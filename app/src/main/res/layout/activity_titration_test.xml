@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/BACK_GROUND_COLOR"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/THEME_COLOR"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:id="@+id/tv_titration_title"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="检测项目: "
+            android:textColor="#ffffff"
+            android:textSize="28sp" />
+
+        <TextView
+            android:id="@+id/tv_titration_scanTime"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:text="食用油酸价"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="28sp" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TableLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1.0"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/checkactivity_textview_style"
+                    android:layout_marginRight="10dp"
+                    android:text="试剂盒编号:" />
+
+                <Spinner
+                    android:id="@+id/check_company_spinner"
+                    style="@style/checkactivity_spinner_style"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tv_titration_number"
+                    android:text="SKDU26A"
+                    style="@style/checkactivity_textview_style" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/checkactivity_textview_style"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="检测方法:" />
+
+                <TextView
+                    android:id="@+id/tv_titration_mode"
+                    style="@style/checkactivity_textview_style"
+                    android:layout_height="match_parent"
+                    android:text="滴定法" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/checkactivity_textview_style"
+                    android:layout_marginRight="10dp"
+                    android:text="国家限量:"
+                    android:textAllCaps="false"/>
+
+                <Spinner
+                    android:id="@+id/check_persion_spinner"
+                    style="@style/checkactivity_spinner_style"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tv_titration_national_limit"
+                    style="@style/checkactivity_textview_style"
+                    android:text="3.5~5.0g/mol"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/checkactivity_textview_style"
+                    android:layout_marginRight="10dp"
+                    android:text="样品编号:" />
+
+                <EditText
+                    android:id="@+id/ed_titration_et_SampleNum"
+                    android:lines="1"
+                    style="@style/titrationtestactivity_edittext_id_style"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="样品编号"/>
+
+                <Spinner android:id="@+id/spinner_input_methods"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp">
+                </Spinner>
+            </TableRow>
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/checkactivity_textview_style"
+                    android:layout_marginRight="10dp"
+                    android:text="样品名称:" />
+
+
+                <TextView
+                    android:id="@+id/tv_titration_sample_name"
+                    style="@style/meninput_edittext_style"
+                    android:hint="请扫码获取"
+                    />
+
+                <EditText
+                    android:id="@+id/ed_titration_sample_name"
+                    android:lines="1"
+                    style="@style/titrationtestactivity_edittext_demo_style"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="请输入"
+                    android:visibility="gone"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/checkactivity_textview_style"
+                    android:layout_marginRight="10dp"
+                    android:text="样品来源:" />
+
+                <TextView
+                    android:id="@+id/tv_titration_sample_source"
+                    style="@style/meninput_edittext_style"
+                    android:hint="请扫码获取"
+                    />
+                <EditText
+                    android:id="@+id/ed_titration_sample_source"
+                    android:lines="1"
+                    style="@style/titrationtestactivity_edittext_demo_style"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="请输入"
+                    android:visibility="gone"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/checkactivity_textview_style"
+                    android:layout_marginRight="10dp"
+                    android:text="被检测单位:" />
+
+                <TextView
+                    android:id="@+id/tv_titration_tested_unit"
+                    android:onClick="ClickDialog"
+                    style="@style/meninput_edittext_style"
+                    android:hint="请扫码获取" />
+
+                <EditText
+                    android:id="@+id/ed_titration_tested_unit"
+                    android:lines="1"
+                    style="@style/titrationtestactivity_edittext_demo_style"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="请输入"
+                    android:visibility="gone"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <TextView
+                    style="@style/checkactivity_textview_style"
+                    android:layout_marginRight="10dp"
+                    android:text="滴加试剂总量:" />
+                <EditText
+                    android:id="@+id/et_drop_volume"
+                    android:lines="1"
+                    style="@style/titrationtestactivity_edittext_drop_style"
+                    android:background="@drawable/bg_edit_drop_style"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"/>
+                <TextView
+                    android:id="@+id/tv_checkactivity_sampleunit"
+                    android:onClick="ClickDialog"
+                    style="@style/checkactivity_textview_style"
+
+                    android:text="滴"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:layout_marginBottom="30dp"
+                android:paddingTop="20dp">
+
+                <TextView
+                    style="@style/checkactivity_textview_style"
+                    android:layout_marginRight="10dp"
+                    android:text="检测结果:" />
+                <TextView
+                    android:id="@+id/tv_titrationTest_result"
+                    style="@style/checkactivity_textview_style"
+                    android:hint="暂无结果"/>
+
+            </TableRow>
+
+
+        </TableLayout>
+
+    </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="50dp"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-100dp">
+
+
+        <Button
+            android:id="@+id/btn_titration_test"
+            style="@style/BtnBottom"
+            android:text="检测" />
+
+        <Button
+            android:id="@+id/btn_titration_print"
+            style="@style/BtnBottom"
+            android:text="打印" />
+
+        <Button
+            android:id="@+id/btn_titration_replace1"
+            style="@style/BtnBottom"
+            android:text="重置"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btn_titration_replace2"
+            style="@style/BtnBottom"
+            android:text="返回"
+            android:visibility="gone" />
+        <Button
+            android:id="@+id/btn_titration_reset"
+            style="@style/BtnBottom"
+            android:text="重置" />
+
+        <Button
+            android:id="@+id/btn_titration_back"
+            style="@style/BtnBottom"
+            android:text="返回" />
+
+        <Button
+            android:id="@+id/btn_titration_replace3"
+            style="@style/BtnBottom"
+            android:text="重置"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btn_titration_replace4"
+            style="@style/BtnBottom"
+            android:text="返回"
+            android:visibility="gone" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

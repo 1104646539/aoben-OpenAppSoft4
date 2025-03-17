@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.1079374315:GSLS_Tool:v1.4.6.7" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.github.1079374315" artifactId="GSLS_Tool" version="v1.4.6.7" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.1079374315/GSLS_Tool/v1.4.6.7/bcb32439d08b14a2fab8bfa0e7c1499d3a50523e/GSLS_Tool-v1.4.6.7.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

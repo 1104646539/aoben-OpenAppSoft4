@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.kongzue:BaseOkHttpV3:3.2.4.2@aar" external-system-id="GRADLE">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/480b8347ffaa94638c9c19be86a40474/jetified-BaseOkHttpV3-3.2.4.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/480b8347ffaa94638c9c19be86a40474/jetified-BaseOkHttpV3-3.2.4.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/480b8347ffaa94638c9c19be86a40474/jetified-BaseOkHttpV3-3.2.4.2/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.kongzue/BaseOkHttpV3/3.2.4.2/8ae0bca48451b1044aeb1a4d01fc43046de73607/BaseOkHttpV3-3.2.4.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

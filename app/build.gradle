@@ -1,0 +1,126 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    compileSdkVersion 31
+    buildToolsVersion "30.0.2"
+    defaultConfig {
+        applicationId "com.open.soft.openappsoft"
+        minSdkVersion 21
+        targetSdkVersion 31
+        versionCode 54
+        versionName "1.7.7"
+//
+//        ndk {//thgppf  123456
+//            // 设置支持的SO库架构
+//            abiFilters 'armeabi',"x86","x86_64"
+//        }
+    }
+//    signingConfigs {
+//        release {
+//            storeFile file('D:\\jks\\TND.jks')
+//            storePassword '123456'
+//            keyPassword '123456'
+//            keyAlias 'tnd'
+//        }
+//    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.release
+        }
+        debug {
+//            signingConfig signingConfigs.release
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+//    buildFeatures{
+//        viewBinding = true
+//        dataBinding = true
+//    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs=['libs']
+        }
+    }
+}
+
+dependencies {
+    //noinspection GradleCompatible
+    implementation 'com.android.support:support-v4:25.0.1'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:25.0.1'
+    implementation files('libs/RootTools.jar')
+    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+    //retrofit
+    //下面两个是RxJava 和RxAndroid
+    implementation 'io.reactivex:rxjava:1.1.5'
+    implementation 'io.reactivex:rxandroid:1.1.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    //转换器，请求结果转换成Model
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:recyclerview-v7:25.0.0'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:support-fragment:25.0.0'
+//    implementation project(path: ':uSB')
+    implementation project(path: ':qrcodescan')
+    implementation project(path: ':utils')
+    implementation project(path: ':MPChartLib')
+    implementation project(path: ':xutils')
+    implementation project(path: ':basejson')
+    //    implementation project(path: ':multifuction')//配合Rxjava 使用
+    implementation files('libs/jxl.jar')
+//    implementation 'com.tencent.tbs.tbssdk:sdk:43903'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.1'
+    //GT基础功能
+//    implementation 'com.github.1079374315:GSLS_Tool:v1.2.9.2'
+//    implementation 'com.github.1079374315:GSLS_Tool:v1.4.1.10'
+    implementation 'com.github.1079374315:GSLS_Tool:v1.4.6.8'
+    //GT全部功能 需要添加的包
+    implementation 'com.google.code.gson:gson:2.8.5'  //JSON 数据解析
+//    implementation 'com.lzy.net:okgo:3.0.4' //OkGo 网络框架
+    implementation 'com.squareup.okhttp3:okhttp:3.12.0'//OkHttp 网络框架
+    implementation 'com.github.bumptech.glide:glide:4.9.0'//加载图片的 glide
+    implementation 'org.jsoup:jsoup:1.10.3'//Jsoup格式化html数据
+//    implementation 'com.blankj:utilcodex:1.25.9'//集成 AndroidUtilCode 工具包
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation files('libs/BaiduLBS_Android.jar')
+    implementation files('libs/AMap_Location_V5.2.0_20200915.jar')
+    //防崩溃
+    implementation 'cat.ereza:customactivityoncrash:2.3.0'
+    //    城市或者时间选择器
+//    api 'com.contrarywind:Android-PickerView:4.1.9'
+    implementation 'com.github.javakam:widget.wheelview:1.8.0@aar'
+    implementation 'com.github.javakam:widget.pickerview:1.8.0@aar'
+
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation files('libs\\okgo-3.0.4.jar')
+    implementation files('libs\\tbs_sdk_thirdapp_v4.3.0.386_44286_sharewithdownloadwithfile_withoutGame_obfs_20230210_114429.jar')
+    //对话框
+    def dialogx_version = "0.0.43.beta13"
+    api "com.github.kongzue.DialogX:DialogX:${dialogx_version}"
+
+    //BaseJson 解析库
+//    implementation 'com.github.kongzue:BaseJson:1.2.0'
+    api 'com.github.kongzue:KongzueUpdateSDK:3.0.1'
+//    api 'com.github.kongzue:BaseFramework:6.8.6'
+    //BaseOkHttp V3 网络请求库
+    api 'com.github.kongzue:BaseOkHttpV3:3.2.4.2'
+    api "com.squareup.okhttp3:okhttp:4.9.1"
+    //标签
+//    api 'com.kongzue.stacklabel:stacklabelview:1.1.9'
+    //万能适配器 recyclerView的适配器
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
+    //消息传递
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.jakewharton.timber:timber:5.0.1'
+
+}

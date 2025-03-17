@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.open.soft.openappsoft",
+  "variantName": "debug",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "properties": [],
+      "versionCode": 54,
+      "versionName": "1.7.7",
+      "enabled": true,
+      "outputFile": "app-debug.apk"
+    }
+  ]
+}

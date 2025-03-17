@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/OpenAppSoft3.iml" filepath="$PROJECT_DIR$/OpenAppSoft3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MPChartLib/OpenAppSoft3.MPChartLib.iml" filepath="$PROJECT_DIR$/.idea/modules/MPChartLib/OpenAppSoft3.MPChartLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MPChartLib/OpenAppSoft3.MPChartLib.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/MPChartLib/OpenAppSoft3.MPChartLib.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MPChartLib/OpenAppSoft3.MPChartLib.main.iml" filepath="$PROJECT_DIR$/.idea/modules/MPChartLib/OpenAppSoft3.MPChartLib.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MPChartLib/OpenAppSoft3.MPChartLib.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/MPChartLib/OpenAppSoft3.MPChartLib.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/OpenAppSoft3.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/OpenAppSoft3.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/OpenAppSoft3.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/OpenAppSoft3.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/OpenAppSoft3.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/OpenAppSoft3.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/OpenAppSoft3.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/OpenAppSoft3.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/qrcodescan/OpenAppSoft3.qrcodescan.iml" filepath="$PROJECT_DIR$/.idea/modules/qrcodescan/OpenAppSoft3.qrcodescan.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/qrcodescan/OpenAppSoft3.qrcodescan.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/qrcodescan/OpenAppSoft3.qrcodescan.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/qrcodescan/OpenAppSoft3.qrcodescan.main.iml" filepath="$PROJECT_DIR$/.idea/modules/qrcodescan/OpenAppSoft3.qrcodescan.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/qrcodescan/OpenAppSoft3.qrcodescan.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/qrcodescan/OpenAppSoft3.qrcodescan.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/utils/OpenAppSoft3.utils.iml" filepath="$PROJECT_DIR$/.idea/modules/utils/OpenAppSoft3.utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/utils/OpenAppSoft3.utils.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/utils/OpenAppSoft3.utils.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/utils/OpenAppSoft3.utils.main.iml" filepath="$PROJECT_DIR$/.idea/modules/utils/OpenAppSoft3.utils.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/utils/OpenAppSoft3.utils.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/utils/OpenAppSoft3.utils.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/xutils/OpenAppSoft3.xutils.iml" filepath="$PROJECT_DIR$/.idea/modules/xutils/OpenAppSoft3.xutils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/xutils/OpenAppSoft3.xutils.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/xutils/OpenAppSoft3.xutils.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/xutils/OpenAppSoft3.xutils.main.iml" filepath="$PROJECT_DIR$/.idea/modules/xutils/OpenAppSoft3.xutils.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/xutils/OpenAppSoft3.xutils.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/xutils/OpenAppSoft3.xutils.unitTest.iml" />
+    </modules>
+  </component>
+</project>

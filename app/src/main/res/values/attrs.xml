@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="IconEditText">
+        <attr name="iconSrc" format="reference" />
+        <attr name="isPassword" format="boolean" />
+        <attr name="hint" format="string" />
+        <attr name="image_width" format="dimension|enum" />
+        <attr name="image_height" format="dimension|enum" />
+        <attr name="textSize" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="MaskedEditText">
+        <attr name="mask" format="string" />
+        <attr name="notMaskedSymbol" format="string" />
+        <attr name="replacementChar" format="string" />
+        <attr name="deleteChar" format="string" />
+        <attr name="format" format="string" />
+        <attr name="maskIcon" format="reference" />
+        <attr name="maskIconColor" format="reference" />
+        <attr name="android:inputType" />
+    </declare-styleable>
+    <declare-styleable name="AutoConintaEditText">
+        <attr name="unit" format="string"></attr>
+        <attr name="TextSize" format="dimension"></attr>
+        <attr name="TextColor" format="color"></attr>
+    </declare-styleable>
+
+<!--    <attr name="TextSize" format="dimension" />-->
+    <declare-styleable name="StackLabel">
+        <attr name="textColor" format="color" />
+        <attr name="textColor1" format="dimension" />
+        <attr name="paddingVertical" format="dimension" />
+        <attr name="paddingHorizontal" format="dimension" />
+        <attr name="itemMargin" format="dimension" />
+        <attr name="itemMarginVertical" format="dimension" />
+        <attr name="itemMarginHorizontal" format="dimension" />
+        <attr name="deleteButton" format="boolean" />
+        <attr name="deleteButtonImage" format="reference" />
+        <attr name="labelBackground" format="reference" />
+        <attr name="selectMode" format="boolean" />
+        <attr name="selectBackground" format="reference" />
+        <attr name="selectTextColor" format="color" />
+        <attr name="maxSelectNum" format="integer" />
+        <attr name="minSelectNum" format="integer" />
+        <attr name="maxLines" format="integer" />
+        <attr name="labels" format="string" />
+    </declare-styleable>
+</resources>

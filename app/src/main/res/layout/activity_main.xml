@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintDimensionRatio="h,15:1"
+        android:textSize="36sp"
+        android:layout_weight="1"
+        android:background="@color/THEME_COLOR"
+        android:gravity="center"
+        android:text="多参数食品安全检测仪"
+        android:textColor="@color/white"
+        />
+
+
+    <ImageView
+        android:id="@+id/btn_open_login"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintTop_toTopOf="@+id/tv_title"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/img_exit"
+        android:padding="5dp"
+        />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            app:layout_constraintBottom_toTopOf="@+id/tv_homeLocation"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                >
+
+              <LinearLayout
+                  android:id="@+id/btn_open_2"
+                  android:layout_width="0dp"
+                  android:layout_weight="1"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical"
+                  android:gravity="center"
+                  >
+
+                  <ImageView
+                      android:layout_width="@dimen/wh_size"
+                      android:layout_height="@dimen/wh_size"
+                      android:src="@drawable/img_fg"
+                      />
+
+                  <TextView
+                      android:id="@+id/tv_fggd_Name"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="@dimen/distance"
+                      android:text="分光光度模块"
+                      android:textColor="#363636"
+                      android:textSize="@dimen/textSize" />
+
+              </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_open_3"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/wh_size"
+                        android:layout_height="@dimen/wh_size"
+                        android:src="@drawable/img_jt"
+                        />
+                    <TextView
+                        android:id="@+id/tv_jtj_Name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="胶体金模块"
+                        android:textColor="#363636"
+                        android:layout_marginTop="@dimen/distance"
+                        android:textSize="@dimen/textSize"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_sql"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        >
+
+                        <ImageView
+                            android:layout_width="@dimen/wh_size"
+                            android:layout_height="@dimen/wh_size"
+                            android:src="@drawable/img_sql"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="数据管理"
+                            android:textColor="#363636"
+                            android:layout_marginTop="@dimen/distance"
+                            android:textSize="@dimen/textSize"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                >
+
+                <LinearLayout
+                    android:id="@+id/btn_open_book"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/wh_size"
+                        android:layout_height="@dimen/wh_size"
+                        android:src="@drawable/img_cz"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="操作手册"
+                        android:textColor="#363636"
+                        android:layout_marginTop="@dimen/distance"
+                        android:textSize="@dimen/textSize"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_open_know"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/wh_size"
+                        android:layout_height="@dimen/wh_size"
+                        android:src="@drawable/img_zs"
+                        android:paddingTop="30dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="知识库"
+                        android:textColor="#363636"
+                        android:layout_marginTop="@dimen/distance"
+                        android:textSize="@dimen/textSize"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_open_setting"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        >
+
+                        <ImageView
+                            android:layout_width="@dimen/wh_size"
+                            android:layout_height="@dimen/wh_size"
+                            android:src="@drawable/img_cs"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="参数设置"
+                            android:textColor="#363636"
+                            android:layout_marginTop="@dimen/distance"
+                            android:textSize="@dimen/textSize"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+
+    <TextView
+        android:id="@+id/tv_homeLocation"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="h,20:1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/THEME_COLOR"
+        android:gravity="center"
+        android:text="北京奥本生物技术有限公司"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

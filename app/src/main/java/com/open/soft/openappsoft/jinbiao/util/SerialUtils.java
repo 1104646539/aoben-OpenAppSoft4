@@ -1,0 +1,102 @@
+package com.open.soft.openappsoft.jinbiao.util;
+
+import android.app.Activity;
+
+import com.friendlyarm.AndroidSDK.HardwareControler;
+
+import java.nio.charset.Charset;
+
+import timber.log.Timber;
+
+/**
+ * Created by Administrator on 2017-12-18.
+ */
+
+public class SerialUtils {
+
+
+    /**
+     * 初始化串口
+     */
+    public static final void InitSerialPort(Activity act) {
+        try {
+            int dev = -1;
+            if (Global.DEV_COM3 == -1) {
+                dev = HardwareControler.openSerialPort(Global.COM3_T3, Global.BAUD_COM3, Global.SERIAL_PORT_DATABITS, Global.SERIAL_PORT_STOPBITS);
+                if (dev < 0) {  //不是T3主板
+                    dev = HardwareControler.openSerialPort(Global.COM3_T2, Global.BAUD_COM3, Global.SERIAL_PORT_DATABITS, Global.SERIAL_PORT_STOPBITS);
+                    if (dev < 0) {  //不是T3主板也不是T2主板，串口识别失败
+                        APPUtils.showToast(act, "通信串口识别失败");
+                    } else {
+                        Global.DEV_COM3 = dev;
+                    }
+                } else {
+                    Global.DEV_COM3 = dev;
+                }
+            }
+            if (Global.DEV_COM4 == -1) {
+                dev = HardwareControler.openSerialPort(Global.COM4_T3, Global.BAUD_COM4, Global.SERIAL_PORT_DATABITS, Global.SERIAL_PORT_STOPBITS);
+                if (dev < 0) {  //不是T3主板
+                    dev = HardwareControler.openSerialPort(Global.COM4_T2, Global.BAUD_COM4, Global.SERIAL_PORT_DATABITS, Global.SERIAL_PORT_STOPBITS);
+                    if (dev < 0) {  //不是T3主板也不是T2主板，串口识别失败
+                        APPUtils.showToast(act, "打印串口识别失败");
+                    } else {
+                        Global.DEV_COM4 = dev;
+                    }
+                } else {
+                    Global.DEV_COM4 = dev;
+                }
+            }
+        } catch (UnsatisfiedLinkError e) {
+            Timber.d("打开串口失败");
+        }
+        System.out.println("打开的通信串口设备id为：" + Global.DEV_COM3);
+        System.out.println("打开的打印串口设备id为：" + Global.DEV_COM4);
+    }
+
+    /**
+     * 进出卡
+     */
+    public static void CardOutOrIn() {
+        if (Global.DEV_COM3 > 0) {
+            HardwareControler.write(Global.DEV_COM3, "Card_OutorIn".getBytes(Charset.forName("gb2312")));
+        }
+    }
+
+    /**
+     * COM3发送数据
+     *
+     * @param data
+     * @return
+     */
+    public static boolean COM3_SendData(byte[] data) {
+        if (Global.DEV_COM3 > 0) {
+            byte[] bs = new byte[1024];
+            int read = HardwareControler.read(Global.DEV_COM3, bs, bs.length);
+            int write = HardwareControler.write(Global.DEV_COM3, data);
+            if (write == data.length) {
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    /**
+     * COM4发送数据
+     *
+     * @param data
+     * @return
+     */
+    public static boolean COM4_SendData(byte[] data) {
+
+        if (Global.DEV_COM4 > 0) {
+            int write = HardwareControler.write(Global.DEV_COM4, data);
+            if (write == data.length) {
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+}

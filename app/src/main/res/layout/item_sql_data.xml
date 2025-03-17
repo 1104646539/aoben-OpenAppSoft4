@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/ll_item"
+        android:layout_width="3500dp"
+        android:layout_height="wrap_content"
+        android:background="#cccccc"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginTop="1dp"
+            android:background="#F6F4F4"
+            >
+
+            <CheckBox
+                style="@style/tvItemTitle"
+                android:id="@+id/cb_item_sql"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="1dp"
+                android:clickable="false"
+                android:focusable="false"
+                android:background="#F6F4F4" />
+
+            <!--
+            android:clickable="false"
+                android:focusable="false"
+                android:button="@null"
+            -->
+
+
+        </LinearLayout>
+
+        <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
+            android:id="@+id/tv_SQLType"
+            style="@style/tvItemTitle"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"/>
+
+        <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
+            android:id="@+id/tv_CheckRunningNumber"
+            style="@style/tvItemTitle"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"/>
+
+        <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
+            android:id="@+id/tv_numberSamples"
+            style="@style/tvItemTitle"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:singleLine="true"/>
+
+        <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
+            android:id="@+id/tv_detectionTime"
+            style="@style/tvItemTitle"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:singleLine="true"/>
+
+        <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
+            android:id="@+id/tv_aisle"
+            style="@style/tvItemTitle"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"/>
+
+        <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
+            android:id="@+id/tv_sampleName"
+            style="@style/tvItemTitle"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"/>
+
+        <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
+            android:id="@+id/tv_specimenType"
+            style="@style/tvItemTitle"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"/>
+
+        <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
+            android:id="@+id/tv_limitStandard"
+            style="@style/tvItemTitle"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"/>
+
+        <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
+            android:id="@+id/tv_criticalValue"
+            style="@style/tvItemTitle"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"/>
+
+        <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
+            android:id="@+id/tv_sampleConcentration"
+            style="@style/tvItemTitle"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"/>
+
+        <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
+            android:id="@+id/tv_detectionValue"
+            style="@style/tvItemTitle"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"/>
+
+        <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
+            android:id="@+id/tv_xgd"
+            style="@style/tvItemTitle"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"/>
+
+
+        <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
+            android:id="@+id/tv_testItem"
+            style="@style/tvItemTitle"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"/>
+
+        <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
+            android:id="@+id/tv_detectionResult"
+            style="@style/tvItemTitle"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"/>
+
+        <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
+            android:id="@+id/tv_unitsUnderInspection"
+            style="@style/tvItemTitle"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:singleLine="true"/>
+
+        <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
+            android:id="@+id/tv_inspector"
+            style="@style/tvItemTitle"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"/>
+
+        <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
+            android:id="@+id/tv_detectionCompany"
+            style="@style/tvItemTitle"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:singleLine="true"/>
+
+        <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
+            android:id="@+id/tv_weight"
+            style="@style/tvItemTitle"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"/>
+
+        <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
+            android:id="@+id/tv_commodityPlaceOrigin"
+            style="@style/tvItemTitle"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:singleLine="true" />
+
+        <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
+            android:id="@+id/tv_uploadStatus"
+            style="@style/tvItemTitle"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"/>
+
+        <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
+            android:id="@+id/tv_companyCode"
+            style="@style/tvItemTitle"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"/>
+
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#cccccc"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/ll_item" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

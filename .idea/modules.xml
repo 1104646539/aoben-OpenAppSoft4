@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/aoben-OpenAppSoft4.iml" filepath="$PROJECT_DIR$/.idea/modules/aoben-OpenAppSoft4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MPChartLib/aoben-OpenAppSoft4.MPChartLib.iml" filepath="$PROJECT_DIR$/.idea/modules/MPChartLib/aoben-OpenAppSoft4.MPChartLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MPChartLib/aoben-OpenAppSoft4.MPChartLib.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/MPChartLib/aoben-OpenAppSoft4.MPChartLib.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MPChartLib/aoben-OpenAppSoft4.MPChartLib.main.iml" filepath="$PROJECT_DIR$/.idea/modules/MPChartLib/aoben-OpenAppSoft4.MPChartLib.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MPChartLib/aoben-OpenAppSoft4.MPChartLib.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/MPChartLib/aoben-OpenAppSoft4.MPChartLib.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/aoben-OpenAppSoft4.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/aoben-OpenAppSoft4.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/aoben-OpenAppSoft4.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/aoben-OpenAppSoft4.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/aoben-OpenAppSoft4.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/aoben-OpenAppSoft4.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/aoben-OpenAppSoft4.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/aoben-OpenAppSoft4.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/basejson/aoben-OpenAppSoft4.basejson.iml" filepath="$PROJECT_DIR$/.idea/modules/basejson/aoben-OpenAppSoft4.basejson.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/basejson/aoben-OpenAppSoft4.basejson.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/basejson/aoben-OpenAppSoft4.basejson.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/basejson/aoben-OpenAppSoft4.basejson.main.iml" filepath="$PROJECT_DIR$/.idea/modules/basejson/aoben-OpenAppSoft4.basejson.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/basejson/aoben-OpenAppSoft4.basejson.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/basejson/aoben-OpenAppSoft4.basejson.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/qrcodescan/aoben-OpenAppSoft4.qrcodescan.iml" filepath="$PROJECT_DIR$/.idea/modules/qrcodescan/aoben-OpenAppSoft4.qrcodescan.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/qrcodescan/aoben-OpenAppSoft4.qrcodescan.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/qrcodescan/aoben-OpenAppSoft4.qrcodescan.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/qrcodescan/aoben-OpenAppSoft4.qrcodescan.main.iml" filepath="$PROJECT_DIR$/.idea/modules/qrcodescan/aoben-OpenAppSoft4.qrcodescan.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/qrcodescan/aoben-OpenAppSoft4.qrcodescan.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/qrcodescan/aoben-OpenAppSoft4.qrcodescan.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/utils/aoben-OpenAppSoft4.utils.iml" filepath="$PROJECT_DIR$/.idea/modules/utils/aoben-OpenAppSoft4.utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/utils/aoben-OpenAppSoft4.utils.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/utils/aoben-OpenAppSoft4.utils.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/utils/aoben-OpenAppSoft4.utils.main.iml" filepath="$PROJECT_DIR$/.idea/modules/utils/aoben-OpenAppSoft4.utils.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/utils/aoben-OpenAppSoft4.utils.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/utils/aoben-OpenAppSoft4.utils.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/xutils/aoben-OpenAppSoft4.xutils.iml" filepath="$PROJECT_DIR$/.idea/modules/xutils/aoben-OpenAppSoft4.xutils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/xutils/aoben-OpenAppSoft4.xutils.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/xutils/aoben-OpenAppSoft4.xutils.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/xutils/aoben-OpenAppSoft4.xutils.main.iml" filepath="$PROJECT_DIR$/.idea/modules/xutils/aoben-OpenAppSoft4.xutils.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/xutils/aoben-OpenAppSoft4.xutils.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/xutils/aoben-OpenAppSoft4.xutils.unitTest.iml" />
+    </modules>
+  </component>
+</project>

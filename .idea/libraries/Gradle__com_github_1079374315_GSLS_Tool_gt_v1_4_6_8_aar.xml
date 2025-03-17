@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.1079374315.GSLS_Tool:gt:v1.4.6.8@aar" external-system-id="GRADLE">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d2f0d524e3ae0191987b57b1d27089a4/jetified-gt-v1.4.6.8/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d2f0d524e3ae0191987b57b1d27089a4/jetified-gt-v1.4.6.8/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d2f0d524e3ae0191987b57b1d27089a4/jetified-gt-v1.4.6.8/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.1079374315.GSLS_Tool/gt/v1.4.6.8/92c850543b03ddf60be1edb9ca9cdeefc22995aa/gt-v1.4.6.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

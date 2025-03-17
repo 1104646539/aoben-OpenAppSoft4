@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.1079374315.GSLS_Tool:gt-DataBinding:v1.4.6.8" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.github.1079374315.GSLS_Tool" artifactId="gt-DataBinding" version="v1.4.6.8" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.1079374315.GSLS_Tool/gt-DataBinding/v1.4.6.8/85d94b816aa699189bcab54b54d0c38b135a239f/gt-DataBinding-v1.4.6.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.1079374315.GSLS_Tool/gt-DataBinding/v1.4.6.8/7ca2859745ae96c7671000ae10e166a5b3303ef8/gt-DataBinding-v1.4.6.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.javakam:widget.pickerview:1.8.0@aar" external-system-id="GRADLE">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6d9e10040bb8a37c675c55094c99b4bb/jetified-widget.pickerview-1.8.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6d9e10040bb8a37c675c55094c99b4bb/jetified-widget.pickerview-1.8.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6d9e10040bb8a37c675c55094c99b4bb/jetified-widget.pickerview-1.8.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.javakam/widget.pickerview/1.8.0/7117196e29d5c5deef6e30fb1736dc6eabd09cd6/widget.pickerview-1.8.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

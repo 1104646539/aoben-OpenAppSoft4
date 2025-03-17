@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:ignore="OnClick">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/THEME_COLOR"
+        android:gravity="center"
+        android:text="系统设置"
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        app:layout_constraintDimensionRatio="h,16:1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title">
+
+        <!-- 总垂直布局 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!-- 上部分布局 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/ll1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toTopOf="@+id/ll3"
+                    app:layout_constraintEnd_toStartOf="@+id/ll2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center"
+                        android:text="单位/产地设置"
+                        android:textColor="#666666"
+                        android:textSize="20sp" />
+
+                    <Button
+                        style="@style/btnSystemSetting"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:onClick="onBCheckOrg"
+                        android:text="被检测单位" />
+
+                    <Button
+                        style="@style/btnSystemSetting"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:onClick="onSampleSource"
+                        android:text="商品来源" />
+
+                    <Button
+                        style="@style/btnSystemSetting"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:onClick="onCheckOrg"
+                        android:text="检测单位" />
+
+                    <Button
+                        style="@style/btnSystemSetting"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:onClick="onSampleName"
+                        android:text="样品名称"
+                        android:visibility="gone" />
+
+                    <Button
+                        android:id="@+id/btn_project"
+                        style="@style/btnSystemSetting"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:onClick="onEditProject"
+                        android:text="项目设置"
+                        android:visibility="gone" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toTopOf="@+id/ll3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ll1"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center"
+                        android:text="参数设置"
+                        android:textColor="#666666"
+                        android:textSize="22sp" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="农残检测时间"
+                            android:textColor="#333"
+                            android:textSize="22sp" />
+
+                        <com.open.soft.openappsoft.multifuction.view.AutoConintaEditText
+                            android:id="@+id/et_card_warm_time"
+                            style="@style/btnSystemSetting"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="2dp"
+                            app:unit="s"></com.open.soft.openappsoft.multifuction.view.AutoConintaEditText>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!-- 下部分布局 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/ll3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/ll4"
+                    app:layout_constraintStart_toEndOf="@+id/ll1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ll1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center"
+                        android:text="打印设置"
+                        android:textColor="#666666"
+                        android:textSize="22sp" />
+
+                    <Button
+                        style="@style/btnSystemSetting"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:onClick="onCheck"
+                        android:text="检测" />
+
+                    <Button
+                        style="@style/btnSystemSetting"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:onClick="onDataManager"
+                        android:text="数据管理" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ll1"
+                    app:layout_constraintTop_toBottomOf="@+id/ll1">
+
+                    <TextView
+                        android:id="@+id/order_setting"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center"
+                        android:text="其他设置"
+                        android:textColor="#666666"
+                        android:textSize="22sp" />
+
+                    <Button
+                        style="@style/btnSystemSetting"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:onClick="onCalibration"
+                        android:text="校准" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="500dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
