@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "J:\\TongKang10\\aoben\\aoben-OpenAppSoft4\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v11\\values-v11.xml",
+            "outputFile": "E:\\androidproject\\aoben\\aoben-OpenAppSoft4\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v11\\values-v11.xml",
             "map": [
                 {
-                    "source": "J:\\TongKang10\\aoben\\aoben-OpenAppSoft4\\app\\src\\main\\res\\values-v11\\styles.xml",
+                    "source": "E:\\androidproject\\aoben\\aoben-OpenAppSoft4\\app\\src\\main\\res\\values-v11\\styles.xml",
                     "from": {
                         "startLines": "6",
                         "startColumns": "4",

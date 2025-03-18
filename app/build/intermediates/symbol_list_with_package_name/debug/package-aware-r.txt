@@ -1289,6 +1289,7 @@ color background_floating_material_light
 color background_material_dark
 color background_material_light
 color bg_buy
+color bg_label
 color black
 color black10
 color black20
@@ -1995,6 +1996,8 @@ dimen abc_text_size_title_material
 dimen abc_text_size_title_material_toolbar
 dimen action_bar_size
 dimen activity_horizontal_margin
+dimen activity_main_pop_hight
+dimen activity_main_pop_width
 dimen activity_vertical_margin
 dimen appcompat_dialog_background_inset
 dimen cardview_compat_inset_shadow
@@ -2682,6 +2685,7 @@ drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable ic_select1
 drawable icon
+drawable icon_item
 drawable img1
 drawable img2
 drawable img3
@@ -2922,6 +2926,7 @@ id btnSubmit
 id btn_Imm_Check
 id btn_OK
 id btn_add_data
+id btn_bcheck_ori
 id btn_cancel
 id btn_changemethod
 id btn_clear
@@ -2975,6 +2980,8 @@ id btn_project
 id btn_query
 id btn_return
 id btn_sample
+id btn_sample_type_child
+id btn_sample_type_main
 id btn_save
 id btn_save_project
 id btn_save_record
@@ -2984,6 +2991,8 @@ id btn_selectPositive
 id btn_set_default_setting
 id btn_start_location
 id btn_sys_setting
+id btn_task_settings
+id btn_task_start
 id btn_test
 id btn_titration_back
 id btn_titration_print
@@ -3247,6 +3256,7 @@ id et_compare_value
 id et_content
 id et_drop_volume
 id et_fenguang_test_time
+id et_id
 id et_input
 id et_input1
 id et_input2
@@ -3326,6 +3336,11 @@ id img_dialogx_pop_icon
 id img_tab
 id img_zoom_activity
 id info
+id inspected_long_delete
+id inspected_long_modify
+id inspected_long_show
+id inspected_long_show_view1
+id inspected_long_show_view2
 id invisible
 id inward
 id it_tv
@@ -3412,6 +3427,7 @@ id ll_mu
 id ll_queryCondition
 id ll_queryDataTitle
 id ll_queryTime
+id ll_root
 id ll_sampleName
 id ll_selectTime
 id ll_select_all
@@ -3574,6 +3590,7 @@ id right
 id rightToLeft
 id right_icon
 id right_side
+id root
 id rounded
 id row_index_key
 id rv_data
@@ -3650,6 +3667,8 @@ id spn_result_judge
 id spn_sample_line_project
 id spn_sample_name
 id spn_sample_source
+id spn_sample_type1
+id spn_sample_type2
 id spn_sample_unit
 id spn_upload_state
 id spr_pt
@@ -3758,12 +3777,15 @@ id tv_SQLType
 id tv_a1_item_project
 id tv_a2_item_project
 id tv_ac
+id tv_add
 id tv_add_commit
+id tv_add_task
 id tv_aisle
 id tv_alis
 id tv_appName
 id tv_back
 id tv_bchecked_org
+id tv_bjdw
 id tv_bochang
 id tv_cancel
 id tv_card_number
@@ -3818,6 +3840,8 @@ id tv_jcx
 id tv_jcx_item_project
 id tv_jingdu
 id tv_jtj_Name
+id tv_label_id
+id tv_label_name
 id tv_limitStandard
 id tv_ljz_item_project
 id tv_location_list_item
@@ -3828,6 +3852,8 @@ id tv_name
 id tv_name_list_item
 id tv_name_sample
 id tv_numberSamples
+id tv_ori_code
+id tv_ori_name
 id tv_p_item_project
 id tv_peak_distance_item_project
 id tv_peak_width_item_project
@@ -3846,6 +3872,7 @@ id tv_sample_aisle_number
 id tv_sample_name
 id tv_sample_number
 id tv_sample_source
+id tv_sampling_date
 id tv_scanEnd_item_project
 id tv_scanStart_item_project
 id tv_scanTime
@@ -3872,6 +3899,7 @@ id tv_task
 id tv_testItem
 id tv_test_time
 id tv_test_value
+id tv_time
 id tv_title
 id tv_title_mode1
 id tv_title_mode2
@@ -4022,6 +4050,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_add_company_search
+layout activity_add_task
 layout activity_app_manager
 layout activity_card_main
 layout activity_check_company_main
@@ -4035,6 +4064,7 @@ layout activity_check_select_project
 layout activity_check_shiji_main
 layout activity_debug
 layout activity_duogongneng_test
+layout activity_edit_info
 layout activity_edit_project
 layout activity_error
 layout activity_file
@@ -4044,6 +4074,7 @@ layout activity_input_message_dialog
 layout activity_knowledge
 layout activity_location
 layout activity_location2
+layout activity_long_pop
 layout activity_main
 layout activity_main1
 layout activity_main2
@@ -4068,7 +4099,9 @@ layout activity_sql2
 layout activity_statistics
 layout activity_system_setting
 layout activity_system_setting2
+layout activity_task_list
 layout activity_test
+layout activity_test_task
 layout activity_titration_test
 layout activity_tscheck
 layout activity_upload_setting
@@ -4103,6 +4136,7 @@ layout dialog_bottom_list
 layout dialog_date_select
 layout dialog_debug_info
 layout dialog_edit_layout
+layout dialog_edit_order_info
 layout dialog_edit_print_layout
 layout dialog_edit_result
 layout dialog_edit_url_layout
@@ -4141,6 +4175,7 @@ layout item_linkage
 layout item_linkage_sampletype
 layout item_log
 layout item_notification
+layout item_order_info
 layout item_print
 layout item_project
 layout item_project_detail
@@ -4157,6 +4192,7 @@ layout item_sql_data
 layout item_sql_table_tv
 layout item_sql_tv
 layout item_table_all_data
+layout item_task_list
 layout item_test
 layout kprogresshud_hud
 layout layou_auto_coninta
@@ -5549,6 +5585,7 @@ style meninput_edittext_style
 style picker_view_scale_anim
 style picker_view_slide_anim
 style project_manager_button_style
+style text_label
 style text_style
 style title_style
 style titrationtestactivity_edittext_demo_style

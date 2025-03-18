@@ -22,6 +22,8 @@ import com.google.gson.Gson;
 import com.gsls.gt.GT;
 import com.lzy.okgo.callback.StringCallback;
 import com.open.soft.openappsoft.R;
+import com.open.soft.openappsoft.activity.orderinfo.EditInfoActivity;
+import com.open.soft.openappsoft.activity.orderinfo.OrderInfoModel;
 import com.open.soft.openappsoft.jinbiao.model.CompanyNameData;
 import com.open.soft.openappsoft.jinbiao.model.CompanyNameRootBean;
 import com.open.soft.openappsoft.jinbiao.model.SharedPreferencesUtil;
@@ -44,6 +46,7 @@ public class SettingActivity extends Activity implements View.OnClickListener {
     private Button btn_open_3;
     private Button btn_open_4;
     private Button btn_open_5;
+    private Button btn_sample_type_main, btn_sample_type_child, btn_bcheck_ori;
     private TextView tv_mac_url;
 
     @GT.Annotations.GT_Collection.GT_Map
@@ -69,6 +72,9 @@ public class SettingActivity extends Activity implements View.OnClickListener {
         btn_open_3 = (Button) findViewById(R.id.btn_open_3);
         btn_open_4 = (Button) findViewById(R.id.btn_open_4);
         btn_open_5 = (Button) findViewById(R.id.btn_open_5);
+        btn_sample_type_main = (Button) findViewById(R.id.btn_sample_type_main);
+        btn_sample_type_child = (Button) findViewById(R.id.btn_sample_type_child);
+        btn_bcheck_ori = (Button) findViewById(R.id.btn_bcheck_ori);
         tv_mac_url = (TextView) findViewById(R.id.tv_mac_url);
 
 
@@ -79,6 +85,9 @@ public class SettingActivity extends Activity implements View.OnClickListener {
         btn_open_3.setOnClickListener(this);
         btn_open_4.setOnClickListener(this);
         btn_open_5.setOnClickListener(this);
+        btn_bcheck_ori.setOnClickListener(this);
+        btn_sample_type_main.setOnClickListener(this);
+        btn_sample_type_child.setOnClickListener(this);
 
     }
 
@@ -134,7 +143,7 @@ public class SettingActivity extends Activity implements View.OnClickListener {
                     }).setNegativeButton("取消", null).show();
 
 
-        }else if (v.getId() == R.id.btn_open_5) {
+        } else if (v.getId() == R.id.btn_open_5) {
             if (setTitleDialog == null) {
                 setTitleDialog = new SetTitleDialog(this);
             }
@@ -142,10 +151,22 @@ public class SettingActivity extends Activity implements View.OnClickListener {
             setTitleDialog.setOnConfirmListener(new SetTitleDialog.OnConfirmListener() {
                 @Override
                 public void onConfirmPw(String pw) {
-                    LoginActivity.sp_ServiceUrl.save("TitleSet",pw);
+                    LoginActivity.sp_ServiceUrl.save("TitleSet", pw);
                     Toast.makeText(SettingActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
                 }
             });
+        } else if (v.getId() == R.id.btn_sample_type_main) {
+            Intent intent = new Intent(this, EditInfoActivity.class);
+            intent.putExtra("type", OrderInfoModel.type_sample_type_main);
+            startActivity(intent);
+        } else if (v.getId() == R.id.btn_sample_type_child) {
+            Intent intent = new Intent(this, EditInfoActivity.class);
+            intent.putExtra("type", OrderInfoModel.type_sample_type_child);
+            startActivity(intent);
+        } else if (v.getId() == R.id.btn_bcheck_ori) {
+            Intent intent = new Intent(this, EditInfoActivity.class);
+            intent.putExtra("type", OrderInfoModel.type_bcheck);
+            startActivity(intent);
         }
     }
 
@@ -168,8 +189,6 @@ public class SettingActivity extends Activity implements View.OnClickListener {
             }
         }, "密码设置", "旧密码", "新密码", "再次输入密码");
     }
-
-
 
 
     /**

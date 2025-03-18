@@ -5,6 +5,8 @@
     <dimen name="sample_line_bottom">60dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_main_pop_width">480dp</dimen>
+    <dimen name="activity_main_pop_hight">153dp</dimen>
 
     <dimen name="wh_size">150dp</dimen>
     <dimen name="textSize">22sp</dimen>

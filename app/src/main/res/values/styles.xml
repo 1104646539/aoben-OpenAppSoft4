@@ -15,17 +15,17 @@
 
     <!-- Application theme. -->
     <!--<style name="AppTheme" parent="AppBaseTheme">-->
-        <!--<item name="android:windowNoTitle">true</item>-->
-        <!--&lt;!&ndash; All customizations that are NOT specific to a particular API-level can go here. &ndash;&gt;-->
+    <!--<item name="android:windowNoTitle">true</item>-->
+    <!--&lt;!&ndash; All customizations that are NOT specific to a particular API-level can go here. &ndash;&gt;-->
     <!--</style>-->
-  <style name="title_style">
-        
+    <style name="title_style">
+
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:textSize">24sp</item>
         <item name="android:gravity">center</item>
         <item name="android:background">@color/title_normal_green</item>
-        
+
     </style>
 
 
@@ -200,14 +200,14 @@
 
     <!-- 基础数据底部按钮风格 -->
     <!--<style name="btn_baseData_style">-->
-        <!--<item name="android:layout_width">0dp</item>-->
-        <!--<item name="android:layout_height">match_parent</item>-->
-        <!--<item name="android:layout_marginLeft">20dp</item>-->
-        <!--<item name="android:layout_marginRight">20dp</item>-->
-        <!--<item name="android:background">@drawable/btn_default1</item>-->
-        <!--<item name="android:layout_weight">1.0</item>-->
-        <!--<item name="android:textSize">20sp</item>-->
-        <!--<item name="android:textColor">@android:color/white</item>-->
+    <!--<item name="android:layout_width">0dp</item>-->
+    <!--<item name="android:layout_height">match_parent</item>-->
+    <!--<item name="android:layout_marginLeft">20dp</item>-->
+    <!--<item name="android:layout_marginRight">20dp</item>-->
+    <!--<item name="android:background">@drawable/btn_default1</item>-->
+    <!--<item name="android:layout_weight">1.0</item>-->
+    <!--<item name="android:textSize">20sp</item>-->
+    <!--<item name="android:textColor">@android:color/white</item>-->
     <!--</style>-->
 
     <style name="DialogAnim" parent="android:Animation">
@@ -287,7 +287,6 @@
         <item name="android:layout_weight">1.0</item>
         <item name="android:textSize">20sp</item>
     </style>
-
 
 
     <!-- 检测页面手动输入风格 -->
@@ -381,12 +380,19 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+
     <style name="BottomDialog.Animation" parent="Animation.AppCompat.Dialog">
         <item name="android:windowEnterAnimation">@anim/translate_dialog_in</item>
         <item name="android:windowExitAnimation">@anim/tranlate_dialog_out</item>
     </style>
 
-
+    <style name="text_label">
+        <item name="android:padding">10dp</item>
+        <item name="android:background">@color/bg_label</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 
 
 </resources>

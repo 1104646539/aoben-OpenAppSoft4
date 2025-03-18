@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "J:\\TongKang10\\aoben\\aoben-OpenAppSoft4\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-watch-v20\\values-watch-v20.xml",
+            "outputFile": "E:\\androidproject\\aoben\\aoben-OpenAppSoft4\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-watch-v20\\values-watch-v20.xml",
             "map": [
                 {
                     "source": "C:\\Users\\wl\\.gradle\\caches\\transforms-2\\files-2.1\\722829414fb60eeff88e57f05a62b41b\\appcompat-1.4.1\\res\\values-watch-v20\\values-watch-v20.xml",

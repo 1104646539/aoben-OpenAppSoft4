@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.exception.DbException;
 import com.open.soft.openappsoft.R;
+import com.open.soft.openappsoft.activity.task.TaskListActivity;
+import com.open.soft.openappsoft.activity.task.TestTaskActivity;
 import com.open.soft.openappsoft.multifuction.db.DbHelper;
 import com.open.soft.openappsoft.multifuction.model.BCheckOrg;
 import com.open.soft.openappsoft.multifuction.model.CheckOrg;
@@ -77,9 +79,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btnPesticideTest.setOnClickListener(this);
         btnDataManage.setOnClickListener(this);
         btnSysSetting.setOnClickListener(this);
-
-
-
 
 
         initSP();
@@ -196,7 +195,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private void initData() {
         if (isFirst) {
-         
+
 //            initXlzMap();
         } else {
             //获取第一行的所有项目为可检测的项目
@@ -245,7 +244,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     private void initSP() {
-      
+
         sp = getSharedPreferences(SPResource.FILE_NAME, Context.MODE_PRIVATE);
         spUtils = new SPUtils(sp);
         isFirst = sp.getBoolean(SPResource.KEY_FIRST_ENTER, true);
@@ -318,16 +317,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
 
-   
     @Override
     public void onClick(View v) {
 
         int i = v.getId();
         //多功能检测跳转
         if (i == R.id.btn_pesticide_test) {//                printTest(true);
-            Intent startTest = new Intent(this, PesticideTestActivity2.class);
+//            Intent startTest = new Intent(this, PesticideTestActivity2.class);
 //                startTest.putParcelableArrayListExtra("project",projects);
-            startActivity(startTest);
+//            startActivity(startTest);
+            Intent intent = new Intent(this, TestTaskActivity.class);
+            intent.putExtra("source", 0);
+            startActivity(intent);
             Log.d(TAG, "projects=" + projects.size());
         } else if (i == R.id.btn_data_manage) {
             startActivity(new Intent(this, ResultQueryActivity.class));

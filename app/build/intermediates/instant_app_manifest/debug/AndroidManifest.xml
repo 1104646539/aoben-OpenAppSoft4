@@ -40,6 +40,18 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.open.soft.openappsoft.activity.orderinfo.EditInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.open.soft.openappsoft.activity.task.AddTaskActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.open.soft.openappsoft.activity.task.TaskListActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.open.soft.openappsoft.activity.task.TestTaskActivity"
+            android:exported="false" />
         <activity android:name="com.open.soft.openappsoft.jinbiao.activity.TSCheckActivity" />
         <activity android:name="com.open.soft.openappsoft.activity.AddCompanySearchActivity" />
         <activity android:name="com.open.soft.openappsoft.activity.ErrorActivity" />
@@ -169,8 +181,7 @@
         <activity android:name="com.open.soft.openappsoft.multifuction.activity.DebugActivity" />
         <activity
             android:name="com.open.soft.openappsoft.multifuction.activity.SampleActivity"
-            android:screenOrientation="landscape" />
-        <!-- <receiver android:name="com.open.soft.openappsoft.multifuction.receiver.BootReceiver"> -->
+            android:screenOrientation="landscape" /> <!-- <receiver android:name="com.open.soft.openappsoft.multifuction.receiver.BootReceiver"> -->
         <!-- <intent-filter android:priority="2147483647"> -->
         <!-- <action android:name="android.intent.action.BOOT_COMPLETED" /> -->
         <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
@@ -180,9 +191,7 @@
             <intent-filter android:priority="2147483647" >
                 <action android:name="android.intent.action.ACTION_SHUTDOWN" />
             </intent-filter>
-        </receiver>
-
-        <!-- <activity android:name=".MainActivity" /> -->
+        </receiver> <!-- <activity android:name=".MainActivity" /> -->
         <!-- <activity android:name=".CheckActivity" /> -->
         <!-- <activity android:name=".CheckActivityByMen" /> -->
         <!-- <activity android:name=".SelectActivity" /> -->
@@ -217,9 +226,7 @@
         <activity android:name="com.open.soft.openappsoft.jinbiao.activity.CheckSelectProjectActivity" />
         <activity android:name="com.open.soft.openappsoft.jinbiao.activity.SampleActivity" />
         <activity android:name="com.open.soft.openappsoft.jinbiao.activity.TypeActivity" />
-        <activity android:name="com.open.soft.openappsoft.jinbiao.activity.ResultActivity" />
-
-        <!-- <receiver android:name="com.open.soft.openappsoft.jinbiao.receiver.BootReceiver"> -->
+        <activity android:name="com.open.soft.openappsoft.jinbiao.activity.ResultActivity" /> <!-- <receiver android:name="com.open.soft.openappsoft.jinbiao.receiver.BootReceiver"> -->
         <!-- <intent-filter android:priority="2147483647"> -->
         <!-- <action android:name="android.intent.action.BOOT_COMPLETED"></action> -->
         <!-- <category android:name="android.intent.category.LAUNCHER"></category> -->

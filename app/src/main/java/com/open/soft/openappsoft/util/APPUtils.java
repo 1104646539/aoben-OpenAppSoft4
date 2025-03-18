@@ -46,6 +46,10 @@ import timber.log.Timber;
 
 
 public class APPUtils {
+    public static boolean isNull(String value){
+        if(value == null  || "".equals(value))return true;
+        return false;
+    }
 
     public static int getVersionCode(Context context) {
         int versionCode = 0;

@@ -94,12 +94,12 @@
     <orderEntry type="library" name="Gradle: io.reactivex:rxandroid:1.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.github.javakam:widget.wheelview:1.8.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.github.javakam:widget.pickerview:1.8.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: J./TongKang10/aoben/aoben-OpenAppSoft4/app/libs/RootTools.jar" level="project" />
-    <orderEntry type="library" name="Gradle: J./TongKang10/aoben/aoben-OpenAppSoft4/app/libs/jxl.jar" level="project" />
-    <orderEntry type="library" name="Gradle: J./TongKang10/aoben/aoben-OpenAppSoft4/app/libs/BaiduLBS_Android.jar" level="project" />
-    <orderEntry type="library" name="Gradle: J./TongKang10/aoben/aoben-OpenAppSoft4/app/libs/AMap_Location_V5.2.0_20200915.jar" level="project" />
-    <orderEntry type="library" name="Gradle: J./TongKang10/aoben/aoben-OpenAppSoft4/app/libs/okgo-3.0.4.jar" level="project" />
-    <orderEntry type="library" name="Gradle: J./TongKang10/aoben/aoben-OpenAppSoft4/app/libs/tbs_sdk_thirdapp_v4.3.0.386_44286_sharewithdownloadwithfile_withoutGame_obfs_20230210_114429.jar" level="project" />
+    <orderEntry type="library" name="Gradle: E./androidproject/aoben/aoben-OpenAppSoft4/app/libs/RootTools.jar" level="project" />
+    <orderEntry type="library" name="Gradle: E./androidproject/aoben/aoben-OpenAppSoft4/app/libs/jxl.jar" level="project" />
+    <orderEntry type="library" name="Gradle: E./androidproject/aoben/aoben-OpenAppSoft4/app/libs/BaiduLBS_Android.jar" level="project" />
+    <orderEntry type="library" name="Gradle: E./androidproject/aoben/aoben-OpenAppSoft4/app/libs/AMap_Location_V5.2.0_20200915.jar" level="project" />
+    <orderEntry type="library" name="Gradle: E./androidproject/aoben/aoben-OpenAppSoft4/app/libs/okgo-3.0.4.jar" level="project" />
+    <orderEntry type="library" name="Gradle: E./androidproject/aoben/aoben-OpenAppSoft4/app/libs/tbs_sdk_thirdapp_v4.3.0.386_44286_sharewithdownloadwithfile_withoutGame_obfs_20230210_114429.jar" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.retrofit2:converter-gson:2.1.0" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.retrofit2:adapter-rxjava:2.1.0" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.retrofit2:retrofit:2.1.0" level="project" />

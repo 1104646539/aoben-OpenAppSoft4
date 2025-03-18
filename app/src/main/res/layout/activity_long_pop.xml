@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/popup_style" >
+
+    <TextView
+        android:id="@+id/inspected_long_show"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="15dp"
+        android:gravity="center|left"
+        android:text="详细信息"
+        android:textSize="18sp" />
+
+    <View
+        android:id="@+id/inspected_long_show_view1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/inspected_long_show"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/inspected_long_modify"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/inspected_long_show_view1"
+        android:layout_marginLeft="15dp"
+        android:gravity="center|left"
+        android:text="修改"
+        android:textSize="18sp" />
+
+    <View
+        android:id="@+id/inspected_long_show_view2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/inspected_long_modify"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/inspected_long_delete"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/inspected_long_show_view2"
+        android:layout_marginLeft="15dp"
+        android:gravity="center|left"
+        android:text="删除"
+        android:textSize="18sp" />
+
+</RelativeLayout>
