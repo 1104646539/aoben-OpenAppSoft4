@@ -3,108 +3,46 @@ package com.example.utils.http;
 public class LoginResultBean {
 
     /**
-     * LogId : hxchenwei
-     * AreaId : TianjinManage
-     * UserName : 陈伟
-     * DeptName : 河西检测中心
+     * accessToken : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWJ4ZGEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImFpZCI6IjEwMDAiLCJ1aWQiOiIxMDAwIiwidGlkIjoiMTAwIiwia2V5IjoiNjg4OTYxNzc3MzA3ODgxNDcyIiwic2FsdCI6IjB3SVkwYkFma2lmMSIsImV4cCI6MTc0MjMxMDUxOSwiaXNzIjoiYWJ4ZGEiLCJhdWQiOiJhYnhkYXFpbmRhbyJ9.CQ8rwgTqpYPKDCnM-RpXHlCKiUVMPWTrwhjTVTOksSo
+     * refreshToken : 036f435ea2ff4c73b5b6a1027fe9bb8d
+     * salt : 0wIY0bAfkif1
+     * timeout : 0
      */
 
-    private String LogId;
-    private String AreaId;
-    private String UserName;
-    private String DeptName;
-    private String DeptId;
-    private String SamplingMode;
-    private String NeedCompanyCode;
+    private String accessToken;
+    private String refreshToken;
+    private String salt;
+    private int timeout;
 
-    public LoginResultBean() {
-        super();
+    public String getAccessToken() {
+        return accessToken;
     }
 
-    public LoginResultBean(String logId, String areaId, String userName, String deptName, String deptId, String samplingMode) {
-        LogId = logId;
-        AreaId = areaId;
-        UserName = userName;
-        DeptName = deptName;
-        DeptId = deptId;
-        SamplingMode = samplingMode;
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 
-    public String getNeedCompanyCode() {
-        return NeedCompanyCode;
+    public String getRefreshToken() {
+        return refreshToken;
     }
 
-    public void setNeedCompanyCode(String needCompanyCode) {
-        NeedCompanyCode = needCompanyCode;
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 
-    public LoginResultBean(String areaId, String logId, String userName, String deptName, String deptId, String samplingMode, String NeedCompanyCode) {
-        AreaId = areaId;
-        LogId = logId;
-        UserName = userName;
-        DeptName = deptName;
-        DeptId = deptId;
-        SamplingMode = samplingMode;
-        this.NeedCompanyCode = NeedCompanyCode;
+    public String getSalt() {
+        return salt;
     }
 
-    public String getLogId() {
-        return LogId;
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
-    public void setLogId(String logId) {
-        LogId = logId;
+    public int getTimeout() {
+        return timeout;
     }
 
-    public String getAreaId() {
-        return AreaId;
-    }
-
-    public void setAreaId(String areaId) {
-        AreaId = areaId;
-    }
-
-    public String getUserName() {
-        return UserName;
-    }
-
-    public void setUserName(String userName) {
-        UserName = userName;
-    }
-
-    public String getDeptName() {
-        return DeptName;
-    }
-
-    public void setDeptName(String deptName) {
-        DeptName = deptName;
-    }
-
-    public String getDeptId() {
-        return DeptId;
-    }
-
-    public void setDeptId(String deptId) {
-        DeptId = deptId;
-    }
-
-    public String getSamplingMode() {
-        return SamplingMode;
-    }
-
-    public void setSamplingMode(String samplingMode) {
-        SamplingMode = samplingMode;
-    }
-
-    @Override
-    public String toString() {
-        return "LoginResultBean{" +
-                "LogId='" + LogId + '\'' +
-                ", AreaId='" + AreaId + '\'' +
-                ", UserName='" + UserName + '\'' +
-                ", DeptName='" + DeptName + '\'' +
-                ", DeptId='" + DeptId + '\'' +
-                ", SamplingMode='" + SamplingMode + '\'' +
-                '}';
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
     }
 }

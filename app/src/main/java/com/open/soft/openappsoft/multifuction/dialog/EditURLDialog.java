@@ -72,9 +72,9 @@ public class EditURLDialog extends Dialog {
             et_url.setText(InterfaceURL.BASE_URL);//否则使用默认的网址
         }
         et_input1.setText(Global.URL_LOGIN);
-        et_input2.setText(Global.URL_GetAreaList);
-        et_input3.setText(Global.URL_GetCardQRInfo);
-        et_input4.setText(Global.URL_GetSamplingInfo);
+//        et_input2.setText(Global.URL_GetAreaList);
+//        et_input3.setText(Global.URL_GetCardQRInfo);
+//        et_input4.setText(Global.URL_GetSamplingInfo);
         et_input5.setText(Global.URL_SendResult);
         showDilaog(onUrlSave, "上传设置", "网址");
     }
@@ -84,12 +84,12 @@ public class EditURLDialog extends Dialog {
         if (isShowing()) {
             dismiss();
         }
-        ll_l.setVisibility(View.VISIBLE);
-        ll_2.setVisibility(View.VISIBLE);
-        ll_3.setVisibility(View.VISIBLE);
-        ll_4.setVisibility(View.GONE);
-        ll_5.setVisibility(View.GONE);
-        ll_6.setVisibility(View.GONE);
+//        ll_l.setVisibility(View.VISIBLE);
+//        ll_2.setVisibility(View.VISIBLE);
+//        ll_3.setVisibility(View.VISIBLE);
+//        ll_4.setVisibility(View.GONE);
+//        ll_5.setVisibility(View.GONE);
+//        ll_6.setVisibility(View.GONE);
 
         tv_title.setText(title);
         tv_hint.setText(hint);
@@ -103,9 +103,9 @@ public class EditURLDialog extends Dialog {
 
                 LoginActivity.sp_ServiceUrl.save("url_api", et_url.getText().toString().trim());
                 LoginActivity.sp_ServiceUrl.save("url_Login", et_input1.getText().toString().trim());
-                LoginActivity.sp_ServiceUrl.save("url_GetAreaList", et_input2.getText().toString().trim());
-                LoginActivity.sp_ServiceUrl.save("url_GetQrInfo", et_input3.getText().toString().trim());
-                LoginActivity.sp_ServiceUrl.save("url_GetSamplingInfo", et_input4.getText().toString().trim());
+//                LoginActivity.sp_ServiceUrl.save("url_GetAreaList", et_input2.getText().toString().trim());
+//                LoginActivity.sp_ServiceUrl.save("url_GetQrInfo", et_input3.getText().toString().trim());
+//                LoginActivity.sp_ServiceUrl.save("url_GetSamplingInfo", et_input4.getText().toString().trim());
                 LoginActivity.sp_ServiceUrl.save("url_SendResult", et_input5.getText().toString().trim());
 
                 if (!isNull2()) {

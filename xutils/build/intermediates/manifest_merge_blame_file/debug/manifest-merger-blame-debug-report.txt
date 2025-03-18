@@ -7,8 +7,8 @@
 7
 8    <uses-sdk
 9        android:minSdkVersion="14"
-9-->E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
+9-->J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
 10        android:targetSdkVersion="20" />
-10-->E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
+10-->J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
 11
 12</manifest>

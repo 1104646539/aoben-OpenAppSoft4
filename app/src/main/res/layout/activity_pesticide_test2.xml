@@ -81,7 +81,7 @@
                             android:gravity="center"
                             android:minWidth="100dp"
                             android:spinnerMode="dialog"
-                            android:visibility="gone"/>
+                            android:visibility="visible"/>
 
                         <TextView
                             android:id="@+id/tv_projectName"

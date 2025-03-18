@@ -51,5 +51,6 @@ public class Global {
      * 串口停止位长度
      */
     public static final int SERIAL_PORT_STOPBITS = 1;
-  
+
+
 }

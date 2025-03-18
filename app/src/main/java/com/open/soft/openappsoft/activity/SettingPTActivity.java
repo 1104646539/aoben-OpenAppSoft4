@@ -58,7 +58,7 @@ public class SettingPTActivity extends Activity implements View.OnClickListener,
 //            public void run() {
 //                if (Network.isNetwork(LoginActivity.this)) {
         progressDialog.show();
-        orderPresenter.GetAreaList(SettingPTActivity.this);
+//        orderPresenter.GetAreaList(SettingPTActivity.this);
 //                } else {
 //                    progressDialog.setCancelable(false);
 //                    progressDialog.setMessage("请先连接网络");

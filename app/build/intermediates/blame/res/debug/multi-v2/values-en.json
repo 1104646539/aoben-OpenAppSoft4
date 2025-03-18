@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\androidproject\\aoben\\aoben-OpenAppSoft4\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en\\values-en.xml",
+            "outputFile": "J:\\TongKang10\\aoben\\aoben-OpenAppSoft4\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en\\values-en.xml",
             "map": [
                 {
                     "source": "C:\\Users\\wl\\.gradle\\caches\\transforms-2\\files-2.1\\ee54fdeeb6df3fe82dd8632a797f7933\\jetified-BaseRecyclerViewAdapterHelper-3.0.4\\res\\values-en\\values-en.xml",

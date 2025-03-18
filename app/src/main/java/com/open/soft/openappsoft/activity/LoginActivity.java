@@ -316,22 +316,22 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
 
     private void initSp() {
 
-        String url_api = sp_ServiceUrl.query("url_api","http://www.xindaon.cn:7011/api/").toString();
+        String url_api = sp_ServiceUrl.query("url_api",Global.BASE_URL).toString();
         GT.logs("查询出来的URL:" + url_api);
-        if (!"0".equals(url_api)) {
-            Global.BASE_URL = InterfaceURL.BASE_URL = url_api;
-        } else {
-            Global.BASE_URL = InterfaceURL.BASE_URL;
-            sp_ServiceUrl.save("url_api", InterfaceURL.BASE_URL);//默认是测试服务器
-        }
-
+//        if (!"0".equals(url_api)) {
+//            Global.BASE_URL = InterfaceURL.BASE_URL = url_api;
+//        } else {
+//            Global.BASE_URL = InterfaceURL.BASE_URL;
+//            sp_ServiceUrl.save("url_api", InterfaceURL.BASE_URL);//默认是测试服务器
+//        }
+        Global.BASE_URL = url_api;
 //        Global.BASE_URL = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString(SPResource.KEY_UPLOAD_URL, com.example.utils.http.Global.BASE_URL);
         Global.admin_psw = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString(Global.SP_ADMIN_PSW, Global.admin_psw);
         Global.admin_pt = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString(Global.SP_ADMIN_PT, Global.admin_pt);
         Global.URL_LOGIN = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString(Global.SP_URL_LOGIN, Global.URL_LOGIN);
-        Global.URL_GetAreaList = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString(Global.SP_URL_GetAreaList, Global.URL_GetAreaList);
-        Global.URL_GetCardQRInfo = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString(Global.SP_URL_GetCardQRInfo, Global.URL_GetCardQRInfo);
-        Global.URL_GetSamplingInfo = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString(Global.SP_URL_GetSamplingInfo, Global.URL_GetSamplingInfo);
+//        Global.URL_GetAreaList = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString(Global.SP_URL_GetAreaList, Global.URL_GetAreaList);
+//        Global.URL_GetCardQRInfo = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString(Global.SP_URL_GetCardQRInfo, Global.URL_GetCardQRInfo);
+//        Global.URL_GetSamplingInfo = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString(Global.SP_URL_GetSamplingInfo, Global.URL_GetSamplingInfo);
         Global.URL_SendResult = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString(Global.SP_URL_SendResult, Global.URL_SendResult);
 //        Log.d("onSettingPsw", "initSp onUrlSave admin_psw=" + Global.admin_psw);
     }
@@ -342,7 +342,7 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
 //            public void run() {
 //                if (Network.isNetwork(LoginActivity.this)) {
         progressDialog.show();
-        orderPresenter.GetAreaList(LoginActivity.this);
+//        orderPresenter.GetAreaList(LoginActivity.this);
 //                } else {
 //                    progressDialog.setCancelable(false);
 //                    progressDialog.setMessage("请先连接网络");
@@ -405,27 +405,29 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
     @Override
     public void logInSuccess(LoginResultBean resultBean) {
 
-        if ("input".equals(resultBean.getSamplingMode())) {
-            Global.isVoluntarily = false;//不将自动录入信息
-            Global.ismixedentry = false; // 不是混合录入
-        } else if ("scan".equals(resultBean.getSamplingMode())) {
-            Global.isVoluntarily = true;//自动录入信息
-            Global.ismixedentry = false; // 不是混合录入
-        } else {
-            Global.ismixedentry = true;
-        }
+//        if ("input".equals(resultBean.getSamplingMode())) {
+//            Global.isVoluntarily = false;//不将自动录入信息
+//            Global.ismixedentry = false; // 不是混合录入
+//        } else if ("scan".equals(resultBean.getSamplingMode())) {
+//            Global.isVoluntarily = true;//自动录入信息
+//            Global.ismixedentry = false; // 不是混合录入
+//        } else {
+//            Global.ismixedentry = true;
+//        }
 
         SharedPreferences sp = this.getSharedPreferences("userPass", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();   //获取编辑器
-        editor.putString("DeptId", resultBean.getDeptId()); //存入部门ID
+//        editor.putString("DeptId", resultBean.getDeptId()); //存入部门ID
+        editor.putString("salt", resultBean.getSalt()); //存入salt秘钥
         editor.apply();                //提交修改，否则不生效
-
+        Global.SALT = resultBean.getSalt();
         Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
-        Global.NAME = resultBean.getUserName();
-        Global.Dept = resultBean.getDeptName();
-        Global.ID = resultBean.getLogId();
-        Global.SamplingMode = resultBean.getSamplingMode();
-        Global.NEEDCompanyCode = resultBean.getNeedCompanyCode();
+//        Global.NAME = resultBean
+//        Global.NAME = resultBean.getUserName();
+//        Global.Dept = resultBean.getDeptName();
+//        Global.ID = resultBean.getLogId();
+//        Global.SamplingMode = resultBean.getSamplingMode();
+//        Global.NEEDCompanyCode = resultBean.getNeedCompanyCode();
         progressDialog.dismiss();
         Intent start = new Intent(this, MainActivity.class);
         startActivity(start);
@@ -507,10 +509,10 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
         }
         Log.d("onSettingPsw", "initSp onUrlSave admin_psw=" + Global.admin_psw + " psw=" + psw + " Global.admin_pt=" + Global.admin_pt);
         if (!Global.isAdimin) {
-            if (Global.admin_pt == null || Global.admin_pt.isEmpty()) {
-                APPUtils.showToast(this, "请先进入管理员帐户选择归属地");
-                return false;
-            }
+//            if (Global.admin_pt == null || Global.admin_pt.isEmpty()) {
+//                APPUtils.showToast(this, "请先进入管理员帐户选择归属地");
+//                return false;
+//            }
             if (!Network.isNetwork(this)) {
                 APPUtils.showToast(this, "请先联网后登录");
                 return false;
@@ -556,7 +558,7 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
         editor.apply();                //提交修改，否则不生效
         progressDialog.show();
 
-        orderPresenter.login(new LoginBean(Global.admin_pt, user, jiamipsw), this, this, pass, progressDialog);
+        orderPresenter.login(new LoginBean(Global.SN, user, psw,"2",Global.KEY), this, this, pass, progressDialog);
     }
 
     public static String getMD5Str(String str) {

@@ -1,5 +1,7 @@
 package com.example.utils.http;
 
+import com.example.utils.http.model.BaseResult;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +21,7 @@ public interface CheckService {
      */
 //    @POST("System/LogIn")
     @POST
-    Observable<Result<LoginResultBean>> LogIn(@Url String url, @Body LoginBean loginBean);
+    Observable<BaseResult<LoginResultBean>> LogIn(@Url String url, @Body LoginBean loginBean);
 
     /**
      * 获取归属平台列表接口

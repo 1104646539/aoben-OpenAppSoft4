@@ -216,6 +216,14 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     private LocationReceiver1 locationReceiver1;//自定义内部类广播 服务于 定位
 
 
+    String[] projectNames = new String[]{
+            "甲醛", "吊白块", "二氧化硫", "亚硝酸盐", "双氧水", "硼砂", "甲醇", "硫酸铝钾", "重金属铅", "山梨酸钾", "溴酸钾", "糖精钠", "组胺",
+            "挥发性盐基氮", "丙二醛", "蛋白质", "氨基酸态氮", "硫氰酸盐", "过氧化苯甲酰", "谷氨酸钠", "碘酸钾", "食醋总酸", "硫酸镁", "甜蜜素",
+            "苯甲酸钠", "羟甲基糠醛", "果糖和葡萄糖", "重金属铬", "重金属镉", "蜂蜜中蔗糖", "钾离子", "柠檬黄", "日落黄", "胭脂红", "苋菜红",
+            "亮蓝", "靛蓝", "尿素", "硫化钠", "亚铁氰化钾", "硫酸铜", "余氯", "氯离子", "硝酸盐", "酱油总酸", "过氧化值", "茶多酚", "酸价", "食用油酸价"
+
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -227,7 +235,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         // 初始化
         initModel();
         initView();
-        checkIsadmin();
+//        checkIsadmin();
         GT.WindowUtils.hideActionBar(this);
         GT.getGT().build(this);//绑定当前Activity
 
@@ -290,10 +298,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                     "农药残留",
                     "GB/T 5009.199", 50f, 1f, 0f, 410);
             project.save(project);
-            Project project2 = new Project("",
-                    "吊白块",
-                    "GB/T 5009.199", 1f, 1f, 0f, 410);
-            project.save(project2);
+            for (int i = 0; i < projectNames.length; i++) {
+                Project project2 = new Project("",
+                        projectNames[i],
+                        "GB/T 5009.199", 1f, 1f, 0f, 410);
+                project.save(project2);
+            }
+
 //            projects = (ArrayList<Project>) new Project().findAll();
             initBook();
             initXlzMap();
@@ -316,25 +327,25 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         }*/
 
         //隐藏不需要的模块
-        if ("农药残留检测仪".equals(InterfaceURL.oneModule)) {
-            findViewById(R.id.btn_open_3).setVisibility(View.GONE);
-            ((TextView) findViewById(R.id.tv_fggd_Name)).setText("检测");
-        } else if ("农药残留单项精准分析仪".equals(InterfaceURL.oneModule)) {
-            findViewById(R.id.btn_open_2).setVisibility(View.GONE);
-            ((TextView) findViewById(R.id.tv_jtj_Name)).setText("检测");
-        }
-        test();
+//        if ("农药残留检测仪".equals(InterfaceURL.oneModule)) {
+//            findViewById(R.id.btn_open_3).setVisibility(View.GONE);
+//            ((TextView) findViewById(R.id.tv_fggd_Name)).setText("检测");
+//        } else if ("农药残留单项精准分析仪".equals(InterfaceURL.oneModule)) {
+//            findViewById(R.id.btn_open_2).setVisibility(View.GONE);
+//            ((TextView) findViewById(R.id.tv_jtj_Name)).setText("检测");
+//        }
+//        test();
 
     }
 
     private void test() {
-        String testStr = "123456";
-        String key="e2fd36a50c8c4759a5aaf1f094543a17";
-        String iv="ueyChVVKOEOQ";
-        String data = AESUtil.encrypt(testStr,key,iv);
-        String ret = AESUtil.decrypt(data,key,iv);
-        Log.d("MainActivity test","data="+data);
-        Log.d("MainActivity test","ret="+ret);
+        String testStr = "{\"id\":\"689376395033448448\",\"qrcode\":\"\",\"checkUserId\":\"\",\"checkUser\":\"aaa\",\"checkItemId\":\"11\",\"checkItemName\":\"itemName\",\"checkMothedId\":\"mothedId\",\"checkMothedName\":\"methedName\",\"checkTime\":\"2025-03-16 12:30:20\",\"checkOrgId\":\"\",\"checkOrg\":\"青岛AA检测站\",\"deviceSn\":\"W123\",\"longitude\":\"\",\"latitude\":\"\",\"checkAddress\":\"\",\"sampleId\":\"\",\"sampleCode\":\"\",\"sampleTypeId\":\"\",\"sampleType\":\"肉类\",\"sampleSubTypeId\":\"\",\"sampleSubType\":\"猪肉\",\"sampleName\":\"猪肉001\",\"companyName\":\"青岛XXX屠宰场\",\"companyCode\":\"12345678987\",\"companyUser\":\"\",\"companyPhone\":\"\",\"sampleBatch\":\"\",\"samplingAddress\":\"\",\"sampleSource\":\"\",\"samplingOrg\":\"抽样单位\",\"samplingUser\":\"抽样人\",\"samplingTime\":\"2025-03-15 13:30:20\",\"checkLimit\":\"\",\"result\":0,\"resultValue\":null,\"resultInfo\":null,\"customize\":\"\"}";
+        String key = "e2fd36a50c8c4759a5aaf1f094543a17";
+        String iv = "0wIY0bAfkif1";
+        String data = AESUtil.encrypt(testStr, key, iv);
+        String ret = AESUtil.decrypt(data, key, iv);
+        Log.d("MainActivity test", "data=" + data);
+        Log.d("MainActivity test", "ret=" + ret);
     }
 
     // 监听其他页面发送的消息（百度定位）
@@ -385,7 +396,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     }
 
     private void initMult() {
-            SerialUtils.InitSerialPort(this);
+        SerialUtils.InitSerialPort(this);
     }
 
     public static void openPDFInNative(Context context, String FILE_NAME) {
@@ -455,13 +466,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
             case R.id.btn_open_2:
                 //分光光度
-                if (!Global.isAdimin) {
-                    Intent intent1 = new Intent(this, com.open.soft.openappsoft.multifuction.activity.PesticideTestActivity2.class);
-                    startActivity(intent1);
-                } else {
-                    Intent intent1 = new Intent(this, com.open.soft.openappsoft.multifuction.activity.MainActivity.class);
-                    startActivity(intent1);
-                }
+//                if (!Global.isAdimin) {
+//                    Intent intent1 = new Intent(this, com.open.soft.openappsoft.multifuction.activity.PesticideTestActivity2.class);
+//                    startActivity(intent1);
+//                } else {
+                Intent intent1 = new Intent(this, com.open.soft.openappsoft.multifuction.activity.MainActivity.class);
+                startActivity(intent1);
+//                }
                 break;
 
             case R.id.btn_open_3:
@@ -472,40 +483,40 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 startActivity(intent10);*/
 
                 //胶体金
-                if (!Global.isAdimin) {
-                    // 获取参数  归属地 本地判断是否是唐山界面进行样本名称选择
-                    String AreaId = com.example.utils.http.Global.admin_pt;
-                    if (AreaId.equals("TangshanNMEnterprise")) {
-                        Intent intent3 = new Intent(this, TSCheckActivity.class);
-                        intent3.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                        intent3.putExtra("source", "2");// 定性
-                        startActivity(intent3);
-                    } else if (AreaId.equals("XAEnterprise")) {
-                        Intent intent3 = new Intent(this, TSCheckActivity.class);
-                        intent3.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                        intent3.putExtra("source", "2");// 定性
-                        startActivity(intent3);
-                    } else {
-                        if ((Global.isVoluntarily && !Global.ismixedentry) || (Global.isVoluntarily && Global.ismixedentry)) {
-                            //自动录入
-                            Intent intent2 = new Intent(this, CheckActivity.class);
-                            intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                            intent2.putExtra("source", "2");// 定性
-                            startActivity(intent2);
-                        } else if (!Global.isVoluntarily && !Global.ismixedentry) {
-                            //手动录入
-                            Intent intent10 = new Intent(this, CheckActivityByMen.class);
-                            intent10.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                            intent10.putExtra("source", "2");// 定性
-                            startActivity(intent10);
-                        }
-                    }
-
-
-                } else {
-                    Intent intent2 = new Intent(this, com.open.soft.openappsoft.jinbiao.activity.MainActivity.class);
-                    startActivity(intent2);
-                }
+//                if (!Global.isAdimin) {
+//                    // 获取参数  归属地 本地判断是否是唐山界面进行样本名称选择
+//                    String AreaId = com.example.utils.http.Global.admin_pt;
+//                    if (AreaId.equals("TangshanNMEnterprise")) {
+//                        Intent intent3 = new Intent(this, TSCheckActivity.class);
+//                        intent3.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+//                        intent3.putExtra("source", "2");// 定性
+//                        startActivity(intent3);
+//                    } else if (AreaId.equals("XAEnterprise")) {
+//                        Intent intent3 = new Intent(this, TSCheckActivity.class);
+//                        intent3.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+//                        intent3.putExtra("source", "2");// 定性
+//                        startActivity(intent3);
+//                    } else {
+//                        if ((Global.isVoluntarily && !Global.ismixedentry) || (Global.isVoluntarily && Global.ismixedentry)) {
+//                            //自动录入
+//                            Intent intent2 = new Intent(this, CheckActivity.class);
+//                            intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+//                            intent2.putExtra("source", "2");// 定性
+//                            startActivity(intent2);
+//                        } else if (!Global.isVoluntarily && !Global.ismixedentry) {
+//                            //手动录入
+//                            Intent intent10 = new Intent(this, CheckActivityByMen.class);
+//                            intent10.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+//                            intent10.putExtra("source", "2");// 定性
+//                            startActivity(intent10);
+//                        }
+//                    }
+//
+//
+//                } else {
+                Intent intent2 = new Intent(this, com.open.soft.openappsoft.jinbiao.activity.MainActivity.class);
+                startActivity(intent2);
+//                }
                 break;
 
             case R.id.ll_sql:

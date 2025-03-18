@@ -34,77 +34,77 @@ public class CheckPresenter {
     public void GetSamplingInfo(GetSamplingInfoBean getSamplingInfoBean, final int requestCode, final CheckInterface checkInterface) {
 //        return checkService.GetAreaList();
 //        checkService.GetAreaList().
-        checkService.GetSamplingInfo(Global.URL_GetSamplingInfo, getSamplingInfoBean).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<Result<GetSamplingInfoResultBean>>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                if (checkInterface != null) {
-                    checkInterface.GetSamplingInfoFailed(e.getMessage(), requestCode);
-                }
-            }
-
-            @Override
-            public void onNext(Result<GetSamplingInfoResultBean> result) {
-                if (result.ErrCode.equals("0")) {
-                    if (checkInterface != null) {
-                        checkInterface.GetSamplingInfoSuccess(result, requestCode);
-                    }
-                } else if (result.ErrCode.equals("1")) {
-                    if (checkInterface != null) {
-                        checkInterface.GetSamplingInfoFailed(result.ErrMsg, requestCode);
-                    }
-                } else {
-                    if (checkInterface != null) {
-                        checkInterface.GetSamplingInfoFailed(result.ErrMsg, requestCode);
-                    }
-                }
-            }
-        });
+//        checkService.GetSamplingInfo(Global.URL_GetSamplingInfo, getSamplingInfoBean).subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<Result<GetSamplingInfoResultBean>>() {
+//            @Override
+//            public void onCompleted() {
+//
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//                if (checkInterface != null) {
+//                    checkInterface.GetSamplingInfoFailed(e.getMessage(), requestCode);
+//                }
+//            }
+//
+//            @Override
+//            public void onNext(Result<GetSamplingInfoResultBean> result) {
+//                if (result.ErrCode.equals("0")) {
+//                    if (checkInterface != null) {
+//                        checkInterface.GetSamplingInfoSuccess(result, requestCode);
+//                    }
+//                } else if (result.ErrCode.equals("1")) {
+//                    if (checkInterface != null) {
+//                        checkInterface.GetSamplingInfoFailed(result.ErrMsg, requestCode);
+//                    }
+//                } else {
+//                    if (checkInterface != null) {
+//                        checkInterface.GetSamplingInfoFailed(result.ErrMsg, requestCode);
+//                    }
+//                }
+//            }
+//        });
     }
 
     public void GetCardQRInfo(GetQRInfoBean getQRInfoBean, final int requestCode, final CheckInterface checkInterface) {
 //        return checkService.GetAreaList();
 //        checkService.GetAreaList().
-        checkService.GetCardQRInfo(Global.URL_GetCardQRInfo, getQRInfoBean).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<Result<GetQRInfoResultBean>>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-                if (checkInterface != null) {
-                    checkInterface.GetCardQRInfoFailed(e.getMessage(), requestCode);
-                }
-            }
-
-            @Override
-            public void onNext(Result<GetQRInfoResultBean> result) {
-
-                if (result.ErrCode.equals("0")) {
-                    if (checkInterface != null) {
-                        checkInterface.GetCardQRInfoSuccess(result, requestCode);
-                    }
-                } else if (result.ErrCode.equals("1")) {
-
-                    if (checkInterface != null) {
-                        checkInterface.GetCardQRInfoFailed(result.ErrMsg, requestCode);
-                    }
-                } else {
-
-                    if (checkInterface != null) {
-                        checkInterface.GetCardQRInfoFailed(result.ErrMsg, requestCode);
-                    }
-                }
-            }
-        });
+//        checkService.GetCardQRInfo(Global.URL_GetCardQRInfo, getQRInfoBean).subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<Result<GetQRInfoResultBean>>() {
+//            @Override
+//            public void onCompleted() {
+//
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//
+//                if (checkInterface != null) {
+//                    checkInterface.GetCardQRInfoFailed(e.getMessage(), requestCode);
+//                }
+//            }
+//
+//            @Override
+//            public void onNext(Result<GetQRInfoResultBean> result) {
+//
+//                if (result.ErrCode.equals("0")) {
+//                    if (checkInterface != null) {
+//                        checkInterface.GetCardQRInfoSuccess(result, requestCode);
+//                    }
+//                } else if (result.ErrCode.equals("1")) {
+//
+//                    if (checkInterface != null) {
+//                        checkInterface.GetCardQRInfoFailed(result.ErrMsg, requestCode);
+//                    }
+//                } else {
+//
+//                    if (checkInterface != null) {
+//                        checkInterface.GetCardQRInfoFailed(result.ErrMsg, requestCode);
+//                    }
+//                }
+//            }
+//        });
     }
 
     public void SendResult(SendResultBean getQRInfoBean, final int requestCode, final CheckInterface checkInterface) {

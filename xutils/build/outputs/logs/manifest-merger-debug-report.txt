@@ -1,39 +1,39 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:2:1-10:12
-INJECTED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:2:1-10:12
-INJECTED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:2:1-10:12
-INJECTED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:2:1-10:12
-INJECTED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:2:1-10:12
-INJECTED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:2:1-10:12
-INJECTED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:2:1-10:12
+ADDED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:2:1-10:12
+INJECTED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:2:1-10:12
+INJECTED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:2:1-10:12
+INJECTED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:2:1-10:12
+INJECTED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:2:1-10:12
+INJECTED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:2:1-10:12
+INJECTED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:2:1-10:12
 	package
-		ADDED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:4:5-33
-		INJECTED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
-		INJECTED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
+		ADDED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:4:5-33
+		INJECTED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
+		INJECTED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
 	android:versionName
-		ADDED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:6:5-30
-		INJECTED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
-		INJECTED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
+		ADDED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:6:5-30
+		INJECTED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
+		INJECTED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
 	xmlns:tools
-		ADDED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:3:5-51
+		ADDED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:3:5-51
 	xmlns:android
-		ADDED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:2:11-69
+		ADDED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:2:11-69
 	android:versionCode
-		ADDED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:5:5-28
-		INJECTED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
-		INJECTED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
+		ADDED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml:5:5-28
+		INJECTED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
+		INJECTED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
 uses-sdk
-INJECTED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
-INJECTED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
-INJECTED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
-INJECTED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
+INJECTED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
+INJECTED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
+INJECTED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
+INJECTED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
-		ADDED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
-		INJECTED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
+		INJECTED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
+		ADDED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
+		INJECTED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
-		ADDED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
-		INJECTED from E:\androidproject\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
+		INJECTED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
+		ADDED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml
+		INJECTED from J:\TongKang10\aoben\aoben-OpenAppSoft4\xutils\src\main\AndroidManifest.xml

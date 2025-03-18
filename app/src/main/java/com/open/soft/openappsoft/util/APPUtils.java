@@ -337,7 +337,8 @@ public class APPUtils {
                     ((Activity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            progressDialog.show();
+                            if (!((Activity) context).isFinishing())
+                                progressDialog.show();
                         }
                     });
 
@@ -395,14 +396,14 @@ public class APPUtils {
 
     }
 
-    private static boolean isValidContext(Context c){
+    private static boolean isValidContext(Context c) {
 
-        Activity a = (Activity)c;
+        Activity a = (Activity) c;
 
-        if (a.isDestroyed() || a.isFinishing()){
+        if (a.isDestroyed() || a.isFinishing()) {
             Log.i("YXH", "Activity is invalid." + " isDestoryed-->" + a.isDestroyed() + " isFinishing-->" + a.isFinishing());
             return false;
-        }else{
+        } else {
             return true;
         }
     }

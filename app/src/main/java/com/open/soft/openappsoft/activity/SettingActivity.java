@@ -191,9 +191,9 @@ public class SettingActivity extends Activity implements View.OnClickListener {
 
                 Global.BASE_URL = InterfaceURL.BASE_URL = url;
                 Global.URL_LOGIN = et_1;
-                Global.URL_GetAreaList = et_2;
-                Global.URL_GetCardQRInfo = et_3;
-                Global.URL_GetSamplingInfo = et_4;
+//                Global.URL_GetAreaList = et_2;
+//                Global.URL_GetCardQRInfo = et_3;
+//                Global.URL_GetSamplingInfo = et_4;
                 Global.URL_SendResult = et_5;
 
                 //修改保存到GT_SP中
@@ -204,9 +204,9 @@ public class SettingActivity extends Activity implements View.OnClickListener {
                 RetrofitServiceManager.getInstance().refreshRetrofitServiceManager();
 
                 SharedPreferencesUtil.getDefaultSharedPreferences(SettingActivity.this).edit().putString(Global.SP_URL_LOGIN, Global.URL_LOGIN).commit();
-                SharedPreferencesUtil.getDefaultSharedPreferences(SettingActivity.this).edit().putString(Global.SP_URL_GetAreaList, Global.URL_GetAreaList).commit();
-                SharedPreferencesUtil.getDefaultSharedPreferences(SettingActivity.this).edit().putString(Global.SP_URL_GetCardQRInfo, Global.URL_GetCardQRInfo).commit();
-                SharedPreferencesUtil.getDefaultSharedPreferences(SettingActivity.this).edit().putString(Global.SP_URL_GetSamplingInfo, Global.URL_GetSamplingInfo).commit();
+//                SharedPreferencesUtil.getDefaultSharedPreferences(SettingActivity.this).edit().putString(Global.SP_URL_GetAreaList, Global.URL_GetAreaList).commit();
+//                SharedPreferencesUtil.getDefaultSharedPreferences(SettingActivity.this).edit().putString(Global.SP_URL_GetCardQRInfo, Global.URL_GetCardQRInfo).commit();
+//                SharedPreferencesUtil.getDefaultSharedPreferences(SettingActivity.this).edit().putString(Global.SP_URL_GetSamplingInfo, Global.URL_GetSamplingInfo).commit();
                 SharedPreferencesUtil.getDefaultSharedPreferences(SettingActivity.this).edit().putString(Global.SP_URL_SendResult, Global.URL_SendResult).commit();
             }
 

@@ -309,19 +309,19 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         //如果是农药残留，就直接不给选择
-        if (!com.example.utils.http.Global.isAdimin) {
-            spn_project.setVisibility(View.GONE);
-            if (!"".equals(qrcode) && qrcode != null) {
-                findViewById(R.id.tv_projectName).setVisibility(View.GONE);
-            } else {
-//                findViewById(R.id.tv_projectName).setVisibility(View.VISIBLE);
-                openLight(410);
-            }
-
-        } else {
+//        if (!com.example.utils.http.Global.isAdimin) {
+//            spn_project.setVisibility(View.GONE);
+//            if (!"".equals(qrcode) && qrcode != null) {
+//                findViewById(R.id.tv_projectName).setVisibility(View.GONE);
+//            } else {
+////                findViewById(R.id.tv_projectName).setVisibility(View.VISIBLE);
+//                openLight(410);
+//            }
+//
+//        } else {
             spn_project.setVisibility(View.VISIBLE);
             findViewById(R.id.tv_projectName).setVisibility(View.GONE);
-        }
+//        }
 
 
     }
