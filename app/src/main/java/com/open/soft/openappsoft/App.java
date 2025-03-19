@@ -17,6 +17,7 @@ import com.open.soft.openappsoft.activity.MainActivity;
 import com.open.soft.openappsoft.jinbiao.db.DbHelper;
 import com.open.soft.openappsoft.jinbiao.location.LocationService;
 import com.open.soft.openappsoft.jinbiao.model.SharedPreferencesUtil;
+import com.open.soft.openappsoft.util.CustomFormatTree;
 import com.open.soft.openappsoft.util.InterfaceURL;
 import com.tencent.smtt.export.external.TbsCoreSettings;
 import com.tencent.smtt.sdk.QbSdk;
@@ -47,6 +48,8 @@ public class App extends Application {
         //这个是打开日志
         BaseOkHttp.TIME_OUT_DURATION = 10;
         BaseOkHttp.DEBUGMODE = true;
+        Timber.plant(new CustomFormatTree()); // 开发模式下使用 DebugTree
+
         defaultSP = SharedPreferencesUtil.getDefaultSharedPreferences(this);
         /***
          * 初始化定位sdk，建议在Application中创建

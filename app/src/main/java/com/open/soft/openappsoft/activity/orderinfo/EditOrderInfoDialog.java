@@ -20,7 +20,7 @@ public class EditOrderInfoDialog extends Dialog {
     TextView tv_title, tv_label_name, tv_label_id;
     EditText et_name, et_id;
     TextView tv_add, tv_cancel;
-    LinearLayout ll_bottom;
+    LinearLayout ll_bottom,ll_id;
     /**
      * 0添加 1修改 2显示
      */
@@ -51,6 +51,7 @@ public class EditOrderInfoDialog extends Dialog {
         tv_add = view.findViewById(R.id.tv_add);
         tv_cancel = view.findViewById(R.id.tv_cancel);
         ll_bottom = view.findViewById(R.id.ll_bottom);
+        ll_id = view.findViewById(R.id.ll_id);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
     }
@@ -91,6 +92,10 @@ public class EditOrderInfoDialog extends Dialog {
             tv_title.setText("样品子类" + hilt);
             tv_label_name.setText("样品子类");
             tv_label_id.setText("样品子类ID");
+        }else if (type == OrderInfoModel.type_check) {
+            ll_id.setVisibility(View.GONE);
+            tv_title.setText("检测机构" + hilt);
+            tv_label_name.setText("检测机构");
         }
         tv_cancel.setOnClickListener(view -> {
             if(onAdd!=null){

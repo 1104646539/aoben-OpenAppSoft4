@@ -1,6 +1,8 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
+    <inspection_tool class="AndroidLintProguard" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="AndroidLintProguardSplit" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="JavaDoc" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="TOP_LEVEL_CLASS_OPTIONS">
         <value>
@@ -31,6 +33,42 @@
       <option name="IGNORE_DUPLICATED_THROWS" value="false" />
       <option name="IGNORE_POINT_TO_ITSELF" value="false" />
       <option name="myAdditionalJavadocTags" value="time：2020/9/16-11:12,author：King,moduleName：数据管理模块,businessIntroduction：主要是为“分光光度”与“胶体金”两个模块的数据表进行管理操作。,loadLibrary：GT库,time：2020/9/23-19:11,moduleName：数据库适配器,businessIntroduction：在数据库查询出数据后进行数据展示,time：2020/9/29-19:41,moduleName：时间选择对话框,businessIntroduction：用于实现，查询中的“开始查询时间”与“结束查询时间”,date" />
+    </inspection_tool>
+    <inspection_tool class="JavadocDeclaration" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ADDITIONAL_TAGS" value="time：2020/9/16-11:12,author：King,moduleName：数据管理模块,businessIntroduction：主要是为“分光光度”与“胶体金”两个模块的数据表进行管理操作。,loadLibrary：GT库,time：2020/9/23-19:11,moduleName：数据库适配器,businessIntroduction：在数据库查询出数据后进行数据展示,time：2020/9/29-19:41,moduleName：时间选择对话框,businessIntroduction：用于实现，查询中的“开始查询时间”与“结束查询时间”,date" />
+    </inspection_tool>
+    <inspection_tool class="MissingJavadoc" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="PACKAGE_SETTINGS">
+        <Options>
+          <option name="ENABLED" value="false" />
+        </Options>
+      </option>
+      <option name="MODULE_SETTINGS">
+        <Options>
+          <option name="ENABLED" value="false" />
+        </Options>
+      </option>
+      <option name="TOP_LEVEL_CLASS_SETTINGS">
+        <Options>
+          <option name="ENABLED" value="false" />
+        </Options>
+      </option>
+      <option name="INNER_CLASS_SETTINGS">
+        <Options>
+          <option name="ENABLED" value="false" />
+        </Options>
+      </option>
+      <option name="METHOD_SETTINGS">
+        <Options>
+          <option name="REQUIRED_TAGS" value="@return@param@throws or @exception" />
+          <option name="ENABLED" value="false" />
+        </Options>
+      </option>
+      <option name="FIELD_SETTINGS">
+        <Options>
+          <option name="ENABLED" value="false" />
+        </Options>
+      </option>
     </inspection_tool>
   </profile>
 </component>

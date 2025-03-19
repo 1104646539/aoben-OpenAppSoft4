@@ -551,30 +551,30 @@ public class PesticideTestActivity extends TestActivity implements View.OnClickL
         double factor = 50.0 / Global.project.cardXlz;
         for (int i = 0; i < Global.CHANNEL_COUNT; i++) {
 
-            if (index == selectedChannels.length) break;
-            if (selectedChannels[index] == i + 1) {
-                double value = 100 - AsList.get(index) * 100.0 * factor;
-                value = value >= 100 ? 100 : value;
-                value = value < 0 ? 0 : value;
-                value = Double.parseDouble(df.format(value));
-                CheckResult tempResult = new CheckResult(
-                        etCheckedOrg.getText().toString(),
-                        etCheckedOrg.getText().toString(),
-                        Global.project.projectName,
-                        etSampleNames[i].getText().toString(),
-                        "", etSampleSource.getText().toString(), "A" + (i + 1), System.currentTimeMillis(),
-                        df.format(value) + "%", value < 50 ? "合格" : "不合格",
-                        Global.project.cardXlz + "",
-                        Global.project.testStandard,
-                        Global.project.checker,
-                        "",new Random().nextInt(100000)+"",AsList.get(index)+"","组织机构测试位置");
-
-                etValues[i].setText(tempResult.testValue);
-                etResults[i].setText(tempResult.resultJudge);
-                etValues[i].setTag(tempResult);
-                resultList.add(tempResult);
-                index++;
-            }
+//            if (index == selectedChannels.length) break;
+//            if (selectedChannels[index] == i + 1) {
+//                double value = 100 - AsList.get(index) * 100.0 * factor;
+//                value = value >= 100 ? 100 : value;
+//                value = value < 0 ? 0 : value;
+//                value = Double.parseDouble(df.format(value));
+//                CheckResult tempResult = new CheckResult(
+//                        etCheckedOrg.getText().toString(),
+//                        etCheckedOrg.getText().toString(),
+//                        Global.project.projectName,
+//                        etSampleNames[i].getText().toString(),
+//                        "", etSampleSource.getText().toString(), "A" + (i + 1), System.currentTimeMillis(),
+//                        df.format(value) + "%", value < 50 ? "合格" : "不合格",
+//                        Global.project.cardXlz + "",
+//                        Global.project.testStandard,
+//                        Global.project.checker,
+//                        "",new Random().nextInt(100000)+"",AsList.get(index)+"","组织机构测试位置");
+//
+//                etValues[i].setText(tempResult.testValue);
+//                etResults[i].setText(tempResult.resultJudge);
+//                etValues[i].setTag(tempResult);
+//                resultList.add(tempResult);
+//                index++;
+//            }
         }
         if (resultList.size() > 0) {
             new CheckResult().saveBindingIdAll(resultList);

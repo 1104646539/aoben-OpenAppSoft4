@@ -47,14 +47,14 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskLi
         holder.tv_bjdw.setText(ToolUtil.nullToString(item.getCompanyName(), ""));
         holder.tv_time.setText(ToolUtil.nullToString(item.getSamplingTime(), ""));
 
-        holder.ll_root.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(onItemClick!=null){
-                    onItemClick.onItemClick(position);
-                }
-            }
-        });
+//        holder.ll_root.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(onItemClick!=null){
+//                    onItemClick.onItemClick(position);
+//                }
+//            }
+//        });
     }
 
     @Override

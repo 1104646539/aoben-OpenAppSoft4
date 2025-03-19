@@ -40,20 +40,22 @@ import java.util.Random;
 
 public class AddTaskActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
-    Spinner spn_sample_type_main, spn_sample_type_child, spn_bjcdw_name;
+    Spinner spn_sample_type_main, spn_sample_type_child, spn_bjcdw_name, spn_jcdw_name;
     TextView tv_sampling_date;
     TextView tv_commit, tv_cancel;
     TextView tv_sample_name;
-    TextView tv_sample_type_main, tv_sample_type_child, tv_bjcdw_name;
+    TextView tv_sample_type_main, tv_sample_type_child, tv_bjcdw_name, tv_jcdw_name;
     EditText et_id;
 
     List<OrderInfoModel> bjcdws;
+    List<OrderInfoModel> jcdws;
     List<OrderInfoModel> sample_type_mains;
     List<OrderInfoModel> sample_type_childs;
 
     GT.Hibernate hibernate;
 
 
+    OrderInfoModel jcdw;
     OrderInfoModel bjcdw;
     OrderInfoModel sample_type_main;
     OrderInfoModel sample_type_child;
@@ -79,7 +81,11 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
         bjcdws = hibernate.where("type = ?", "" + OrderInfoModel.type_bcheck).queryAll(OrderInfoModel.class);
         sample_type_childs = hibernate.where("type = ?", "" + OrderInfoModel.type_sample_type_child).queryAll(OrderInfoModel.class);
         sample_type_mains = hibernate.where("type = ?", "" + OrderInfoModel.type_sample_type_main).queryAll(OrderInfoModel.class);
+        jcdws = hibernate.where("type = ?", "" + OrderInfoModel.type_check).queryAll(OrderInfoModel.class);
 
+        if (jcdws == null) {
+            jcdws = new ArrayList<>();
+        }
         if (bjcdws == null) {
             bjcdws = new ArrayList<>();
         }
@@ -101,6 +107,7 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
         spn_sample_type_main = findViewById(R.id.spn_sample_type_main);
         spn_sample_type_child = findViewById(R.id.spn_sample_type_child);
         spn_bjcdw_name = findViewById(R.id.spn_bjcdw_name);
+        spn_jcdw_name = findViewById(R.id.spn_jcdw_name);
         tv_sampling_date = findViewById(R.id.tv_sampling_date);
         et_id = findViewById(R.id.et_id);
         tv_cancel = findViewById(R.id.tv_cancel);
@@ -109,6 +116,7 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
         tv_sample_type_main = findViewById(R.id.tv_sample_type_main);
         tv_sample_type_child = findViewById(R.id.tv_sample_type_child);
         tv_bjcdw_name = findViewById(R.id.tv_bjcdw_name);
+        tv_jcdw_name = findViewById(R.id.tv_jcdw_name);
 
         tv_cancel.setOnClickListener(this);
         tv_commit.setOnClickListener(this);
@@ -122,6 +130,15 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
             bjcdw = bjcdws.get(bjcdws.size() - 1);
         }
         spn_bjcdw_name.setOnItemSelectedListener(this);
+
+        ArrayAdapter<OrderInfoModel> adapter_jcdw = new ArrayAdapter(this, R.layout.item_select_project, R.id.tv_project_name, bjcdws);
+        adapter_jcdw.setDropDownViewResource(R.layout.item_select_project_drop);
+        spn_jcdw_name.setAdapter(adapter_jcdw);
+        if (!jcdws.isEmpty()) {
+            spn_jcdw_name.setSelection(jcdws.size() - 1);
+            jcdw = jcdws.get(jcdws.size() - 1);
+        }
+        spn_jcdw_name.setOnItemSelectedListener(this);
 
         ArrayAdapter<OrderInfoModel> adapter_sample_type_child = new ArrayAdapter(this, R.layout.item_select_project, R.id.tv_project_name, sample_type_childs);
         adapter_sample_type_child.setDropDownViewResource(R.layout.item_select_project_drop);
@@ -143,7 +160,6 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
 
         tv_sampling_date.setOnClickListener(this);
 
-
         et_id.setText(getRandomTaskId());
 
         spn_sample_type_main.setVisibility(sample_type_mains.isEmpty() ? View.GONE : View.VISIBLE);
@@ -154,6 +170,8 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
 
         spn_bjcdw_name.setVisibility(bjcdws.isEmpty() ? View.GONE : View.VISIBLE);
         tv_bjcdw_name.setVisibility(!bjcdws.isEmpty() ? View.GONE : View.VISIBLE);
+        spn_jcdw_name.setVisibility(jcdws.isEmpty() ? View.GONE : View.VISIBLE);
+        tv_jcdw_name.setVisibility(!jcdws.isEmpty() ? View.GONE : View.VISIBLE);
 
     }
 
@@ -169,6 +187,8 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
             sample_type_main = sample_type_mains.get(position);
         } else if (parent.getId() == R.id.spn_sample_type_child) {
             sample_type_child = sample_type_childs.get(position);
+        } else if (parent.getId() == R.id.spn_jcdw_name) {
+            jcdw = jcdws.get(position);
         }
     }
 
@@ -230,6 +250,8 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
             sample_type_main = null;
         } else if (parent.getId() == R.id.spn_sample_type_child) {
             sample_type_child = null;
+        } else if (parent.getId() == R.id.spn_jcdw_name) {
+            jcdw = null;
         }
     }
 
@@ -255,7 +277,7 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
         if (!verify()) return;
         String samplingDate = tv_sampling_date.getText().toString();
         String sampleName = tv_sample_name.getText().toString();
-        TaskModel taskModel = new TaskModel(et_id.getText().toString(), sample_type_main.name, sample_type_main.code,
+        TaskModel taskModel = new TaskModel(et_id.getText().toString(), jcdw.name, sample_type_main.name, sample_type_main.code,
                 sample_type_child.name, sample_type_child.code, sampleName, bjcdw.name, bjcdw.code, samplingDate, Global.NAME);
         hibernate.save(taskModel);
         if (hibernate.isStatus()) {
@@ -277,6 +299,9 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
         } else if (bjcdw == null) {
             APPUtils.showToast(this, "请选择受检单位");
             return false;
+        } else if (jcdw == null) {
+            APPUtils.showToast(this, "请选择检测机构");
+            return false;
         } else if (sample_type_main == null) {
             APPUtils.showToast(this, "请选择样品主类");
             return false;
@@ -295,7 +320,7 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
         Date now = new Date();
         ;
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
-            String s = String.format("%d/%d/%d", year, month , dayOfMonth);
+            String s = String.format("%d/%d/%d", year, month, dayOfMonth);
             tv_sampling_date.setText(s);
         }, now.getYear() + 1900, now.getMonth() + 1, now.getDay());
         datePickerDialog.show();

@@ -44,12 +44,17 @@ public class TaskModel {
      * 必填 检测人员姓名
      */
     private String checkUser;
+    /**
+     * 必填 检测单位
+     */
+    private String jcdw;
 
     public TaskModel() {
     }
 
-    public TaskModel(String taskID, String sampleTypeId, String sampleType, String sampleSubTypeId, String sampleSubType, String sampleName, String companyName, String companyCode, String samplingTime, String checkUser) {
+    public TaskModel(String taskID, String jcdw, String sampleTypeId, String sampleType, String sampleSubTypeId, String sampleSubType, String sampleName, String companyName, String companyCode, String samplingTime, String checkUser) {
         this.taskID = taskID;
+        this.jcdw = jcdw;
         this.sampleTypeId = sampleTypeId;
         this.sampleType = sampleType;
         this.sampleSubTypeId = sampleSubTypeId;
@@ -59,6 +64,14 @@ public class TaskModel {
         this.companyCode = companyCode;
         this.samplingTime = samplingTime;
         this.checkUser = checkUser;
+    }
+
+    public String getJcdw() {
+        return jcdw;
+    }
+
+    public void setJcdw(String jcdw) {
+        this.jcdw = jcdw;
     }
 
     public String getTaskID() {

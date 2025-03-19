@@ -100,12 +100,12 @@ public class TestAdapter<T> extends RecyclerView.Adapter {
         viewHolder.tv_sample_aisle_number.setText(checkResult.channel != null ? checkResult.channel : "");
         viewHolder.tv_sample_name.setText(checkResult.sampleName != null ? checkResult.sampleName : "");
         viewHolder.tv_bchecked_org.setText(checkResult.bcheckedOrganization != null ? checkResult.bcheckedOrganization : "");
-        viewHolder.tv_sample_source.setText(checkResult.sampleSource != null ? checkResult.sampleSource : "");
-        viewHolder.et_sample_number.setText(checkResult.sampleNum != null ? checkResult.sampleNum : "");
+        viewHolder.tv_sample_source.setText(checkResult.sampleType != null ? checkResult.sampleType : "");
+        viewHolder.et_sample_number.setText(checkResult.taskID != null ? checkResult.taskID : "");
         viewHolder.tv_yzl.setText(checkResult.testValue != null ? checkResult.testValue : "");
         viewHolder.tv_judge.setText(checkResult.resultJudge != null ? checkResult.resultJudge : "");
-        viewHolder.et_sample_weight.setText(checkResult.weight != null ? checkResult.weight : "");
-        viewHolder.tv_company_code_item.setText(checkResult.companyCode != null ? checkResult.companyCode : "");
+//        viewHolder.et_sample_weight.setText(checkResult.weight != null ? checkResult.weight : "");
+        viewHolder.tv_company_code_item.setText(checkResult.sampleTypeChild != null ? checkResult.sampleTypeChild : "");
 
         viewHolder.item_view.setSelected(checkResult.isSelected);
         viewHolder.tv_sample_aisle_number.setOnClickListener(new View.OnClickListener() {

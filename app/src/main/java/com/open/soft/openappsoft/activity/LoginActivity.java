@@ -418,8 +418,12 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
         SharedPreferences.Editor editor = sp.edit();   //获取编辑器
 //        editor.putString("DeptId", resultBean.getDeptId()); //存入部门ID
         editor.putString("salt", resultBean.getSalt()); //存入salt秘钥
+        editor.putString("refreshToken", resultBean.getRefreshToken()); //存入salt秘钥
+        editor.putString("token", resultBean.getAccessToken()); //存入salt秘钥
         editor.apply();                //提交修改，否则不生效
         Global.SALT = resultBean.getSalt();
+        Global.Token = resultBean.getAccessToken();
+        Global.RefreshToken = resultBean.getRefreshToken();
         Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
 //        Global.NAME = resultBean
 //        Global.NAME = resultBean.getUserName();
@@ -524,10 +528,10 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("NewApi")
     private void login() {
-        if (Global.isAdimin) {
-            startAdmin();
-            return;
-        }
+//        if (Global.isAdimin) {
+//            startAdmin();
+//            return;
+//        }
         String pass = psw;//存储真实密码
         Timber.i("存储真实账号user:" + user);
         Timber.i("存储真实密码psw:" + psw);
@@ -535,20 +539,20 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
 
         int count = 0;
 
-        while (true) {
-            count++;
-            if (reslut[0]) {
-                break;
-            }
-            try {
-                Thread.sleep(300);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            if (count == 12) {
-                break;
-            }
-        }
+//        while (true) {
+//            count++;
+//            if (reslut[0]) {
+//                break;
+//            }
+//            try {
+//                Thread.sleep(300);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+//            if (count == 12) {
+//                break;
+//            }
+//        }
 
         //存储
         SharedPreferences sp = this.getSharedPreferences("userPass", Context.MODE_PRIVATE);

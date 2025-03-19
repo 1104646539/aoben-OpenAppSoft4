@@ -49,6 +49,7 @@ import com.google.gson.Gson;
 import com.gsls.gt.GT;
 import com.kongzue.dialogx.dialogs.MessageDialog;
 import com.lidroid.xutils.DbUtils;
+import com.lidroid.xutils.db.annotation.Check;
 import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.db.sqlite.WhereBuilder;
 import com.lidroid.xutils.exception.DbException;
@@ -79,6 +80,7 @@ import com.open.soft.openappsoft.multifuction.util.SerialUtils;
 import com.open.soft.openappsoft.multifuction.util.ToolUtils;
 import com.open.soft.openappsoft.sql.bean.DetectionResultBean;
 import com.open.soft.openappsoft.util.InterfaceURL;
+import com.open.soft.openappsoft.util.UploadThread2;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -254,6 +256,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
 
     Dialog dialog_task_list;
     TaskListAdapter2 taskListAdapter;
+
     ListView task_list;
     List<TaskModel> taskModels = new ArrayList<>();
 
@@ -271,13 +274,29 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
             dialog_task_list.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog_task_list.setContentView(dialogContentView);
 
+            task_list.setAdapter(taskListAdapter);
             task_list.setOnItemClickListener((parent, view, position, id) -> {
                 TaskModel taskModel = taskModels.get(position);
                 Timber.i("选择的任务=" + new Gson().toJson(taskModel));
+
+                resultList.get(clickPosition).sampleName = taskModel.getSampleName();
+                resultList.get(clickPosition).taskID = taskModel.getTaskID();
+                resultList.get(clickPosition).bcheckedOrganization = taskModel.getCompanyName();
+                resultList.get(clickPosition).bcheckedOrganizationCode = taskModel.getCompanyCode();
+                resultList.get(clickPosition).sampleType = taskModel.getSampleType();
+                resultList.get(clickPosition).sampleTypeCode = taskModel.getSampleTypeId();
+                resultList.get(clickPosition).sampleTypeChild = taskModel.getSampleSubType();
+                resultList.get(clickPosition).sampleTypeChildCode = taskModel.getSampleSubTypeId();
+                resultList.get(clickPosition).SamplingTime = taskModel.getSamplingTime();
+                resultList.get(clickPosition).checkedOrganization = taskModel.getJcdw();
+
+                testAdapter.notifyItemChanged(clickPosition);
+                dialog_task_list.dismiss();
             });
         }
 
         dialog_task_list.show();
+        dialog_task_list.setCancelable(true);
 
     }
 
@@ -512,19 +531,19 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
         testAdapter.setData(resultList);
 
 
-        if (Global.uploadModel == 1) {
-            btnUpload.setVisibility(View.GONE);
-        }
+//        if (Global.uploadModel == 1) {
+//            btnUpload.setVisibility(View.GONE);
+//        }
         btnReturn = (Button) findViewById(R.id.btn_return);
 
         btnTest.setOnClickListener(this);
         btnReturn.setOnClickListener(this);
 
-        if (com.example.utils.http.Global.ismixedentry) {
-            btn_changemethod.setVisibility(View.VISIBLE);
-        } else {
-            btn_changemethod.setVisibility(View.GONE);
-        }
+//        if (com.example.utils.http.Global.ismixedentry) {
+//            btn_changemethod.setVisibility(View.VISIBLE);
+//        } else {
+//            btn_changemethod.setVisibility(View.GONE);
+//        }
 
 //        tvCurrentTemp = findViewById(R.id.tv_current_temp);
     }
@@ -561,14 +580,14 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
 
         int i = v.getId();//全选
         if (i == R.id.btn_test) {
-            if (card_number == null || card_number.isEmpty()) {
-                APPUtils.showToast(this, "检测卡编号未输入");
-                return;
-            }
-            if (remainTimes < 1 || remainTimes < testAdapter.getSelectedCount()) {
-                APPUtils.showToast(this, "检测卡编号可用次数不足" + testAdapter.getSelectedCount() + "次");
-                return;
-            }
+//            if (card_number == null || card_number.isEmpty()) {
+//                APPUtils.showToast(this, "检测卡编号未输入");
+//                return;
+//            }
+//            if (remainTimes < 1 || remainTimes < testAdapter.getSelectedCount()) {
+//                APPUtils.showToast(this, "检测卡编号可用次数不足" + testAdapter.getSelectedCount() + "次");
+//                return;
+//            }
             if (isNc()) {
                 if (Ac < COMPARE_MIN_VALUE) {
                     APPUtils.showToast(this, "请先对照");
@@ -641,7 +660,32 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
     }
 
     private void upload(boolean autoUpload) {
+        if (testAdapter.getSelectedCount() == 0) {
+            APPUtils.showToast(this, "请选择上传");
+            return;
+        }
+        List<CheckResult> checkResults = testAdapter.getSelectedList();
+        //
+        for (int i = 0; i < checkResults.size(); i++) {
+            if (com.open.soft.openappsoft.util.APPUtils.isNull(checkResults.get(i).resultJudge)) {
+                APPUtils.showToast(this, "请不要选择未检测的数据");
+                return;
+            }
+        }
 
+        //上传
+        UploadThread2 uploadThread2 = new UploadThread2(this, checkResults, new UploadThread2.onUploadListener() {
+            @Override
+            public void onSuccess(List<CheckResult> list, int returnId, int position, String result) {
+                Timber.i("onSuccess position="+position);
+            }
+
+            @Override
+            public void onFail(String failInfo) {
+                Timber.i("onFail failInfo="+failInfo);
+            }
+        });
+        uploadThread2.start();
     }
 
     private void updateUploadState2Db(List<CheckResult> list) {
@@ -1000,8 +1044,15 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
 
                     Timber.i("限量值：" + xlz);
                     CheckResult tempResult = new CheckResult(
-                            com.example.utils.http.Global.Dept == null ? "无" : com.example.utils.http.Global.Dept,//检测单位
+                            cr.checkedOrganization,
                             cr.bcheckedOrganization,//被检测单位
+                            cr.bcheckedOrganizationCode,
+                            cr.SamplingTime,
+                            cr.taskID,
+                            cr.sampleType,
+                            cr.sampleTypeCode,
+                            cr.sampleTypeChild,
+                            cr.sampleTypeChildCode,
                             mProject.projectName,//检测项目
                             cr.sampleNum,//样本编号
                             cr.sampleName,//样本名称
@@ -1097,8 +1148,15 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
 
                     //开始保存数据
                     CheckResult tempResult = new CheckResult(
-                            com.example.utils.http.Global.Dept == null ? "无" : com.example.utils.http.Global.Dept,
-                            cr.bcheckedOrganization,
+                            cr.checkedOrganization,
+                            cr.bcheckedOrganization,//被检测单位
+                            cr.bcheckedOrganizationCode,
+                            cr.SamplingTime,
+                            cr.taskID,
+                            cr.sampleType,
+                            cr.sampleTypeCode,
+                            cr.sampleTypeChild,
+                            cr.sampleTypeChildCode,
                             mProject.projectName,
                             cr.sampleNum,
                             cr.sampleName,
@@ -1113,13 +1171,13 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
                             cr.weight, new Random().nextInt(100000) + "", logresult + "", companyCode);
                     tempResult.isSelected = cr.isSelected;
                     tempResult.sn = cr.sn;
-                    tempResult.checker = check_persion;
-                    tempResult.checkedOrganization = check_company;
+//                    tempResult.checker = check_persion;
+//                    tempResult.checkedOrganization = check_company;
 
                     // 修改
-                    if (com.example.utils.http.Global.isAdimin) {
-                        tempResult.checkedOrganization = "";
-                    }
+//                    if (com.example.utils.http.Global.isAdimin) {
+//                        tempResult.checkedOrganization = "";
+//                    }
 
                     // 修改
                     if (!mode_statu_list[i]) {
@@ -2164,11 +2222,12 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
                 float[] d = new float[20];
                 for (int i = 0; i < 20; i++) {
                     if (flag == COMPARE_START) {
-                        d[i] = 0.2f;
+                        d[i] = 0.8f;
                     } else {
                         d[i] = 0.5f;
                     }
                 }
+                this.d = d;
                 parseCompare(d, flag);
             } else if (flag == TEST_START || flag == TEST_END) {
                 float[] d = new float[20];

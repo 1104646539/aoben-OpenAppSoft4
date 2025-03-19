@@ -8,8 +8,8 @@ android {
         applicationId "com.open.soft.openappsoft"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 54
-        versionName "1.7.7"
+        versionCode 1
+        versionName "1.7.8"
 //
 //        ndk {//thgppf  123456
 //            // 设置支持的SO库架构
@@ -27,6 +27,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 //            signingConfig signingConfigs.release
@@ -43,7 +44,14 @@ android {
 //        viewBinding = true
 //        dataBinding = true
 //    }
-
+//    lintOptions {
+//        checkReleaseBuilds false
+//    }
+    lintOptions {
+        // 这里可以配置一些lint的选项
+        abortOnError false
+        checkReleaseBuilds false
+    }
     sourceSets {
         main {
             jniLibs.srcDirs=['libs']
@@ -82,7 +90,10 @@ dependencies {
     //GT基础功能
 //    implementation 'com.github.1079374315:GSLS_Tool:v1.2.9.2'
 //    implementation 'com.github.1079374315:GSLS_Tool:v1.4.1.10'
-    implementation 'com.github.1079374315:GSLS_Tool:v1.4.6.8'
+//    implementation 'com.github.1079374315:GSLS_Tool:v1.4.6.8'
+    implementation ('com.github.1079374315:GSLS_Tool:v1.4.6.8'){
+        exclude group:'com.friendlyarm.AndroidSDK',module:'*'
+    }
     //GT全部功能 需要添加的包
     implementation 'com.google.code.gson:gson:2.8.5'  //JSON 数据解析
 //    implementation 'com.lzy.net:okgo:3.0.4' //OkGo 网络框架

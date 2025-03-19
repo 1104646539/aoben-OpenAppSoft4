@@ -30,19 +30,23 @@ public class OrderInfoModel {
      * 受检单位
      * 受检单位代码（个人就是身份证号）
      */
-    public static int type_bcheck = 1;
+    public final static int type_bcheck = 1;
     /**
      * 样品主类名称（类型）
      * 样品主类ID（类型）
      */
-    public static int type_sample_type_main = 2;
+    public final static int type_sample_type_main = 2;
     /**
      * 样品子类名称（类型）
      * 样品子类ID（类型）
      */
-    public static int type_sample_type_child = 3;
+    public final static int type_sample_type_child = 3;
 
-
+    /**
+     * 检测机构
+     * 不需要
+     */
+    public final static int type_check = 4;
     @NonNull
     @Override
     public String toString() {

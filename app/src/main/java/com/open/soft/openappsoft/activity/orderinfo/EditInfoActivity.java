@@ -56,6 +56,8 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
             tv_title.setText("样本子类管理");
         } else if (type == OrderInfoModel.type_sample_type_main) {
             tv_title.setText("样本主类管理");
+        }else if (type == OrderInfoModel.type_check) {
+            tv_title.setText("检测机构管理");
         }
     }
 
@@ -214,6 +216,14 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
                 } else if (type == OrderInfoModel.type_sample_type_main) {
                     if (APPUtils.isNull(model.name)) {
                         APPUtils.showToast(EditInfoActivity.this, "请输入样品主类");
+
+                    } else {
+                        orderInfoDialog.dismiss();
+                        addOrSave(showMode == EditOrderInfoDialog.ShowMode_add, model);
+                    }
+                } else if (type == OrderInfoModel.type_check) {
+                    if (APPUtils.isNull(model.name)) {
+                        APPUtils.showToast(EditInfoActivity.this, "请输入检测机构");
 
                     } else {
                         orderInfoDialog.dismiss();

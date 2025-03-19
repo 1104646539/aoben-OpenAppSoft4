@@ -7,6 +7,9 @@ public class CheckResult extends BaseData<CheckResult> {
 
     public String checkedOrganization = "";//检测单位
     public String bcheckedOrganization = "";//被检测单位
+    public String bcheckedOrganizationCode = "";//被检测代码
+    public String SamplingTime = "";//抽样时间
+    public String taskID = "";//任务ID
     public String projectName;//检测项目
     public String sampleName;//样品名称
     public String sampleNum = "";//样品编号
@@ -24,9 +27,13 @@ public class CheckResult extends BaseData<CheckResult> {
     public boolean isSelected;
     public SampleName sn;
     public int uploadId;//上传状态
-    
+    public String uploadMsg;//上传成功返回的ID
+
     // 新增
-    public String sampleType; // 样品类型
+    public String sampleType; // 样品类型 主类
+    public String sampleTypeCode; // 样品类型 主类
+    public String sampleTypeChild; // 样品类型 子类
+    public String sampleTypeChildCode; // 样品类型 子类
 
     public String xgd;  //吸光度
 
@@ -36,14 +43,19 @@ public class CheckResult extends BaseData<CheckResult> {
     public String companyCode;//组织机构
 
 
-
-
     public CheckResult() {
 
     }
 
     public CheckResult(String checkedOrganization,
                        String bcheckedOrganization,
+                       String bcheckedOrganizationCode,
+                       String samplingTime,
+                       String taskID,
+                       String sampleType,
+                       String sampleTypeCode,
+                       String sampleTypeChild,
+                       String sampleTypeChildCode,
                        String projectName,
                        String sampleNum,
                        String sampleName,
@@ -59,6 +71,13 @@ public class CheckResult extends BaseData<CheckResult> {
                        String twh,
                        String xgd,
                        String companyCode) {
+        this.sampleTypeChild = sampleTypeChild;
+        this.bcheckedOrganizationCode = bcheckedOrganizationCode;
+        this.SamplingTime = samplingTime;
+        this.taskID = taskID;
+        this.sampleType = sampleType;
+        this.sampleTypeCode = sampleTypeCode;
+        this.sampleTypeChildCode = sampleTypeChildCode;
         this.checkedOrganization = checkedOrganization;
         this.bcheckedOrganization = bcheckedOrganization;
         this.sampleNum = sampleNum;

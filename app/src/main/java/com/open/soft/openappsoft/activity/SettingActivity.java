@@ -46,7 +46,7 @@ public class SettingActivity extends Activity implements View.OnClickListener {
     private Button btn_open_3;
     private Button btn_open_4;
     private Button btn_open_5;
-    private Button btn_sample_type_main, btn_sample_type_child, btn_bcheck_ori;
+    private Button btn_sample_type_main, btn_sample_type_child, btn_bcheck_ori,btn_check_ori;
     private TextView tv_mac_url;
 
     @GT.Annotations.GT_Collection.GT_Map
@@ -75,6 +75,7 @@ public class SettingActivity extends Activity implements View.OnClickListener {
         btn_sample_type_main = (Button) findViewById(R.id.btn_sample_type_main);
         btn_sample_type_child = (Button) findViewById(R.id.btn_sample_type_child);
         btn_bcheck_ori = (Button) findViewById(R.id.btn_bcheck_ori);
+        btn_check_ori = (Button) findViewById(R.id.btn_check_ori);
         tv_mac_url = (TextView) findViewById(R.id.tv_mac_url);
 
 
@@ -86,6 +87,7 @@ public class SettingActivity extends Activity implements View.OnClickListener {
         btn_open_4.setOnClickListener(this);
         btn_open_5.setOnClickListener(this);
         btn_bcheck_ori.setOnClickListener(this);
+        btn_check_ori.setOnClickListener(this);
         btn_sample_type_main.setOnClickListener(this);
         btn_sample_type_child.setOnClickListener(this);
 
@@ -114,30 +116,30 @@ public class SettingActivity extends Activity implements View.OnClickListener {
                 et_name.setText(name);
             }
 
-            new AlertDialog.Builder(this).setTitle("请输入维护公司的名称")
-                    .setIcon(android.R.drawable.sym_def_app_icon)
-                    .setView(sp_name)
+            new AlertDialog.Builder(this).setTitle("请输入设备名(SN)")
+//                    .setIcon(android.R.drawable.sym_def_app_icon)
+                    .setView(et_name)
                     .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             //按下确定键后的事件
-//                            String name = sp_name.getText().toString();
-                            String name = sp_name.getSelectedItem().toString();
+                            String name = et_name.getText().toString();
+//                            String name = sp_name.getSelectedItem().toString();
 
                             if (null != name && !"null".equals(name) && name.length() > 0) {
 
                                 // 修改
-                                if ("信达安检测技术（天津）有限公司".equals(name)) {
-                                    Global.company_name = "Xindaan";
-                                } else {
-                                    Global.company_name = "Aoben";
-                                }
+//                                if ("信达安检测技术（天津）有限公司".equals(name)) {
+//                                    Global.company_name = "Xindaan";
+//                                } else {
+//                                    Global.company_name = "Aoben";
+//                                }
 
                                 new GT.GT_SharedPreferences(SettingActivity.this, "companyName", true).save("name", name);
                                 GT.toast(SettingActivity.this, "修改成功！");
                                 InterfaceURL.companyName = name;
                             } else {
-                                GT.toast(SettingActivity.this, "公司名不能为空！");
+                                GT.toast(SettingActivity.this, "设备名(SN)不能为空！");
                             }
                         }
                     }).setNegativeButton("取消", null).show();
@@ -166,6 +168,10 @@ public class SettingActivity extends Activity implements View.OnClickListener {
         } else if (v.getId() == R.id.btn_bcheck_ori) {
             Intent intent = new Intent(this, EditInfoActivity.class);
             intent.putExtra("type", OrderInfoModel.type_bcheck);
+            startActivity(intent);
+        }else if (v.getId() == R.id.btn_check_ori) {
+            Intent intent = new Intent(this, EditInfoActivity.class);
+            intent.putExtra("type", OrderInfoModel.type_check);
             startActivity(intent);
         }
     }

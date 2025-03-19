@@ -1,6 +1,8 @@
 package com.example.utils.http;
 
 import com.example.utils.http.model.BaseResult;
+import com.example.utils.http.model.UploadBean;
+import com.example.utils.http.model.UploadBean2;
 
 import java.util.HashMap;
 import java.util.List;
@@ -53,7 +55,7 @@ public interface CheckService {
      * @return
      */
     @POST
-    Observable<Result<String>> SendResult(@Url String url, @Body SendResultBean sendResultBean);
+    Observable<BaseResult<String>> SendResult(@Url String url, @Body UploadBean2 uploadBean);
 
     /**
      * 获取知识库

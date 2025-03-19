@@ -63,6 +63,14 @@
                 android:text="受检单位"
                 android:textColor="#ffffff"
                 android:textSize="36sp" />
+            <Button
+                android:id="@+id/btn_check_ori"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:background="@drawable/btn_default1"
+                android:text="检测单位"
+                android:textColor="#ffffff"
+                android:textSize="36sp" />
 
             <Button
                 android:id="@+id/btn_open_1"
@@ -78,6 +86,7 @@
                 android:layout_width="300dp"
                 android:layout_height="80dp"
                 android:background="@drawable/btn_default1"
+                android:visibility="gone"
                 android:text="密码设置"
                 android:textColor="#ffffff"
                 android:textSize="36sp" />
@@ -87,7 +96,7 @@
                 android:layout_width="300dp"
                 android:layout_height="80dp"
                 android:background="@drawable/btn_default1"
-                android:text="名称设置"
+                android:text="设备名(SN)设置"
                 android:textColor="#ffffff"
                 android:textSize="36sp" />
 
@@ -98,6 +107,7 @@
                 android:layout_height="80dp"
                 android:background="@drawable/btn_default1"
                 android:text="修改标题"
+                android:visibility="gone"
                 android:textColor="#ffffff"
                 android:textSize="36sp" />
 
@@ -105,6 +115,7 @@
             <Button
                 android:id="@+id/btn_open_3"
                 android:layout_width="300dp"
+                android:visibility="gone"
                 android:layout_height="80dp"
                 android:background="@drawable/btn_default1"
                 android:text="本机归属地设置"

@@ -109,16 +109,17 @@
                             <Spinner
                                 android:id="@+id/spn_sample_type_main"
                                 android:layout_width="match_parent"
-                                android:visibility="gone"
                                 android:layout_height="match_parent"
-                                android:paddingLeft="10dp" />
+                                android:paddingLeft="10dp"
+                                android:visibility="gone" />
 
                             <TextView
                                 android:id="@+id/tv_sample_type_main"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:textColor="@color/black"
+                                android:paddingLeft="10dp"
                                 android:text="请选择"
+                                android:textColor="@color/black"
                                 android:textSize="26sp" />
                         </FrameLayout>
 
@@ -146,15 +147,16 @@
                                 android:id="@+id/spn_sample_type_child"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:visibility="gone"
-                                android:paddingLeft="10dp" />
+                                android:paddingLeft="10dp"
+                                android:visibility="gone" />
 
                             <TextView
                                 android:id="@+id/tv_sample_type_child"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:textColor="@color/black"
+                                android:paddingLeft="10dp"
                                 android:text="请选择"
+                                android:textColor="@color/black"
                                 android:textSize="26sp" />
                         </FrameLayout>
                     </LinearLayout>
@@ -187,40 +189,56 @@
 
                             <Spinner
                                 android:id="@+id/spn_bjcdw_name"
-                                android:visibility="gone"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:paddingLeft="10dp" />
+                                android:paddingLeft="10dp"
+                                android:visibility="gone" />
 
                             <TextView
                                 android:id="@+id/tv_bjcdw_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:paddingLeft="10dp"
                                 android:text="请选择"
                                 android:textColor="@color/black"
                                 android:textSize="26sp" />
                         </FrameLayout>
                     </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
-                    <!--                    <LinearLayout-->
-                    <!--                        android:layout_width="0dp"-->
-                    <!--                        android:layout_weight="1"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_marginTop="5dp"-->
-                    <!--                        android:layout_marginBottom="5dp"-->
-                    <!--                        android:orientation="horizontal">-->
+                        <TextView
+                            style="@style/text_label"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:text="检测机构" />
 
-                    <!--                        <TextView-->
-                    <!--                            style="@style/text_label"-->
-                    <!--                            android:layout_width="150dp"-->
-                    <!--                            android:layout_height="wrap_content"-->
-                    <!--                            android:text="受检单位代码" />-->
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
-                    <!--                        <TextView-->
-                    <!--                            android:id="@+id/tv_bjcdw_code"-->
-                    <!--                            android:layout_width="match_parent"-->
-                    <!--                            android:layout_height="match_parent" />-->
-                    <!--                    </LinearLayout>-->
+                            <Spinner
+                                android:id="@+id/spn_jcdw_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingLeft="10dp"
+                                android:visibility="gone" />
+
+                            <TextView
+                                android:id="@+id/tv_jcdw_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingLeft="10dp"
+                                android:text="请选择"
+                                android:textColor="@color/black"
+                                android:textSize="26sp" />
+                        </FrameLayout>
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout

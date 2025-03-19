@@ -23,6 +23,18 @@ public class Global {
      * 仪器型号
      */
     public static String KEY = "688961777307881472";
+    /**
+     * 加密 key
+     */
+    public static String ENCODE_KEY = "e2fd36a50c8c4759a5aaf1f094543a17";
+    /**
+     * Token
+     */
+    public static String Token = "";
+    /**
+     * Token 刷新用
+     */
+    public static String RefreshToken = "";
 
     //是否自动录入信息
     public static boolean isVoluntarily = true;//默认是自动的录入信息

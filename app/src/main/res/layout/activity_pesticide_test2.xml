@@ -176,6 +176,7 @@
             <LinearLayout
                 android:id="@+id/ll_card_number"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="5dp">
@@ -256,9 +257,9 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="3"
+                    android:layout_weight="6"
                     android:gravity="center"
-                    android:text="样品编号"
+                    android:text="任务ID"
                     android:textColor="@android:color/black"
                     android:textSize="28sp" />
 
@@ -295,7 +296,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="4"
                     android:gravity="center"
-                    android:text="被检单位"
+                    android:text="受检单位"
                     android:textColor="@android:color/black"
                     android:textSize="28sp" />
 
@@ -304,7 +305,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="4"
                     android:gravity="center"
-                    android:text="商品来源"
+                    android:text="样品主类"
                     android:textColor="@android:color/black"
                     android:textSize="28sp" />
                 <TextView
@@ -312,7 +313,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="4"
                     android:gravity="center"
-                    android:text="组织机构"
+                    android:text="样品子类"
+                    android:visibility="gone"
                     android:textColor="@android:color/black"
                     android:textSize="28sp" />
 
@@ -383,7 +385,7 @@
                         android:id="@+id/btn_upload"
                         style="@style/BtnBottom"
                         android:text="上传"
-                        android:visibility="gone" />
+                        android:visibility="visible" />
 
                     <Button
                         android:id="@+id/btn_print"
@@ -403,6 +405,7 @@
                     <Button
                         android:id="@+id/btn_changemethod"
                         style="@style/BtnBottom"
+                        android:visibility="gone"
                         android:textSize="22sp"
                         android:text="方式切换" />
                 </LinearLayout>

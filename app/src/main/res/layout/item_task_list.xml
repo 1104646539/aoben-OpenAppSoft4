@@ -4,8 +4,6 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingTop="5dp"
-    android:id="@+id/ll_root"
-    android:clickable="true"
     android:paddingBottom="5dp">
 
 
