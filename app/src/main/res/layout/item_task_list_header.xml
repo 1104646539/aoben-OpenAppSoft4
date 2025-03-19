@@ -2,12 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
     android:orientation="horizontal"
     android:paddingTop="5dp"
-    android:id="@+id/ll_root"
-    android:clickable="true"
     android:paddingBottom="5dp">
-
 
     <TextView
         android:id="@+id/tv_id"
@@ -16,8 +14,8 @@
         android:layout_weight="1"
         android:gravity="center"
         android:text="任务ID"
-        android:textColor="@color/black"
-        android:textSize="22sp" />
+        android:textColor="@color/white"
+        android:textSize="26sp" />
 
     <TextView
         android:id="@+id/tv_name"
@@ -26,26 +24,26 @@
         android:layout_weight="1"
         android:gravity="center"
         android:text="样品名"
-        android:textColor="@color/black"
-        android:textSize="22sp" />
+        android:textColor="@color/white"
+        android:textSize="26sp" />
 
     <TextView
         android:id="@+id/tv_bjdw"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
         android:gravity="center"
         android:text="受检单位"
-        android:textColor="@color/black"
-        android:textSize="22sp" />
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:textColor="@color/white"
+        android:textSize="26sp" />
 
     <TextView
         android:id="@+id/tv_time"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
         android:gravity="center"
         android:text="抽样时间"
-        android:textColor="@color/black"
-        android:textSize="22sp" />
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:textColor="@color/white"
+        android:textSize="26sp" />
 </LinearLayout>

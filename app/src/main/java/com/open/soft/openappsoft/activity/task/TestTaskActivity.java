@@ -12,6 +12,9 @@ import com.open.soft.openappsoft.R;
 import com.open.soft.openappsoft.multifuction.activity.PesticideTestActivity2;
 
 public class TestTaskActivity extends AppCompatActivity implements View.OnClickListener {
+    public final static int source_pesticide = 0;
+    public final static int source_jinbiao = 1;
+    public final static int source_atp = 2;
     Button btn_task_settings;
     Button btn_task_start;
 
@@ -28,7 +31,7 @@ public class TestTaskActivity extends AppCompatActivity implements View.OnClickL
         btn_task_settings.setOnClickListener(this);
         btn_task_start.setOnClickListener(this);
 
-        source = getIntent().getIntExtra("source", 0);
+        source = getIntent().getIntExtra("source", source_pesticide);
     }
 
     @Override
@@ -38,9 +41,8 @@ public class TestTaskActivity extends AppCompatActivity implements View.OnClickL
                 startActivity(new Intent(this, TaskListActivity.class));
                 break;
             case R.id.btn_task_start:
-                if (source == 0) {
+                if (source == source_pesticide) {
                     startActivity(new Intent(this, PesticideTestActivity2.class));
-
                 }
                 break;
         }

@@ -18,6 +18,8 @@ import java.util.regex.Pattern;
 public class ToolUtil {
 
 
+    public final static String DateTime1 = "yyyy-MM-dd HH:mm:ss";
+    public final static String Date1 = "yyyy-MM-dd";
     // long转换为Date类型
     // currentTime要转换的long类型的时间
     // formatType要转换的时间格式yyyy-MM-dd HH:mm:ss//yyyy年MM月dd日 HH时mm分ss秒

@@ -52,10 +52,10 @@
                         android:text="任务编号" />
 
                     <EditText
-                        android:id="@+id/tv_id"
+                        android:id="@+id/et_id"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textSize="22sp" />
+                        android:textSize="26sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -71,10 +71,14 @@
                         android:layout_height="wrap_content"
                         android:text="样品名称" />
 
-                    <Spinner
+                    <TextView
                         android:id="@+id/tv_sample_name"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="26sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -98,10 +102,26 @@
                             android:layout_height="wrap_content"
                             android:text="样品主类" />
 
-                        <Spinner
-                            android:id="@+id/spn_sample_type1"
+                        <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent">
+
+                            <Spinner
+                                android:id="@+id/spn_sample_type_main"
+                                android:layout_width="match_parent"
+                                android:visibility="gone"
+                                android:layout_height="match_parent"
+                                android:paddingLeft="10dp" />
+
+                            <TextView
+                                android:id="@+id/tv_sample_type_main"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textColor="@color/black"
+                                android:text="请选择"
+                                android:textSize="26sp" />
+                        </FrameLayout>
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -118,10 +138,25 @@
                             android:layout_height="wrap_content"
                             android:text="样品子类" />
 
-                        <Spinner
-                            android:id="@+id/spn_sample_type2"
+                        <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent">
+
+                            <Spinner
+                                android:id="@+id/spn_sample_type_child"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:visibility="gone"
+                                android:paddingLeft="10dp" />
+
+                            <TextView
+                                android:id="@+id/tv_sample_type_child"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textColor="@color/black"
+                                android:text="请选择"
+                                android:textSize="26sp" />
+                        </FrameLayout>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -134,10 +169,10 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
                         android:orientation="horizontal">
 
                         <TextView
@@ -146,31 +181,46 @@
                             android:layout_height="wrap_content"
                             android:text="受检单位" />
 
-                        <Spinner
-                            android:id="@+id/tv_ori_name"
+                        <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent">
+
+                            <Spinner
+                                android:id="@+id/spn_bjcdw_name"
+                                android:visibility="gone"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingLeft="10dp" />
+
+                            <TextView
+                                android:id="@+id/tv_bjcdw_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="请选择"
+                                android:textColor="@color/black"
+                                android:textSize="26sp" />
+                        </FrameLayout>
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:orientation="horizontal">
+                    <!--                    <LinearLayout-->
+                    <!--                        android:layout_width="0dp"-->
+                    <!--                        android:layout_weight="1"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="5dp"-->
+                    <!--                        android:layout_marginBottom="5dp"-->
+                    <!--                        android:orientation="horizontal">-->
 
-                        <TextView
-                            style="@style/text_label"
-                            android:layout_width="150dp"
-                            android:layout_height="wrap_content"
-                            android:text="受检单位代码" />
+                    <!--                        <TextView-->
+                    <!--                            style="@style/text_label"-->
+                    <!--                            android:layout_width="150dp"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:text="受检单位代码" />-->
 
-                        <Spinner
-                            android:id="@+id/tv_ori_code"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
-                    </LinearLayout>
+                    <!--                        <TextView-->
+                    <!--                            android:id="@+id/tv_bjcdw_code"-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="match_parent" />-->
+                    <!--                    </LinearLayout>-->
                 </LinearLayout>
 
                 <LinearLayout
@@ -189,7 +239,10 @@
                     <TextView
                         android:id="@+id/tv_sampling_date"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="26sp" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
@@ -204,24 +257,26 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="300dp"
+                android:id="@+id/tv_commit"
+                android:layout_width="260dp"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="提交"
                 android:textColor="@color/white"
-                android:textSize="30sp" />
+                android:textSize="24sp" />
 
             <TextView
-                android:layout_width="300dp"
+                android:id="@+id/tv_cancel"
+                android:layout_width="260dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:background="@drawable/main_bg"
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="取消"
-                android:textSize="30sp" />
+                android:textSize="24sp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

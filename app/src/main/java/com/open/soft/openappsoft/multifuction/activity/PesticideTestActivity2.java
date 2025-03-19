@@ -15,15 +15,19 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +55,9 @@ import com.lidroid.xutils.exception.DbException;
 import com.open.soft.openappsoft.App;
 import com.open.soft.openappsoft.R;
 import com.open.soft.openappsoft.activity.MainActivity;
+import com.open.soft.openappsoft.activity.task.TaskListAdapter;
+import com.open.soft.openappsoft.activity.task.TaskListAdapter2;
+import com.open.soft.openappsoft.activity.task.TaskModel;
 import com.open.soft.openappsoft.jinbiao.db.DbHelper;
 import com.open.soft.openappsoft.jinbiao.model.CardCompanyModel;
 import com.open.soft.openappsoft.jinbiao.model.LineModel;
@@ -60,6 +67,7 @@ import com.open.soft.openappsoft.jinbiao.model.SampleTypeModel;
 import com.open.soft.openappsoft.jinbiao.model.TestDataBean1;
 import com.open.soft.openappsoft.jinbiao.model.TestDataBean2;
 import com.open.soft.openappsoft.jinbiao.model.TestDataBean3;
+import com.open.soft.openappsoft.multifuction.adapter.FiltrateAdapter;
 import com.open.soft.openappsoft.multifuction.adapter.TestAdapter;
 import com.open.soft.openappsoft.multifuction.model.CheckResult;
 import com.open.soft.openappsoft.multifuction.model.Project;
@@ -226,13 +234,14 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
     @Override
     public void onShowSampleDialog(int position) {
         clickPosition = position;
-        if (com.example.utils.http.Global.isVoluntarily && !com.example.utils.http.Global.ismixedentry) {
-            statusDialog.setStatus(StatusDialog.STATUS_START_SCAN_QRCODE_SAMPLE);
-            statusDialog.show();
-        } else if (com.example.utils.http.Global.ismixedentry && change_method % 2 == 1) {
-            statusDialog.setStatus(StatusDialog.STATUS_START_SCAN_QRCODE_SAMPLE);
-            statusDialog.show();
-        }
+        showTaskDialog();
+//        if (com.example.utils.http.Global.isVoluntarily && !com.example.utils.http.Global.ismixedentry) {
+//            statusDialog.setStatus(StatusDialog.STATUS_START_SCAN_QRCODE_SAMPLE);
+//            statusDialog.show();
+//        } else if (com.example.utils.http.Global.ismixedentry && change_method % 2 == 1) {
+//            statusDialog.setStatus(StatusDialog.STATUS_START_SCAN_QRCODE_SAMPLE);
+//            statusDialog.show();
+//        }
 
 //        if(com.example.utils.http.Global.isVoluntarily){
 //            statusDialog.setStatus(StatusDialog.STATUS_START_SCAN_QRCODE_SAMPLE);
@@ -241,6 +250,43 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
 //        statusDialog.setStatus(StatusDialog.STATUS_START_SCAN_QRCODE_SAMPLE);
 //        statusDialog.show();
 
+    }
+
+    Dialog dialog_task_list;
+    TaskListAdapter2 taskListAdapter;
+    ListView task_list;
+    List<TaskModel> taskModels = new ArrayList<>();
+
+    private void showTaskDialog() {
+        if (dialog_task_list == null) {
+            loadTaskModel();
+            dialog_task_list = new Dialog(this);
+
+            View dialogContentView = LayoutInflater.from(this)
+                    .inflate(R.layout.dialog_show_task_list, null, false);
+            task_list = dialogContentView.findViewById(R.id.lv_task_list);
+            taskListAdapter = new TaskListAdapter2(this);
+            taskListAdapter.setData(taskModels);
+
+            dialog_task_list.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog_task_list.setContentView(dialogContentView);
+
+            task_list.setOnItemClickListener((parent, view, position, id) -> {
+                TaskModel taskModel = taskModels.get(position);
+                Timber.i("选择的任务=" + new Gson().toJson(taskModel));
+            });
+        }
+
+        dialog_task_list.show();
+
+    }
+
+    private void loadTaskModel() {
+        List<TaskModel> temp = hibernate.queryAll(TaskModel.class);
+        taskModels.clear();
+        if (temp != null) {
+            taskModels.addAll(temp);
+        }
     }
 
     public class QRCodeBroadcastReceiver extends BroadcastReceiver {
@@ -263,7 +309,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pesticide_test2);
         GT.WindowUtils.hideActionBar(this);
-
+        hibernate = MainActivity.hibernate;
         // 百度定位
         Intent intent = new Intent("LocationAction");
         intent.putExtra("locationMessage", "开始定位");
@@ -319,8 +365,8 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
 //            }
 //
 //        } else {
-            spn_project.setVisibility(View.VISIBLE);
-            findViewById(R.id.tv_projectName).setVisibility(View.GONE);
+        spn_project.setVisibility(View.VISIBLE);
+        findViewById(R.id.tv_projectName).setVisibility(View.GONE);
 //        }
 
 

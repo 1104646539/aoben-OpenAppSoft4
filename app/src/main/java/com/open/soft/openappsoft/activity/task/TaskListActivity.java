@@ -1,6 +1,8 @@
 package com.open.soft.openappsoft.activity.task;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,37 +11,31 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.utils.http.model.UploadBean;
 import com.gsls.gt.GT;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.exception.DbException;
 import com.open.soft.openappsoft.R;
+import com.open.soft.openappsoft.activity.MainActivity;
 import com.open.soft.openappsoft.jinbiao.db.DbHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskListActivity extends AppCompatActivity implements View.OnClickListener {
-    List<UploadBean> taskList = new ArrayList<>();
-    DbUtils db;
+    List<TaskModel> taskList = new ArrayList<>();
 
     RecyclerView rv_data;
     TextView tv_add_task;
     TaskListAdapter adapter;
 
+    GT.Hibernate hibernate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_list);
+        hibernate = MainActivity.hibernate;
         initView();
-        db = DbHelper.GetInstance();
-        UploadBean ub = new UploadBean();
-        ub.setSampleName("123456d");
-        try {
-            db.save(ub);
-        } catch (DbException e) {
-            throw new RuntimeException(e);
-        }
         findData();
     }
 
@@ -57,14 +53,12 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void findData() {
-        try {
-            List<UploadBean> temp = DbHelper.GetInstance().findAll(UploadBean.class);
-            taskList.clear();
+        List<TaskModel> temp = hibernate.queryAll(TaskModel.class);
+        taskList.clear();
+        if (temp != null) {
             taskList.addAll(temp);
-            adapter.notifyDataSetChanged();
-        } catch (DbException e) {
-            throw new RuntimeException(e);
         }
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -76,7 +70,17 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    int request_add = 12000;
+
     private void addTask() {
-//        startActivity(new Intent(this,));
+        startActivityForResult(new Intent(this, AddTaskActivity.class), request_add);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == request_add && resultCode == RESULT_OK) {
+            findData();
+        }
     }
 }

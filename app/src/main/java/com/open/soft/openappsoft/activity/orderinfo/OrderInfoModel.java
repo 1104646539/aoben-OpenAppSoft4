@@ -1,6 +1,10 @@
 package com.open.soft.openappsoft.activity.orderinfo;
 
+import androidx.annotation.NonNull;
+
+import com.example.utils.http.ToolUtil;
 import com.gsls.gt.GT;
+import com.open.soft.openappsoft.util.APPUtils;
 
 @GT.Hibernate.GT_Bean
 public class OrderInfoModel {
@@ -37,4 +41,11 @@ public class OrderInfoModel {
      * 样品子类ID（类型）
      */
     public static int type_sample_type_child = 3;
+
+
+    @NonNull
+    @Override
+    public String toString() {
+        return ToolUtil.nullToString(name, "");
+    }
 }

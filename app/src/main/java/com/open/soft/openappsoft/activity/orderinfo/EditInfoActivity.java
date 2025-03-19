@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.gsls.gt.GT;
 import com.open.soft.openappsoft.R;
 import com.open.soft.openappsoft.activity.MainActivity;
@@ -21,6 +22,8 @@ import com.open.soft.openappsoft.util.APPUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import timber.log.Timber;
 
 public class EditInfoActivity extends AppCompatActivity implements View.OnClickListener, OrderInfoAdapter.OnLongClick {
     OrderInfoAdapter adapter;
@@ -33,7 +36,6 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
 
     GT.Hibernate hibernate;
 
-    int id = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +62,14 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
     private void loadData() {
         List<OrderInfoModel> temp = hibernate.where("type = ?", "" + type).queryAll(OrderInfoModel.class);
         orderInfoModels.clear();
-        orderInfoModels.addAll(temp);
+        if (temp != null) {
+            orderInfoModels.addAll(temp);
+        }
         adapter.notifyDataSetChanged();
     }
 
     private void addOrSave(boolean add, OrderInfoModel orderInfoModel) {
+//        Timber.i(new Gson().toJson(orderInfoModel));
         String hilt = add ? "插入" : "更新";
         if (add) {
             hibernate.save(orderInfoModel);
@@ -196,7 +201,7 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
 
                     } else {
                         orderInfoDialog.dismiss();
-                        addOrSave(showMode == EditOrderInfoDialog.ShowMode_add, temp);
+                        addOrSave(showMode == EditOrderInfoDialog.ShowMode_add, model);
                     }
                 } else if (type == OrderInfoModel.type_sample_type_child) {
                     if (APPUtils.isNull(model.name)) {
@@ -204,7 +209,7 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
 
                     } else {
                         orderInfoDialog.dismiss();
-                        addOrSave(showMode == EditOrderInfoDialog.ShowMode_add, temp);
+                        addOrSave(showMode == EditOrderInfoDialog.ShowMode_add, model);
                     }
                 } else if (type == OrderInfoModel.type_sample_type_main) {
                     if (APPUtils.isNull(model.name)) {
@@ -212,8 +217,7 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
 
                     } else {
                         orderInfoDialog.dismiss();
-                        popupWindow_long.dismiss();
-                        addOrSave(showMode == EditOrderInfoDialog.ShowMode_add, temp);
+                        addOrSave(showMode == EditOrderInfoDialog.ShowMode_add, model);
                     }
                 }
             }

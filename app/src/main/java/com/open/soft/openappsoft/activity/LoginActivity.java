@@ -293,7 +293,6 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
             et_user.setText("admin");
             et_psw.setText("123456");
         }
-
     }
 
     //收起软键盘
@@ -316,7 +315,7 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
 
     private void initSp() {
 
-        String url_api = sp_ServiceUrl.query("url_api",Global.BASE_URL).toString();
+        String url_api = sp_ServiceUrl.query("url_api", Global.BASE_URL).toString();
         GT.logs("查询出来的URL:" + url_api);
 //        if (!"0".equals(url_api)) {
 //            Global.BASE_URL = InterfaceURL.BASE_URL = url_api;
@@ -414,7 +413,7 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
 //        } else {
 //            Global.ismixedentry = true;
 //        }
-
+        Global.NAME = user;
         SharedPreferences sp = this.getSharedPreferences("userPass", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();   //获取编辑器
 //        editor.putString("DeptId", resultBean.getDeptId()); //存入部门ID
@@ -558,7 +557,7 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
         editor.apply();                //提交修改，否则不生效
         progressDialog.show();
 
-        orderPresenter.login(new LoginBean(Global.SN, user, psw,"2",Global.KEY), this, this, pass, progressDialog);
+        orderPresenter.login(new LoginBean(Global.SN, user, psw, "2", Global.KEY), this, this, pass, progressDialog);
     }
 
     public static String getMD5Str(String str) {
@@ -611,7 +610,7 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
 
         final boolean[] is_complete = {false};
         reslut = new boolean[1];
-        new GT.HttpUtil().getRequest(InterfaceURL.BASE_URL + "System/GetAreaList",  new GT.HttpUtil.OnLoadDataListener() {
+        new GT.HttpUtil().getRequest(InterfaceURL.BASE_URL + "System/GetAreaList", new GT.HttpUtil.OnLoadDataListener() {
             @Override
             public void onSuccess(String response, Object o) {
                 String string = response;
@@ -641,7 +640,7 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
                             break;
                         }
                     }
-            }
+                }
             }
 
             @Override

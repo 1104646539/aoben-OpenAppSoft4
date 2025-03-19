@@ -19,10 +19,12 @@
     <content url="file://$MODULE_DIR$/../../../app/build/generated/aidl_source_output_dir/debugAndroidTest/out" />
     <content url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/debugAndroidTest/out">
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/debugAndroidTest/out" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/debugAndroidTest/out" isTestSource="true" generated="true" />
     </content>
     <content url="file://$MODULE_DIR$/../../../app/build/generated/renderscript_source_output_dir/debugAndroidTest/out" />
     <content url="file://$MODULE_DIR$/../../../app/build/generated/res/rs/androidTest/debug" />
     <content url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/androidTest/debug">
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/androidTest/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/androidTest/debug" isTestSource="true" generated="true" />
     </content>
     <content url="file://$MODULE_DIR$/../../../app/src/androidTest" />
@@ -89,12 +91,12 @@
     <orderEntry type="library" scope="TEST" name="Gradle: io.reactivex:rxandroid:1.1.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.github.javakam:widget.wheelview:1.8.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.github.javakam:widget.pickerview:1.8.0@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: E./androidproject/aoben/aoben-OpenAppSoft4/app/libs/RootTools.jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: E./androidproject/aoben/aoben-OpenAppSoft4/app/libs/jxl.jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: E./androidproject/aoben/aoben-OpenAppSoft4/app/libs/BaiduLBS_Android.jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: E./androidproject/aoben/aoben-OpenAppSoft4/app/libs/AMap_Location_V5.2.0_20200915.jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: E./androidproject/aoben/aoben-OpenAppSoft4/app/libs/okgo-3.0.4.jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: E./androidproject/aoben/aoben-OpenAppSoft4/app/libs/tbs_sdk_thirdapp_v4.3.0.386_44286_sharewithdownloadwithfile_withoutGame_obfs_20230210_114429.jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: J./TongKang10/aoben/aoben-OpenAppSoft4/app/libs/RootTools.jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: J./TongKang10/aoben/aoben-OpenAppSoft4/app/libs/jxl.jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: J./TongKang10/aoben/aoben-OpenAppSoft4/app/libs/BaiduLBS_Android.jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: J./TongKang10/aoben/aoben-OpenAppSoft4/app/libs/AMap_Location_V5.2.0_20200915.jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: J./TongKang10/aoben/aoben-OpenAppSoft4/app/libs/okgo-3.0.4.jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: J./TongKang10/aoben/aoben-OpenAppSoft4/app/libs/tbs_sdk_thirdapp_v4.3.0.386_44286_sharewithdownloadwithfile_withoutGame_obfs_20230210_114429.jar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.squareup.retrofit2:converter-gson:2.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.squareup.retrofit2:adapter-rxjava:2.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.squareup.retrofit2:retrofit:2.1.0" level="project" />

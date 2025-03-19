@@ -327,7 +327,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 //                startTest.putParcelableArrayListExtra("project",projects);
 //            startActivity(startTest);
             Intent intent = new Intent(this, TestTaskActivity.class);
-            intent.putExtra("source", 0);
+            intent.putExtra("source", TestTaskActivity.source_pesticide);
             startActivity(intent);
             Log.d(TAG, "projects=" + projects.size());
         } else if (i == R.id.btn_data_manage) {
