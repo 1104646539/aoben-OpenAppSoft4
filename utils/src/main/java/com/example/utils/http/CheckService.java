@@ -1,6 +1,7 @@
 package com.example.utils.http;
 
 import com.example.utils.http.model.BaseResult;
+import com.example.utils.http.model.UpdateBean;
 import com.example.utils.http.model.UploadBean;
 import com.example.utils.http.model.UploadBean2;
 
@@ -9,9 +10,13 @@ import java.util.List;
 import java.util.Map;
 
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import retrofit2.http.Url;
 import rx.Observable;
 
@@ -40,13 +45,14 @@ public interface CheckService {
      */
     @POST
     Observable<Result<GetSamplingInfoResultBean>> GetSamplingInfo(@Url String url, @Body GetSamplingInfoBean loginBean);
+
     /**
      * 获取更新接口
      *
      * @return
      */
-    @POST
-    Observable<Result<GetSamplingInfoResultBean>> GetUpdate(@Url String url, @Body GetSamplingInfoBean loginBean);
+    @GET
+    Observable<BaseResult<UpdateBean>> GetUpdate(@Url String url, @Query("app") String app);
 
     /**
      * 验证有效性接口
@@ -70,7 +76,7 @@ public interface CheckService {
      * @return
      */
     @POST
-    Observable<Result<List<KnowledgeResultBean>>> GetKnowledge(@Url String url,@Body Map<String,String> map);
+    Observable<Result<List<KnowledgeResultBean>>> GetKnowledge(@Url String url, @Body Map<String, String> map);
 
 
 }

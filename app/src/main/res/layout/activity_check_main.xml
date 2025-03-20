@@ -33,7 +33,7 @@
                 android:layout_height="50dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
-                android:text="自动录入样品检测"
+                android:text="样品检测"
                 android:textColor="#ffffff"
                 android:textSize="28sp" />
 
@@ -399,6 +399,7 @@
                         android:id="@+id/btn_exchange"
                         style="@style/checkactivity_button_style"
                         android:background="@drawable/main_change_btu_shape"
+                        android:visibility="gone"
                         android:textAllCaps="false"
                         android:text="方式切换" />
 

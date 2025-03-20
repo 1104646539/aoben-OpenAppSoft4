@@ -24,6 +24,19 @@ public class MainActivity extends BaseActivity {
 //        }
     }
 
+    public void ClickLin(View v) {
+        Intent intent1 = new Intent(this, CheckActivity.class);
+        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        intent1.putExtra("source", "1");// 定量
+        startActivity(intent1);
+    }
+
+    public void ClickDinXin(View v) {
+        Intent intent2 = new Intent(this, CheckActivity.class);
+        intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        intent2.putExtra("source", "2");// 定性
+        startActivity(intent2);
+    }
     public void ClickCheck(View v) { //样品检测
         Intent intent = new Intent(this, CheckSelectProjectActivity.class);
         startActivity(intent);
@@ -55,5 +68,5 @@ public class MainActivity extends BaseActivity {
         finish();
 //        }
     }
-  
+
 }
