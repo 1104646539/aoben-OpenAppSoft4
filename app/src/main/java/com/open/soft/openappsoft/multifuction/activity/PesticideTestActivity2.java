@@ -3,6 +3,7 @@ package com.open.soft.openappsoft.multifuction.activity;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -83,9 +84,11 @@ import com.open.soft.openappsoft.util.InterfaceURL;
 import com.open.soft.openappsoft.util.UploadThread2;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.Timer;
@@ -659,33 +662,72 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
         statusDialog.show();
     }
 
-    private void upload(boolean autoUpload) {
-        if (testAdapter.getSelectedCount() == 0) {
-            APPUtils.showToast(this, "请选择上传");
-            return;
-        }
-        List<CheckResult> checkResults = testAdapter.getSelectedList();
-        //
-        for (int i = 0; i < checkResults.size(); i++) {
-            if (com.open.soft.openappsoft.util.APPUtils.isNull(checkResults.get(i).resultJudge)) {
-                APPUtils.showToast(this, "请不要选择未检测的数据");
-                return;
-            }
-        }
-
-        //上传
-        UploadThread2 uploadThread2 = new UploadThread2(this, checkResults, new UploadThread2.onUploadListener() {
+    private void upload(DetectionResultBean bean){
+        List<DetectionResultBean> list = new ArrayList<>();
+        list.add(bean);
+        UploadThread2 uploadThread2 = new UploadThread2(this,list , new UploadThread2.onUploadListener() {
             @Override
-            public void onSuccess(List<CheckResult> list, int returnId, int position, String result) {
-                Timber.i("onSuccess position="+position);
+            public void onUploadSuccess(int position, String msg) {
+                Timber.i("onSuccess position=" + position);
+                bean.setUploadStatus("已上传");
+                bean.setUploadID(msg);
+                hibernate.update(bean);
             }
 
             @Override
-            public void onFail(String failInfo) {
-                Timber.i("onFail failInfo="+failInfo);
+            public void onUploadFail(int position, String failInfo) {
+                Timber.i("onFail position=" + position);
             }
+
+            @Override
+            public void onUploadFinish(int count, int successCount, int failedCount) {
+            }
+
         });
         uploadThread2.start();
+    }
+    private void upload(boolean autoUpload) {
+//        ProgressDialog progressDialog = new ProgressDialog(this);
+//
+//        if (testAdapter.getSelectedCount() == 0) {
+//            APPUtils.showToast(this, "请选择上传");
+//            return;
+//        }
+//        List<CheckResult> checkResults = testAdapter.getSelectedList();
+//        //
+//        for (int i = 0; i < checkResults.size(); i++) {
+//            if (com.open.soft.openappsoft.util.APPUtils.isNull(checkResults.get(i).resultJudge)) {
+//                APPUtils.showToast(this, "请不要选择未检测的数据");
+//                return;
+//            }
+//        }
+//        progressDialog.setMessage("正在上传");
+//        progressDialog.show();
+//        //上传
+//        UploadThread2 uploadThread2 = new UploadThread2(this, checkResults, new UploadThread2.onUploadListener() {
+//            @Override
+//            public void onUploadSuccess(int position, String msg) {
+//                Timber.i("onSuccess position=" + position);
+//                checkResults.get(position).uploadId = 1;
+//                checkResults.get(position).uploadMsg = msg;
+//                hibernate.update(checkResults.get(position));
+//            }
+//
+//            @Override
+//            public void onUploadFail(int position, String failInfo) {
+//                Timber.i("onFail position=" + position);
+//            }
+//
+//            @Override
+//            public void onUploadFinish(int count, int successCount, int failedCount) {
+//                runOnUiThread(() -> {
+//                    progressDialog.dismiss();
+//                    MessageDialog.show("提示", "上传完成,共上传" + count + "条" + "，成功" + successCount + "条" + "，失败" + failedCount + "条", "确定");
+//                });
+//            }
+//
+//        });
+//        uploadThread2.start();
     }
 
     private void updateUploadState2Db(List<CheckResult> list) {
@@ -1226,10 +1268,10 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
         }
         Log.d(TAG, "resultList=" + resultList.toString());
         testAdapter.setData(resultList);
-        boolean isSuccess = new CheckResult().saveBindingIdAll(savaDatas);
+//        boolean isSuccess = new CheckResult().saveBindingIdAll(savaDatas);
 
         //保存新表
-        saveNewTable(savaDatas);
+        saveNewTable();
         Log.i("lcy", "showTestResult: -11-----" + savaDatas.toString());
 
     }
@@ -1245,9 +1287,51 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
     int currentIndex = 0;
 
 
-    private void saveNewTable(List<CheckResult> savaDatas) {
+    private void saveNewTable() {
         currentIndex = 0;
-        upDateShuju();
+        List<CheckResult> selectedList = testAdapter.getSelectedList();
+        for (int i = 0; i < selectedList.size(); i++) {
+            DetectionResultBean detectionResultBean = checkResultTranDetectionBean(selectedList.get(i));
+            hibernate.save(detectionResultBean);
+            detectionResultBean.setID(hibernate.getStatus());
+            upload(detectionResultBean);
+            Timber.i("插入 "+hibernate.isStatus());
+        }
+    }
+
+    private DetectionResultBean checkResultTranDetectionBean(CheckResult checkResult) {
+
+        detectionResultBean = new DetectionResultBean();
+        detectionResultBean.setSQLType("分光光度");//设置当前数据的模块名称(防止以后需求改动的需要)
+        detectionResultBean.setNumberSamples(checkResult.sampleNum);//样品编号
+        detectionResultBean.setDetectionTime(checkResult.testTime);//检测时间
+        detectionResultBean.setAisle(checkResult.channel);//通道
+        detectionResultBean.setSampleName(checkResult.sampleName);//样品名称
+        detectionResultBean.setDetectionValue(checkResult.testValue);//抑制率/检测值
+        detectionResultBean.setDetectionResult(checkResult.resultJudge);//检测结果
+        detectionResultBean.setUnitsUnderInspection(checkResult.bcheckedOrganization);//被检测单位
+        detectionResultBean.setUnitsUnderInspectionCode(checkResult.bcheckedOrganizationCode);//被检测单位Code
+        detectionResultBean.setInspector(checkResult.checker);//检测人员
+        detectionResultBean.setDetectionCompany(checkResult.checkedOrganization);//检测单位
+        detectionResultBean.setWeight(checkResult.weight);//重量
+        detectionResultBean.setCommodityPlaceOrigin(checkResult.sampleSource);//商品来源
+        detectionResultBean.setUploadStatus("未上传");
+        detectionResultBean.setSpecimenType(checkResult.sampleType); // 样品类型
+        detectionResultBean.setLimitStandard(checkResult.xlz); // 限量标准
+//        detectionResultBean.setCriticalValue(checkResult.xlz); // 临界值
+        detectionResultBean.setTestItem(checkResult.projectName); // 检测项目
+        detectionResultBean.setQRCode(card_number); // 试剂盒二维码字符串
+        detectionResultBean.setOperatorId(com.example.utils.http.Global.ID); // 上传数据的OperatorId参数
+//        detectionResultBean.setAreaId(terrace); // 上传数据的AreaId参数
+//        detectionResultBean.setDeptId(DeptId); // 上传数据的DeptId参数
+        detectionResultBean.setXgd(checkResult.xgd);//吸光度
+        detectionResultBean.companyCode = checkResult.companyCode; //组织代码
+
+        detectionResultBean.setSpecimenTypeCode(checkResult.sampleTypeCode);//样本类型Code
+        detectionResultBean.setSpecimenTypeChild(checkResult.sampleTypeChild);//样本子类型
+        detectionResultBean.setSpecimenTypeChildCode(checkResult.sampleTypeChildCode);////样本子类型Code
+        detectionResultBean.setSamplingDate(checkResult.SamplingTime);////抽样时间
+        return detectionResultBean;
     }
 
 
@@ -1262,7 +1346,6 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
             locsp2Id.add(locSp2Id[SelectArray[k] - 1]);
             locsp3Id.add(locSp3Id[SelectArray[k] - 1]);
             subProductId.add(sublistProductId[SelectArray[k] - 1]);
-
         }
         if (savaDatas == null || savaDatas.size() == 0) return;
         if (currentIndex < savaDatas.size()) {
@@ -1336,34 +1419,6 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
 
     private DetectionResultBean detectionResultBean;
 
-
-    private void saveNewTable1(CheckResult checkResult) {
-        detectionResultBean = new DetectionResultBean();
-        detectionResultBean.setSQLType("分光光度");//设置当前数据的模块名称(防止以后需求改动的需要)
-        detectionResultBean.setNumberSamples(checkResult.sampleNum);//样品编号
-        detectionResultBean.setDetectionTime(checkResult.testTime);//检测时间
-        detectionResultBean.setAisle(checkResult.channel);//通道
-        detectionResultBean.setSampleName(checkResult.sampleName);//样品名称
-        detectionResultBean.setDetectionValue(checkResult.testValue);//抑制率/检测值
-        detectionResultBean.setDetectionResult(checkResult.resultJudge);//检测结果
-        detectionResultBean.setUnitsUnderInspection(checkResult.bcheckedOrganization);//被检测单位
-        detectionResultBean.setInspector(checkResult.checker);//检测人员
-        detectionResultBean.setDetectionCompany(checkResult.checkedOrganization);//检测单位
-        detectionResultBean.setWeight(checkResult.weight);//重量
-        detectionResultBean.setCommodityPlaceOrigin(checkResult.sampleSource);//商品来源
-//            detectionResultBean.setUploadStatus("未上传");//上传状态
-//            detectionResultBean.setUploadStatus("已上传");//上传状态
-        detectionResultBean.setUploadStatus("未上传");
-//            detectionResultBean.setUploadStatus(upload_status == 1 ? "已上传" : "未上传");//上传状态
-        detectionResultBean.setSampleId(sampleId);//样品总分类Id
-        detectionResultBean.setSpecimenType(checkResult.sampleType); // 样品类型
-        detectionResultBean.setLimitStandard(limit_standard); // 限量标准
-        detectionResultBean.setCriticalValue(critical_value); // 临界值
-        detectionResultBean.setTestItem(jiance_xiangmu); // 检测项目
-        detectionResultBean.setQRCode(card_number); // 试剂盒二维码字符串
-
-//        MainActivity.hibernate.save(detectionResultBean);
-    }
 
 
     private void uploadResult(int position) {
@@ -2547,136 +2602,106 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
     private void uploadResult2(int index) {
 
         //获取必要上传
-        SharedPreferences sp = getSharedPreferences("userPass", MODE_PRIVATE);
-        String user = sp.getString("user", "");
-        String terrace = sp.getString("terrace", "");
-        String deptId = sp.getString("DeptId", "");
-        String setWithModel = getStringSN();//获取唯一标识
-
-
-        String str_api = "";
-
-        // 只有单金标且登录用户是唐山的用户才使用 "Tangshan/SendForNAD4074" api
-        // 其他的都是 "CommonManual/GetSamplingTypeList" api
-        if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
-            str_api = "QR/SendResult";
-        }
-
-        String data = "";
-
-
-        Result = "";
-        ResultValue = "";
-        Result = savaDatas.get(currentIndex).resultJudge;
-        //Result = resultList.get(clickPosition).resultJudge;
-        if ("合格".equals(Result)) {
-            ResultValue = "0";
-        } else if ("不合格".equals(Result)) {
-            ResultValue = "1";
-        } else {
-            ResultValue = "-1";
-        }
-
-        // 新的上传
-        if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
-
-            data = "{\"QRCode\":\"" + card_number.replaceAll("\\s*", "") + "\",\n" +
-                    "\"LocationX\":\"" + LocationX + "\",\n" +
-                    "\"LocationY\":\"" + LocationY + "\",\n" +
-                    "\"LocationAddress\":\"" + LocationAddress + "\",\n" +
-                    "\"Result\":\"" + ResultValue + "\",\n" +
-                    "\"ResultValue\":\"" + savaDatas.get(currentIndex).testValue + "\",\n" +
-                    "\"SamplingNumber\":\"" + savaDatas.get(currentIndex).sampleNum + "\",\n" +
-                    "\"AreaId\":\"" + terrace + "\",\n" +
-                    "\"OperatorId\":\"" + com.example.utils.http.Global.ID + "\",\n" +
-                    "\"ResultData\":\n" +
-                    "    [\n" +
-                    "        {\n" +
-                    "        \"Title\":\"检测项目\",\n" +
-                    "        \"Id\":\"projectName\",\n" +
-                    "        \"Value\":\"" + savaDatas.get(currentIndex).projectName + "\"\n" +
-                    "        },\n" +
-                    "        {\n" +
-                    "            \"Title\":\"限量值\",\n" +
-                    "            \"Id\":\"xlz\",\n" +
-                    "            \"Value\":\"" + savaDatas.get(currentIndex).xlz + "\"\n" +
-                    "            }\n" +
-                    "            ,{\n" +
-                    "                \"Title\":\"被检测单位\",\n" +
-                    "                \"Id\":\"sampleSource\",\n" +
-                    "                \"Value\":\"" + savaDatas.get(currentIndex).bcheckedOrganization + "\"\n" +
-                    "                },\n" +
-                    "            ,{\n" +
-                    "                \"Title\":\"设备编号\",\n" +
-                    "                \"Id\":\"deviceSn\",\n" +
-                    "                \"Value\":\"" + MainActivity.mac_url + "\"\n" +
-                    "                },\n" +
-                    "            ,{\n" +
-                    "                \"Title\":\"组织机构代码\",\n" +
-                    "                \"Id\":\"companyCode\",\n" +
-                    "                \"Value\":\"" + savaDatas.get(currentIndex).companyCode + "\"\n" +
-                    "                },\n" +
-                    "{\n" +
-                    "    \"Title\":\"商品来源\",\n" +
-                    "    \"Id\":\"samplingDept\",\n" +
-                    "    \"Value\":\"" + savaDatas.get(currentIndex).sampleSource + "\"\n" +
-                    "    }]}";
-
-        }
-
-        Timber.i("自动录入方式data:" + data);
-        OkHttpClient client = new OkHttpClient();
-        RequestBody body = RequestBody.create(data, MediaType.get("application/json; charset=utf-8"));
-        Request request = new Request.Builder()
-                .url(InterfaceURL.BASE_URL + str_api)
-                .post(body)
-                .build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                upload_status = 3;
-                MainActivity.hibernate.save(detectionResultBean);
-            }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                String ret = response.body().string();
-                TestDataBean3 testDataBean3 = null;
-                testDataBean3 = new Gson().fromJson(ret, TestDataBean3.class);
-
-                if (testDataBean3 != null) {
-                    Log.i("lcy", "onSuccess: ----testDataBean3 自动---" + testDataBean3);
-                    errMsg = testDataBean3.getData().getErrMsg();
-                    TestDataBean2 data1 = testDataBean3.getData();
-                    if (data1 != null) {
-                        PesticideTestActivity2.this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if ("0".equals(data1.getErrCode())) {
-                                    upload_status = 1;
-                                    detectionResultBean.setUploadStatus("已上传");
-                                    MainActivity.hibernate.save(detectionResultBean);
-                                } else {
-                                    upload_status = 2;
-                                    MainActivity.hibernate.save(detectionResultBean);
-                                }
-                                currentIndex++;
-                                upDateShuju();
-                            }
-                        });
-                    }
-                }
-            }
-        });
-//        GT.HttpUtil.postRequest(InterfaceURL.BASE_URL + str_api, data, new GT.HttpUtil.OnLoadData() {
+//        SharedPreferences sp = getSharedPreferences("userPass", MODE_PRIVATE);
+//        String user = sp.getString("user", "");
+//        String terrace = sp.getString("terrace", "");
+//        String deptId = sp.getString("DeptId", "");
+//        String setWithModel = getStringSN();//获取唯一标识
+//
+//
+//        String str_api = "";
+//
+//        // 只有单金标且登录用户是唐山的用户才使用 "Tangshan/SendForNAD4074" api
+//        // 其他的都是 "CommonManual/GetSamplingTypeList" api
+//        if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
+//            str_api = "QR/SendResult";
+//        }
+//
+//        String data = "";
+//
+//
+//        Result = "";
+//        ResultValue = "";
+//        Result = savaDatas.get(currentIndex).resultJudge;
+//        //Result = resultList.get(clickPosition).resultJudge;
+//        if ("合格".equals(Result)) {
+//            ResultValue = "0";
+//        } else if ("不合格".equals(Result)) {
+//            ResultValue = "1";
+//        } else {
+//            ResultValue = "-1";
+//        }
+//
+//        // 新的上传
+//        if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
+//
+//            data = "{\"QRCode\":\"" + card_number.replaceAll("\\s*", "") + "\",\n" +
+//                    "\"LocationX\":\"" + LocationX + "\",\n" +
+//                    "\"LocationY\":\"" + LocationY + "\",\n" +
+//                    "\"LocationAddress\":\"" + LocationAddress + "\",\n" +
+//                    "\"Result\":\"" + ResultValue + "\",\n" +
+//                    "\"ResultValue\":\"" + savaDatas.get(currentIndex).testValue + "\",\n" +
+//                    "\"SamplingNumber\":\"" + savaDatas.get(currentIndex).sampleNum + "\",\n" +
+//                    "\"AreaId\":\"" + terrace + "\",\n" +
+//                    "\"OperatorId\":\"" + com.example.utils.http.Global.ID + "\",\n" +
+//                    "\"ResultData\":\n" +
+//                    "    [\n" +
+//                    "        {\n" +
+//                    "        \"Title\":\"检测项目\",\n" +
+//                    "        \"Id\":\"projectName\",\n" +
+//                    "        \"Value\":\"" + savaDatas.get(currentIndex).projectName + "\"\n" +
+//                    "        },\n" +
+//                    "        {\n" +
+//                    "            \"Title\":\"限量值\",\n" +
+//                    "            \"Id\":\"xlz\",\n" +
+//                    "            \"Value\":\"" + savaDatas.get(currentIndex).xlz + "\"\n" +
+//                    "            }\n" +
+//                    "            ,{\n" +
+//                    "                \"Title\":\"被检测单位\",\n" +
+//                    "                \"Id\":\"sampleSource\",\n" +
+//                    "                \"Value\":\"" + savaDatas.get(currentIndex).bcheckedOrganization + "\"\n" +
+//                    "                },\n" +
+//                    "            ,{\n" +
+//                    "                \"Title\":\"设备编号\",\n" +
+//                    "                \"Id\":\"deviceSn\",\n" +
+//                    "                \"Value\":\"" + MainActivity.mac_url + "\"\n" +
+//                    "                },\n" +
+//                    "            ,{\n" +
+//                    "                \"Title\":\"组织机构代码\",\n" +
+//                    "                \"Id\":\"companyCode\",\n" +
+//                    "                \"Value\":\"" + savaDatas.get(currentIndex).companyCode + "\"\n" +
+//                    "                },\n" +
+//                    "{\n" +
+//                    "    \"Title\":\"商品来源\",\n" +
+//                    "    \"Id\":\"samplingDept\",\n" +
+//                    "    \"Value\":\"" + savaDatas.get(currentIndex).sampleSource + "\"\n" +
+//                    "    }]}";
+//
+//        }
+//
+//        Timber.i("自动录入方式data:" + data);
+//        OkHttpClient client = new OkHttpClient();
+//        RequestBody body = RequestBody.create(data, MediaType.get("application/json; charset=utf-8"));
+//        Request request = new Request.Builder()
+//                .url(InterfaceURL.BASE_URL + str_api)
+//                .post(body)
+//                .build();
+//        client.newCall(request).enqueue(new Callback() {
 //            @Override
-//            public void onSuccess(String response) {
+//            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+//                upload_status = 3;
+//                MainActivity.hibernate.save(detectionResultBean);
+//            }
+//
+//            @Override
+//            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+//                String ret = response.body().string();
 //                TestDataBean3 testDataBean3 = null;
-//                testDataBean3 = new Gson().fromJson(response, TestDataBean3.class);
+//                testDataBean3 = new Gson().fromJson(ret, TestDataBean3.class);
 //
 //                if (testDataBean3 != null) {
-//                    Log.i("lcy", "onSuccess: ----testDataBean3 自动---"+testDataBean3);
-//                    errMsg= testDataBean3.getData().getErrMsg();
+//                    Log.i("lcy", "onSuccess: ----testDataBean3 自动---" + testDataBean3);
+//                    errMsg = testDataBean3.getData().getErrMsg();
 //                    TestDataBean2 data1 = testDataBean3.getData();
 //                    if (data1 != null) {
 //                        PesticideTestActivity2.this.runOnUiThread(new Runnable() {
@@ -2696,13 +2721,6 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
 //                        });
 //                    }
 //                }
-//
-//            }
-//
-//            @Override
-//            public void onError(String response) {
-//                upload_status = 3;
-//                MainActivity.hibernate.save(detectionResultBean);
 //            }
 //        });
 
@@ -2712,159 +2730,131 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
     // 手动录入上传方式
     private void uploadResult1(int index) {
         //获取必要上传
-        SharedPreferences sp = getSharedPreferences("userPass", MODE_PRIVATE);
-//        String user = sp.getString("user", "");
-        String user = com.example.utils.http.Global.ID;
-        String terrace = sp.getString("terrace", "");
-        String deptId = sp.getString("DeptId", "");
-        String setWithModel = getStringSN();//获取唯一标识
-        String str_api = "";
-
-        // 只有单金标且登录用户是唐山的用户才使用 "Tangshan/SendForNAD4074" api
-        // 其他的都是 "CommonManual/GetSamplingTypeList" api
-        if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
-            str_api = "CommonManual/UpdateManualSampling";
-        }
-        if ("".equals(LocationX) && "".equals(LocationY) && "".equals(LocationAddress)) {
-            locationMsg = MainActivity.gt_sp.query("locationMsg").toString();
-            MainActivity.gt_sp.save("locationMsg", locationMsg);
-
-            String[] split_something = locationMsg.split(",");
-
-            LocationX = split_something[0];
-            LocationY = split_something[1];
-            LocationAddress = split_something[2];
-        }
-        String data = "";
-        Result = "";
-        ResultValue = "";
-        Result = savaDatas.get(currentIndex).resultJudge;
-        //Result = resultList.get(clickPosition-1).resultJudge;
-        if ("合格".equals(Result)) {
-            ResultValue = "0";
-        } else if ("不合格".equals(Result)) {
-            ResultValue = "1";
-        } else {
-            ResultValue = "-1";
-        }
-
-
-        // 获取参数  归属地 本地判断是否是唐山界面进行样本名称选择
-        String AreaId = com.example.utils.http.Global.admin_pt;
-        if (AreaId.equals("TangshanNMEnterprise")) {
-            if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
-                data = "[{\"QRCode\":\"" + card_number.replaceAll("\\s*", "") + "\",\n" +
-                        "\"LocationX\":\"" + LocationX + "\",\n" +
-                        "\"LocationY\":\"" + LocationY + "\",\n" +
-                        "\"LocationAddress\":\"" + LocationAddress + "\",\n" +
-                        "\"Result\":\"" + ResultValue + "\",\n" +
-                        "\"ResultValue\":\"" + savaDatas.get(currentIndex).testValue + "\",\n" +
-                        "\"SamplingNumber\":\"" + SamplNumlist.get(currentIndex) + "\",\n" +
-                        "\"AreaId\":\"" + terrace + "\",\n" +
-                        "\"OperatorId\":\"" + com.example.utils.http.Global.ID + "\",\n" +
-                        "\"ResultData\":\n" +
-                        "[\n" +
-                        "{\"Title\":\"部门id\",\"Id\":\"deptId\",\"Value\":\"" + deptId + "\"},\n" +
-                        "{\"Title\":\"样品来源地1级\",\"Id\":\"source1\",\"Value\":\"" + locsp1Id.get(currentIndex) + "\"},\n" +
-                        "{\"Title\":\"样品来源地2级\",\"Id\":\"source2\",\"Value\":\"" + locsp2Id.get(currentIndex) + "\"},\n" +
-                        "{\"Title\":\"样品来源地3级\",\"Id\":\"source3\",\"Value\":\"" + locsp3Id.get(currentIndex) + "\"},\n" +
-                        "{\"Title\":\"样品总分类Id\",\"Id\":\"sampleClassId\",\"Value\":\"" + sampleId + "\"},\n" +
-                        "{\"Title\":\"样本类别Id\",\"Id\":\"sampleTypeId\",\"Value\":\"" + "\"},\n" +
-                        "{\"Title\":\"检测对象名称\",\"Id\":\"objectName\",\"Value\":\"" + typelist.get(currentIndex) + "\"},\n" +
-                        "{\"Title\":\"被检企业名称\",\"Id\":\"companyName\",\"Value\":\"" + detectionResultBean.getUnitsUnderInspection() + "\"},\n" +
-                        "{\"Title\":\"样品详细地址\",\"Id\":\"sampleAddress\",\"Value\":\"" + locId.get(currentIndex) + "\"},\n" +
-                        "{\"Title\":\"设备编号\",\"Id\":\"deviceSn\",\"Value\":\"" + MainActivity.mac_url + "\"},\n" +
-                        "{\"Title\":\"设备型号\",\"Id\":\"deviceType\",\"Value\":\"" + "MD_417" + "\"},\n" +
-                        "{\"Title\":\"组织机构代码\",\"Id\":\"companyCode\",\"Value\":\"" + detectionResultBean.companyCode + "\"},\n" +
-                        "{\"Title\":\"产 品Id\",\"Id\":\"productId\",\"Value\":\"" + subProductId.get(currentIndex) + "\"},\n" +
-                        "{\"Title\":\"对象 Id\",\"Id\":\"objectId\",\"Value\":\"" + yplblist.get(currentIndex) + "\"}\n" +
-                        "]}\n" +
-                        "]";
-            }
-
-        } else {
-            if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
-                data = "[{\"QRCode\":\"" + card_number.replaceAll("\\s*", "") + "\",\n" +
-                        "\"LocationX\":\"" + LocationX + "\",\n" +
-                        "\"LocationY\":\"" + LocationY + "\",\n" +
-                        "\"LocationAddress\":\"" + LocationAddress + "\",\n" +
-                        "\"Result\":\"" + ResultValue + "\",\n" +
-                        "\"ResultValue\":\"" + savaDatas.get(currentIndex).testValue + "\",\n" +
-                        "\"SamplingNumber\":\"" + SamplNumlist.get(currentIndex) + "\",\n" +
-                        "\"AreaId\":\"" + terrace + "\",\n" +
-                        "\"OperatorId\":\"" + com.example.utils.http.Global.ID + "\",\n" +
-                        "\"ResultData\":\n" +
-                        "[\n" +
-                        "{\"Title\":\"部门id\",\"Id\":\"deptId\",\"Value\":\"" + deptId + "\"},\n" +
-                        "{\"Title\":\"样品来源地1级\",\"Id\":\"source1\",\"Value\":\"" + locsp1Id.get(currentIndex) + "\"},\n" +
-                        "{\"Title\":\"样品来源地2级\",\"Id\":\"source2\",\"Value\":\"" + locsp2Id.get(currentIndex) + "\"},\n" +
-                        "{\"Title\":\"样品来源地3级\",\"Id\":\"source3\",\"Value\":\"" + locsp3Id.get(currentIndex) + "\"},\n" +
-                        "{\"Title\":\"样品总分类Id\",\"Id\":\"sampleClassId\",\"Value\":\"" + sampleId + "\"},\n" +
-                        "{\"Title\":\"样本类别Id\",\"Id\":\"sampleTypeId\",\"Value\":\"" + yplblist.get(currentIndex) + "\"},\n" +
-                        "{\"Title\":\"检测对象名称\",\"Id\":\"objectName\",\"Value\":\"" + typelist.get(currentIndex) + "\"},\n" +
-                        "{\"Title\":\"被检企业名称\",\"Id\":\"companyName\",\"Value\":\"" + detectionResultBean.getUnitsUnderInspection() + "\"},\n" +
-                        "{\"Title\":\"设备编号\",\"Id\":\"deviceSn\",\"Value\":\"" + MainActivity.mac_url + "\"},\n" +
-                        "{\"Title\":\"组织机构代码\",\"Id\":\"companyCode\",\"Value\":\"" + detectionResultBean.companyCode + "\"},\n" +
-                        "{\"Title\":\"样品详细地址\",\"Id\":\"sampleAddress\",\"Value\":\"" + locId.get(currentIndex) + "\"}\n" +
-                        "]}\n" +
-                        "]";
-            }
-
-        }
-        // 新的上传
-        Timber.i("手动录入上传方式data:" + data);
-        OkHttpClient client = new OkHttpClient();
-        RequestBody body = RequestBody.create(data, MediaType.get("application/json; charset=utf-8"));
-        Request request = new Request.Builder()
-                .url(InterfaceURL.BASE_URL + str_api)
-                .post(body)
-                .build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                MainActivity.hibernate.save(detectionResultBean);
-                Log.i("lcy", "run: ---3------" + detectionResultBean.toString());
-            }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                String ret = response.body().string();
-                TestDataBean1 uploadData1 = new Gson().fromJson(ret, TestDataBean1.class);
-                if (uploadData1 != null) {
-                    Timber.i("手动录入上传方式走了:" + response);
-                    Log.i("lcy", "onSuccess: --uploadData1----" + uploadData1.toString());
-                    errMsg = uploadData1.getData().get(0).getErrMsg();
-                    String errCode = uploadData1.getData().get(0).getErrCode();
-                    runOnUiThread(() -> {
-                        Log.i("lcy", "onSuccess: --uploadData1----" + uploadData1);
-                        Log.d("zdl", "=========success=============" + response);
-                        Log.d("zdl", "end:========" + detectionResultBean.getSampleName() + ":");
-                        //0 是成功 进入这个回调肯定就是上传成功了
-                        if ("0".equals(errCode)) {
-                            detectionResultBean.setUploadStatus("已上传");
-                            MainActivity.hibernate.save(detectionResultBean);
-                        } else {
-//                            MessageDialog.show("提示", errMsg, "确定");
-                            MainActivity.hibernate.save(detectionResultBean);
-                        }
-                        //只有进到这个里面才会开始上传下一个
-                        currentIndex++;
-                        upDateShuju();
-                    });
-                }
-            }
-        });
-//        GT.HttpUtil.postRequest(InterfaceURL.BASE_URL + str_api, data, new GT.HttpUtil.OnLoadData() {
+//        SharedPreferences sp = getSharedPreferences("userPass", MODE_PRIVATE);
+////        String user = sp.getString("user", "");
+//        String user = com.example.utils.http.Global.ID;
+//        String terrace = sp.getString("terrace", "");
+//        String deptId = sp.getString("DeptId", "");
+//        String setWithModel = getStringSN();//获取唯一标识
+//        String str_api = "";
+//
+//        // 只有单金标且登录用户是唐山的用户才使用 "Tangshan/SendForNAD4074" api
+//        // 其他的都是 "CommonManual/GetSamplingTypeList" api
+//        if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
+//            str_api = "CommonManual/UpdateManualSampling";
+//        }
+//        if ("".equals(LocationX) && "".equals(LocationY) && "".equals(LocationAddress)) {
+//            locationMsg = MainActivity.gt_sp.query("locationMsg").toString();
+//            MainActivity.gt_sp.save("locationMsg", locationMsg);
+//
+//            String[] split_something = locationMsg.split(",");
+//
+//            LocationX = split_something[0];
+//            LocationY = split_something[1];
+//            LocationAddress = split_something[2];
+//        }
+//        String data = "";
+//        Result = "";
+//        ResultValue = "";
+//        Result = savaDatas.get(currentIndex).resultJudge;
+//        //Result = resultList.get(clickPosition-1).resultJudge;
+//        if ("合格".equals(Result)) {
+//            ResultValue = "0";
+//        } else if ("不合格".equals(Result)) {
+//            ResultValue = "1";
+//        } else {
+//            ResultValue = "-1";
+//        }
+//
+//
+//        // 获取参数  归属地 本地判断是否是唐山界面进行样本名称选择
+//        String AreaId = com.example.utils.http.Global.admin_pt;
+//        if (AreaId.equals("TangshanNMEnterprise")) {
+//            if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
+//                data = "[{\"QRCode\":\"" + card_number.replaceAll("\\s*", "") + "\",\n" +
+//                        "\"LocationX\":\"" + LocationX + "\",\n" +
+//                        "\"LocationY\":\"" + LocationY + "\",\n" +
+//                        "\"LocationAddress\":\"" + LocationAddress + "\",\n" +
+//                        "\"Result\":\"" + ResultValue + "\",\n" +
+//                        "\"ResultValue\":\"" + savaDatas.get(currentIndex).testValue + "\",\n" +
+//                        "\"SamplingNumber\":\"" + SamplNumlist.get(currentIndex) + "\",\n" +
+//                        "\"AreaId\":\"" + terrace + "\",\n" +
+//                        "\"OperatorId\":\"" + com.example.utils.http.Global.ID + "\",\n" +
+//                        "\"ResultData\":\n" +
+//                        "[\n" +
+//                        "{\"Title\":\"部门id\",\"Id\":\"deptId\",\"Value\":\"" + deptId + "\"},\n" +
+//                        "{\"Title\":\"样品来源地1级\",\"Id\":\"source1\",\"Value\":\"" + locsp1Id.get(currentIndex) + "\"},\n" +
+//                        "{\"Title\":\"样品来源地2级\",\"Id\":\"source2\",\"Value\":\"" + locsp2Id.get(currentIndex) + "\"},\n" +
+//                        "{\"Title\":\"样品来源地3级\",\"Id\":\"source3\",\"Value\":\"" + locsp3Id.get(currentIndex) + "\"},\n" +
+//                        "{\"Title\":\"样品总分类Id\",\"Id\":\"sampleClassId\",\"Value\":\"" + sampleId + "\"},\n" +
+//                        "{\"Title\":\"样本类别Id\",\"Id\":\"sampleTypeId\",\"Value\":\"" + "\"},\n" +
+//                        "{\"Title\":\"检测对象名称\",\"Id\":\"objectName\",\"Value\":\"" + typelist.get(currentIndex) + "\"},\n" +
+//                        "{\"Title\":\"被检企业名称\",\"Id\":\"companyName\",\"Value\":\"" + detectionResultBean.getUnitsUnderInspection() + "\"},\n" +
+//                        "{\"Title\":\"样品详细地址\",\"Id\":\"sampleAddress\",\"Value\":\"" + locId.get(currentIndex) + "\"},\n" +
+//                        "{\"Title\":\"设备编号\",\"Id\":\"deviceSn\",\"Value\":\"" + MainActivity.mac_url + "\"},\n" +
+//                        "{\"Title\":\"设备型号\",\"Id\":\"deviceType\",\"Value\":\"" + "MD_417" + "\"},\n" +
+//                        "{\"Title\":\"组织机构代码\",\"Id\":\"companyCode\",\"Value\":\"" + detectionResultBean.companyCode + "\"},\n" +
+//                        "{\"Title\":\"产 品Id\",\"Id\":\"productId\",\"Value\":\"" + subProductId.get(currentIndex) + "\"},\n" +
+//                        "{\"Title\":\"对象 Id\",\"Id\":\"objectId\",\"Value\":\"" + yplblist.get(currentIndex) + "\"}\n" +
+//                        "]}\n" +
+//                        "]";
+//            }
+//
+//        } else {
+//            if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
+//                data = "[{\"QRCode\":\"" + card_number.replaceAll("\\s*", "") + "\",\n" +
+//                        "\"LocationX\":\"" + LocationX + "\",\n" +
+//                        "\"LocationY\":\"" + LocationY + "\",\n" +
+//                        "\"LocationAddress\":\"" + LocationAddress + "\",\n" +
+//                        "\"Result\":\"" + ResultValue + "\",\n" +
+//                        "\"ResultValue\":\"" + savaDatas.get(currentIndex).testValue + "\",\n" +
+//                        "\"SamplingNumber\":\"" + SamplNumlist.get(currentIndex) + "\",\n" +
+//                        "\"AreaId\":\"" + terrace + "\",\n" +
+//                        "\"OperatorId\":\"" + com.example.utils.http.Global.ID + "\",\n" +
+//                        "\"ResultData\":\n" +
+//                        "[\n" +
+//                        "{\"Title\":\"部门id\",\"Id\":\"deptId\",\"Value\":\"" + deptId + "\"},\n" +
+//                        "{\"Title\":\"样品来源地1级\",\"Id\":\"source1\",\"Value\":\"" + locsp1Id.get(currentIndex) + "\"},\n" +
+//                        "{\"Title\":\"样品来源地2级\",\"Id\":\"source2\",\"Value\":\"" + locsp2Id.get(currentIndex) + "\"},\n" +
+//                        "{\"Title\":\"样品来源地3级\",\"Id\":\"source3\",\"Value\":\"" + locsp3Id.get(currentIndex) + "\"},\n" +
+//                        "{\"Title\":\"样品总分类Id\",\"Id\":\"sampleClassId\",\"Value\":\"" + sampleId + "\"},\n" +
+//                        "{\"Title\":\"样本类别Id\",\"Id\":\"sampleTypeId\",\"Value\":\"" + yplblist.get(currentIndex) + "\"},\n" +
+//                        "{\"Title\":\"检测对象名称\",\"Id\":\"objectName\",\"Value\":\"" + typelist.get(currentIndex) + "\"},\n" +
+//                        "{\"Title\":\"被检企业名称\",\"Id\":\"companyName\",\"Value\":\"" + detectionResultBean.getUnitsUnderInspection() + "\"},\n" +
+//                        "{\"Title\":\"设备编号\",\"Id\":\"deviceSn\",\"Value\":\"" + MainActivity.mac_url + "\"},\n" +
+//                        "{\"Title\":\"组织机构代码\",\"Id\":\"companyCode\",\"Value\":\"" + detectionResultBean.companyCode + "\"},\n" +
+//                        "{\"Title\":\"样品详细地址\",\"Id\":\"sampleAddress\",\"Value\":\"" + locId.get(currentIndex) + "\"}\n" +
+//                        "]}\n" +
+//                        "]";
+//            }
+//
+//        }
+//        // 新的上传
+//        Timber.i("手动录入上传方式data:" + data);
+//        OkHttpClient client = new OkHttpClient();
+//        RequestBody body = RequestBody.create(data, MediaType.get("application/json; charset=utf-8"));
+//        Request request = new Request.Builder()
+//                .url(InterfaceURL.BASE_URL + str_api)
+//                .post(body)
+//                .build();
+//        client.newCall(request).enqueue(new Callback() {
 //            @Override
-//            public void onSuccess(String response) {
-//                TestDataBean1 uploadData1 = new Gson().fromJson(response, TestDataBean1.class);
+//            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+//                MainActivity.hibernate.save(detectionResultBean);
+//                Log.i("lcy", "run: ---3------" + detectionResultBean.toString());
+//            }
+//
+//            @Override
+//            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+//                String ret = response.body().string();
+//                TestDataBean1 uploadData1 = new Gson().fromJson(ret, TestDataBean1.class);
 //                if (uploadData1 != null) {
-//                    Timber.i("手动录入上传方式走了:"+response);
-//                    Log.i("lcy", "onSuccess: --uploadData1----" +uploadData1.toString());
-//                    errMsg= uploadData1.getData().get(0).getErrMsg();
+//                    Timber.i("手动录入上传方式走了:" + response);
+//                    Log.i("lcy", "onSuccess: --uploadData1----" + uploadData1.toString());
+//                    errMsg = uploadData1.getData().get(0).getErrMsg();
 //                    String errCode = uploadData1.getData().get(0).getErrCode();
 //                    runOnUiThread(() -> {
-//                        Log.i("lcy", "onSuccess: --uploadData1----" +uploadData1);
+//                        Log.i("lcy", "onSuccess: --uploadData1----" + uploadData1);
 //                        Log.d("zdl", "=========success=============" + response);
 //                        Log.d("zdl", "end:========" + detectionResultBean.getSampleName() + ":");
 //                        //0 是成功 进入这个回调肯定就是上传成功了
@@ -2880,12 +2870,6 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
 //                        upDateShuju();
 //                    });
 //                }
-//            }
-//
-//            @Override
-//            public void onError(String response) {
-//                MainActivity.hibernate.save(detectionResultBean);
-//                Log.i("lcy", "run: ---3------" + detectionResultBean.toString());
 //            }
 //        });
 

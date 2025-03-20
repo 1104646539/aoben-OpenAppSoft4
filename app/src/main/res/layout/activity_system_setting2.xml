@@ -63,6 +63,7 @@
                         style="@style/btnSystemSetting"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
+                        android:visibility="gone"
                         android:layout_weight="1"
                         android:onClick="onBCheckOrg"
                         android:text="被检测单位" />
@@ -72,6 +73,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
+                        android:visibility="gone"
                         android:onClick="onSampleSource"
                         android:text="商品来源" />
 
@@ -80,6 +82,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
+                        android:visibility="gone"
                         android:onClick="onCheckOrg"
                         android:text="检测单位" />
 
@@ -88,6 +91,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
+                        android:visibility="gone"
                         android:onClick="onSampleName"
                         android:text="样品名称"
                         android:visibility="gone" />
@@ -100,7 +104,7 @@
                         android:layout_weight="1"
                         android:onClick="onEditProject"
                         android:text="项目设置"
-                        android:visibility="gone" />
+                        android:visibility="visible" />
 
 
                 </LinearLayout>

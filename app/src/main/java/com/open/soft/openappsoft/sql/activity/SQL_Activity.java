@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.gsls.gt.GT;
+import com.kongzue.dialogx.dialogs.MessageDialog;
 import com.lidroid.xutils.DbUtils;
 import com.open.soft.openappsoft.R;
 import com.open.soft.openappsoft.activity.LoginActivity;
@@ -47,6 +48,7 @@ import com.open.soft.openappsoft.sql.adapter.SqlAdapter;
 import com.open.soft.openappsoft.sql.bean.DetectionResultBean;
 import com.open.soft.openappsoft.util.APPUtils;
 import com.open.soft.openappsoft.util.InterfaceURL;
+import com.open.soft.openappsoft.util.UploadThread2;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -847,111 +849,94 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
                 viewGroup = (ViewGroup) childAt;
             }
         }
-        GT.Thread.runJava(() -> {
-            if (list_upload.size() > 0) {
-                for (int i = 0; i < list_upload.size(); i++) {
-
-                    DetectionResultBean detectionResultBean = list_upload.get(i);
-
-                    String uploadStatus = detectionResultBean.getUploadStatus();
-                    if ("已上传".equals(uploadStatus)) {
-                        errmessage_list[i] = "已上传过不能重复上传";
-                        continue;
-                    }
-
-                    Log.i("lcy", "uploadData: -------" + detectionResultBean);
-                    if ("胶体金".equals(detectionResultBean.getSQLType())) {
-                        if (detectionResultBean.getCommodityPlaceOrigin().contains(",")) {
-                            // 手动录入
-                            uploadData2(detectionResultBean);
-                        } else {
-                            // 自动录入
-                            uploadData1(detectionResultBean);
-                        }
-
-                    } else if ("分光光度".equals(detectionResultBean.getSQLType())) {
-                        Timber.i("手动与自动:" + detectionResultBean.getAreaId());
-                        if ("TangshanNM".equals(detectionResultBean.getAreaId())) {
-                            // 手动录入
-                            uploadData4(detectionResultBean);
-                        } else if ("TangshanNMEnterprise".equals(detectionResultBean.getAreaId())) {
-                            // 手动录入
-                            uploadData4(detectionResultBean);
-
-                        } else {
-                            // 自动录入
-                            uploadData3(detectionResultBean);
-                        }
-                    }
-
-                    int count = 0;
-                    while (true) {
-                        count++;
-                        if (upload_status != 0) {
-                            break;
-                        }
-                        if (count > 10) {
-                            break;
-                        }
-                        GT.Thread.sleep(500);
-                    }
-
-                    if (upload_status == 1) {
-                        upload_list[i] = true;
-                        errmessage_list[i] = errmessage;
-                    } else {
-                        upload_list[i] = false;
-                        errmessage_list[i] = errmessage;
-                    }
-                    upload_status = 0;
-                }
-            }
-
-
-            String success = "";
-            String fail = "";
+        if (list_upload.size() > 0) {
             for (int i = 0; i < list_upload.size(); i++) {
-                if (upload_list[i]) {
-//                        success += index_list[i] + ",";
+                DetectionResultBean detectionResultBean = list_upload.get(i);
 
-                    success += "检测流水号为" + index_list[i] + "上传成功" + "\n";
-                } else {
-//                        fail += index_list[i] + ",";
-                    fail += "检测流水号为" + index_list[i] + "上传失败，失败原因：" + errmessage_list[i] + "\n";
+                String uploadStatus = detectionResultBean.getUploadStatus();
+                if ("已上传".equals(uploadStatus)) {
+                    APPUtils.showToast(SQL_Activity.this, "已上传过不能重复上传");
+                    press_status = false;
+                    return;
                 }
             }
+        }
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("正在上传");
+        progressDialog.show();
+        GT.Thread.runJava(() -> {
 
+            UploadThread2 uploadThread2 = new UploadThread2(this, list_upload, new UploadThread2.onUploadListener() {
+                @Override
+                public void onUploadSuccess(int position, String msg) {
+                    list_upload.get(position).setUploadID(msg);
+                    list_upload.get(position).setUploadStatus("已上传");
+                    list_upload.get(position).setSelect(false);
+                    hibernate.update(list_upload.get(position));
+                    sqlAdapter.notifyDataSetChanged();
+                }
 
-            String finalSuccess = success;
-            String finalFail = fail;
+                @Override
+                public void onUploadFail(int position, String failInfo) {
 
-            if (SQL_Activity.this != null) {
-                try {
-                    SQL_Activity.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            new AlertDialog.Builder(SQL_Activity.this).setTitle("提示")
-                                    .setMessage(finalSuccess + finalFail)
-                                    .setCancelable(false)
-                                    .setNeutralButton("确定", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            press_status = false;
-                                        }
-                                    }).setPositiveButton("取消", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                            press_status = false;
-                                        }
-                                    }).create().show();
-                        }
+                }
+
+                @Override
+                public void onUploadFinish(int count, int successCount, int failedCount) {
+                    runOnUiThread(() -> {
+                        progressDialog.dismiss();
+                        MessageDialog.show("提示", "上传完成,共上传" + count + "条" + "，成功" + successCount + "条" + "，失败" + failedCount + "条", "确定");
                     });
-                } catch (Exception e) {
-                    Timber.e("窗口异常:" + e);
+                    press_status = false;
                 }
+            });
+            uploadThread2.start();
 
-            }
+
+//            String success = "";
+//            String fail = "";
+//            for (int i = 0; i < list_upload.size(); i++) {
+//                if (upload_list[i]) {
+////                        success += index_list[i] + ",";
+//
+//                    success += "检测流水号为" + index_list[i] + "上传成功" + "\n";
+//                } else {
+////                        fail += index_list[i] + ",";
+//                    fail += "检测流水号为" + index_list[i] + "上传失败，失败原因：" + errmessage_list[i] + "\n";
+//                }
+//            }
+//
+//
+//            String finalSuccess = success;
+//            String finalFail = fail;
+//
+//            if (SQL_Activity.this != null) {
+//                try {
+//                    SQL_Activity.this.runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            new AlertDialog.Builder(SQL_Activity.this).setTitle("提示")
+//                                    .setMessage(finalSuccess + finalFail)
+//                                    .setCancelable(false)
+//                                    .setNeutralButton("确定", new DialogInterface.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(DialogInterface dialog, int which) {
+//                                            press_status = false;
+//                                        }
+//                                    }).setPositiveButton("取消", new DialogInterface.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(DialogInterface dialog, int which) {
+//                                            dialog.dismiss();
+//                                            press_status = false;
+//                                        }
+//                                    }).create().show();
+//                        }
+//                    });
+//                } catch (Exception e) {
+//                    Timber.e("窗口异常:" + e);
+//                }
+//
+//            }
 
 
         });

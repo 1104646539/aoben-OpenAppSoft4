@@ -136,7 +136,7 @@ public class CheckPresenter {
 
                 if(result.code == 200){
                     if (checkInterface != null) {
-                        checkInterface.SendResultSuccess("成功222", requestCode);
+                        checkInterface.SendResultSuccess(result.data, requestCode);
                     }
                 }else{
                     if (checkInterface != null) {

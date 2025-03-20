@@ -24,6 +24,10 @@ public class Global {
      */
     public static String KEY = "688961777307881472";
     /**
+     * 应用名
+     */
+    public static String APP_NAME = "qingdao001";
+    /**
      * 加密 key
      */
     public static String ENCODE_KEY = "e2fd36a50c8c4759a5aaf1f094543a17";

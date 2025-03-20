@@ -48,7 +48,7 @@ public class App extends Application {
         //这个是打开日志
         BaseOkHttp.TIME_OUT_DURATION = 10;
         BaseOkHttp.DEBUGMODE = true;
-        Timber.plant(new CustomFormatTree()); // 开发模式下使用 DebugTree
+        Timber.plant(new CustomFormatTree());
 
         defaultSP = SharedPreferencesUtil.getDefaultSharedPreferences(this);
         /***
@@ -87,49 +87,6 @@ public class App extends Application {
                 Log.d(TAG, " onCreate initX5Environment onViewInitFinished b=" + b);
             }
         });
-//        new GT.HttpUtil().postRequest(url, dataMap, new GT.HttpUtil.OnLoadDataListener() {
-//            @Override
-//            public void onSuccess(String response, Object o) {
-//
-//            }
-//
-//            @Override
-//            public void onError(String response, Object o) {
-//
-//            }
-//        });
-//        OkHttpClient client = new OkHttpClient();
-//        RequestBody body = RequestBody.create(data, MediaType.get("application/json; charset=utf-8"));
-//        Request request = new Request.Builder()
-//                .url(InterfaceURL.BASE_URL + str_api)
-//                .post(body)
-//                .build();
-//        client.newCall(request).enqueue(new Callback() {
-//            @Override
-//            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-//
-//            }
-//
-//            @Override
-//            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-//                String ret = response.body().string();
-//
-//            }
-//        });
-//        //崩溃收集
-//        CaocConfig.Builder.create()
-//                .backgroundMode(CaocConfig.BACKGROUND_MODE_SILENT) //default: CaocConfig.BACKGROUND_MODE_SHOW_CUSTOM
-//                .enabled(true) //default: true
-//                .showErrorDetails(true) //default: true
-//                .showRestartButton(true) //default: true
-//                .logErrorOnRestart(true) //default: true
-//                .trackActivities(true) //default: false
-//                .minTimeBetweenCrashesMs(2000) //default: 3000
-//                .errorDrawable(R.mipmap.ic_launcher) //default: bug image
-//                .restartActivity(MainActivity.class) //default: null (your app's launch activity)
-//                .errorActivity(ErrorActivity.class) //default: null (default error activity)
-//                //default: null
-//                .apply();
 
     }
 }

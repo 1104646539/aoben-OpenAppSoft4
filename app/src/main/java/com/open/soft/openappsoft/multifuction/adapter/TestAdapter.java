@@ -150,18 +150,21 @@ public class TestAdapter<T> extends RecyclerView.Adapter {
         viewHolder.tv_sample_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onShowSampleDialog.onShowSampleDialog(position);
 //                showSelectDialog(position, DIALOG_SAMPLE_NAME, viewHolder);
             }
         });
         viewHolder.tv_sample_source.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onShowSampleDialog.onShowSampleDialog(position);
 //                showSelectDialog(position, DIALOG_SAMPLE_SOURCE, viewHolder);
             }
         });
         viewHolder.tv_bchecked_org.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onShowSampleDialog.onShowSampleDialog(position);
 //                showSelectDialog(position, DIALOG_CHECKED_ORG, viewHolder);
             }
         });

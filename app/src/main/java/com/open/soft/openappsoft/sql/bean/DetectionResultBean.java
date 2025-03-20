@@ -14,6 +14,7 @@ public class DetectionResultBean {
 
     @GT.Hibernate.GT_Key
     private int ID;                             //检测结果ID
+    @GT.Hibernate.GT_Column(setNotInit = true)
     private boolean isSelect;                   //是否选中
     private String SQLType;                     //数据类型
     private int CheckRunningNumber;             //检测流水号
@@ -29,6 +30,7 @@ public class DetectionResultBean {
     private String testItem;                    //检测项目
     private String detectionResult;             //检测结果
     private String unitsUnderInspection;        //被检单位
+    private String unitsUnderInspectionCode;        //被检单位Code
     private String inspector;                   //检测人员
     private String detectionCompany;            //检测单位
     private String weight;                      //重量
@@ -46,6 +48,12 @@ public class DetectionResultBean {
     private String xgd;                      //吸光度
     public String companyCode;               //组织机构代码
     public String objectId;               //组织机构代码
+    public String taskID;               //任务ID
+    public String specimenTypeCode;               //样品类型code
+    public String specimenTypeChild;               //样品类型code
+    public String specimenTypeChildCode;               //样品类型code
+    public String uploadID;               //上传返回的
+    public String samplingDate;               //抽样时间
 
 
     public DetectionResultBean() {
@@ -119,6 +127,74 @@ public class DetectionResultBean {
         this.DeptId = deptId;
         this.companyCode = companyCode;
         this.objectId = objectId;
+    }
+
+    public String getUnitsUnderInspectionCode() {
+        return unitsUnderInspectionCode;
+    }
+
+    public void setUnitsUnderInspectionCode(String unitsUnderInspectionCode) {
+        this.unitsUnderInspectionCode = unitsUnderInspectionCode;
+    }
+
+    public String getSamplingDate() {
+        return samplingDate;
+    }
+
+    public void setSamplingDate(String samplingDate) {
+        this.samplingDate = samplingDate;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public String getCompanyCode() {
+        return companyCode;
+    }
+
+    public void setCompanyCode(String companyCode) {
+        this.companyCode = companyCode;
+    }
+
+    public String getTaskID() {
+        return taskID;
+    }
+
+    public void setTaskID(String taskID) {
+        this.taskID = taskID;
+    }
+
+    public String getSpecimenTypeCode() {
+        return specimenTypeCode;
+    }
+
+    public void setSpecimenTypeCode(String specimenTypeCode) {
+        this.specimenTypeCode = specimenTypeCode;
+    }
+
+    public String getSpecimenTypeChild() {
+        return specimenTypeChild;
+    }
+
+    public void setSpecimenTypeChild(String specimenTypeChild) {
+        this.specimenTypeChild = specimenTypeChild;
+    }
+
+    public String getSpecimenTypeChildCode() {
+        return specimenTypeChildCode;
+    }
+
+    public void setSpecimenTypeChildCode(String specimenTypeChildCode) {
+        this.specimenTypeChildCode = specimenTypeChildCode;
+    }
+
+    public String getUploadID() {
+        return uploadID;
+    }
+
+    public void setUploadID(String uploadID) {
+        this.uploadID = uploadID;
     }
 
     public String getObjectId() {

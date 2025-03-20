@@ -149,11 +149,11 @@ public class SystemSettingActivity2 extends Activity implements View.OnClickList
         });
         order_setting.setOnClickListener(this);
 
-        if (com.example.utils.http.Global.isAdimin) {
-            btn_project.setVisibility(View.VISIBLE);
-        } else {
-            btn_project.setVisibility(View.GONE);
-        }
+//        if (com.example.utils.http.Global.isAdimin) {
+//            btn_project.setVisibility(View.VISIBLE);
+//        } else {
+//            btn_project.setVisibility(View.GONE);
+//        }
     }
 
     private void initData() {

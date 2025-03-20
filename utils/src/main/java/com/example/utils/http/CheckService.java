@@ -40,6 +40,13 @@ public interface CheckService {
      */
     @POST
     Observable<Result<GetSamplingInfoResultBean>> GetSamplingInfo(@Url String url, @Body GetSamplingInfoBean loginBean);
+    /**
+     * 获取更新接口
+     *
+     * @return
+     */
+    @POST
+    Observable<Result<GetSamplingInfoResultBean>> GetUpdate(@Url String url, @Body GetSamplingInfoBean loginBean);
 
     /**
      * 验证有效性接口

@@ -385,7 +385,7 @@
                         android:id="@+id/btn_upload"
                         style="@style/BtnBottom"
                         android:text="上传"
-                        android:visibility="visible" />
+                        android:visibility="gone" />
 
                     <Button
                         android:id="@+id/btn_print"

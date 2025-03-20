@@ -19,6 +19,7 @@ public class ToolUtil {
 
 
     public final static String DateTime1 = "yyyy-MM-dd HH:mm:ss";
+    public final static String DateTime2 = "yyyyMMddHHmmss";
     public final static String Date1 = "yyyy-MM-dd";
     // long转换为Date类型
     // currentTime要转换的long类型的时间

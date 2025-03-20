@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.example.utils.http.Global;
 import com.example.utils.http.ToolUtil;
@@ -26,6 +27,7 @@ import com.lidroid.xutils.exception.DbException;
 import com.open.soft.openappsoft.R;
 import com.open.soft.openappsoft.activity.MainActivity;
 import com.open.soft.openappsoft.activity.orderinfo.OrderInfoModel;
+import com.open.soft.openappsoft.jinbiao.dialog.DateTimePickerDialog;
 import com.open.soft.openappsoft.multifuction.adapter.FiltrateAdapter;
 import com.open.soft.openappsoft.multifuction.db.DbHelper;
 import com.open.soft.openappsoft.multifuction.model.Project;
@@ -131,7 +133,7 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
         }
         spn_bjcdw_name.setOnItemSelectedListener(this);
 
-        ArrayAdapter<OrderInfoModel> adapter_jcdw = new ArrayAdapter(this, R.layout.item_select_project, R.id.tv_project_name, bjcdws);
+        ArrayAdapter<OrderInfoModel> adapter_jcdw = new ArrayAdapter(this, R.layout.item_select_project, R.id.tv_project_name, jcdws);
         adapter_jcdw.setDropDownViewResource(R.layout.item_select_project_drop);
         spn_jcdw_name.setAdapter(adapter_jcdw);
         if (!jcdws.isEmpty()) {
@@ -176,7 +178,7 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
     }
 
     private String getRandomTaskId() {
-        return ToolUtil.dateToString(new Date(), ToolUtil.DateTime1) + ((int) (new Random().nextFloat() * 1000));
+        return ToolUtil.dateToString(new Date(), ToolUtil.DateTime2) + "-" + ((int) (new Random().nextFloat() * 100));
     }
 
     @Override
@@ -277,8 +279,8 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
         if (!verify()) return;
         String samplingDate = tv_sampling_date.getText().toString();
         String sampleName = tv_sample_name.getText().toString();
-        TaskModel taskModel = new TaskModel(et_id.getText().toString(), jcdw.name, sample_type_main.name, sample_type_main.code,
-                sample_type_child.name, sample_type_child.code, sampleName, bjcdw.name, bjcdw.code, samplingDate, Global.NAME);
+        TaskModel taskModel = new TaskModel(et_id.getText().toString(), jcdw.name, sample_type_main.code, sample_type_main.name,
+                sample_type_child.code, sample_type_child.name, sampleName, bjcdw.name, bjcdw.code, samplingDate, Global.NAME);
         hibernate.save(taskModel);
         if (hibernate.isStatus()) {
             APPUtils.showToast(this, "插入成功");
@@ -290,7 +292,7 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
     }
 
     private boolean verify() {
-        if (APPUtils.isNull(tv_sample_name.getText().toString())) {
+        if (APPUtils.isNull(tv_sample_name.getText().toString()) || "请选择".equals(tv_sample_name.getText().toString())) {
             APPUtils.showToast(this, "请选择样品名");
             return false;
         } else if (APPUtils.isNull(et_id.getText().toString())) {
@@ -318,11 +320,17 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
 
     private void showSamplingDate() {
         Date now = new Date();
-        ;
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
-            String s = String.format("%d/%d/%d", year, month, dayOfMonth);
+//        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
+//            String s = String.format("%d/%d/%d", year, month, dayOfMonth);
+//            tv_sampling_date.setText(s);
+//        }, now.getYear() + 1900, now.getMonth() + 1, now.getDay());
+//        datePickerDialog.show();
+        int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+
+        DateTimePickerDialog dateTimePickerDialog = new DateTimePickerDialog(this, (startDatePicker, startYear, startMonthOfYear, startDayOfMonth, timePicker, hour, minute) -> {
+            String s = ToolUtil.dateToString(new Date(startYear - 1900, startMonthOfYear, startDayOfMonth, hour, minute), ToolUtil.DateTime1);
             tv_sampling_date.setText(s);
-        }, now.getYear() + 1900, now.getMonth() + 1, now.getDay());
-        datePickerDialog.show();
+        }, now.getYear() + 1900, now.getMonth(), day, now.getHours(), now.getMinutes());
+        dateTimePickerDialog.show();
     }
 }

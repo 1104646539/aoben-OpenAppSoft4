@@ -41,6 +41,7 @@ import com.example.utils.http.ToolUtil;
 import com.google.gson.Gson;
 import com.gsls.gt.GT;
 import com.open.soft.openappsoft.R;
+import com.open.soft.openappsoft.activity.orderinfo.OrderInfoModel;
 import com.open.soft.openappsoft.data2.JingWeiDataBean;
 import com.open.soft.openappsoft.jinbiao.activity.CheckActivity;
 import com.open.soft.openappsoft.jinbiao.activity.CheckActivityByMen;
@@ -847,6 +848,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         new Thread() {
             @Override
             public void run() {
+
+                initDB();
+
                 InputStream is = null;
                 FileOutputStream fos = null;
                 try {
@@ -922,6 +926,34 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 }
             }
         }.start();
+    }
+
+    String[] initName1 = {"畜禽产品类", "农产品类", "水产品类", "加工制成类", "餐饮器具类"};
+    String[] initCode1 = {"A", "C", "F", "P", "T",};
+    String[] initName2 = {"畜肉类", "禽肉类", "禽蛋类", "餐具类", "专间类", "熟食类", "豆制品类", "腌制品类", "粮油类", "加工类", "水果类", "蔬菜类", "乳制品类", "干货类", "酒类", "水产品类", "调味品类", "其它"};
+    String[] initCode2 = {"A001", "A002", "A003", "T001", "T002", "P001", "P002", "P003", "C001", "P004", "C002", "C003", "P005", "C004", "P006", "F001", "P007", "P999"};
+    String[] initName3 = {"农贸市场1", "农贸市场2"};
+    String[] initCode3 = {"00100001", "222200000"};
+    String[] initName4 = {"检测机构1", "检测机构2"};
+
+    private void initDB() {
+
+        for (int i = 0; i < initName1.length; i++) {
+            OrderInfoModel orderInfoModel = new OrderInfoModel(initName1[i], initCode1[i], OrderInfoModel.type_sample_type_main);
+            hibernate.save(orderInfoModel);
+        }
+        for (int i = 0; i < initName2.length; i++) {
+            OrderInfoModel orderInfoModel = new OrderInfoModel(initName2[i], initCode2[i], OrderInfoModel.type_sample_type_child);
+            hibernate.save(orderInfoModel);
+        }
+        for (int i = 0; i < initName3.length; i++) {
+            OrderInfoModel orderInfoModel = new OrderInfoModel(initName3[i], initCode3[i], OrderInfoModel.type_bcheck);
+            hibernate.save(orderInfoModel);
+        }
+        for (int i = 0; i < initName4.length; i++) {
+            OrderInfoModel orderInfoModel = new OrderInfoModel(initName4[i], "", OrderInfoModel.type_check);
+            hibernate.save(orderInfoModel);
+        }
     }
 
 
