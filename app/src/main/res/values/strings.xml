@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">安全检测仪</string>
+    <string name="app_name">多参数食品安全分析仪</string>
     <!--    <string name="app_name">多功能食品安全检测仪</string>-->
 
     <!-- 主界面标题 -->
-    <string name="main_activit_title">多功能食品安全检测仪</string>
+    <string name="main_activit_title">多参数食品安全分析仪</string>
     <string name="hello_world">Hello world!</string>
     <!-- 农药残留按钮名字 -->
     <string name="nongCanButton">农药残留</string>

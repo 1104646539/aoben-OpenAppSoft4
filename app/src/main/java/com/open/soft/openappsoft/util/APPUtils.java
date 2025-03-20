@@ -21,8 +21,15 @@ import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
 
+import com.example.utils.http.CheckService;
+import com.example.utils.http.Global;
+import com.example.utils.http.Result;
+import com.example.utils.http.RetrofitServiceManager;
+import com.example.utils.http.model.BaseResult;
+import com.example.utils.http.model.UpdateBean;
 import com.google.gson.Gson;
 import com.gsls.gt.GT;
+import com.open.soft.openappsoft.App;
 import com.open.soft.openappsoft.bean.AppInfoBean;
 import com.open.soft.openappsoft.bean.AppUpdateBean;
 import com.open.soft.openappsoft.bean.JsonRootBean;
@@ -42,12 +49,15 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
 
 public class APPUtils {
-    public static boolean isNull(String value){
-        if(value == null  || "".equals(value))return true;
+    public static boolean isNull(String value) {
+        if (value == null || "".equals(value)) return true;
         return false;
     }
 
@@ -302,100 +312,190 @@ public class APPUtils {
 
     //更新APP中
     public static void updateApp(Context context, ProgressDialog progressDialog) {
+        CheckService checkService = RetrofitServiceManager.getInstance().getCheckService();
 
-        Map<String, String> map = new HashMap<>();
-        if ("多参数食品安全检测仪".equals(InterfaceURL.oneModule)) {//多参数
-            map.put("requestAppVersionsName", "OpenAppSoft3");
-        } else if ("农药残留检测仪".equals(InterfaceURL.oneModule)) {//单农残
-            map.put("requestAppVersionsName", "OpenAppSoft2");
-        } else if ("农药残留单项精准分析仪".equals(InterfaceURL.oneModule)) {//单金标
-            map.put("requestAppVersionsName", "OpenAppSoft1");
-        }
-
-        new OkHttp(InterfaceURL.BASE_URL + "/System/Update", map).loadData(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                ((Activity) context).runOnUiThread(new Runnable() {
+//        Map<String, String> map = new HashMap<>();
+//        if ("多参数食品安全检测仪".equals(InterfaceURL.oneModule)) {//多参数
+//            map.put("requestAppVersionsName", "OpenAppSoft3");
+//        } else if ("农药残留检测仪".equals(InterfaceURL.oneModule)) {//单农残
+//            map.put("requestAppVersionsName", "OpenAppSoft2");
+//        } else if ("农药残留单项精准分析仪".equals(InterfaceURL.oneModule)) {//单金标
+//            map.put("requestAppVersionsName", "OpenAppSoft1");
+//        }
+//        map.put("app","qingdao001");
+        checkService.GetUpdate(Global.URL_UPDATE, Global.APP_NAME).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<BaseResult<UpdateBean>>() {
                     @Override
-                    public void run() {
-                        Toast.makeText(context, "网络异常，请检查网络！", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
+                    public void onCompleted() {
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.code() == 200) {
-                    String string = response.body().string();
-                    JsonRootBean jsonRootBean = new Gson().fromJson(string, JsonRootBean.class);
-                    AppUpdateBean appUpdateBean = jsonRootBean.getData();
-                    if (appUpdateBean == null) {
-                        return;
                     }
 
-                    if (appUpdateBean.getVersions().equals(GT.ApplicationUtils.getVerName(context))) {
-                        Timber.i("onResponse: 当前App为最新版，无需更新。");
-                        return;
+                    @Override
+                    public void onError(Throwable e) {
+                        ((Activity) context).runOnUiThread(() -> {
+                            progressDialog.dismiss();
+                            APPUtils.showToast(((Activity) context),"获取错误："+e.getMessage());
+
+                        });
                     }
 
-                    ((Activity) context).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (!((Activity) context).isFinishing())
-                                progressDialog.show();
-                        }
-                    });
+                    @Override
+                    public void onNext(BaseResult<UpdateBean> updateBeanResult) {
+                        if (updateBeanResult.code == 200) {
+                            UpdateBean appUpdateBean = updateBeanResult.data;
+                            if (appUpdateBean == null) {
+                                return;
+                            }
+                            int versionCode = Integer.valueOf(appUpdateBean.getVersion());
+                            if (versionCode <= GT.ApplicationUtils.getVersionCode(context)) {
+                                Timber.i("onResponse: 当前App为最新版，无需更新。");
+                                return;
+                            }
 
-                    /**
-                     * @param url          下载连接
-                     * @param destFileDir  下载的文件储存目录
-                     * @param destFileName 下载文件名称，后面记得拼接后缀，否则手机没法识别文件类型
-                     * @param listener     下载监听
-                     */
-                    String appSavePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "最新APP/";
-                    new DownloadUtil().download(appUpdateBean.getFilePath(), appSavePath, appUpdateBean.getProjectName() + ".apk", new DownloadUtil.OnDownloadListener() {
-                        @Override
-                        public void onDownloadSuccess(File file) {
+                            ((Activity) context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (!((Activity) context).isFinishing())
+                                        progressDialog.show();
+                                }
+                            });
+
+                            /**
+                             * @param url          下载连接
+                             * @param destFileDir  下载的文件储存目录
+                             * @param destFileName 下载文件名称，后面记得拼接后缀，否则手机没法识别文件类型
+                             * @param listener     下载监听
+                             */
+                            String appSavePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "最新APP/";
+                            String saveFileName = appUpdateBean.getName() + "" + appUpdateBean.getVersion() + ".apk";
+                            new DownloadUtil().download(appUpdateBean.getUrl(), appSavePath, saveFileName, new DownloadUtil.OnDownloadListener() {
+                                @Override
+                                public void onDownloadSuccess(File file) {
 //                            Log.i(TAG, "onDownloadSuccess: 下载完成");
 
-                            ((Activity) context).runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    progressDialog.dismiss();
+                                    ((Activity) context).runOnUiThread(() -> progressDialog.dismiss());
+                                    //自动安装下载好的 APP
+                                    installNewApk((Activity) context, "最新APP/" + saveFileName);
                                 }
-                            });
-                            //自动安装下载好的 APP
-                            installNewApk((Activity) context, "最新APP/" + appUpdateBean.getProjectName() + ".apk");
-                        }
 
-                        @Override
-                        public void onDownloading(int progress) {
-                            ((Activity) context).runOnUiThread(new Runnable() {
                                 @Override
-                                public void run() {
-                                    progressDialog.setMessage("正在下载最新版本，请稍等...已完成 " + progress + "%");
-                                }
-                            });
+                                public void onDownloading(int progress) {
+                                    ((Activity) context).runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            progressDialog.setMessage("正在下载最新版本，请稍等...已完成 " + progress + "%");
+                                        }
+                                    });
 //                            Log.i(TAG, "onDownloading: 下载中...:" + progress);
-                        }
+                                }
 
-                        @Override
-                        public void onDownloadFailed(Exception e) {
-                            ((Activity) context).runOnUiThread(new Runnable() {
                                 @Override
-                                public void run() {
-                                    if (isValidContext(context) && progressDialog.isShowing()) {
-                                        progressDialog.dismiss();
-                                    }
+                                public void onDownloadFailed(Exception e) {
+                                    ((Activity) context).runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            if (isValidContext(context) && progressDialog.isShowing()) {
+                                                progressDialog.dismiss();
+                                            }
+                                            APPUtils.showToast(((Activity) context),"下载失败："+e.getMessage());
+                                        }
+                                    });
+
                                 }
                             });
-
+                        } else {
+                            ((Activity) context).runOnUiThread(() -> {
+                                progressDialog.dismiss();
+                                APPUtils.showToast(((Activity) context),"获取错误："+updateBeanResult.code +" "+updateBeanResult.message);
+                            });
+//                            progressDialog.dismiss();
                         }
-                    });
-
-                }
-            }
-        });
+                    }
+                });
+//        new OkHttp(Global.BASE_URL + Global.URL_UPDATE, map).loadData(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                ((Activity) context).runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Toast.makeText(context, "网络异常，请检查网络！", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                if (response.code() == 200) {
+//                    String string = response.body().string();
+//                    BaseResult<UpdateBean> jsonRootBean = new Gson().fromJson(string, BaseResult<UpdateBean>.class);
+//                    AppUpdateBean appUpdateBean = jsonRootBean.data;
+//                    if (appUpdateBean == null) {
+//                        return;
+//                    }
+//
+//                    if (appUpdateBean.getVersions().equals(GT.ApplicationUtils.getVerName(context))) {
+//                        Timber.i("onResponse: 当前App为最新版，无需更新。");
+//                        return;
+//                    }
+//
+//                    ((Activity) context).runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            if (!((Activity) context).isFinishing())
+//                                progressDialog.show();
+//                        }
+//                    });
+//
+//                    /**
+//                     * @param url          下载连接
+//                     * @param destFileDir  下载的文件储存目录
+//                     * @param destFileName 下载文件名称，后面记得拼接后缀，否则手机没法识别文件类型
+//                     * @param listener     下载监听
+//                     */
+//                    String appSavePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "最新APP/";
+//                    new DownloadUtil().download(appUpdateBean.getFilePath(), appSavePath, appUpdateBean.getProjectName() + ".apk", new DownloadUtil.OnDownloadListener() {
+//                        @Override
+//                        public void onDownloadSuccess(File file) {
+////                            Log.i(TAG, "onDownloadSuccess: 下载完成");
+//
+//                            ((Activity) context).runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    progressDialog.dismiss();
+//                                }
+//                            });
+//                            //自动安装下载好的 APP
+//                            installNewApk((Activity) context, "最新APP/" + appUpdateBean.getProjectName() + ".apk");
+//                        }
+//
+//                        @Override
+//                        public void onDownloading(int progress) {
+//                            ((Activity) context).runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    progressDialog.setMessage("正在下载最新版本，请稍等...已完成 " + progress + "%");
+//                                }
+//                            });
+////                            Log.i(TAG, "onDownloading: 下载中...:" + progress);
+//                        }
+//
+//                        @Override
+//                        public void onDownloadFailed(Exception e) {
+//                            ((Activity) context).runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    if (isValidContext(context) && progressDialog.isShowing()) {
+//                                        progressDialog.dismiss();
+//                                    }
+//                                }
+//                            });
+//
+//                        }
+//                    });
+//
+//                }
+//            }
+//        });
 
 
     }

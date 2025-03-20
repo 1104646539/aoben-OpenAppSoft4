@@ -93,8 +93,7 @@
                         android:layout_weight="1"
                         android:visibility="gone"
                         android:onClick="onSampleName"
-                        android:text="样品名称"
-                        android:visibility="gone" />
+                        android:text="样品名称"/>
 
                     <Button
                         android:id="@+id/btn_project"

@@ -105,6 +105,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -142,10 +143,9 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
     private TextView tv_title_mode1;
 
 
-
     private EditText et_Sample_Num = null;
     private EditText et_SampleTime = null;
-    private EditText et_companyCode=null;
+    private EditText et_companyCode = null;
     private TableRow llCompany;
 
     private String[] company_list = null;
@@ -331,11 +331,11 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         GT.WindowUtils.hideActionBar(this);
 
         // 单金标隐藏胶体金模块定时检测按钮，多参数不隐藏
-        if ("农药残留单项精准分析仪".equals(InterfaceURL.oneModule)) {
-            move_time.setVisibility(View.GONE);
-        } else if ("多参数食品安全检测仪".equals(InterfaceURL.oneModule)) {
-            move_time.setVisibility(View.GONE);
-        }
+//        if ("农药残留单项精准分析仪".equals(InterfaceURL.oneModule)) {
+//            move_time.setVisibility(View.GONE);
+//        } else if ("多参数食品安全检测仪".equals(InterfaceURL.oneModule)) {
+//            move_time.setVisibility(View.GONE);
+//        }
 
         tv_check_company.setText(com.example.utils.http.Global.Dept + "");
         tv_check_persion.setText(com.example.utils.http.Global.NAME + "");
@@ -659,7 +659,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 
                         }
                         statusDialog.setStatus(StatusDialog.STATUS_END_SCAN_QRCODE_SAMPLE);
-                        checkPresenter.GetSamplingInfo(new GetSamplingInfoBean(sampleCode,com.example.utils.http.Global.admin_pt), 1, CheckActivity.this);
+                        checkPresenter.GetSamplingInfo(new GetSamplingInfoBean(sampleCode, com.example.utils.http.Global.admin_pt), 1, CheckActivity.this);
                         statusDialog.setStatus(StatusDialog.STATUS_START_VERITY_QRCODE_SAMPLE);
                         et_Sample_Num.setText(sampleCode);
                     } else if (statusDialog.getStatus() == StatusDialog.STATUS_START_SCAN_QRCODE_CARD
@@ -786,9 +786,9 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 //                            selectedProject.Jcx += listInfoBean.getValue() + "";
                         }*/
                         if ("灵敏度".equals(listInfoBean.getTitle())) {
-                            String str=listInfoBean.getValue().trim();
-                            String str2="";
-                            if(str != null && !"".equals(str)) {
+                            String str = listInfoBean.getValue().trim();
+                            String str2 = "";
+                            if (str != null && !"".equals(str)) {
                                 for (int i = 0; i < str.length(); i++) {
                                     if ((str.charAt(i) >= 48 && str.charAt(i) <= 57) || str.charAt(i) == 46) {
                                         str2 += str.charAt(i);
@@ -1139,7 +1139,6 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         tv_check_sample = (TextView) findViewById(R.id.tv_check_sample);
 
 
-
         tv_check_type = (TextView) findViewById(R.id.tv_check_type);
         tv_check_project = (TextView) findViewById(R.id.tv_check_project);
         etJcx = (EditText) findViewById(R.id.check_edit_jcx);
@@ -1149,11 +1148,11 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         long_tv = (TextView) findViewById(R.id.check_edit_tv_long);
 
         et_Sample_Num = (EditText) findViewById(R.id.checkactivity_et_SampleNum);
-        et_companyCode=findViewById(R.id.checkactivity_et_company);
-        llCompany=findViewById(R.id.tr_ll);
+        et_companyCode = findViewById(R.id.checkactivity_et_company);
+        llCompany = findViewById(R.id.tr_ll);
         //判断是否需要组织机构代码
         String needCompanyCode = com.example.utils.http.Global.NEEDCompanyCode;
-        if (needCompanyCode.equals("0")){
+        if (needCompanyCode.equals("0")) {
             llCompany.setVisibility(View.GONE);
         }
 
@@ -1476,12 +1475,12 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
                     "{\n" +
                     "    \"Title\":\"设备编号\",\n" +
                     "    \"Id\":\"deviceSn\",\n" +
-                    "    \"Value\":\"" +MainActivity.mac_url+ "\"\n" +
+                    "    \"Value\":\"" + MainActivity.mac_url + "\"\n" +
                     "    },\n" +
                     "{\n" +
                     "    \"Title\":\"组织机构代码\",\n" +
                     "    \"Id\":\"companyCode\",\n" +
-                    "    \"Value\":\"" +et_companyCode.getText().toString()+ "\"\n" +
+                    "    \"Value\":\"" + et_companyCode.getText().toString() + "\"\n" +
                     "    },\n" +
                     "{\n" +
                     "    \"Title\":\"图像Base64(可选)\",\n" +
@@ -1801,7 +1800,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             resultModel.concentrateUnit = selectedProject.ConcentrateUnit;
             resultModel.sample_unit = tv_checkactivity_sampleunit.getText().toString();
             resultModel.shiji = tv_check_b.getText().toString();
-            resultModel.companyCode=et_companyCode.getText().toString();
+            resultModel.companyCode = et_companyCode.getText().toString();
 //            resultModel.sample_id = et_Sample_Num.getText().toString();
 //            resultModel.upload_status = 1;
             upload_data.setEnabled(true);
@@ -1864,7 +1863,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         detectionResultBean.companyCode = resultModel.companyCode;
 
 
-        Log.d("zdl","===============companyCode================"+detectionResultBean.companyCode);
+        Log.d("zdl", "===============companyCode================" + detectionResultBean.companyCode);
 
 //        List<DetectionResultBean> detectionResultBeans = MainActivity.hibernate.queryAll(DetectionResultBean.class);
 
@@ -1950,7 +1949,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 
         //如果还在扫描二维码时，不许再点击即时检测
         if (isTest) {
-            APPUtils.showToast(CheckActivity.this, "二维码扫描中，请稍后...");
+            APPUtils.showToast(CheckActivity.this, "检测中，请稍后...");
             return;
         }
         //如果样品名称为null 那就弹出对话框
@@ -1971,77 +1970,77 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 
         //扫描内置二维码
         isStartTest = 0;
-        scanInlayQRCode();
-        APPUtils.showToast(CheckActivity.this, "扫描二维码中，请稍后...");
+//        scanInlayQRCode();
+//        APPUtils.showToast(CheckActivity.this, "扫描二维码中，请稍后...");
         GT.Thread.runJava(new Runnable() {
             @Override
             public void run() {
 
                 int i = sleepTime;
-                while (isStartTest == 0) {
-
-                    int finalI = i;
-                    GT.Thread.runAndroid(CheckActivity.this, new Runnable() {
-                        @Override
-                        public void run() {
-                            if (tv_scanTime != null) {
-                                tv_scanTime.setText("扫描时间  " + finalI + "s");
-                            }
-                        }
-                    });
-
-                    //是否在扫描的时候按下返回键退出
-                    if (isScanQRExit) {
-                        isScanQRExit = false;
-                        break;
-                    }
-
-                    i--;
-                    GT.Thread.sleep(1000);
-                    if (i <= 0) {
-                        break;
-                    }
-                }
-
-                if (isStartTest == 0) {
-//                    APPUtils.showToast(CheckActivity.this, "二维码扫描失败，请重新扫描。");
-                    APPUtils.showToast(CheckActivity.this, "2请检查金标卡是否插到位与网络是否正常连接：" + isStartTest);
-                    isTest = false;
-
-                    GT.Thread.runAndroid(CheckActivity.this, new Runnable() {
-                        @Override
-                        public void run() {
-                            if (tv_scanTime != null) {
-                                tv_scanTime.setText("未扫描");
-                            }
-                        }
-                    });
-
-//                    CardOutOrIn();
-
-                    SerialUtils.CardOutOrIn();
-
-                    return;
-                } else if (isStartTest == -1) {
-
-                    APPUtils.showToast(CheckActivity.this, "该二维码数据有误");
-                    isTest = false;
-
-                    GT.Thread.runAndroid(CheckActivity.this, new Runnable() {
-                        @Override
-                        public void run() {
-                            if (tv_scanTime != null) {
-                                tv_scanTime.setText("二维码数据有误");
-                            }
-                        }
-                    });
-
-//                    CardOutOrIn();
-                    SerialUtils.CardOutOrIn();
-
-                    return;
-
-                }
+//                while (isStartTest == 0) {
+//
+//                    int finalI = i;
+//                    GT.Thread.runAndroid(CheckActivity.this, new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            if (tv_scanTime != null) {
+//                                tv_scanTime.setText("扫描时间  " + finalI + "s");
+//                            }
+//                        }
+//                    });
+//
+//                    //是否在扫描的时候按下返回键退出
+//                    if (isScanQRExit) {
+//                        isScanQRExit = false;
+//                        break;
+//                    }
+//
+//                    i--;
+//                    GT.Thread.sleep(1000);
+//                    if (i <= 0) {
+//                        break;
+//                    }
+//                }
+//
+//                if (isStartTest == 0) {
+////                    APPUtils.showToast(CheckActivity.this, "二维码扫描失败，请重新扫描。");
+//                    APPUtils.showToast(CheckActivity.this, "2请检查金标卡是否插到位与网络是否正常连接：" + isStartTest);
+//                    isTest = false;
+//
+//                    GT.Thread.runAndroid(CheckActivity.this, new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            if (tv_scanTime != null) {
+//                                tv_scanTime.setText("未扫描");
+//                            }
+//                        }
+//                    });
+//
+////                    CardOutOrIn();
+//
+//                    SerialUtils.CardOutOrIn();
+//
+//                    return;
+//                } else if (isStartTest == -1) {
+//
+//                    APPUtils.showToast(CheckActivity.this, "该二维码数据有误");
+//                    isTest = false;
+//
+//                    GT.Thread.runAndroid(CheckActivity.this, new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            if (tv_scanTime != null) {
+//                                tv_scanTime.setText("二维码数据有误");
+//                            }
+//                        }
+//                    });
+//
+////                    CardOutOrIn();
+//                    SerialUtils.CardOutOrIn();
+//
+//                    return;
+//
+//                }
 
 //                GT.Thread.sleep(2000);
 
@@ -2892,6 +2891,20 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             mChart.clear();
         }
 
+
+        if (com.open.soft.openappsoft.multifuction.util.Global.DEBUG) {
+            //测试 图像数据
+//            imageData =
+            int len = Integer.valueOf(selectedProject.ScanEnd) - Integer.valueOf(selectedProject.ScanStart);
+            for (int i = 0; i < len; i++) {
+                int ff = new Random().nextInt(100);
+
+            }
+
+            showResult();
+            handlerMess1.sendEmptyMessage(100);
+            return;
+        }
         byte[] data = message.getBytes(Charset.forName("gb2312"));
         if (!SerialUtils.COM3_SendData(data)) {
             isTest = false;
@@ -2962,9 +2975,20 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         if (index == -1) {   //如果不包含逗号，则说明没有dr值，数据不完整
             return null;
         }
+        byte[] data = new byte[currentDataLength - index - 1];
+        System.arraycopy(response, index + 1, data, 0, data.length);
+
+        showResult( new String(data));
+        return data;
+    }
+
+    private void showResult(String str) {
+
+        int index = str.indexOf(',');
         String linjie_str = etLjz.getText().toString();
         float linjie_num = Float.parseFloat(linjie_str);
-        final String drValue = new String(response, 0, index + 1, Charset.forName("gbk")).replace("OK", "").replace(",", "");
+        final String drValue = str.substring(0,index + 1).replace("OK", "").replace(",", "");
+//        final String drValue = new String(str, 0, index + 1, Charset.forName("gbk")).replace("OK", "").replace(",", "");
         GT.Thread.runAndroid(CheckActivity.this, new Runnable() {
             @Override
             public void run() {
@@ -3040,9 +3064,6 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
                 });
             }
         }
-        byte[] data = new byte[currentDataLength - index - 1];
-        System.arraycopy(response, index + 1, data, 0, data.length);
-        return data;
     }
 
 

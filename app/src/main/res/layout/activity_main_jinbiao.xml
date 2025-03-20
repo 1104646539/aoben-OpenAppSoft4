@@ -43,8 +43,8 @@
                 android:padding="30dp"
                 android:layout_weight="1.0"
                 android:background="@drawable/main_change_btu_shape"
-                android:onClick="ClickCheck"
-                android:text="样品检测"
+                android:onClick="ClickLin"
+                android:text="定量检测"
                 android:textSize="30sp"
                 android:layout_margin="10dp"
                 />
@@ -55,11 +55,26 @@
                 android:padding="30dp"
                 android:layout_weight="1.0"
                 android:background="@drawable/main_change_btu_shape"
-                android:onClick="ClickProject"
-                android:text="项目管理"
+                android:onClick="ClickDinXin"
+                android:text="定性检测"
                 android:textSize="30sp"
                 android:layout_margin="10dp"
                 />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:padding="30dp"
+                android:layout_weight="1.0"
+                android:background="@drawable/main_change_btu_shape"
+                android:onClick="ClickCheck"
+                android:text="样品检测"
+                android:textSize="30sp"
+                android:layout_margin="10dp"
+                />
+
+
 
         </LinearLayout>
 
@@ -71,7 +86,17 @@
             android:orientation="horizontal"
             android:gravity="center"
             >
-
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="30dp"
+                android:layout_weight="1.0"
+                android:background="@drawable/main_change_btu_shape"
+                android:onClick="ClickProject"
+                android:text="项目管理"
+                android:textSize="30sp"
+                android:layout_margin="10dp"
+                />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -95,7 +120,7 @@
                 android:textSize="30sp"
                 android:layout_margin="10dp"
                 />
-            
+
         </LinearLayout>
 
     </LinearLayout>

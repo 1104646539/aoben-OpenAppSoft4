@@ -20,7 +20,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -42,10 +41,6 @@ import com.google.gson.Gson;
 import com.gsls.gt.GT;
 import com.open.soft.openappsoft.R;
 import com.open.soft.openappsoft.activity.orderinfo.OrderInfoModel;
-import com.open.soft.openappsoft.data2.JingWeiDataBean;
-import com.open.soft.openappsoft.jinbiao.activity.CheckActivity;
-import com.open.soft.openappsoft.jinbiao.activity.CheckActivityByMen;
-import com.open.soft.openappsoft.jinbiao.activity.TSCheckActivity;
 import com.open.soft.openappsoft.jinbiao.location.LocationService;
 import com.open.soft.openappsoft.jinbiao.model.CompanyNameData;
 import com.open.soft.openappsoft.jinbiao.model.PdfRootBean;
@@ -60,7 +55,6 @@ import com.open.soft.openappsoft.multifuction.util.SPUtils;
 import com.open.soft.openappsoft.multifuction.util.SerialUtils;
 import com.open.soft.openappsoft.multifuction.util.ToolUtils;
 import com.open.soft.openappsoft.sql.activity.SQL_Activity;
-import com.open.soft.openappsoft.sql.bean.DetectionResultBean;
 import com.open.soft.openappsoft.util.AESUtil;
 import com.open.soft.openappsoft.util.InterfaceURL;
 
@@ -78,13 +72,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Timer;
 
 import jxl.Sheet;
 import jxl.Workbook;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener {
