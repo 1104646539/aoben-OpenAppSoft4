@@ -3,6 +3,7 @@ package com.open.soft.openappsoft;
 import android.app.Application;
 import android.app.Service;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.os.Vibrator;
 import android.util.Log;
 
@@ -22,6 +23,7 @@ import com.open.soft.openappsoft.util.InterfaceURL;
 import com.tencent.smtt.export.external.TbsCoreSettings;
 import com.tencent.smtt.sdk.QbSdk;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -48,7 +50,7 @@ public class App extends Application {
         //这个是打开日志
         BaseOkHttp.TIME_OUT_DURATION = 10;
         BaseOkHttp.DEBUGMODE = true;
-        Timber.plant(new CustomFormatTree());
+        Timber.plant(new CustomFormatTree(new File(getCacheDir().getAbsolutePath()+"/log.txt")));
 
         defaultSP = SharedPreferencesUtil.getDefaultSharedPreferences(this);
         /***

@@ -1,6 +1,7 @@
 package com.example.utils.http;
 
 import com.example.utils.http.model.BaseResult;
+import com.example.utils.http.model.UpdateBean;
 import com.example.utils.http.model.UploadBean;
 import com.example.utils.http.model.UploadBean2;
 
@@ -12,6 +13,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import retrofit2.http.Url;
 import rx.Observable;
 
@@ -47,6 +49,13 @@ public interface CheckService {
      */
     @POST
     Observable<Result<GetSamplingInfoResultBean>> GetUpdate(@Url String url, @Body GetSamplingInfoBean loginBean);
+    /**
+     * 获取更新接口
+     *
+     * @return
+     */
+    @GET
+    Observable<BaseResult<UpdateBean>> GetUpdate(@Url String url, @Query("app") String app);
 
     /**
      * 验证有效性接口

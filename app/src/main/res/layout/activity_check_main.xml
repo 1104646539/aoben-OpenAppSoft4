@@ -33,12 +33,13 @@
                 android:layout_height="50dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
-                android:text="自动录入样品检测"
+                android:text="样品检测"
                 android:textColor="#ffffff"
                 android:textSize="28sp" />
 
             <TextView
                 android:id="@+id/tv_scanTime"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_alignParentRight="true"
@@ -83,6 +84,7 @@
                         <TextView
                             android:id="@+id/tv_check_company"
                             style="@style/checkactivity_textview_style" />
+
                     </TableRow>
 
                     <TableRow
@@ -127,7 +129,7 @@
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone">
+                        android:visibility="visible">
 
                         <TextView
                             style="@style/checkactivity_textview_style"
@@ -136,6 +138,7 @@
                         <TextView
                             android:id="@+id/tv_check_b"
                             style="@style/checkactivity_textview_style" />
+
                         <Spinner
                             android:id="@+id/check_shiji_spinner"
                             android:visibility="gone"
@@ -175,7 +178,7 @@
                         <Spinner
                             android:id="@+id/check_project_spinner"
                             style="@style/checkactivity_spinner_style"
-                            android:visibility="gone" />
+                            android:visibility="visible" />
 
                         <TextView
                             android:id="@+id/tv_check_project"
@@ -188,7 +191,7 @@
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible">
+                        android:visibility="gone">
 
                         <TextView
                             style="@style/checkactivity_textview_style"
@@ -208,6 +211,7 @@
 
                     <TableRow
                         android:layout_width="match_parent"
+                        android:visibility="gone"
                         android:layout_height="wrap_content">
 
                         <TextView
@@ -398,12 +402,14 @@
                     <Button
                         android:id="@+id/btn_exchange"
                         style="@style/checkactivity_button_style"
+                        android:visibility="gone"
                         android:background="@drawable/main_change_btu_shape"
                         android:textAllCaps="false"
                         android:text="方式切换" />
 
                     <Button
                         android:id="@+id/btn_paint1"
+                        android:visibility="gone"
                         style="@style/checkactivity_button_style"
                         android:background="@drawable/main_change_btu_shape"
                         android:onClick="ShowPicture"

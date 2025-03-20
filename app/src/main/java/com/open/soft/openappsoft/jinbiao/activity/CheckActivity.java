@@ -3,6 +3,7 @@ package com.open.soft.openappsoft.jinbiao.activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -22,14 +23,17 @@ import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -59,12 +63,15 @@ import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.gson.Gson;
 import com.gsls.gt.GT;
+import com.kongzue.dialogx.dialogs.MessageDialog;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.db.sqlite.WhereBuilder;
 import com.lidroid.xutils.exception.DbException;
 import com.open.soft.openappsoft.R;
 import com.open.soft.openappsoft.activity.MainActivity;
+import com.open.soft.openappsoft.activity.task.TaskListAdapter2;
+import com.open.soft.openappsoft.activity.task.TaskModel;
 import com.open.soft.openappsoft.dialog.DialogFragmentPaint;
 import com.open.soft.openappsoft.jinbiao.base.BaseActivity;
 import com.open.soft.openappsoft.jinbiao.db.DbHelper;
@@ -86,6 +93,7 @@ import com.open.soft.openappsoft.jinbiao.util.SerialUtils;
 import com.open.soft.openappsoft.jinbiao.util.ToolUtils;
 import com.open.soft.openappsoft.sql.bean.DetectionResultBean;
 import com.open.soft.openappsoft.util.InterfaceURL;
+import com.open.soft.openappsoft.util.UploadThread2;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -105,6 +113,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -142,10 +151,9 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
     private TextView tv_title_mode1;
 
 
-
     private EditText et_Sample_Num = null;
     private EditText et_SampleTime = null;
-    private EditText et_companyCode=null;
+    private EditText et_companyCode = null;
     private TableRow llCompany;
 
     private String[] company_list = null;
@@ -331,31 +339,32 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         GT.WindowUtils.hideActionBar(this);
 
         // 单金标隐藏胶体金模块定时检测按钮，多参数不隐藏
-        if ("农药残留单项精准分析仪".equals(InterfaceURL.oneModule)) {
-            move_time.setVisibility(View.GONE);
-        } else if ("多参数食品安全检测仪".equals(InterfaceURL.oneModule)) {
-            move_time.setVisibility(View.GONE);
-        }
+//        if ("农药残留单项精准分析仪".equals(InterfaceURL.oneModule)) {
+//            move_time.setVisibility(View.GONE);
+//        } else if ("多参数食品安全检测仪".equals(InterfaceURL.oneModule)) {
+//            move_time.setVisibility(View.GONE);
+//        }
 
-        tv_check_company.setText(com.example.utils.http.Global.Dept + "");
+//        tv_check_company.setText(com.example.utils.http.Global.Dept + "");
         tv_check_persion.setText(com.example.utils.http.Global.NAME + "");
 
         upload_data.setEnabled(true);
         source = getIntent().getStringExtra("source");
 
-        statusDialog = new StatusDialog(this);
-        statusDialog.show();
-        statusDialog.setOnProgressStatus(this);
+//        statusDialog = new StatusDialog(this);
+//        statusDialog.show();
+//        statusDialog.setOnProgressStatus(this);
+        showTaskDialog();
 
         // 录入方式切换
         mode_exchange = findViewById(R.id.btn_exchange);
 
         // 判断是否是混合输入状态
-        if (!com.example.utils.http.Global.ismixedentry) {
-            mode_exchange.setVisibility(View.GONE);
-        } else {
-            tv_title_mode1.setText("混合录入样品检测".toString());
-        }
+//        if (!com.example.utils.http.Global.ismixedentry) {
+//            mode_exchange.setVisibility(View.GONE);
+//        } else {
+//            tv_title_mode1.setText("混合录入样品检测".toString());
+//        }
 //
         mode_exchange.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -410,9 +419,11 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             if (typelist == null) {
                 typelist = new ArrayList<SampleTypeModel>();
             }
-            if (projectlist == null) {
-                projectlist = new ArrayList<LineModel>();
-            }
+            projectlist = db.findAll(Selector.from(LineModel.class));
+
+//            if (projectlist == null) {
+//                projectlist = new ArrayList<LineModel>();
+//            }
             if (sampleUnitList == null) {
                 sampleUnitList = new ArrayList<PeopleModel>();
             }
@@ -530,6 +541,9 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int arg2, long arg3) {
                 if (projectlist.size() > 0) {
+                    selectedProject = projectlist.get(arg2);
+                    etLjz.setText(selectedProject.getLjz());
+                    etJcx.setText(selectedProject.getJcx());
                 }
             }
 
@@ -659,7 +673,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 
                         }
                         statusDialog.setStatus(StatusDialog.STATUS_END_SCAN_QRCODE_SAMPLE);
-                        checkPresenter.GetSamplingInfo(new GetSamplingInfoBean(sampleCode,com.example.utils.http.Global.admin_pt), 1, CheckActivity.this);
+                        checkPresenter.GetSamplingInfo(new GetSamplingInfoBean(sampleCode, com.example.utils.http.Global.admin_pt), 1, CheckActivity.this);
                         statusDialog.setStatus(StatusDialog.STATUS_START_VERITY_QRCODE_SAMPLE);
                         et_Sample_Num.setText(sampleCode);
                     } else if (statusDialog.getStatus() == StatusDialog.STATUS_START_SCAN_QRCODE_CARD
@@ -786,9 +800,9 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 //                            selectedProject.Jcx += listInfoBean.getValue() + "";
                         }*/
                         if ("灵敏度".equals(listInfoBean.getTitle())) {
-                            String str=listInfoBean.getValue().trim();
-                            String str2="";
-                            if(str != null && !"".equals(str)) {
+                            String str = listInfoBean.getValue().trim();
+                            String str2 = "";
+                            if (str != null && !"".equals(str)) {
                                 for (int i = 0; i < str.length(); i++) {
                                     if ((str.charAt(i) >= 48 && str.charAt(i) <= 57) || str.charAt(i) == 46) {
                                         str2 += str.charAt(i);
@@ -961,14 +975,71 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             case R.id.tv_check_sample:
             case R.id.tv_check_type:
             case R.id.tv_checkactivity_sampleunit:
-                if (statusDialog == null) {
-                    statusDialog = new StatusDialog(this);
-                }
-                statusDialog.setStatus(StatusDialog.STATUS_START_SCAN_QRCODE_SAMPLE);//隐藏弹出检测卡对话框扫描
-                statusDialog.show();
+                showTaskDialog();
+//                if (statusDialog == null) {
+//                    statusDialog = new StatusDialog(this);
+//                }
+//                statusDialog.setStatus(StatusDialog.STATUS_START_SCAN_QRCODE_SAMPLE);//隐藏弹出检测卡对话框扫描
+//                statusDialog.show();
                 break;
         }
 
+
+    }
+
+    private void loadTaskModel() {
+        List<TaskModel> temp = hibernate.queryAll(TaskModel.class);
+        taskModels.clear();
+        if (temp != null) {
+            taskModels.addAll(temp);
+        }
+    }
+
+    Dialog dialog_task_list;
+    TaskListAdapter2 taskListAdapter;
+
+    ListView task_list;
+    List<TaskModel> taskModels = new ArrayList<>();
+    TaskModel taskModel = null;
+
+    private void showTaskDialog() {
+        if (dialog_task_list == null) {
+            loadTaskModel();
+            dialog_task_list = new Dialog(this);
+
+            View dialogContentView = LayoutInflater.from(this)
+                    .inflate(R.layout.dialog_show_task_list, null, false);
+            task_list = dialogContentView.findViewById(R.id.lv_task_list);
+            taskListAdapter = new TaskListAdapter2(this);
+            taskListAdapter.setData(taskModels);
+
+            dialog_task_list.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog_task_list.setContentView(dialogContentView);
+
+            task_list.setAdapter(taskListAdapter);
+            task_list.setOnItemClickListener((parent, view, position, id) -> {
+                TaskModel taskModel = taskModels.get(position);
+                Timber.i("选择的任务=" + new Gson().toJson(taskModel));
+                this.taskModel = taskModel;
+                tv_check_sample.setText(taskModel.getSampleName());
+//                resultList.get(clickPosition).taskID = taskModel.getTaskID();
+                tv_check_b.setText(taskModel.getCompanyName());
+//                resultList.get(clickPosition).bcheckedOrganizationCode = taskModel.getCompanyCode();
+                tv_check_type.setText(taskModel.getSampleType());
+//                resultList.get(clickPosition).sampleTypeCode = taskModel.getSampleTypeId();
+//                resultList.get(clickPosition).sampleTypeChild = taskModel.getSampleSubType();
+//                resultList.get(clickPosition).sampleTypeChildCode = taskModel.getSampleSubTypeId();
+//                resultList.get(clickPosition).SamplingTime = taskModel.getSamplingTime();
+//                resultList.get(clickPosition).checkedOrganization = taskModel.getJcdw();
+                tv_check_company.setText(taskModel.getJcdw());
+//
+//                testAdapter.notifyItemChanged(clickPosition);
+                dialog_task_list.dismiss();
+            });
+        }
+
+        dialog_task_list.show();
+        dialog_task_list.setCancelable(true);
 
     }
 
@@ -1139,7 +1210,6 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         tv_check_sample = (TextView) findViewById(R.id.tv_check_sample);
 
 
-
         tv_check_type = (TextView) findViewById(R.id.tv_check_type);
         tv_check_project = (TextView) findViewById(R.id.tv_check_project);
         etJcx = (EditText) findViewById(R.id.check_edit_jcx);
@@ -1149,11 +1219,11 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         long_tv = (TextView) findViewById(R.id.check_edit_tv_long);
 
         et_Sample_Num = (EditText) findViewById(R.id.checkactivity_et_SampleNum);
-        et_companyCode=findViewById(R.id.checkactivity_et_company);
-        llCompany=findViewById(R.id.tr_ll);
+        et_companyCode = findViewById(R.id.checkactivity_et_company);
+        llCompany = findViewById(R.id.tr_ll);
         //判断是否需要组织机构代码
         String needCompanyCode = com.example.utils.http.Global.NEEDCompanyCode;
-        if (needCompanyCode.equals("0")){
+        if (needCompanyCode.equals("0")) {
             llCompany.setVisibility(View.GONE);
         }
 
@@ -1220,7 +1290,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         uploadingFlag = true;
 
         // 新的上传
-        getUploadData2();
+        uploadResult();
 
     }
 
@@ -1364,316 +1434,6 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
     private int upload_status = 0;
 
     // 二维码录入模式下的数据上传功能
-    private void getUploadData2() {
-
-        SharedPreferences sp = getSharedPreferences("userPass", MODE_PRIVATE);
-        String user = sp.getString("user", "");
-        String terrace = sp.getString("terrace", "");
-
-        //将具体检测文字 转为 编码
-        String result = "";
-        if ("阴性".equals(etResult.getText().toString())) {
-            result = "0";
-        } else if ("阳性".equals(etResult.getText().toString())) {
-            result = "1";
-        } else {
-            result = "-1";
-        }
-
-        // 真实数据data
-        String data = "";
-//        EditURLDialog editURLDialog = new EditURLDialog(CheckActivity.this);
-
-// et_Sample_Num.getText().toString()
-        String str_api = "";
-
-        if ("农药残留单项精准分析仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
-            str_api = "QR/SendResultList";
-
-            data = "[{\"QRCode\":\"" + QRCode1.replaceAll("\\s*", "") + "\",\n" +
-                    "\"LocationX\":\"" + LocationX + "\",\n" +
-                    "\"LocationY\":\"" + LocationY + "\",\n" +
-                    "\"LocationAddress\":\"" + LocationAddress + "\",\n" +
-                    "\"Result\":\"" + result + "\",\n" +
-                    "\"ResultValue\":\"" + etDr.getText().toString() + "\",\n" +
-                    "\"SamplingNumber\":\"" + et_Sample_Num.getText().toString() + "\",\n" +
-                    "\"AreaId\":\"" + terrace + "\",\n" +
-                    "\"OperatorId\":\"" + com.example.utils.http.Global.ID + "\",\n" +
-                    "\"ResultData\":\n" +
-                    "    [\n" +
-                    "        {\n" +
-                    "        \"Title\":\"检测项目\",\n" +
-                    "        \"Id\":\"projectName\",\n" +
-                    "        \"Value\":\"" + tv_check_project.getText().toString() + "\"\n" +
-                    "        },\n" +
-                    "        {\n" +
-                    "            \"Title\":\"限量值\",\n" +
-                    "            \"Id\":\"xlz\",\n" +
-                    "            \"Value\":\"" + etLjz.getText().toString() + "\"\n" +
-                    "            }\n" +
-                    "            ,{\n" +
-                    "                \"Title\":\"样品来源\",\n" +
-                    "                \"Id\":\"sampleSource\",\n" +
-                    "                \"Value\":\"" + tv_checkactivity_sampleunit.getText().toString() + "\"\n" +
-                    "                },\n" +
-                    "{\n" +
-                    "    \"Title\":\"被检测单位\",\n" +
-                    "    \"Id\":\"samplingDept\",\n" +
-                    "    \"Value\":\"" + tv_checkactivity_sampleunit.getText().toString() + "\"\n" +
-                    "    },\n" +
-                    "{\n" +
-                    "    \"Title\":\"设备编号\",\n" +
-                    "    \"Id\":\"deviceSn\",\n" +
-                    "    \"Value\":\"" + MainActivity.mac_url + "\"\n" +
-                    "    },\n" +
-                    "{\n" +
-                    "    \"Title\":\"组织机构代码\",\n" +
-                    "    \"Id\":\"companyCode\",\n" +
-                    "    \"Value\":\"" + et_companyCode.getText().toString() + "\"\n" +
-                    "    },\n" +
-                    "{\n" +
-                    "    \"Title\":\"图像Base64(可选)\",\n" +
-                    "    \"Id\":\"picBase64\",\n" +
-                    "    \"Value\":\"" + image_base64 + "\"\n" +
-                    "    }]}\n" +
-                    "\n" +
-                    "]";
-
-
-        } else if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
-            str_api = "QR/SendResult";
-            data = "{\"QRCode\":\"" + QRCode1.replaceAll("\\s*", "") + "\",\n" +
-                    "\"LocationX\":\"" + LocationX + "\",\n" +
-                    "\"LocationY\":\"" + LocationY + "\",\n" +
-                    "\"LocationAddress\":\"" + LocationAddress + "\",\n" +
-                    "\"Result\":\"" + result + "\",\n" +
-                    "\"ResultValue\":\"" + etDr.getText().toString() + "\",\n" +
-                    "\"SamplingNumber\":\"" + et_Sample_Num.getText().toString() + "\",\n" +
-                    "\"AreaId\":\"" + terrace + "\",\n" +
-                    "\"OperatorId\":\"" + com.example.utils.http.Global.ID + "\",\n" +
-                    "\"ResultData\":\n" +
-                    "    [\n" +
-                    "        {\n" +
-                    "        \"Title\":\"检测项目\",\n" +
-                    "        \"Id\":\"projectName\",\n" +
-                    "        \"Value\":\"" + tv_check_project.getText().toString() + "\"\n" +
-                    "        },\n" +
-                    "        {\n" +
-                    "            \"Title\":\"限量值\",\n" +
-                    "            \"Id\":\"xlz\",\n" +
-                    "            \"Value\":\"" + etLjz.getText().toString() + "\"\n" +
-                    "            }\n" +
-                    "            ,{\n" +
-                    "                \"Title\":\"样品来源\",\n" +
-                    "                \"Id\":\"sampleSource\",\n" +
-                    "                \"Value\":\"" + tv_checkactivity_sampleunit.getText().toString() + "\"\n" +
-                    "                },\n" +
-                    "{\n" +
-                    "    \"Title\":\"被检测单位\",\n" +
-                    "    \"Id\":\"samplingDept\",\n" +
-                    "    \"Value\":\"" + tv_checkactivity_sampleunit.getText().toString() + "\"\n" +
-                    "    },\n" +
-                    "{\n" +
-                    "    \"Title\":\"设备编号\",\n" +
-                    "    \"Id\":\"deviceSn\",\n" +
-                    "    \"Value\":\"" +MainActivity.mac_url+ "\"\n" +
-                    "    },\n" +
-                    "{\n" +
-                    "    \"Title\":\"组织机构代码\",\n" +
-                    "    \"Id\":\"companyCode\",\n" +
-                    "    \"Value\":\"" +et_companyCode.getText().toString()+ "\"\n" +
-                    "    },\n" +
-                    "{\n" +
-                    "    \"Title\":\"图像Base64(可选)\",\n" +
-                    "    \"Id\":\"picBase64\",\n" +
-                    "    \"Value\":\"" + image_base64 + "\"\n" +
-                    "    }]}";
-
-        }
-        OkHttpClient client = new OkHttpClient();
-        RequestBody body = RequestBody.create(data, MediaType.get("application/json; charset=utf-8"));
-        Request request = new Request.Builder()
-                .url(InterfaceURL.BASE_URL + str_api)
-                .post(body)
-                .build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                if (detectionResultBean != null) {
-                    MainActivity.hibernate.save(detectionResultBean);
-                }
-                GT.Thread.runJava(() -> CheckActivity.this.runOnUiThread(() -> GT.Thread.runJava(new Runnable() {
-                    @Override
-                    public void run() {
-                        GT.Thread.sleep(4000);
-                        ToolUtils.hiddenHUD();
-                    }
-                })));
-            }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                String ret = response.body().string();
-                TestDataBean1 testDataBean1 = null;
-                TestDataBean3 testDataBean3 = null;
-                if ("农药残留单项精准分析仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
-                    testDataBean1 = new Gson().fromJson(ret, TestDataBean1.class);
-                    if (testDataBean1 != null) {
-                        List<TestDataBean2> data1 = testDataBean1.getData();
-                        if (data1 != null) {
-                            TestDataBean2 testDataBean2 = data1.get(0);
-                            if (testDataBean2 != null) {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(CheckActivity.this, testDataBean2.getErrMsg(), Toast.LENGTH_LONG).show();
-                                        if ("0".equals(testDataBean2.getErrCode())) {
-                                            if (detectionResultBean != null) {
-                                                detectionResultBean.setUploadStatus("已上传");
-                                                MainActivity.hibernate.save(detectionResultBean);
-                                            }
-                                        } else {
-                                            if (detectionResultBean != null) {
-                                                MainActivity.hibernate.save(detectionResultBean);
-                                            }
-                                            GT.toast(CheckActivity.this, testDataBean2.getErrMsg());
-                                        }
-                                        GT.Thread.runJava(() -> CheckActivity.this.runOnUiThread(() -> GT.Thread.runJava(() -> {
-                                            GT.Thread.sleep(4000);
-                                            ToolUtils.hiddenHUD();
-                                        })));
-                                    }
-                                });
-                            }
-                        }
-
-                    }
-                } else if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
-                    testDataBean3 = new Gson().fromJson(ret, TestDataBean3.class);
-
-                    if (testDataBean3 != null) {
-                        TestDataBean2 data1 = testDataBean3.getData();
-                        if (data1 != null) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(CheckActivity.this, data1.getErrMsg(), Toast.LENGTH_LONG).show();
-
-                                    if ("0".equals(data1.getErrCode())) {
-                                        if (detectionResultBean != null) {
-                                            detectionResultBean.setUploadStatus("已上传");
-                                            MainActivity.hibernate.save(detectionResultBean);
-                                        }
-                                    } else {
-                                        if (detectionResultBean != null) {
-                                            MainActivity.hibernate.save(detectionResultBean);
-                                        }
-                                        GT.toast(CheckActivity.this, data1.getErrMsg());
-                                    }
-
-                                    GT.Thread.runJava(() -> CheckActivity.this.runOnUiThread(() -> GT.Thread.runJava(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            GT.Thread.sleep(4000);
-                                            ToolUtils.hiddenHUD();
-                                        }
-                                    })));
-                                }
-                            });
-                        }
-                    }
-                }
-            }
-        });
-//        GT.HttpUtil.postRequest(InterfaceURL.BASE_URL + str_api, data, new GT.HttpUtil.OnLoadData() {
-//            @Override
-//            public void onSuccess(String response) {
-//                TestDataBean1 testDataBean1 = null;
-//                TestDataBean3 testDataBean3 = null;
-//                if ("农药残留单项精准分析仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
-//                    testDataBean1 = new Gson().fromJson(response, TestDataBean1.class);
-//                    if (testDataBean1 != null) {
-//                        List<TestDataBean2> data1 = testDataBean1.getData();
-//                        if (data1 != null) {
-//                            TestDataBean2 testDataBean2 = data1.get(0);
-//                            if (testDataBean2 != null) {
-//                                runOnUiThread(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        Toast.makeText(CheckActivity.this, testDataBean2.getErrMsg(), Toast.LENGTH_LONG).show();
-//                                        if ("0".equals(testDataBean2.getErrCode())) {
-//                                            if (detectionResultBean != null) {
-//                                                detectionResultBean.setUploadStatus("已上传");
-//                                                MainActivity.hibernate.save(detectionResultBean);
-//                                            }
-//                                        } else {
-//                                            if (detectionResultBean != null) {
-//                                                MainActivity.hibernate.save(detectionResultBean);
-//                                            }
-//                                            GT.toast(CheckActivity.this, testDataBean2.getErrMsg());
-//                                        }
-//                                        GT.Thread.runJava(() -> CheckActivity.this.runOnUiThread(() -> GT.Thread.runJava(() -> {
-//                                            GT.Thread.sleep(4000);
-//                                            ToolUtils.hiddenHUD();
-//                                        })));
-//                                    }
-//                                });
-//                            }
-//                        }
-//
-//                    }
-//                } else if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
-//                    testDataBean3 = new Gson().fromJson(response, TestDataBean3.class);
-//
-//                    if (testDataBean3 != null) {
-//                        TestDataBean2 data1 = testDataBean3.getData();
-//                        if (data1 != null) {
-//                            runOnUiThread(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    Toast.makeText(CheckActivity.this, data1.getErrMsg(), Toast.LENGTH_LONG).show();
-//
-//                                    if ("0".equals(data1.getErrCode())) {
-//                                        if (detectionResultBean != null) {
-//                                            detectionResultBean.setUploadStatus("已上传");
-//                                            MainActivity.hibernate.save(detectionResultBean);
-//                                        }
-//                                    } else {
-//                                        if (detectionResultBean != null) {
-//                                            MainActivity.hibernate.save(detectionResultBean);
-//                                        }
-//                                        GT.toast(CheckActivity.this, data1.getErrMsg());
-//                                    }
-//
-//                                    GT.Thread.runJava(() -> CheckActivity.this.runOnUiThread(() -> GT.Thread.runJava(new Runnable() {
-//                                        @Override
-//                                        public void run() {
-//                                            GT.Thread.sleep(4000);
-//                                            ToolUtils.hiddenHUD();
-//                                        }
-//                                    })));
-//                                }
-//                            });
-//                        }
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onError(String response) {
-//                if (detectionResultBean != null) {
-//                    MainActivity.hibernate.save(detectionResultBean);
-//                }
-//                GT.Thread.runJava(() -> CheckActivity.this.runOnUiThread(() -> GT.Thread.runJava(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        GT.Thread.sleep(4000);
-//                        ToolUtils.hiddenHUD();
-//                    }
-//                })));
-//            }
-//        });
-    }
 
 
     public static String decodeUnicode(final String dataStr) {
@@ -1801,7 +1561,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             resultModel.concentrateUnit = selectedProject.ConcentrateUnit;
             resultModel.sample_unit = tv_checkactivity_sampleunit.getText().toString();
             resultModel.shiji = tv_check_b.getText().toString();
-            resultModel.companyCode=et_companyCode.getText().toString();
+            resultModel.companyCode = et_companyCode.getText().toString();
 //            resultModel.sample_id = et_Sample_Num.getText().toString();
 //            resultModel.upload_status = 1;
             upload_data.setEnabled(true);
@@ -1810,7 +1570,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             //保存新表
             saveNewTable(resultModel);
             // 添加检测项目
-            save_projectname_to_LineModel();
+//            save_projectname_to_LineModel();
 
 
         } catch (DbException e) {
@@ -1840,6 +1600,9 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         detectionResultBean.setTestItem(resultModel.project_name);//检测项目
         detectionResultBean.setSampleName(resultModel.sample_name);//样品名称
         detectionResultBean.setSpecimenType(resultModel.sample_type);//样品类型
+        detectionResultBean.setSpecimenTypeCode(taskModel.getSampleTypeId());//样品类型
+        detectionResultBean.setSpecimenTypeChild(taskModel.getSampleSubType());//样品类型
+        detectionResultBean.setSpecimenTypeChildCode(taskModel.getSampleSubTypeId());//样品类型
         detectionResultBean.setLimitStandard(resultModel.xian);//限量标准
 //        detectionResultBean.setLimitStandard(resultModel.xian + resultModel.concentrateUnit);//限量标准
 //        detectionResultBean.setLimitStandard(limit_standard);//限量标准
@@ -1853,7 +1616,8 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         detectionResultBean.setNumberSamples(sample_number);// 样品编号
         detectionResultBean.setUploadStatus("未上传");
 
-        detectionResultBean.setUnitsUnderInspection(tested_unit); // 被检单位
+        detectionResultBean.setUnitsUnderInspection(taskModel.getCompanyName()); // 被检单位
+        detectionResultBean.setUnitsUnderInspectionCode(taskModel.getCompanyCode()); // 被检单位
         detectionResultBean.setAisle(""); // 通道
         detectionResultBean.setWeight(""); // 重量
         detectionResultBean.setSampleConcentration(""); // 浓度
@@ -1862,14 +1626,16 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         detectionResultBean.setAreaId(terrace); // 上传数据的AreaId参数
         detectionResultBean.setDeptId(DeptId); // 上传数据的DeptId参数
         detectionResultBean.companyCode = resultModel.companyCode;
+        detectionResultBean.samplingDate = taskModel.getSamplingTime();
 
 
-        Log.d("zdl","===============companyCode================"+detectionResultBean.companyCode);
+        Log.d("zdl", "===============companyCode================" + detectionResultBean.companyCode);
 
 //        List<DetectionResultBean> detectionResultBeans = MainActivity.hibernate.queryAll(DetectionResultBean.class);
 
-//        MainActivity.hibernate.save(detectionResultBean);
-
+        MainActivity.hibernate.save(detectionResultBean);
+        int id = hibernate.getStatus();
+        detectionResultBean.setID(id);
 
     }
 
@@ -1950,17 +1716,18 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 
         //如果还在扫描二维码时，不许再点击即时检测
         if (isTest) {
-            APPUtils.showToast(CheckActivity.this, "二维码扫描中，请稍后...");
+            APPUtils.showToast(CheckActivity.this, "检测中，请稍后...");
             return;
         }
         //如果样品名称为null 那就弹出对话框
 
         if (tv_check_sample == null || tv_check_sample.getText().toString().length() == 0) {
-            if (statusDialog == null) {
-                statusDialog = new StatusDialog(this);
-            }
-            statusDialog.setStatus(StatusDialog.STATUS_START_SCAN_QRCODE_SAMPLE);//隐藏弹出检测卡对话框扫描
-            statusDialog.show();
+//            if (statusDialog == null) {
+//                statusDialog = new StatusDialog(this);
+//            }
+//            statusDialog.setStatus(StatusDialog.STATUS_START_SCAN_QRCODE_SAMPLE);//隐藏弹出检测卡对话框扫描
+//            statusDialog.show();
+            showTaskDialog();
             return;
         }
 
@@ -1971,156 +1738,77 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 
         //扫描内置二维码
         isStartTest = 0;
-        scanInlayQRCode();
-        APPUtils.showToast(CheckActivity.this, "扫描二维码中，请稍后...");
-        GT.Thread.runJava(new Runnable() {
+//        scanInlayQRCode();
+//        APPUtils.showToast(CheckActivity.this, "扫描二维码中，请稍后...");
+
+        if (selectedProject == null) {
+            isTest = false;
+            return;
+        }
+
+        if (tv_check_company.getText() == null || tv_check_company.getText().toString().isEmpty()) {
+            APPUtils.showToast(CheckActivity.this, "请先选择检测单位");
+            tv_scanTime.setText("请先选择检测单位");
+            isTest = false;
+            return;
+        }
+
+        if (tv_check_persion.getText() == null || tv_check_persion.getText().toString().isEmpty()) {
+            APPUtils.showToast(CheckActivity.this, "请先选择检验员");
+            tv_scanTime.setText("请先选择检验员");
+            isTest = false;
+            return;
+        }
+
+        if (tv_check_sample.getText() == null || tv_check_sample.getText().toString().isEmpty()) {
+            APPUtils.showToast(CheckActivity.this, "请先选样品名称");
+            tv_scanTime.setText("请先选样品名称");
+            isTest = false;
+            return;
+        }
+        if (tv_check_type.getText() == null || tv_check_type.getText().toString().isEmpty()) {
+            APPUtils.showToast(CheckActivity.this, "请先选样品类型");
+            tv_scanTime.setText("请先选样品类型");
+            isTest = false;
+            return;
+        }
+
+
+        if (new Integer("0").equals(selectedProject.ScanEnd)
+                || new Integer("0").equals(selectedProject.ScanStart)
+                || new Integer("0").equals(selectedProject.CTWidth)
+                || new Integer("0").equals(selectedProject.CTDistance)) {
+            APPUtils.showToast(CheckActivity.this, "该检测项目参数不完整或不正确，请转至项目管理并重新编辑");
+            isTest = false;
+            return;
+        }
+        GT.Thread.runAndroid(CheckActivity.this, new Runnable() {
             @Override
             public void run() {
+                isTest = false;
+//                        GT.Thread.runAndroid(CheckActivity.this, new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                if (tv_scanTime != null) {
+//                                    tv_scanTime.setText("扫描成功");
+//                                }
+//                            }
+//                        });
 
-                int i = sleepTime;
-                while (isStartTest == 0) {
-
-                    int finalI = i;
-                    GT.Thread.runAndroid(CheckActivity.this, new Runnable() {
-                        @Override
-                        public void run() {
-                            if (tv_scanTime != null) {
-                                tv_scanTime.setText("扫描时间  " + finalI + "s");
-                            }
-                        }
-                    });
-
-                    //是否在扫描的时候按下返回键退出
-                    if (isScanQRExit) {
-                        isScanQRExit = false;
-                        break;
-                    }
-
-                    i--;
-                    GT.Thread.sleep(1000);
-                    if (i <= 0) {
-                        break;
-                    }
-                }
-
-                if (isStartTest == 0) {
-//                    APPUtils.showToast(CheckActivity.this, "二维码扫描失败，请重新扫描。");
-                    APPUtils.showToast(CheckActivity.this, "2请检查金标卡是否插到位与网络是否正常连接：" + isStartTest);
-                    isTest = false;
-
-                    GT.Thread.runAndroid(CheckActivity.this, new Runnable() {
-                        @Override
-                        public void run() {
-                            if (tv_scanTime != null) {
-                                tv_scanTime.setText("未扫描");
-                            }
-                        }
-                    });
-
-//                    CardOutOrIn();
-
-                    SerialUtils.CardOutOrIn();
-
-                    return;
-                } else if (isStartTest == -1) {
-
-                    APPUtils.showToast(CheckActivity.this, "该二维码数据有误");
-                    isTest = false;
-
-                    GT.Thread.runAndroid(CheckActivity.this, new Runnable() {
-                        @Override
-                        public void run() {
-                            if (tv_scanTime != null) {
-                                tv_scanTime.setText("二维码数据有误");
-                            }
-                        }
-                    });
-
-//                    CardOutOrIn();
-                    SerialUtils.CardOutOrIn();
-
-                    return;
-
-                }
-
-//                GT.Thread.sleep(2000);
-
-                if (selectedProject == null) {
-                    isTest = false;
-                    return;
-                }
-
-
-                if (tv_check_company.getText() == null || tv_check_company.getText().toString().isEmpty()) {
-                    APPUtils.showToast(CheckActivity.this, "请先选择检测单位");
-                    tv_scanTime.setText("请先选择检测单位");
-                    isTest = false;
-                    return;
-                }
-
-                if (tv_check_persion.getText() == null || tv_check_persion.getText().toString().isEmpty()) {
-                    APPUtils.showToast(CheckActivity.this, "请先选择检验员");
-                    tv_scanTime.setText("请先选择检验员");
-                    isTest = false;
-                    return;
-                }
-
-                if (tv_check_sample.getText() == null || tv_check_sample.getText().toString().isEmpty()) {
-                    APPUtils.showToast(CheckActivity.this, "请先选样品名称");
-                    tv_scanTime.setText("请先选样品名称");
-                    isTest = false;
-                    return;
-                }
-                if (tv_check_type.getText() == null || tv_check_type.getText().toString().isEmpty()) {
-                    APPUtils.showToast(CheckActivity.this, "请先选样品类型");
-                    tv_scanTime.setText("请先选样品类型");
-                    isTest = false;
-                    return;
-                }
-
-
-                if (new Integer("0").equals(selectedProject.ScanEnd)
-                        || new Integer("0").equals(selectedProject.ScanStart)
-                        || new Integer("0").equals(selectedProject.CTWidth)
-                        || new Integer("0").equals(selectedProject.CTDistance)) {
-                    APPUtils.showToast(CheckActivity.this, "该检测项目参数不完整或不正确，请转至项目管理并重新编辑");
-                    isTest = false;
-                    return;
-                }
-
-                GT.Thread.runAndroid(CheckActivity.this, new Runnable() {
-                    @Override
-                    public void run() {
-
-                        isTest = false;
-                        GT.Thread.runAndroid(CheckActivity.this, new Runnable() {
-                            @Override
-                            public void run() {
-                                if (tv_scanTime != null) {
-                                    tv_scanTime.setText("扫描成功");
-                                }
-                            }
-                        });
-
-
-                        //清空测试数据显示
-                        clearTestDataShow();
+                //清空测试数据显示
+                clearTestDataShow();
 
                         /*//发送检测命令
                         String message = getTestInstruction();
                         readTimeOutCount = 0;
                         SendData(message);*/
 
-                        // 发送绘图命令
-                        ClickDraw1(v);
+                // 发送绘图命令
+                ClickDraw1(v);
 
-
-                    }
-                });
 
             }
         });
-
     }
 
     public static int REQUEST_CODE = 0;
@@ -2452,7 +2140,39 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
     }
 
     private void uploadResult() {
-        getUploadData2();
+        if (detectionResultBean != null) {
+            List<DetectionResultBean> list_upload = new ArrayList<>();
+            list_upload.add(detectionResultBean);
+            UploadThread2 uploadThread2 = new UploadThread2(this, list_upload, new UploadThread2.onUploadListener() {
+                @Override
+                public void onUploadSuccess(int position, String msg) {
+                    list_upload.get(position).setUploadID(msg);
+                    list_upload.get(position).setUploadStatus("已上传");
+                    list_upload.get(position).setSelect(false);
+                    hibernate.update(list_upload.get(position));
+                    runOnUiThread(() -> {
+                        com.open.soft.openappsoft.util.APPUtils.showToast(CheckActivity.this, "上传成功");
+                    });
+                }
+
+                @Override
+                public void onUploadFail(int position, String failInfo) {
+                    runOnUiThread(() -> {
+                        com.open.soft.openappsoft.util.APPUtils.showToast(CheckActivity.this, "上传失败：" + failInfo);
+                    });
+                }
+
+                @Override
+                public void onUploadFinish(int count, int successCount, int failedCount) {
+//                    runOnUiThread(() -> {
+//                        MessageDialog.show("提示", "上传完成,共上传" + count + "条" + "，成功" + successCount + "条" + "，失败" + failedCount + "条", "确定");
+//                    });
+                }
+            });
+            uploadThread2.start();
+        } else {
+            com.open.soft.openappsoft.util.APPUtils.showToast(this, "未检测");
+        }
     }
 
     public boolean isNumeric(String str) {
@@ -2556,7 +2276,8 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.checkactivity_et_SampleTime) {
-            ShowSampleTimeDialog();
+//            ShowSampleTimeDialog();
+            showTaskDialog();
         } else if (v.getId() == R.id.move_time) {
             timeCheck();
         } else if (v.getId() == R.id.btn_test) {
@@ -2892,6 +2613,31 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             mChart.clear();
         }
 
+
+        if (com.open.soft.openappsoft.multifuction.util.Global.DEBUG) {
+            //测试 图像数据
+//            imageData =
+            int len = Integer.valueOf(selectedProject.ScanEnd) - Integer.valueOf(selectedProject.ScanStart);
+            String temp = "OK,0.22";
+            String img = "";
+            imageData = new byte[len * 2];
+            for (int i = 0; i < len; i++) {
+                int ff = 500 + i;
+
+                imageData[2 * i] = (byte) ((ff & 0xff) << 8);
+                imageData[2 * i + 1] = (byte) ((ff & 0xff));
+//                if (i != 0) {
+//                    img += ",";
+//                }
+//
+//                img += ff;
+            }
+            temp += (img + "\n");
+            showResult(temp);
+//            imageData = img.getBytes();
+            handlerMess1.sendEmptyMessage(100);
+            return;
+        }
         byte[] data = message.getBytes(Charset.forName("gb2312"));
         if (!SerialUtils.COM3_SendData(data)) {
             isTest = false;
@@ -2962,14 +2708,32 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         if (index == -1) {   //如果不包含逗号，则说明没有dr值，数据不完整
             return null;
         }
+        byte[] data = new byte[currentDataLength - index - 1];
+        System.arraycopy(response, index + 1, data, 0, data.length);
+
+        showResult(new String(data));
+        return data;
+    }
+
+    private void showResult(String str) {
+        Timber.i("showResult str=" + str);
+//        str = str.replace("OK", "");
+        String[] strs = str.split(",");
         String linjie_str = etLjz.getText().toString();
         float linjie_num = Float.parseFloat(linjie_str);
-        final String drValue = new String(response, 0, index + 1, Charset.forName("gbk")).replace("OK", "").replace(",", "");
+        String drValue = "";
+        if (strs.length > 1) {
+            drValue = strs[1];
+        } else {
+            drValue = strs[0];
+        }
+//        final String drValue = new String(str, 0, index + 1, Charset.forName("gbk")).replace("OK", "").replace(",", "");
+        String finalDrValue = drValue;
         GT.Thread.runAndroid(CheckActivity.this, new Runnable() {
             @Override
             public void run() {
                 if (etDr != null) {
-                    etDr.setText(drValue);
+                    etDr.setText(finalDrValue);
                 }
             }
         });
@@ -3040,9 +2804,6 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
                 });
             }
         }
-        byte[] data = new byte[currentDataLength - index - 1];
-        System.arraycopy(response, index + 1, data, 0, data.length);
-        return data;
     }
 
 
@@ -3068,17 +2829,18 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
                     InitChart();
                     try {
                         setData(ints, scanStart);
-                        savaImage();
-                        // 获取图片路径
-                        String imgaepath = getImagePath();
-                        // 转base64编码
-                        image_base64 = imageToBase64(imgaepath);
-                        image_base64 = image_base64.replaceAll("\r\n", "").replaceAll("\r", "").replaceAll("\n", "");
+//                        savaImage();
+//                        // 获取图片路径
+//                        String imgaepath = getImagePath();
+//                        // 转base64编码
+//                        image_base64 = imageToBase64(imgaepath);
+//                        image_base64 = image_base64.replaceAll("\r\n", "").replaceAll("\r", "").replaceAll("\n", "");
                         // 数据上传
-                        uploadResult();
+//                        uploadResult();
 
                         // 保存新表
                         saveCheck_ResultData(etResult.getText().toString());
+                        uploadResult();
                         handler.sendEmptyMessage(100);//关闭定时器
                     } catch (ClassCastException e1) {
                         APPUtils.showToast(CheckActivity.this, "接收数据错误");

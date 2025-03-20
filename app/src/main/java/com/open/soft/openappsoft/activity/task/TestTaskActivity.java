@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.gsls.gt.GT;
 import com.open.soft.openappsoft.R;
+import com.open.soft.openappsoft.jinbiao.activity.CheckActivity;
 import com.open.soft.openappsoft.multifuction.activity.PesticideTestActivity2;
 
 public class TestTaskActivity extends AppCompatActivity implements View.OnClickListener {
@@ -19,6 +20,8 @@ public class TestTaskActivity extends AppCompatActivity implements View.OnClickL
     Button btn_task_start;
 
     int source;
+    //金标的类型，定性，定量
+    String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class TestTaskActivity extends AppCompatActivity implements View.OnClickL
         btn_task_start.setOnClickListener(this);
 
         source = getIntent().getIntExtra("source", source_pesticide);
+        type = getIntent().getStringExtra("type");
     }
 
     @Override
@@ -43,6 +47,11 @@ public class TestTaskActivity extends AppCompatActivity implements View.OnClickL
             case R.id.btn_task_start:
                 if (source == source_pesticide) {
                     startActivity(new Intent(this, PesticideTestActivity2.class));
+                } else if (source == source_jinbiao) {
+                    Intent intent1 = new Intent(this, CheckActivity.class);
+                    intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                    intent1.putExtra("source", type);// 定量
+                    startActivity(intent1);
                 }
                 break;
         }

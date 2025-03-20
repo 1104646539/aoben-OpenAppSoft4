@@ -134,17 +134,17 @@ public class DbHelper {
 
 
 
-//        String[] projectNames1 = new String[]{
-//                "盐酸克伦特罗",
-//                "沙丁胺醇",
-//                "莱克多巴胺",
-//                "三聚氰胺",
-//                "氯霉素"
-//        };
-
-
         String[] projectNames1 = new String[]{
+                "盐酸克伦特罗",
+                "沙丁胺醇",
+                "莱克多巴胺",
+                "三聚氰胺",
+                "氯霉素"
         };
+
+
+//        String[] projectNames1 = new String[]{
+//        };
 
 
 

@@ -61,7 +61,8 @@ public class Global {
     public static String admin_name = "";
     public static String admin_pt = "";
     public static String URL_LOGIN = "api/system/auth/device-login";
-//    public static String URL_GetAreaList = "System/GetAreaList";
+    public static String URL_UPDATE = "api/system/app/version/check";
+    //    public static String URL_GetAreaList = "System/GetAreaList";
 //    public static String URL_GetSamplingInfo = "QR/GetSamplingInfo";
 //    public static String URL_GetCardQRInfo = "QR/GetQRInfo";
     public static String URL_SendResult = "api/device/sample/check/upload";

@@ -48,6 +48,7 @@ import com.open.soft.openappsoft.jinbiao.activity.CheckActivityByMen;
 import com.open.soft.openappsoft.jinbiao.activity.TSCheckActivity;
 import com.open.soft.openappsoft.jinbiao.location.LocationService;
 import com.open.soft.openappsoft.jinbiao.model.CompanyNameData;
+import com.open.soft.openappsoft.jinbiao.model.LineModel;
 import com.open.soft.openappsoft.jinbiao.model.PdfRootBean;
 import com.open.soft.openappsoft.jinbiao.model.SharedPreferencesUtil;
 import com.open.soft.openappsoft.multifuction.model.CheckOrg;
