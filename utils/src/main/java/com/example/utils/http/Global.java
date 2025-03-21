@@ -15,10 +15,10 @@ public class Global {
      * 秘钥
      */
     public static String SALT = "";
-    /**
-     * 设备码
-     */
-    public static String SN = "W123";
+//    /**
+//     * 设备码
+//     */
+//    public static String SN = "W123";
     /**
      * 仪器型号
      */

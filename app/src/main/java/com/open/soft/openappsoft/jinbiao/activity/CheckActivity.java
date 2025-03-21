@@ -1774,10 +1774,10 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         }
 
 
-        if (new Integer("0").equals(selectedProject.ScanEnd)
-                || new Integer("0").equals(selectedProject.ScanStart)
-                || new Integer("0").equals(selectedProject.CTWidth)
-                || new Integer("0").equals(selectedProject.CTDistance)) {
+        if (new String("0").equals(selectedProject.ScanEnd)
+                || new String("0").equals(selectedProject.ScanStart)
+                || new String("0").equals(selectedProject.CTWidth)
+                || new String("0").equals(selectedProject.CTDistance)) {
             APPUtils.showToast(CheckActivity.this, "该检测项目参数不完整或不正确，请转至项目管理并重新编辑");
             isTest = false;
             return;
@@ -1786,18 +1786,8 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             @Override
             public void run() {
                 isTest = false;
-//                        GT.Thread.runAndroid(CheckActivity.this, new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                if (tv_scanTime != null) {
-//                                    tv_scanTime.setText("扫描成功");
-//                                }
-//                            }
-//                        });
-
                 //清空测试数据显示
                 clearTestDataShow();
-
                         /*//发送检测命令
                         String message = getTestInstruction();
                         readTimeOutCount = 0;
@@ -2618,14 +2608,20 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             //测试 图像数据
 //            imageData =
             int len = Integer.valueOf(selectedProject.ScanEnd) - Integer.valueOf(selectedProject.ScanStart);
-            String temp = "OK,0.22";
+            String temp = "OK0.22,";
             String img = "";
+            int value;
             imageData = new byte[len * 2];
             for (int i = 0; i < len; i++) {
                 int ff = 500 + i;
 
                 imageData[2 * i] = (byte) ((ff & 0xff) << 8);
                 imageData[2 * i + 1] = (byte) ((ff & 0xff));
+
+
+                int int1 = (imageData[2 * i] & 0xff) << 8;
+                value = int1 + (imageData[2 * i + 1] & 0xff);
+                Timber.i("ff="+ff+" value="+value);
 //                if (i != 0) {
 //                    img += ",";
 //                }
@@ -2672,6 +2668,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 
     private byte[] RecImageData(int minDataLength) {
         byte[] response = new byte[4096];
+        Timber.d("response="+new String(response,Charset.forName("gbk")));
 //		int select = HardwareControler.select(ToolUtils.devfd, 2, 20);
 //		if(select == 0){
 //			return null;
@@ -2721,12 +2718,12 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         String[] strs = str.split(",");
         String linjie_str = etLjz.getText().toString();
         float linjie_num = Float.parseFloat(linjie_str);
-        String drValue = "";
-        if (strs.length > 1) {
-            drValue = strs[1];
-        } else {
-            drValue = strs[0];
-        }
+        String drValue = strs[0].replace("OK","");
+//        if (strs.length > 1) {
+//            drValue = strs[1];
+//        } else {
+//            drValue = strs[0];
+//        }
 //        final String drValue = new String(str, 0, index + 1, Charset.forName("gbk")).replace("OK", "").replace(",", "");
         String finalDrValue = drValue;
         GT.Thread.runAndroid(CheckActivity.this, new Runnable() {

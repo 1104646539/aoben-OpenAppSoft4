@@ -112,8 +112,8 @@ public class SettingActivity extends Activity implements View.OnClickListener {
             //赋值
             String name = new GT.GT_SharedPreferences(this, "companyName", true).query("name").toString();
             if (!"0".equals(name)) {
-                InterfaceURL.companyName = name;//赋值
-                et_name.setText(name);
+//                InterfaceURL.companyName = name;//赋值
+//                et_name.setText(name);
             }
 
             new AlertDialog.Builder(this).setTitle("请输入设备名(SN)")

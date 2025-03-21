@@ -50,7 +50,7 @@ public class App extends Application {
         //这个是打开日志
         BaseOkHttp.TIME_OUT_DURATION = 10;
         BaseOkHttp.DEBUGMODE = true;
-        Timber.plant(new CustomFormatTree(new File(getCacheDir().getAbsolutePath()+"/log.txt")));
+        Timber.plant(new CustomFormatTree(new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/log.txt")));
 
         defaultSP = SharedPreferencesUtil.getDefaultSharedPreferences(this);
         /***

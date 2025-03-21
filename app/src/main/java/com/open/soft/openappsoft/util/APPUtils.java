@@ -367,8 +367,8 @@ public class APPUtils {
                              * @param destFileName 下载文件名称，后面记得拼接后缀，否则手机没法识别文件类型
                              * @param listener     下载监听
                              */
-//                            String appSavePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "最新APP/";
-                            String appSavePath = context.getFilesDir().getAbsolutePath() + "/" + "APP/";
+                            String appSavePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "APP/";
+//                            String appSavePath = context.getFilesDir().getAbsolutePath() + "/" + "APP/";
                             String saveFileName = appUpdateBean.getApp() + "" + appUpdateBean.getVersion() + ".apk";
                             new DownloadUtil().download(appUpdateBean.getUrl(), appSavePath, saveFileName, new DownloadUtil.OnDownloadListener() {
                                 @Override

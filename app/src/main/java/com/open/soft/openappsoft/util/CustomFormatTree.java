@@ -32,8 +32,8 @@ public class CustomFormatTree extends Timber.Tree {
 //        }
         try {
             writer = new FileWriter(path);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            Log.i("CustomFormatTree", "CustomFormatTree" + path + " 无权限");
         }
     }
 

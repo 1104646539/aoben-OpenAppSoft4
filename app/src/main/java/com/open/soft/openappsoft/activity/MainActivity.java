@@ -134,13 +134,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         super.onStart();
 
         String name = LoginActivity.sp_ServiceUrl.query("name").toString();
-        if (!"0".equals(name)) {
-            InterfaceURL.companyName = name;//赋值
-        }
+//        if (!"0".equals(name)) {
+//            InterfaceURL.companyName = name;//赋值
+//        }
 
         TextView tv_homeLocation = findViewById(R.id.tv_homeLocation);
         String verName = GT.ApplicationUtils.getVerName(this);
-        tv_homeLocation.setText(InterfaceURL.companyName + " " + "v" + verName);
+        tv_homeLocation.setText("v" + verName);
 
         //动态标题
         TextView tv_title = findViewById(R.id.tv_title);

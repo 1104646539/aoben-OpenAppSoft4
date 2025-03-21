@@ -157,24 +157,24 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
         });*/
 
 
-        if (sp_ServiceUrl != null) {
-            Object name1 = sp_ServiceUrl.query("name");
-            String name = name1.toString();
-            if (!"0".equals(name)) {
-                InterfaceURL.companyName = name;//赋值
-                // 修改
-                if ("北京奥本生物技术有限公司".equals(name)) {
-                    Global.company_name = "Aoben";
-                } else {
-                    Global.company_name = "Xindaan";
-                }
-            }
-        }
+//        if (sp_ServiceUrl != null) {
+//            Object name1 = sp_ServiceUrl.query("name");
+//            String name = name1.toString();
+//            if (!"0".equals(name)) {
+//                InterfaceURL.companyName = name;//赋值
+//                // 修改
+//                if ("北京奥本生物技术有限公司".equals(name)) {
+//                    Global.company_name = "Aoben";
+//                } else {
+//                    Global.company_name = "Xindaan";
+//                }
+//            }
+//        }
 
 
         tv_homeLocation = findViewById(R.id.tv_homeLocation);
         String verName = GT.ApplicationUtils.getVerName(this);
-        tv_homeLocation.setText(InterfaceURL.companyName + " " + "v" + verName);
+        tv_homeLocation.setText("v" + verName);
 
 
         getEncryptionMethod();
@@ -561,7 +561,7 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
         editor.apply();                //提交修改，否则不生效
         progressDialog.show();
 
-        orderPresenter.login(new LoginBean(Global.SN, user, psw, "2", Global.KEY), this, this, pass, progressDialog);
+        orderPresenter.login(new LoginBean(InterfaceURL.companyName, user, psw, "2", Global.KEY), this, this, pass, progressDialog);
     }
 
     public static String getMD5Str(String str) {
