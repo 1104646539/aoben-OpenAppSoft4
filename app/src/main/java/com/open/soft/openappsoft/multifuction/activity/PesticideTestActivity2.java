@@ -164,7 +164,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
     private TestAdapter testAdapter;
     private List<CheckResult> resultList = new ArrayList<>();
     private long countDownDelay = 6500;//倒计时结束后延时处理
-    private List<Project> projects = new ArrayList<>();
+    private List<Project> projects;
     private Spinner spn_project;
     private Project mProject;
     private TextView tv_yzl;
@@ -437,7 +437,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
 
     private void initView() {
         projects = new Project().findAll();
-        Log.d(TAG, "projects=" + projects.size());
+        Timber.d(TAG, "projects=" + projects.size());
         tv_status = (TextView) findViewById(R.id.tv_status);
         tvCompareValue = (TextView) findViewById(R.id.tv_compare_value);
         btnPrint = (Button) findViewById(R.id.btn_print);
@@ -477,25 +477,25 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
         tv_card_number.setOnClickListener(this);
         ll_card_number.setOnClickListener(this);
         spn_project = (Spinner) findViewById(R.id.spn_project);
-        if (com.example.utils.http.Global.isAdimin) {
-            if (projects != null && !projects.isEmpty()) {
-                ArrayAdapter<Project> adapter = new ArrayAdapter<Project>(this, R.layout.item_select_project, R.id.tv_project_name, projects);
-                adapter.setDropDownViewResource(R.layout.item_select_project_drop);
-                spn_project.setAdapter(adapter);
-                spn_project.setSelection(projects.size() - 1);
-                mProject = projects.get(projects.size() - 1);
-                spn_project.setOnItemSelectedListener(this);
-            }
-            openLight(mProject.bochang);
-
-            // 波长
-
-            spn_project.setVisibility(View.VISIBLE);
-            tv_project.setVisibility(View.GONE);
-        } else {
-            spn_project.setVisibility(View.GONE);
-            tv_project.setVisibility(View.VISIBLE);
+//        if (com.example.utils.http.Global.isAdimin) {
+        if (projects != null && !projects.isEmpty()) {
+            ArrayAdapter<Project> adapter = new ArrayAdapter<Project>(this, R.layout.item_select_project, R.id.tv_project_name, projects);
+            adapter.setDropDownViewResource(R.layout.item_select_project_drop);
+            spn_project.setAdapter(adapter);
+            spn_project.setSelection(projects.size() - 1);
+            mProject = projects.get(projects.size() - 1);
+            spn_project.setOnItemSelectedListener(this);
         }
+        openLight(mProject.bochang);
+
+        // 波长
+
+        spn_project.setVisibility(View.VISIBLE);
+        tv_project.setVisibility(View.GONE);
+//        } else {
+//            spn_project.setVisibility(View.GONE);
+//            tv_project.setVisibility(View.VISIBLE);
+//        }
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         testAdapter = new TestAdapter(this);
         testAdapter.setOnAllSelectListener(new TestAdapter.OnAllSelectListener() {
@@ -662,10 +662,10 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
         statusDialog.show();
     }
 
-    private void upload(DetectionResultBean bean){
+    private void upload(DetectionResultBean bean) {
         List<DetectionResultBean> list = new ArrayList<>();
         list.add(bean);
-        UploadThread2 uploadThread2 = new UploadThread2(this,list , new UploadThread2.onUploadListener() {
+        UploadThread2 uploadThread2 = new UploadThread2(this, list, new UploadThread2.onUploadListener() {
             @Override
             public void onUploadSuccess(int position, String msg) {
                 Timber.i("onSuccess position=" + position);
@@ -686,6 +686,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
         });
         uploadThread2.start();
     }
+
     private void upload(boolean autoUpload) {
 //        ProgressDialog progressDialog = new ProgressDialog(this);
 //
@@ -1295,7 +1296,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
             hibernate.save(detectionResultBean);
             detectionResultBean.setID(hibernate.getStatus());
             upload(detectionResultBean);
-            Timber.i("插入 "+hibernate.isStatus());
+            Timber.i("插入 " + hibernate.isStatus());
         }
     }
 
@@ -1418,7 +1419,6 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
     }
 
     private DetectionResultBean detectionResultBean;
-
 
 
     private void uploadResult(int position) {

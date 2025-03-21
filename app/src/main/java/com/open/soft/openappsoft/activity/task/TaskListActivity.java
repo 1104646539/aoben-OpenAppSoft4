@@ -29,12 +29,14 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
     TaskListAdapter adapter;
 
     GT.Hibernate hibernate;
+    int source;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_list);
         hibernate = MainActivity.hibernate;
+        source = getIntent().getIntExtra(TestTaskActivity.Key_type, TestTaskActivity.source_pesticide);
         initView();
         findData();
     }
@@ -53,7 +55,7 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void findData() {
-        List<TaskModel> temp = hibernate.queryAll(TaskModel.class);
+        List<TaskModel> temp = hibernate.flashback("id").queryAll(TaskModel.class);
         taskList.clear();
         if (temp != null) {
             taskList.addAll(temp);
@@ -73,7 +75,9 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
     int request_add = 12000;
 
     private void addTask() {
-        startActivityForResult(new Intent(this, AddTaskActivity.class), request_add);
+        Intent intent = new Intent(this, AddTaskActivity.class);
+        intent.putExtra(TestTaskActivity.Key_type, source);
+        startActivityForResult(intent, request_add);
     }
 
     @Override

@@ -13,6 +13,7 @@ import com.open.soft.openappsoft.jinbiao.activity.CheckActivity;
 import com.open.soft.openappsoft.multifuction.activity.PesticideTestActivity2;
 
 public class TestTaskActivity extends AppCompatActivity implements View.OnClickListener {
+    public final static String Key_type = "source";
     public final static int source_pesticide = 0;
     public final static int source_jinbiao = 1;
     public final static int source_atp = 2;
@@ -34,7 +35,7 @@ public class TestTaskActivity extends AppCompatActivity implements View.OnClickL
         btn_task_settings.setOnClickListener(this);
         btn_task_start.setOnClickListener(this);
 
-        source = getIntent().getIntExtra("source", source_pesticide);
+        source = getIntent().getIntExtra(Key_type, source_pesticide);
         type = getIntent().getStringExtra("type");
     }
 
@@ -42,7 +43,9 @@ public class TestTaskActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_task_settings:
-                startActivity(new Intent(this, TaskListActivity.class));
+                Intent intent = new Intent(this, TaskListActivity.class);
+                intent.putExtra(Key_type,source);
+                startActivity(intent);
                 break;
             case R.id.btn_task_start:
                 if (source == source_pesticide) {

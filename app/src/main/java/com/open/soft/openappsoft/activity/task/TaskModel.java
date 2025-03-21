@@ -48,11 +48,15 @@ public class TaskModel {
      * 必填 检测单位
      */
     private String jcdw;
+    /**
+     *  ATP专用 检出限
+     */
+    private String jcx;
 
     public TaskModel() {
     }
 
-    public TaskModel(String taskID, String jcdw, String sampleTypeId, String sampleType, String sampleSubTypeId, String sampleSubType, String sampleName, String companyName, String companyCode, String samplingTime, String checkUser) {
+    public TaskModel(String taskID, String jcdw, String sampleTypeId, String sampleType, String sampleSubTypeId, String sampleSubType, String sampleName, String companyName, String companyCode, String samplingTime, String checkUser,String jcx) {
         this.taskID = taskID;
         this.jcdw = jcdw;
         this.sampleTypeId = sampleTypeId;
@@ -64,6 +68,15 @@ public class TaskModel {
         this.companyCode = companyCode;
         this.samplingTime = samplingTime;
         this.checkUser = checkUser;
+        this.jcx = jcx;
+    }
+
+    public String getJcx() {
+        return jcx;
+    }
+
+    public void setJcx(String jcx) {
+        this.jcx = jcx;
     }
 
     public String getJcdw() {

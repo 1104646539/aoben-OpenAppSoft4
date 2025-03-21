@@ -2668,7 +2668,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 
     private byte[] RecImageData(int minDataLength) {
         byte[] response = new byte[4096];
-        Timber.d("response="+new String(response,Charset.forName("gbk")));
+        Timber.d("RecImageData=");
 //		int select = HardwareControler.select(ToolUtils.devfd, 2, 20);
 //		if(select == 0){
 //			return null;
@@ -2693,8 +2693,10 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             SystemClock.sleep(500);
         }
         if (errorCount >= 100) {
+            Timber.d("RecImageData=errorCount >= 100");
             return null;
         }
+        Timber.d("response="+new String(response,Charset.forName("gbk")));
         int index = -1;
         for (int i = 0; i < currentDataLength; i++) {
             if (response[i] == ',') {
@@ -2703,17 +2705,22 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             }
         }
         if (index == -1) {   //如果不包含逗号，则说明没有dr值，数据不完整
+            Timber.d("RecImageData=errorCount index == -1");
             return null;
         }
+        Timber.d("response2="+new String(response,Charset.forName("gbk")));
+        Timber.d("currentDataLength="+currentDataLength);
+
         byte[] data = new byte[currentDataLength - index - 1];
         System.arraycopy(response, index + 1, data, 0, data.length);
+        Timber.d("data="+data);
 
-        showResult(new String(data));
+        showResult(new String(response));
         return data;
     }
 
     private void showResult(String str) {
-        Timber.i("showResult str=" + str);
+        Timber.d("showResult str=" + str);
 //        str = str.replace("OK", "");
         String[] strs = str.split(",");
         String linjie_str = etLjz.getText().toString();
@@ -2844,7 +2851,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally {
-//                        ToolUtils.hiddenHUD();
+                        ToolUtils.hiddenHUD();
                         isTest = false;
                     }
                     break;

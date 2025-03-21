@@ -45,17 +45,48 @@
                     android:layout_marginBottom="5dp"
                     android:orientation="horizontal">
 
-                    <TextView
-                        style="@style/text_label"
-                        android:layout_width="150dp"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="任务编号" />
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/et_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textSize="26sp" />
+                        <TextView
+                            style="@style/text_label"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:text="任务编号" />
+
+                        <EditText
+                            android:id="@+id/et_id"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:textSize="26sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_jcx"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/text_label"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:text="检出限" />
+
+                        <EditText
+                            android:id="@+id/et_jcx"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:textSize="26sp" />
+
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout

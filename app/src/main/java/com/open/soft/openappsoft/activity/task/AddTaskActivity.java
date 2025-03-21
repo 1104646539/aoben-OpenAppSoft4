@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -41,7 +42,6 @@ import java.util.List;
 import java.util.Random;
 
 public class AddTaskActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
-
     Spinner spn_sample_type_main, spn_sample_type_child, spn_bjcdw_name, spn_jcdw_name;
     TextView tv_sampling_date;
     TextView tv_commit, tv_cancel;
@@ -65,8 +65,11 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
     Dialog dialog_sample_name;
     List<SampleName> sample_names;
     FiltrateAdapter filtrateAdapter;
-    EditText et_content;
+    EditText et_content, et_jcx;
     ListView lv;
+
+    LinearLayout ll_jcx;
+    int source;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,7 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
         GT.WindowUtils.hideActionBar(this);
         setContentView(R.layout.activity_add_task);
         hibernate = MainActivity.hibernate;
+        source = getIntent().getIntExtra(TestTaskActivity.Key_type, TestTaskActivity.source_pesticide);
         initData();
         initView();
 
@@ -107,6 +111,8 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
 
     private void initView() {
         spn_sample_type_main = findViewById(R.id.spn_sample_type_main);
+        et_jcx = findViewById(R.id.et_jcx);
+        ll_jcx = findViewById(R.id.ll_jcx);
         spn_sample_type_child = findViewById(R.id.spn_sample_type_child);
         spn_bjcdw_name = findViewById(R.id.spn_bjcdw_name);
         spn_jcdw_name = findViewById(R.id.spn_jcdw_name);
@@ -163,6 +169,8 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
         tv_sampling_date.setOnClickListener(this);
 
         et_id.setText(getRandomTaskId());
+        tv_sampling_date.setText(ToolUtil.date2String(new Date(), ToolUtil.DateTime1));
+
 
         spn_sample_type_main.setVisibility(sample_type_mains.isEmpty() ? View.GONE : View.VISIBLE);
         tv_sample_type_main.setVisibility(!sample_type_mains.isEmpty() ? View.GONE : View.VISIBLE);
@@ -175,6 +183,14 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
         spn_jcdw_name.setVisibility(jcdws.isEmpty() ? View.GONE : View.VISIBLE);
         tv_jcdw_name.setVisibility(!jcdws.isEmpty() ? View.GONE : View.VISIBLE);
 
+        if (!isAtp()) {
+            ll_jcx.setVisibility(View.GONE);
+            et_jcx.setText("100");
+        }
+    }
+
+    private boolean isAtp() {
+        return source == TestTaskActivity.source_atp;
     }
 
     private String getRandomTaskId() {
@@ -279,8 +295,9 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
         if (!verify()) return;
         String samplingDate = tv_sampling_date.getText().toString();
         String sampleName = tv_sample_name.getText().toString();
+        String jcx = et_jcx.getText().toString();
         TaskModel taskModel = new TaskModel(et_id.getText().toString(), jcdw.name, sample_type_main.code, sample_type_main.name,
-                sample_type_child.code, sample_type_child.name, sampleName, bjcdw.name, bjcdw.code, samplingDate, Global.NAME);
+                sample_type_child.code, sample_type_child.name, sampleName, bjcdw.name, bjcdw.code, samplingDate, Global.NAME, jcx);
         hibernate.save(taskModel);
         if (hibernate.isStatus()) {
             APPUtils.showToast(this, "插入成功");
@@ -312,6 +329,11 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
             return false;
         } else if (APPUtils.isNull(tv_sampling_date.getText().toString())) {
             APPUtils.showToast(this, "请选择抽样时间");
+            return false;
+        }
+
+        if (isAtp() && APPUtils.isNull(et_jcx.getText().toString())) {
+            APPUtils.showToast(this, "请输入检出限");
             return false;
         }
 
