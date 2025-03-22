@@ -214,7 +214,7 @@ public class SettingActivity extends Activity implements View.OnClickListener {
                     return;
                 }
 
-                Global.BASE_URL = InterfaceURL.BASE_URL = url;
+                Global.BASE_URL  = url;
                 Global.URL_LOGIN = et_1;
 //                Global.URL_GetAreaList = et_2;
 //                Global.URL_GetCardQRInfo = et_3;

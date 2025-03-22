@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -27,8 +26,7 @@
         android:layout_height="wrap_content"
         android:background="#F6F4F4"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/tv_querySum"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/tv_querySum">
 
         <LinearLayout
             android:id="@+id/ll_queryCondition"
@@ -256,15 +254,13 @@
     </HorizontalScrollView>
 
 
-
     <!-- 查询的数据展示 -->
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="none"
         app:layout_constraintBottom_toTopOf="@id/ll_button"
-        app:layout_constraintTop_toBottomOf="@+id/hsv"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/hsv">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -284,8 +280,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    >
+                    android:layout_weight="0.5">
 
                     <TextView
                         android:id="@+id/tv_select_all"
@@ -293,15 +288,14 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
                         android:text="全选" />
-                    <CheckBox
 
+                    <CheckBox
                         android:id="@+id/cb_activity_sql"
                         android:layout_width="0dp"
-                        android:layout_marginTop="1dp"
                         android:layout_height="match_parent"
-                        android:background="#F6F4F4"
+                        android:layout_marginTop="1dp"
                         android:layout_weight="0.4"
-                        />
+                        android:background="#F6F4F4" />
 
                 </LinearLayout>
 
@@ -316,31 +310,46 @@
                     style="@style/tvItemTitle"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="检测流水号" />
+                    android:text="检测流水号"
+                    android:visibility="gone" />
 
                 <TextView
                     style="@style/tvItemTitle"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
-                    android:text="样品编号" />
+                    android:text="样品编号"
+                    android:visibility="gone" />
 
-                <TextView
-                    style="@style/tvItemTitle"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:text="检测时间" />
 
-                <TextView
-                    style="@style/tvItemTitle"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="通道" />
 
                 <TextView
                     style="@style/tvItemTitle"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="样品名称" />
+
+                <TextView
+                    style="@style/tvItemTitle"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="检测结果" />
+
+                <TextView
+                    style="@style/tvItemTitle"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="检测项目" />
+                <TextView
+                    style="@style/tvItemTitle"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.3"
+                    android:text="检测时间" />
+                <TextView
+                    style="@style/tvItemTitle"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="通道" />
+
 
                 <TextView
                     style="@style/tvItemTitle"
@@ -378,17 +387,6 @@
                     android:layout_weight="1"
                     android:text="吸光度" />
 
-                <TextView
-                    style="@style/tvItemTitle"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="检测项目" />
-
-                <TextView
-                    style="@style/tvItemTitle"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="检测结果" />
 
                 <TextView
                     style="@style/tvItemTitle"
@@ -412,24 +410,28 @@
                     style="@style/tvItemTitle"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="重量" />
+                    android:text="重量"
+                    android:visibility="gone" />
 
                 <TextView
                     style="@style/tvItemTitle"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="商品来源" />
+                    android:text="商品来源"
+                    android:visibility="gone" />
 
                 <TextView
                     style="@style/tvItemTitle"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="上传状态" />
+
                 <TextView
                     style="@style/tvItemTitle"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="组织机构" />
+                    android:text="组织机构"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -453,116 +455,107 @@
         android:id="@+id/ll_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="#F6F4F4"
-        app:layout_constraintBottom_toBottomOf="parent"
-        >
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <Button
             android:id="@+id/btn_clear"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="清空"
-            android:background="@drawable/btn_filleted_corner"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:padding="5dp"
             android:layout_margin="10dp"
-            />
+            android:layout_weight="1"
+            android:background="@drawable/btn_filleted_corner"
+            android:padding="5dp"
+            android:text="清空"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/btn_delete"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="删除"
-            android:background="@drawable/btn_filleted_corner"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:padding="5dp"
             android:layout_margin="10dp"
-            />
+            android:layout_weight="1"
+            android:background="@drawable/btn_filleted_corner"
+            android:padding="5dp"
+            android:text="删除"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/btn_print"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="打印"
-            android:background="@drawable/btn_filleted_corner"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:padding="5dp"
             android:layout_margin="10dp"
-            />
+            android:layout_weight="1"
+            android:background="@drawable/btn_filleted_corner"
+            android:padding="5dp"
+            android:text="打印"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/btn_uploading"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="上传"
-            android:background="@drawable/btn_filleted_corner"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:padding="5dp"
             android:layout_margin="10dp"
-            />
+            android:layout_weight="1"
+            android:background="@drawable/btn_filleted_corner"
+            android:padding="5dp"
+            android:text="上传"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/btn_export"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="导出"
-            android:background="@drawable/btn_filleted_corner"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:padding="5dp"
             android:layout_margin="10dp"
-            />
+            android:layout_weight="1"
+            android:background="@drawable/btn_filleted_corner"
+            android:padding="5dp"
+            android:text="导出"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/btn_return"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="返回"
-            android:background="@drawable/btn_filleted_corner"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:padding="5dp"
             android:layout_margin="10dp"
-            />
+            android:layout_weight="1"
+            android:background="@drawable/btn_filleted_corner"
+            android:padding="5dp"
+            android:text="返回"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/btn_fggb"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="分光"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
             android:background="@drawable/btn_filleted_corner"
+            android:padding="5dp"
+            android:text="分光"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
-            android:padding="5dp"
-            android:layout_margin="10dp"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btn_jtj"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="胶体金"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
             android:background="@drawable/btn_filleted_corner"
+            android:padding="5dp"
+            android:text="胶体金"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
-            android:padding="5dp"
-            android:layout_margin="10dp"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
 
     </LinearLayout>
 

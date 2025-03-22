@@ -734,11 +734,17 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 
                 // 朝内打印
 //                            printData = GetPrintInfo4(detectionResultBean, this);
+            }else if ("ATP".equals(detectionResultBean.getSQLType())) {
+                // 朝外打印
+                printData = GetPrintInfo5(detectionResultBean, this);
+
+                // 朝内打印
+//                            printData = GetPrintInfo4(detectionResultBean, this);
             }
 
-            APPUtils.showToast(this, printData);
+//            APPUtils.showToast(this, printData);
             byte[] data = printData.getBytes(Charset.forName("gb2312"));
-
+            Timber.d("data="+new String(data,Charset.forName("gb2312")));
 
             if (!SerialUtils.COM4_SendData(data)) {
                 APPUtils.showToast(this, "打印数据发送失败");
@@ -746,52 +752,6 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
                 APPUtils.showToast(this, "打印数据发送成功");
             }
         }
-        //getChildCount()返回数量
-        /*for (int i = 0; i < sql_rv.getChildCount(); i++) {
-            ViewGroup viewGroup = (ViewGroup) sql_rv.getChildAt(i);
-            while (true) {
-                View childAt = viewGroup.getChildAt(0);
-                if (childAt instanceof CheckBox) {
-                    CheckBox checkBox = (CheckBox) childAt;
-                    if (checkBox.isChecked()) {
-                        have_chenked = true;
-                        DetectionResultBean detectionResultBean = sqlAdapter.getList().get(i);
-                        logs("打印detectionResultBean:" + detectionResultBean);
-
-                        if ("胶体金".equals(detectionResultBean.getSQLType())) {
-                            // 朝外打印
-                            printData = GetPrintInfo1(detectionResultBean, this);
-
-                            // 朝内打印
-//                            printData = GetPrintInfo3(detectionResultBean, this);
-                        } else if ("分光光度".equals(detectionResultBean.getSQLType())) {
-                            // 朝外打印
-                            printData = GetPrintInfo2(detectionResultBean, this);
-
-                            // 朝内打印
-//                            printData = GetPrintInfo4(detectionResultBean, this);
-                        }
-
-                        APPUtils.showToast(this, printData);
-                        byte[] data = printData.getBytes(Charset.forName("gb2312"));
-
-
-                        if (!SerialUtils.COM4_SendData(data)) {
-                            APPUtils.showToast(this, "打印数据发送失败");
-                        } else {
-                            APPUtils.showToast(this, "打印数据发送成功");
-                        }
-                    }
-                    break;
-                }
-
-                viewGroup = (ViewGroup) childAt;
-            }
-        }
-
-        if (!have_chenked) {
-            APPUtils.showToast(this, "请先选择要打印的数据");
-        }*/
 
     }
 
@@ -1664,27 +1624,29 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
         sb.append("检 测 限：");
         sb.append(detectionResultBean.getLimitStandard() + "\n");
 
-        sb.append("样品编号：");
-        sb.append(detectionResultBean.getNumberSamples() + "\n");
+//        sb.append("样品编号：");
+//        sb.append(detectionResultBean.getNumberSamples() + "\n");
+        sb.append("被检单位：");
+        sb.append(detectionResultBean.getUnitsUnderInspection() + "\n");
 
 
         List list1 = getStrList1(detectionResultBean.getCommodityPlaceOrigin());
         Log.d("list1", list1.toString());
         Log.d("list1.size() ", "" + list1.size() + "");
 
-        if (0 < detectionResultBean.getCommodityPlaceOrigin().length() && detectionResultBean.getCommodityPlaceOrigin().length() <= 11) {
-            sb.append("样品来源：");
-            sb.append(list1.get(0) + "\n");
-        } else if (11 < detectionResultBean.getCommodityPlaceOrigin().length() && detectionResultBean.getCommodityPlaceOrigin().length() <= 27) {
-            sb.append(list1.get(1) + "\n");
-            sb.append("样品来源：");
-            sb.append(list1.get(0) + "\n");
-        } else if (27 < detectionResultBean.getCommodityPlaceOrigin().length() && detectionResultBean.getCommodityPlaceOrigin().length() <= 43) {
-            sb.append(list1.get(0) + "\n");
-            sb.append("样品来源：");
-            sb.append(list1.get(1) + "\n");
-            sb.append(list1.get(2) + "\n");
-        }
+//        if (0 < detectionResultBean.getCommodityPlaceOrigin().length() && detectionResultBean.getCommodityPlaceOrigin().length() <= 11) {
+//            sb.append("样品来源：");
+//            sb.append(list1.get(0) + "\n");
+//        } else if (11 < detectionResultBean.getCommodityPlaceOrigin().length() && detectionResultBean.getCommodityPlaceOrigin().length() <= 27) {
+//            sb.append(list1.get(1) + "\n");
+//            sb.append("样品来源：");
+//            sb.append(list1.get(0) + "\n");
+//        } else if (27 < detectionResultBean.getCommodityPlaceOrigin().length() && detectionResultBean.getCommodityPlaceOrigin().length() <= 43) {
+//            sb.append(list1.get(0) + "\n");
+//            sb.append("样品来源：");
+//            sb.append(list1.get(1) + "\n");
+//            sb.append(list1.get(2) + "\n");
+//        }
 
         sb.append("检测项目：");
         sb.append(detectionResultBean.getTestItem() + "\n");
@@ -1799,42 +1761,6 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
         if (title.isEmpty() || title.equals("0")) {
             title = InterfaceURL.oneModule;
         }
-        /*sb.append("检测单位：");
-        sb.append(detectionResultBean.getDetectionResult() + "\n");
-
-        sb.append("检测人员：");
-        sb.append(detectionResultBean.getDetectionResult() + "\n");
-
-        sb.append("样本类型：");
-        sb.append(detectionResultBean.getDetectionResult() + "\n");
-
-        sb.append("样品名称：");
-        sb.append(detectionResultBean.getSampleName() + "\n");
-
-        sb.append("检测项目：");
-        sb.append(detectionResultBean.getTestItem() + "\n");
-
-        sb.append("样本来源：");
-        sb.append(detectionResultBean.getTestItem() + "\n");
-
-        sb.append("样品编号：");
-        sb.append(detectionResultBean.getTestItem() + "\n");
-
-        sb.append("限量标准：");
-        sb.append(detectionResultBean.getTestItem() + "\n");
-
-        sb.append("检测值：");
-        sb.append(detectionResultBean.getDetectionValue() + "\n");
-
-        sb.append("判定结果：  ");
-        sb.append(detectionResultBean.getDetectionResult() + "\n");
-
-        sb.append("检测时间：");
-        sb.append(ToolUtils.dateToString(ToolUtils.longToDate(
-                detectionResultBean.getDetectionTime(), "yyyy-MM-dd HH:mm:ss"),
-                "yyyy-MM-dd HH:mm:ss") + "\n");
-
-        sb.append("\n\n\n\n\n");*/
         sb.append("\n\n");
         sb.append("检测时间：");
         sb.append(ToolUtils.dateToString(ToolUtils.longToDate(
@@ -1850,27 +1776,109 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
         sb.append("检 测 限：");
         sb.append(detectionResultBean.getLimitStandard() + "\n");
 
-        sb.append("样品编号：");
-        sb.append(detectionResultBean.getNumberSamples() + "\n");
+//        sb.append("样品编号：");
+//        sb.append(detectionResultBean.getNumberSamples() + "\n");
+        sb.append("被检单位：");
+        sb.append(detectionResultBean.getUnitsUnderInspection() + "\n");
 
 
         List list1 = getStrList1(detectionResultBean.getCommodityPlaceOrigin());
         Log.d("list1", list1.toString());
         Log.d("list1.size() ", "" + list1.size() + "");
 
-        if (0 < detectionResultBean.getCommodityPlaceOrigin().length() && detectionResultBean.getCommodityPlaceOrigin().length() <= 11) {
-            sb.append("样品来源：");
-            sb.append(list1.get(0) + "\n");
-        } else if (11 < detectionResultBean.getCommodityPlaceOrigin().length() && detectionResultBean.getCommodityPlaceOrigin().length() <= 27) {
-            sb.append(list1.get(1) + "\n");
-            sb.append("样品来源：");
-            sb.append(list1.get(0) + "\n");
-        } else if (27 < detectionResultBean.getCommodityPlaceOrigin().length() && detectionResultBean.getCommodityPlaceOrigin().length() <= 43) {
-            sb.append(list1.get(0) + "\n");
-            sb.append("样品来源：");
-            sb.append(list1.get(1) + "\n");
-            sb.append(list1.get(2) + "\n");
+//        if (0 < detectionResultBean.getCommodityPlaceOrigin().length() && detectionResultBean.getCommodityPlaceOrigin().length() <= 11) {
+//            sb.append("样品来源：");
+//            sb.append(list1.get(0) + "\n");
+//        } else if (11 < detectionResultBean.getCommodityPlaceOrigin().length() && detectionResultBean.getCommodityPlaceOrigin().length() <= 27) {
+//            sb.append(list1.get(1) + "\n");
+//            sb.append("样品来源：");
+//            sb.append(list1.get(0) + "\n");
+//        } else if (27 < detectionResultBean.getCommodityPlaceOrigin().length() && detectionResultBean.getCommodityPlaceOrigin().length() <= 43) {
+//            sb.append(list1.get(0) + "\n");
+//            sb.append("样品来源：");
+//            sb.append(list1.get(1) + "\n");
+//            sb.append(list1.get(2) + "\n");
+//        }
+
+        sb.append("检测项目：");
+        sb.append(detectionResultBean.getTestItem() + "\n");
+
+        sb.append("样品名称：");
+        sb.append(detectionResultBean.getSampleName() + "\n");
+
+        sb.append("样品类型：");
+        sb.append(detectionResultBean.getSpecimenType() + "\n");
+
+//        sb.append("检 验 员：");
+//        sb.append(detectionResultBean.getInspector() + "\n");
+        if (detectionResultBean.getInspector().length() > 11) {
+            sb.append(detectionResultBean.getInspector().substring(11) + "\n");
+            sb.append("检 验 员：");
+            sb.append(detectionResultBean.getInspector().substring(0, 11) + "\n");
+        } else {
+            sb.append("检 验 员：");
+            sb.append(detectionResultBean.getInspector() + "\n");
         }
+
+        if (detectionResultBean.getDetectionCompany().length() > 11) {
+            sb.append(detectionResultBean.getDetectionCompany().substring(11) + "\n");
+            sb.append("检测单位：");
+            sb.append(detectionResultBean.getDetectionCompany().substring(0, 11) + "\n");
+        } else {
+            sb.append("检测单位：");
+            sb.append(detectionResultBean.getDetectionCompany() + "\n");
+        }
+
+        sb.append("通 道 号：");
+        sb.append(detectionResultBean.getAisle() + "\n");
+        sb.append("\n" + title + "\n\n\n\n");
+        sb.append("\n\n");
+
+        return sb.toString();
+    }
+    // ATP数据打印[朝外打印]
+    public static String GetPrintInfo5(DetectionResultBean detectionResultBean, Context context) {
+        StringBuffer sb = new StringBuffer("\n\n");
+
+        String title = LoginActivity.sp_ServiceUrl.query("TitleSet").toString();
+        if (title.isEmpty() || title.equals("0")) {
+            title = InterfaceURL.oneModule;
+        }
+        sb.append("\n\n");
+        sb.append("检测时间：");
+        sb.append(ToolUtils.dateToString(ToolUtils.longToDate(
+                        detectionResultBean.getDetectionTime(), "yyyy-MM-dd HH:mm:ss"),
+                "yyyy-MM-dd HH:mm:ss") + "\n");
+
+        sb.append("检测结果：");
+        sb.append(detectionResultBean.getDetectionResult() + "\n");
+
+        sb.append("检 测 限：");
+        sb.append(detectionResultBean.getLimitStandard() + "\n");
+
+//        sb.append("样品编号：");
+//        sb.append(detectionResultBean.getNumberSamples() + "\n");
+        sb.append("被检单位：");
+        sb.append(detectionResultBean.getUnitsUnderInspection() + "\n");
+
+
+        List list1 = getStrList1(detectionResultBean.getCommodityPlaceOrigin());
+        Log.d("list1", list1.toString());
+        Log.d("list1.size() ", "" + list1.size() + "");
+
+//        if (0 < detectionResultBean.getCommodityPlaceOrigin().length() && detectionResultBean.getCommodityPlaceOrigin().length() <= 11) {
+//            sb.append("样品来源：");
+//            sb.append(list1.get(0) + "\n");
+//        } else if (11 < detectionResultBean.getCommodityPlaceOrigin().length() && detectionResultBean.getCommodityPlaceOrigin().length() <= 27) {
+//            sb.append(list1.get(1) + "\n");
+//            sb.append("样品来源：");
+//            sb.append(list1.get(0) + "\n");
+//        } else if (27 < detectionResultBean.getCommodityPlaceOrigin().length() && detectionResultBean.getCommodityPlaceOrigin().length() <= 43) {
+//            sb.append(list1.get(0) + "\n");
+//            sb.append("样品来源：");
+//            sb.append(list1.get(1) + "\n");
+//            sb.append(list1.get(2) + "\n");
+//        }
 
         sb.append("检测项目：");
         sb.append(detectionResultBean.getTestItem() + "\n");

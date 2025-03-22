@@ -404,7 +404,7 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
             resultModel.check_result = result;
             resultModel.time = time;
             resultModel.concentrateUnit = "";
-            resultModel.sample_unit = "";
+            resultModel.sample_unit = taskModel.getCompanyName();
             resultModel.shiji = tv_check_b.getText().toString();
             resultModel.companyCode = et_companyCode.getText().toString();
 //            resultModel.sample_id = et_Sample_Num.getText().toString();
@@ -618,9 +618,10 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date curDate = new Date(System.currentTimeMillis());//获取当前时间
         String printData = null;
-        printData = ToolUtils.GetPrintInfo2(resultModel, this, source);
-        APPUtils.showToast(this, printData);
+        printData = ToolUtils.GetPrintInfo3(resultModel);
+//        APPUtils.showToast(this, printData);
         byte[] data = printData.getBytes(Charset.forName("gb2312"));
+        Timber.i("data="+new String(data,Charset.forName("gbk")));
         if (!SerialUtils.COM4_SendData(data)) {
             APPUtils.showToast(this, "打印数据发送失败");
         }

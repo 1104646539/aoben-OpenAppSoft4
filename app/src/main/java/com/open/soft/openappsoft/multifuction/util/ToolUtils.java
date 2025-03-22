@@ -295,7 +295,7 @@ public class ToolUtils {
 
                 //if (isPrint_checkedOrganization) {
                 sb.append("检测单位:");
-                sb.append(com.example.utils.http.Global.Dept + "\n");
+                sb.append(result.checkedOrganization + "\n");
                 //}
 
                 sb.append("通道号:");

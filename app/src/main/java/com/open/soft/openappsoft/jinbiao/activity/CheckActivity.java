@@ -107,6 +107,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
+import java.sql.Time;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -1855,8 +1856,9 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         Date curDate = new Date(System.currentTimeMillis());//获取当前时间
         String printData = null;
         printData = ToolUtils.GetPrintInfo2(resultModel, this, source);
-        APPUtils.showToast(this, printData);
+//        APPUtils.showToast(this, printData);
         byte[] data = printData.getBytes(Charset.forName("gb2312"));
+        Timber.i("data="+new String(data,Charset.forName("gbk")));
         if (!SerialUtils.COM4_SendData(data)) {
             APPUtils.showToast(this, "打印数据发送失败");
         }

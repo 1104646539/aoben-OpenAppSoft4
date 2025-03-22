@@ -87,6 +87,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -771,7 +772,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
             APPUtils.showToast(act, "请先选择数据");
         } else {
             byte[] data = ToolUtils.assemblePrintCheck(printList, this);
-            Log.d(TAG, "data:" + new String(data));
+            Log.d(TAG, "data:" + new String(data, Charset.forName("gbk")));
             if (SerialUtils.COM4_SendData(data)) {
                 APPUtils.showToast(act, "打印数据发送成功");
             } else {

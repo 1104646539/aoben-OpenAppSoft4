@@ -1318,7 +1318,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             prints_check.add(new Print("吸光度", true, true, true));
             prints_check.add(new Print("判定结果", true, true, true));
             prints_check.add(new Print("通道号", true, true, true));
-            prints_check.add(new Print("样品编号", true, false, false));
+//            prints_check.add(new Print("样品编号", true, false, false));
             prints_check.add(new Print("被检测单位", true, false, false));
             prints_check.add(new Print("重量", true, false, false));
             prints_check.add(new Print("商品来源", true, false, false));
@@ -1335,7 +1335,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             prints_data_manager.add(new Print("被检测单位", true, false, false));
             prints_data_manager.add(new Print("检测单位", true, true, false));
             prints_data_manager.add(new Print("检测人员", true, true, false));
-            prints_data_manager.add(new Print("商品来源", true, false, false));
+//            prints_data_manager.add(new Print("商品来源", true, false, false));
             prints_data_manager.add(new Print("样品编号", true, false, false));
             prints_data_manager.add(new Print("重量", true, false, false));
             prints_data_manager.add(new Print("限量标准", true, true, false));

@@ -66,11 +66,11 @@ public class EditURLDialog extends Dialog {
     public void showDilaog(final OnUrlSave onUrlSave) {
 
         String url_api = LoginActivity.sp_ServiceUrl.query("url_api").toString();//修改默认是服务器
-        if (!"0".equals(url_api)) {
-            et_url.setText(url_api);//如果不为null那就显示保存的
-        } else {
-            et_url.setText(InterfaceURL.BASE_URL);//否则使用默认的网址
-        }
+//        if (!"0".equals(url_api)) {
+//            et_url.setText(url_api);//如果不为null那就显示保存的
+//        } else {
+            et_url.setText(Global.BASE_URL);//否则使用默认的网址
+//        }
         et_input1.setText(Global.URL_LOGIN);
 //        et_input2.setText(Global.URL_GetAreaList);
 //        et_input3.setText(Global.URL_GetCardQRInfo);

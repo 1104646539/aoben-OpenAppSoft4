@@ -105,7 +105,7 @@
                 <ImageView
                     android:layout_width="@dimen/wh_size"
                     android:layout_height="@dimen/wh_size"
-                    android:src="@drawable/img_jt" />
+                    android:src="@drawable/yuan_ygb" />
 
                 <TextView
                     android:id="@+id/tv_apt_Name"
