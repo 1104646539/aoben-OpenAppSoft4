@@ -209,6 +209,10 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
                     arrayString = new String[]{"全部", "阳性", "阴性", "无效"};
                     stringArrayAdapter = new ArrayAdapter<>(SQL_Activity.this, R.layout.sp_style, R.id.tv_sp_size, arrayString);
                     sp_detectionResult.setAdapter(stringArrayAdapter);
+                } else if ("ATP".equals(moduleName)) {
+                    arrayString = new String[]{"全部", "合格", "不合格", "无效"};
+                    stringArrayAdapter = new ArrayAdapter<>(SQL_Activity.this, R.layout.sp_style, R.id.tv_sp_size, arrayString);
+                    sp_detectionResult.setAdapter(stringArrayAdapter);
                 } else if ("全部".equals(moduleName)) {
                     arrayString = new String[]{"全部", "合格", "不合格", "阳性", "阴性", "无效"};
                     stringArrayAdapter = new ArrayAdapter<>(SQL_Activity.this, R.layout.sp_style, R.id.tv_sp_size, arrayString);
@@ -245,13 +249,13 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
     //更新数据库数据
     private void updateSQLData() {
         progressDialog.show();
-        if ("多参数食品安全检测仪".equals(InterfaceURL.oneModule)) {
+//        if ("多参数食品安全检测仪".equals(InterfaceURL.oneModule)) {
             detectionResultBeans = hibernate.flashback("ID").queryAll(DetectionResultBean.class);//loadData 加载数据 全部
-        } else if ("农药残留单项精准分析仪".equals(InterfaceURL.oneModule)) {
-            detectionResultBeans = hibernate.flashback("ID").where("SQLType = ?", "胶体金").queryAll(DetectionResultBean.class);//loadData 加载数据 单金标或分光光度
-        } else if ("农药残留检测仪".equals(InterfaceURL.oneModule)) {
-            detectionResultBeans = hibernate.flashback("ID").where("SQLType = ?", "分光光度").queryAll(DetectionResultBean.class);//loadData 加载数据 单金标或分光光度
-        }
+//        } else if ("农药残留单项精准分析仪".equals(InterfaceURL.oneModule)) {
+//            detectionResultBeans = hibernate.flashback("ID").where("SQLType = ?", "胶体金").queryAll(DetectionResultBean.class);//loadData 加载数据 单金标或分光光度
+//        } else if ("农药残留检测仪".equals(InterfaceURL.oneModule)) {
+//            detectionResultBeans = hibernate.flashback("ID").where("SQLType = ?", "分光光度").queryAll(DetectionResultBean.class);//loadData 加载数据 单金标或分光光度
+//        }
         sqlAdapter.setList(detectionResultBeans);//设置数据
         progressDialog.dismiss();
     }
@@ -277,7 +281,7 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 
 
         //模块名称
-        arrayString = new String[]{"全部", "分光光度", "胶体金"};
+        arrayString = new String[]{"全部", "分光光度", "胶体金","ATP"};
         stringArrayAdapter = new ArrayAdapter<>(SQL_Activity.this, R.layout.sp_style, R.id.tv_sp_size, arrayString);
         sp_moduleName.setAdapter(stringArrayAdapter);
 

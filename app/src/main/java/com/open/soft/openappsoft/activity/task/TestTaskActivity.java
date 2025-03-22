@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.gsls.gt.GT;
 import com.open.soft.openappsoft.R;
+import com.open.soft.openappsoft.atp.AtpCheckActivity;
 import com.open.soft.openappsoft.jinbiao.activity.CheckActivity;
 import com.open.soft.openappsoft.multifuction.activity.PesticideTestActivity2;
 
@@ -54,6 +55,10 @@ public class TestTaskActivity extends AppCompatActivity implements View.OnClickL
                     Intent intent1 = new Intent(this, CheckActivity.class);
                     intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                     intent1.putExtra("source", type);// 定量
+                    startActivity(intent1);
+                }else if (source == source_atp) {
+                    Intent intent1 = new Intent(this, AtpCheckActivity.class);
+                    intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                     startActivity(intent1);
                 }
                 break;

@@ -50,7 +50,7 @@ public class Global {
 
     public static final byte[] LightSame = "LightSame".getBytes();
 
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
 
     public static final String DATA_BASE_NAME = "data.db";
     /**

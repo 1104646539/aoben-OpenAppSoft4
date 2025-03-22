@@ -99,4 +99,21 @@ public class SerialUtils {
         }
         return false;
     }
+
+    /**
+     * 读取COM3接收到的数据
+     * @return
+     */
+    public static synchronized byte[] COM3_RevData(){
+
+        byte[] rec = new byte[1024];
+        int len = HardwareControler.read(Global.DEV_COM3, rec, rec.length);
+
+        if(len == 0){
+            return null;
+        }
+        byte[] data = new byte[len];
+        System.arraycopy(rec, 0, data, 0, len);
+        return data;
+    }
 }

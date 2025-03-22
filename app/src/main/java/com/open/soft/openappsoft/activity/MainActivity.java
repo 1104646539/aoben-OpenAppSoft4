@@ -42,6 +42,8 @@ import com.google.gson.Gson;
 import com.gsls.gt.GT;
 import com.open.soft.openappsoft.R;
 import com.open.soft.openappsoft.activity.orderinfo.OrderInfoModel;
+import com.open.soft.openappsoft.activity.task.TaskListActivity;
+import com.open.soft.openappsoft.activity.task.TestTaskActivity;
 import com.open.soft.openappsoft.data2.JingWeiDataBean;
 import com.open.soft.openappsoft.jinbiao.activity.CheckActivity;
 import com.open.soft.openappsoft.jinbiao.activity.CheckActivityByMen;
@@ -91,7 +93,8 @@ import timber.log.Timber;
 public class MainActivity extends AppCompatActivity implements OnClickListener {
     private static final String TAG = "MainActivity";
     private View btn_open_2;// 比色法模块
-    private View btn_open_3;// 金标卡模块o
+    private View btn_open_3;// 金标卡模块
+    private View btn_open_4;// atp模块
     private View ll_sql;// 金标卡模块
     private View btn_open_login;//
     private View btn_open_book;//
@@ -448,6 +451,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     private void initView() {
         btn_open_2 = findViewById(R.id.btn_open_2);
         btn_open_3 = findViewById(R.id.btn_open_3);
+        btn_open_4 = findViewById(R.id.btn_open_4);
         ll_sql = findViewById(R.id.ll_sql);
         btn_open_setting = findViewById(R.id.btn_open_setting);
         btn_open_login = findViewById(R.id.btn_open_login);
@@ -455,6 +459,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         btn_open_book = findViewById(R.id.btn_open_book);
         btn_open_2.setOnClickListener(this);
         btn_open_3.setOnClickListener(this);
+        btn_open_4.setOnClickListener(this);
         ll_sql.setOnClickListener(this);
         btn_open_setting.setOnClickListener(this);
         btn_open_login.setOnClickListener(this);
@@ -476,7 +481,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 startActivity(intent1);
 //                }
                 break;
-
+            case R.id.btn_open_4:
+                //ATP
+                Intent intentAtp = new Intent(this, TestTaskActivity.class);
+                intentAtp.putExtra("source", TestTaskActivity.source_atp);
+                startActivity(intentAtp);
+                break;
             case R.id.btn_open_3:
 
                 /*Intent intent10 = new Intent(this, CheckActivityByMen.class);
@@ -614,7 +624,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 break;
 
             case R.id.btn_open_login:
-
 
                 Global.isAdimin = false;
                 Intent intent4 = new Intent(this, LoginActivity.class);
