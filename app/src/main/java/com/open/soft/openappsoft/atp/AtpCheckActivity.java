@@ -1,89 +1,38 @@
 package com.open.soft.openappsoft.atp;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;
-import android.text.TextUtils;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.example.qrcodescan.QRCode;
-import com.example.utils.http.Barcode2D;
-import com.example.utils.http.CheckPresenter;
-import com.example.utils.http.GetQRInfoBean;
-import com.example.utils.http.GetQRInfoResultBean;
-import com.example.utils.http.GetSamplingInfoBean;
-import com.example.utils.http.GetSamplingInfoResultBean;
-import com.example.utils.http.Result;
-import com.example.utils.http.StatusDialog;
-import com.friendlyarm.AndroidSDK.HardwareControler;
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IFillFormatter;
-import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.gson.Gson;
 import com.gsls.gt.GT;
 import com.lidroid.xutils.DbUtils;
-import com.lidroid.xutils.db.sqlite.Selector;
-import com.lidroid.xutils.db.sqlite.WhereBuilder;
 import com.lidroid.xutils.exception.DbException;
 import com.open.soft.openappsoft.R;
 import com.open.soft.openappsoft.activity.MainActivity;
 import com.open.soft.openappsoft.activity.task.TaskListAdapter2;
 import com.open.soft.openappsoft.activity.task.TaskModel;
-import com.open.soft.openappsoft.dialog.DialogFragmentPaint;
-import com.open.soft.openappsoft.jinbiao.activity.CheckActivityByMen;
-import com.open.soft.openappsoft.jinbiao.activity.CheckPaintActivity;
 import com.open.soft.openappsoft.jinbiao.activity.MyApplication;
 import com.open.soft.openappsoft.jinbiao.base.BaseActivity;
 import com.open.soft.openappsoft.jinbiao.db.DbHelper;
-import com.open.soft.openappsoft.jinbiao.dialog.DateTimePickerDialog;
-import com.open.soft.openappsoft.jinbiao.model.CardCompanyModel;
-import com.open.soft.openappsoft.jinbiao.model.LineModel;
-import com.open.soft.openappsoft.jinbiao.model.PeopleModel;
 import com.open.soft.openappsoft.jinbiao.model.ResultModel;
-import com.open.soft.openappsoft.jinbiao.model.SampleModel;
-import com.open.soft.openappsoft.jinbiao.model.SampleTypeModel;
-import com.open.soft.openappsoft.jinbiao.model.SharedPreferencesUtil;
-import com.open.soft.openappsoft.jinbiao.model.ShiJiModel;
 import com.open.soft.openappsoft.jinbiao.util.APPUtils;
 import com.open.soft.openappsoft.jinbiao.util.SerialUtils;
 import com.open.soft.openappsoft.jinbiao.util.ToolUtils;
@@ -91,22 +40,9 @@ import com.open.soft.openappsoft.multifuction.util.Global;
 import com.open.soft.openappsoft.sql.bean.DetectionResultBean;
 import com.open.soft.openappsoft.util.UploadThread2;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.lang.reflect.Array;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.UnknownHostException;
 import java.nio.charset.Charset;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
@@ -595,7 +531,7 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
                 clearTestDataShow();
 
                 // 发送绘图命令
-                ClickDraw1();
+                ClickTest();
             }
         });
     }
@@ -745,8 +681,6 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
     public void onClick(View v) {
         if (v.getId() == R.id.checkactivity_et_SampleTime) {
             showTaskDialog();
-        } else if (v.getId() == R.id.move_time) {
-            timeCheck();
         }
     }
 
@@ -771,7 +705,7 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
 
     String temp = "OK0.3\n";
 
-    public void ClickDraw1() {
+    public void ClickTest() {
         if (isTest) {
             APPUtils.showToast(this, "正在检测，请稍后...");
             return;
@@ -786,11 +720,14 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
             return;
         }
         byte[] data = message.getBytes(Charset.forName("gb2312"));
+        Timber.d("COM3_SendData="+new String(data,Charset.forName("gb2312")));
+//        SerialUtils.COM3_SendData(data);
         if (!SerialUtils.COM3_SendData(data)) {
             isTest = false;
             APPUtils.showToast(this, "数据发送失败");
             return;
         }
+        timeCheck();
     }
 
     private final static int what_test_success = 700;
@@ -805,9 +742,11 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
             if (Float.parseFloat(finalDrValue) > Float.parseFloat(jcx)) {
                 etConcentrate.setText(finalDrValue);
                 etResult.setText("不合格");
+                tv_scanTime.setText("");
             } else {
                 etConcentrate.setText(finalDrValue);
                 etResult.setText("合格");
+                tv_scanTime.setText("");
             }
         });
     }
