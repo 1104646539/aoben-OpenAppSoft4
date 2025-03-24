@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
@@ -24,6 +27,7 @@ import com.lzy.okgo.callback.StringCallback;
 import com.open.soft.openappsoft.R;
 import com.open.soft.openappsoft.activity.orderinfo.EditInfoActivity;
 import com.open.soft.openappsoft.activity.orderinfo.OrderInfoModel;
+import com.open.soft.openappsoft.atp.AtpArgActivity;
 import com.open.soft.openappsoft.jinbiao.model.CompanyNameData;
 import com.open.soft.openappsoft.jinbiao.model.CompanyNameRootBean;
 import com.open.soft.openappsoft.jinbiao.model.SharedPreferencesUtil;
@@ -46,8 +50,9 @@ public class SettingActivity extends Activity implements View.OnClickListener {
     private Button btn_open_3;
     private Button btn_open_4;
     private Button btn_open_5;
-    private Button btn_sample_type_main, btn_sample_type_child, btn_bcheck_ori,btn_check_ori;
+    private Button btn_sample_type_main, btn_sample_type_child, btn_bcheck_ori, btn_check_ori;
     private TextView tv_mac_url;
+    private TextView tv_title;
 
     @GT.Annotations.GT_Collection.GT_Map
     private Map<String, String> map;
@@ -77,6 +82,7 @@ public class SettingActivity extends Activity implements View.OnClickListener {
         btn_bcheck_ori = (Button) findViewById(R.id.btn_bcheck_ori);
         btn_check_ori = (Button) findViewById(R.id.btn_check_ori);
         tv_mac_url = (TextView) findViewById(R.id.tv_mac_url);
+        tv_title = (TextView) findViewById(R.id.tv_title);
 
 
         tv_mac_url.setText("Mac地址：" + MainActivity.mac_url);
@@ -90,14 +96,39 @@ public class SettingActivity extends Activity implements View.OnClickListener {
         btn_check_ori.setOnClickListener(this);
         btn_sample_type_main.setOnClickListener(this);
         btn_sample_type_child.setOnClickListener(this);
+        tv_title.setOnClickListener(this);
 
     }
 
+    int clickSettings = 0;
+    int What_Click_atp = 100;
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == What_Click_atp) {
+                clickSettings = 0;
+            }
+        }
+    };
+
+    private void startAtpArg() {
+        clickSettings++;
+        if (clickSettings > 5) {
+            clickSettings = 0;
+            startActivity(new Intent(this, AtpArgActivity.class));
+        } else {
+            handler.removeMessages(What_Click_atp);
+            handler.sendEmptyMessageDelayed(What_Click_atp, 2000);
+        }
+    }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btn_open_1) {
             onUpLoadingSetting();
+        } else if (v.getId() == R.id.tv_title) {
+            startAtpArg();
         } else if (v.getId() == R.id.btn_open_2) {
             onSettingPsw();
         } else if (v.getId() == R.id.btn_open_3) {
@@ -169,7 +200,7 @@ public class SettingActivity extends Activity implements View.OnClickListener {
             Intent intent = new Intent(this, EditInfoActivity.class);
             intent.putExtra("type", OrderInfoModel.type_bcheck);
             startActivity(intent);
-        }else if (v.getId() == R.id.btn_check_ori) {
+        } else if (v.getId() == R.id.btn_check_ori) {
             Intent intent = new Intent(this, EditInfoActivity.class);
             intent.putExtra("type", OrderInfoModel.type_check);
             startActivity(intent);
@@ -214,7 +245,7 @@ public class SettingActivity extends Activity implements View.OnClickListener {
                     return;
                 }
 
-                Global.BASE_URL  = url;
+                Global.BASE_URL = url;
                 Global.URL_LOGIN = et_1;
 //                Global.URL_GetAreaList = et_2;
 //                Global.URL_GetCardQRInfo = et_3;

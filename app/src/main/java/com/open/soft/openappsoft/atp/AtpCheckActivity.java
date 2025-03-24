@@ -557,7 +557,7 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
         printData = ToolUtils.GetPrintInfo3(resultModel);
 //        APPUtils.showToast(this, printData);
         byte[] data = printData.getBytes(Charset.forName("gb2312"));
-        Timber.i("data="+new String(data,Charset.forName("gbk")));
+        Timber.i("data=" + new String(data, Charset.forName("gbk")));
         if (!SerialUtils.COM4_SendData(data)) {
             APPUtils.showToast(this, "打印数据发送失败");
         }
@@ -720,7 +720,7 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
             return;
         }
         byte[] data = message.getBytes(Charset.forName("gb2312"));
-        Timber.d("COM3_SendData="+new String(data,Charset.forName("gb2312")));
+        Timber.d("COM3_SendData=" + new String(data, Charset.forName("gb2312")));
 //        SerialUtils.COM3_SendData(data);
         if (!SerialUtils.COM3_SendData(data)) {
             isTest = false;
@@ -736,7 +736,16 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
     private void showResult(String str) {
         Timber.d("showResult str=" + str);
         String drValue = str.replace("OK", "").replace("\n", "");
+        Timber.d("showResult 原始 drValue=" + drValue);
+        try {
+            float oriValue = Float.parseFloat(drValue);
+            float matchValue = oriValue * Global.ATP_K + Global.ATP_B;
+            drValue = "" + matchValue;
+        } catch (Exception e) {
+            Timber.d("");
+        }
         String finalDrValue = drValue;
+        Timber.d("showResult 拟合后 finalDrValue=" + finalDrValue);
         String jcx = etJcx.getText().toString();
         runOnUiThread(() -> {
             if (Float.parseFloat(finalDrValue) > Float.parseFloat(jcx)) {

@@ -12,7 +12,7 @@ import java.util.Date;
  */
 
 public class Global {
-    
+
     public static Project project;
 
     public static final String DEBUG_DEVICE_ID = "CESHIZHUANYONGID";
@@ -145,6 +145,8 @@ public class Global {
 
     public static String device_id = "device_天迈";
 
+    public static float ATP_K = 1;
+    public static float ATP_B = 0;
 
     public static float singleXlz = 50;
 

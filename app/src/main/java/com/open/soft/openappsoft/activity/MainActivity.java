@@ -321,6 +321,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             initJinBiao();
         }
 
+        com.open.soft.openappsoft.multifuction.util.Global.ATP_K = SharedPreferencesUtil.getDefaultSharedPreferences(this).getFloat("atp_k",com.open.soft.openappsoft.multifuction.util.Global.ATP_K);
+        com.open.soft.openappsoft.multifuction.util.Global.ATP_B = SharedPreferencesUtil.getDefaultSharedPreferences(this).getFloat("atp_b",com.open.soft.openappsoft.multifuction.util.Global.ATP_B);
         /*//动态标题
         TextView tv_title = findViewById(R.id.tv_title);
 
