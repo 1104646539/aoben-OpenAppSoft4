@@ -249,7 +249,7 @@
     <!-- 检测界面edittext风格 -->
     <style name="checkactivity_edittext_style">
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginRight">20dp</item>
         <item name="android:layout_weight">1.0</item>
         <item name="android:textSize">20sp</item>
@@ -292,10 +292,10 @@
     <!-- 检测页面手动输入风格 -->
     <style name="meninput_edittext_style">
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginRight">20dp</item>
         <item name="android:layout_weight">1.0</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">26sp</item>
         <item name="android:inputType">number|numberDecimal</item>
     </style>
 

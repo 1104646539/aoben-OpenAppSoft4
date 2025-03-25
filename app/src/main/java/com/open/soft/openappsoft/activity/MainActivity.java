@@ -321,8 +321,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             initJinBiao();
         }
 
-        com.open.soft.openappsoft.multifuction.util.Global.ATP_K = SharedPreferencesUtil.getDefaultSharedPreferences(this).getFloat("atp_k",com.open.soft.openappsoft.multifuction.util.Global.ATP_K);
-        com.open.soft.openappsoft.multifuction.util.Global.ATP_B = SharedPreferencesUtil.getDefaultSharedPreferences(this).getFloat("atp_b",com.open.soft.openappsoft.multifuction.util.Global.ATP_B);
+        com.open.soft.openappsoft.multifuction.util.Global.ATP_K = SharedPreferencesUtil.getDefaultSharedPreferences(this).getFloat("atp_k", com.open.soft.openappsoft.multifuction.util.Global.ATP_K);
+        com.open.soft.openappsoft.multifuction.util.Global.ATP_B = SharedPreferencesUtil.getDefaultSharedPreferences(this).getFloat("atp_b", com.open.soft.openappsoft.multifuction.util.Global.ATP_B);
         /*//动态标题
         TextView tv_title = findViewById(R.id.tv_title);
 
@@ -889,24 +889,28 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                                 String sampleNumber = sheet.getCell(1, i).getContents();
                                 String sampleType = sheet.getCell(2, i).getContents();
                                 SampleName sn = new SampleName(sampleName, sampleType, sampleNumber);
-                                SampleName.ProjectList<SampleName.Project> snps = new SampleName.ProjectList<>();
                                 schedule += 1;
-                                for (int j = 4; j < sheet.getColumns(); j++) {
-                                    String projectName = sheet.getCell(j, 0).getContents();
-                                    String projectJcx = sheet.getCell(j, i).getContents();
+
+                                if (i == 1) {
+                                    SampleName.ProjectList<SampleName.Project> snps = new SampleName.ProjectList<>();
+                                    for (int j = 4; j < sheet.getColumns(); j++) {
+                                        String projectName = sheet.getCell(j, 0).getContents();
+                                        String projectJcx = sheet.getCell(j, i).getContents();
 //                                    Log.d(TAG,"column="+j+"sampleName="+sampleName+"projectName="+projectName);
-                                    if (projectName != null && projectJcx != null && !projectJcx.equals("")) {
-                                        SampleName.Project snp = new SampleName.Project();
-                                        snp.projectName = projectName;
-                                        snp.jcx = Float.valueOf(projectJcx);
-                                        snp.parent_id = sampleName;
-                                        snps.add(snp);
+                                        if (projectName != null && projectJcx != null && !projectJcx.equals("")) {
+                                            SampleName.Project snp = new SampleName.Project();
+                                            snp.projectName = projectName;
+                                            snp.jcx = Float.valueOf(projectJcx);
+                                            snp.parent_id = sampleName;
+                                            snps.add(snp);
+                                        }
                                     }
+                                    sn.projects = snps;
+                                    new SampleName.Project().saveAll(snps);
                                 }
-                                CheckOrg checkOrg = new CheckOrg();
-                                checkOrg.co_id = i;
-                                sn.projects = snps;
-                                new SampleName.Project().saveAll(snps);
+//                                CheckOrg checkOrg = new CheckOrg();
+//                                checkOrg.co_id = i;
+
                                 list.add(sn);
                                 GT.Thread.runAndroid(MainActivity.this, new Runnable() {
                                     @Override

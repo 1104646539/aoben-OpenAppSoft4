@@ -86,6 +86,7 @@
 
                     <TableRow
                         android:layout_width="match_parent"
+                        android:layout_marginTop="5dp"
                         android:layout_height="wrap_content">
 
                         <TextView
@@ -126,6 +127,7 @@
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:visibility="visible">
 
                         <TextView
@@ -182,6 +184,7 @@
 
                     <TableRow
                         android:id="@+id/tr_ll"
+                        android:layout_marginTop="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
