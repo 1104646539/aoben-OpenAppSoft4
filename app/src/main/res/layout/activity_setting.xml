@@ -37,91 +37,117 @@
                 android:text="MAC地址:"
                 android:textSize="30sp" />
 
-            <Button
-                android:id="@+id/btn_sample_type_main"
-                android:layout_width="300dp"
-                android:layout_height="80dp"
-                android:background="@drawable/btn_default1"
-                android:text="样本主类"
-                android:textColor="#ffffff"
-                android:textSize="36sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btn_sample_type_child"
-                android:layout_width="300dp"
-                android:layout_height="80dp"
-                android:background="@drawable/btn_default1"
-                android:text="样本子类"
-                android:textColor="#ffffff"
-                android:textSize="36sp" />
+                <Button
+                    android:id="@+id/btn_sample_type_main"
+                    android:layout_width="300dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/btn_default1"
+                    android:text="样本主类"
+                    android:textColor="#ffffff"
+                    android:textSize="36sp" />
 
-            <Button
-                android:id="@+id/btn_bcheck_ori"
-                android:layout_width="300dp"
-                android:layout_height="80dp"
-                android:background="@drawable/btn_default1"
-                android:text="受检单位"
-                android:textColor="#ffffff"
-                android:textSize="36sp" />
-            <Button
-                android:id="@+id/btn_check_ori"
-                android:layout_width="300dp"
-                android:layout_height="80dp"
-                android:background="@drawable/btn_default1"
-                android:text="检测单位"
-                android:textColor="#ffffff"
-                android:textSize="36sp" />
+                <Button
+                    android:id="@+id/btn_sample_type_child"
+                    android:layout_width="300dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/btn_default1"
+                    android:text="样本子类"
+                    android:textColor="#ffffff"
+                    android:textSize="36sp" />
 
-            <Button
-                android:id="@+id/btn_open_1"
-                android:layout_width="300dp"
-                android:layout_height="80dp"
-                android:background="@drawable/btn_default1"
-                android:text="网站设置"
-                android:textColor="#ffffff"
-                android:textSize="36sp" />
+                <Button
+                    android:id="@+id/btn_bcheck_ori"
+                    android:layout_width="300dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/btn_default1"
+                    android:text="受检单位"
+                    android:textColor="#ffffff"
+                    android:textSize="36sp" />
+            </LinearLayout>
 
-            <Button
-                android:id="@+id/btn_open_2"
-                android:layout_width="300dp"
-                android:layout_height="80dp"
-                android:background="@drawable/btn_default1"
-                android:visibility="gone"
-                android:text="密码设置"
-                android:textColor="#ffffff"
-                android:textSize="36sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_check_ori"
+                    android:layout_width="300dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/btn_default1"
+                    android:text="检测单位"
+                    android:textColor="#ffffff"
+                    android:textSize="36sp" />
+
+                <Button
+                    android:id="@+id/btn_sample"
+                    android:layout_width="300dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/btn_default1"
+                    android:text="样品名称"
+                    android:textColor="#ffffff"
+                    android:textSize="36sp" />
+
+                <Button
+                    android:id="@+id/btn_open_1"
+                    android:layout_width="300dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/btn_default1"
+                    android:text="网站设置"
+                    android:textColor="#ffffff"
+                    android:textSize="36sp" />
+
+                <Button
+                    android:id="@+id/btn_open_2"
+                    android:layout_width="300dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/btn_default1"
+                    android:text="密码设置"
+                    android:textColor="#ffffff"
+                    android:textSize="36sp"
+                    android:visibility="gone" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btn_open_4"
                 android:layout_width="300dp"
-                android:layout_height="80dp"
+                android:layout_height="100dp"
                 android:background="@drawable/btn_default1"
                 android:text="设备名(SN)设置"
                 android:textColor="#ffffff"
                 android:textSize="36sp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btn_open_5"
-                android:layout_width="300dp"
-                android:layout_height="80dp"
-                android:background="@drawable/btn_default1"
-                android:text="修改标题"
-                android:visibility="gone"
-                android:textColor="#ffffff"
-                android:textSize="36sp" />
+                <Button
+                    android:id="@+id/btn_open_5"
+                    android:layout_width="300dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/btn_default1"
+                    android:text="修改标题"
+                    android:textColor="#ffffff"
+                    android:textSize="36sp"
+                    android:visibility="gone" />
 
 
-            <Button
-                android:id="@+id/btn_open_3"
-                android:layout_width="300dp"
-                android:visibility="gone"
-                android:layout_height="80dp"
-                android:background="@drawable/btn_default1"
-                android:text="本机归属地设置"
-                android:textColor="#ffffff"
-                android:textSize="36sp" />
-
+                <Button
+                    android:id="@+id/btn_open_3"
+                    android:layout_width="300dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/btn_default1"
+                    android:text="本机归属地设置"
+                    android:textColor="#ffffff"
+                    android:textSize="36sp"
+                    android:visibility="gone" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

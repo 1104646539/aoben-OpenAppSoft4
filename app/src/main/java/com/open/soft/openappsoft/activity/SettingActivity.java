@@ -27,6 +27,7 @@ import com.lzy.okgo.callback.StringCallback;
 import com.open.soft.openappsoft.R;
 import com.open.soft.openappsoft.activity.orderinfo.EditInfoActivity;
 import com.open.soft.openappsoft.activity.orderinfo.OrderInfoModel;
+import com.open.soft.openappsoft.activity.samplename.SampleNameActivity;
 import com.open.soft.openappsoft.atp.AtpArgActivity;
 import com.open.soft.openappsoft.jinbiao.model.CompanyNameData;
 import com.open.soft.openappsoft.jinbiao.model.CompanyNameRootBean;
@@ -50,7 +51,7 @@ public class SettingActivity extends Activity implements View.OnClickListener {
     private Button btn_open_3;
     private Button btn_open_4;
     private Button btn_open_5;
-    private Button btn_sample_type_main, btn_sample_type_child, btn_bcheck_ori, btn_check_ori;
+    private Button btn_sample_type_main, btn_sample_type_child, btn_bcheck_ori, btn_check_ori,btn_sample;
     private TextView tv_mac_url;
     private TextView tv_title;
 
@@ -81,6 +82,7 @@ public class SettingActivity extends Activity implements View.OnClickListener {
         btn_sample_type_child = (Button) findViewById(R.id.btn_sample_type_child);
         btn_bcheck_ori = (Button) findViewById(R.id.btn_bcheck_ori);
         btn_check_ori = (Button) findViewById(R.id.btn_check_ori);
+        btn_sample = (Button) findViewById(R.id.btn_sample);
         tv_mac_url = (TextView) findViewById(R.id.tv_mac_url);
         tv_title = (TextView) findViewById(R.id.tv_title);
 
@@ -97,6 +99,7 @@ public class SettingActivity extends Activity implements View.OnClickListener {
         btn_sample_type_main.setOnClickListener(this);
         btn_sample_type_child.setOnClickListener(this);
         tv_title.setOnClickListener(this);
+        btn_sample.setOnClickListener(this);
 
     }
 
@@ -203,6 +206,9 @@ public class SettingActivity extends Activity implements View.OnClickListener {
         } else if (v.getId() == R.id.btn_check_ori) {
             Intent intent = new Intent(this, EditInfoActivity.class);
             intent.putExtra("type", OrderInfoModel.type_check);
+            startActivity(intent);
+        }else if (v.getId() == R.id.btn_sample){
+            Intent intent = new Intent(this, SampleNameActivity.class);
             startActivity(intent);
         }
     }

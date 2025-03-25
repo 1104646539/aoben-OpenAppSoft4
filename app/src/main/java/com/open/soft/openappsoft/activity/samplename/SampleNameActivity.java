@@ -1,9 +1,5 @@
 
-package com.open.soft.openappsoft.activity.orderinfo;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+package com.open.soft.openappsoft.activity.samplename;
 
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
@@ -14,77 +10,80 @@ import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.gsls.gt.GT;
+import com.lidroid.xutils.db.sqlite.Selector;
+import com.lidroid.xutils.exception.DbException;
 import com.open.soft.openappsoft.R;
 import com.open.soft.openappsoft.activity.MainActivity;
+import com.open.soft.openappsoft.activity.orderinfo.EditOrderInfoDialog;
+import com.open.soft.openappsoft.activity.orderinfo.OrderInfoAdapter;
+import com.open.soft.openappsoft.activity.orderinfo.OrderInfoModel;
+import com.open.soft.openappsoft.multifuction.db.DbHelper;
+import com.open.soft.openappsoft.multifuction.model.SampleName;
 import com.open.soft.openappsoft.util.APPUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import timber.log.Timber;
 
-public class EditInfoActivity extends AppCompatActivity implements View.OnClickListener, OrderInfoAdapter.OnLongClick {
-    OrderInfoAdapter adapter;
+public class SampleNameActivity extends AppCompatActivity implements View.OnClickListener, SampleNameAdapter.OnLongClick {
+    SampleNameAdapter adapter;
     TextView tv_title, tv_add;
     RecyclerView rv_data;
     View ll_root;
-    List<OrderInfoModel> orderInfoModels = new ArrayList<>();
-
-    int type = OrderInfoModel.type_bcheck;
-
-    GT.Hibernate hibernate;
-
+    List<SampleName> sampleNames = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         GT.WindowUtils.hideActionBar(this);
-        setContentView(R.layout.activity_edit_info);
-        hibernate = MainActivity.hibernate;
-        type = getIntent().getIntExtra("type", OrderInfoModel.type_bcheck);
+        setContentView(R.layout.activity_edit_sample_name);
         initView();
         setTypeInfo();
         loadData();
     }
 
     private void setTypeInfo() {
-        if (type == OrderInfoModel.type_bcheck) {
-            tv_title.setText("受检单位管理");
-        } else if (type == OrderInfoModel.type_sample_type_child) {
-            tv_title.setText("样本子类管理");
-        } else if (type == OrderInfoModel.type_sample_type_main) {
-            tv_title.setText("样本主类管理");
-        } else if (type == OrderInfoModel.type_check) {
-            tv_title.setText("检测机构管理");
-        }
+        tv_title.setText("样品名称管理");
     }
 
     private void loadData() {
-        List<OrderInfoModel> temp = hibernate.where("type = ?", "" + type).queryAll(OrderInfoModel.class);
-        orderInfoModels.clear();
-        if (temp != null) {
-            orderInfoModels.addAll(temp);
+
+        List<SampleName> temp = null;
+        try {
+            temp = DbHelper.GetInstance().findAll(Selector.from(SampleName.class)
+                    .orderBy("time", true));
+            sampleNames.clear();
+            if (temp != null) {
+                sampleNames.addAll(temp);
+            }
+            adapter.notifyDataSetChanged();
+        } catch (DbException e) {
+            Timber.d("加载失败");
+            APPUtils.showToast(this, "加载失败");
         }
-        adapter.notifyDataSetChanged();
     }
 
-    private void addOrSave(boolean add, OrderInfoModel orderInfoModel) {
-//        Timber.i(new Gson().toJson(orderInfoModel));
+    private void addOrSave(boolean add, SampleName sampleName) {
         String hilt = add ? "插入" : "更新";
-        if (add) {
-            hibernate.save(orderInfoModel);
-        } else {
-            hibernate.update(orderInfoModel);
-        }
-        if (hibernate.isStatus()) {
-            loadData();
-            adapter.notifyDataSetChanged();
-            APPUtils.showToast(this, hilt + "成功");
-        } else {
+        try {
+            if (add) {
+                DbHelper.GetInstance().save(sampleName);
+            } else {
+                DbHelper.GetInstance().update(sampleName);
+            }
+        } catch (DbException e) {
             APPUtils.showToast(this, hilt + "失败");
+            return;
         }
+        loadData();
+        adapter.notifyDataSetChanged();
     }
 
     private void initView() {
@@ -94,7 +93,7 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
         ll_root = findViewById(R.id.ll_root);
         tv_add.setOnClickListener(this);
 
-        adapter = new OrderInfoAdapter(orderInfoModels);
+        adapter = new SampleNameAdapter(sampleNames);
         rv_data.setLayoutManager(new GridLayoutManager(this, 5, GridLayoutManager.VERTICAL, false));
         rv_data.setAdapter(adapter);
         adapter.setOnLongClick(this);
@@ -160,10 +159,10 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
                 showInfoDialog(EditOrderInfoDialog.ShowMode_add, null);
                 break;
             case R.id.inspected_long_show:
-                showInfoDialog(EditOrderInfoDialog.ShowMode_details, orderInfoModels.get(longPosition));
+                showInfoDialog(EditOrderInfoDialog.ShowMode_details, sampleNames.get(longPosition));
                 break;
             case R.id.inspected_long_modify:
-                showInfoDialog(EditOrderInfoDialog.ShowMode_change, orderInfoModels.get(longPosition));
+                showInfoDialog(EditOrderInfoDialog.ShowMode_change, sampleNames.get(longPosition));
                 break;
             case R.id.inspected_long_delete:
                 delete();
@@ -173,9 +172,16 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
 
 
     private void delete() {
-        if (longPosition >= 0 && longPosition < orderInfoModels.size()) {
-            OrderInfoModel model = orderInfoModels.get(longPosition);
-            hibernate.where("id = ?", "" + model.id).delete(OrderInfoModel.class);
+        if (longPosition >= 0 && longPosition < sampleNames.size()) {
+            SampleName model = sampleNames.get(longPosition);
+            try {
+                DbHelper.GetInstance().delete(model);
+            } catch (DbException e) {
+                Timber.d("删除失败");
+                popupWindow_long.dismiss();
+                APPUtils.showToast(this, "删除失败");
+                return;
+            }
             loadData();
             APPUtils.showToast(this, "删除成功");
         }
@@ -183,52 +189,26 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-    private void showInfoDialog(int showMode, OrderInfoModel temp) {
-        EditOrderInfoDialog orderInfoDialog = new EditOrderInfoDialog(this);
-        orderInfoDialog.showDialog(showMode, type, temp, new EditOrderInfoDialog.OnCommit() {
+    private void showInfoDialog(int showMode, SampleName temp) {
+        EditSampleNameDialog editSampleNameDialog = new EditSampleNameDialog(this);
+        editSampleNameDialog.showDialog(showMode, temp, new EditSampleNameDialog.OnCommit() {
             @Override
-            public void OnCommit(boolean add, OrderInfoModel model) {
-                if (type == OrderInfoModel.type_bcheck) {
-                    if (APPUtils.isNull(model.name)) {
-                        APPUtils.showToast(EditInfoActivity.this, "请输入受检单位");
+            public void OnCommit(boolean add, SampleName model) {
 
-                    } else if (APPUtils.isNull(model.code)) {
-                        APPUtils.showToast(EditInfoActivity.this, "请输入受检单位代码");
+                if (APPUtils.isNull(model.sampleName)) {
+                    APPUtils.showToast(SampleNameActivity.this, "请输入样品名称");
 
-                    } else {
-                        orderInfoDialog.dismiss();
-                        addOrSave(showMode == EditOrderInfoDialog.ShowMode_add, model);
-                    }
-                } else if (type == OrderInfoModel.type_sample_type_child) {
-                    if (APPUtils.isNull(model.name)) {
-                        APPUtils.showToast(EditInfoActivity.this, "请输入样品子类");
-
-                    } else {
-                        orderInfoDialog.dismiss();
-                        addOrSave(showMode == EditOrderInfoDialog.ShowMode_add, model);
-                    }
-                } else if (type == OrderInfoModel.type_sample_type_main) {
-                    if (APPUtils.isNull(model.name)) {
-                        APPUtils.showToast(EditInfoActivity.this, "请输入样品主类");
-
-                    } else {
-                        orderInfoDialog.dismiss();
-                        addOrSave(showMode == EditOrderInfoDialog.ShowMode_add, model);
-                    }
-                } else if (type == OrderInfoModel.type_check) {
-                    if (APPUtils.isNull(model.name)) {
-                        APPUtils.showToast(EditInfoActivity.this, "请输入检测机构");
-
-                    } else {
-                        orderInfoDialog.dismiss();
-                        addOrSave(showMode == EditOrderInfoDialog.ShowMode_add, model);
-                    }
+                } else {
+                    editSampleNameDialog.dismiss();
+                    model.time = new Date().getTime();
+                    addOrSave(showMode == EditOrderInfoDialog.ShowMode_add, model);
                 }
+
             }
 
             @Override
             public void OnCancel() {
-                orderInfoDialog.dismiss();
+                editSampleNameDialog.dismiss();
                 if (popupWindow_long != null)
                     popupWindow_long.dismiss();
             }

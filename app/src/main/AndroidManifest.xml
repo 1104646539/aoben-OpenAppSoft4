@@ -49,6 +49,9 @@
             android:name=".atp.AtpCheckActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.samplename.SampleNameActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.task.TestTaskActivity"
             android:exported="false" />
         <activity android:name=".jinbiao.activity.TSCheckActivity" />
