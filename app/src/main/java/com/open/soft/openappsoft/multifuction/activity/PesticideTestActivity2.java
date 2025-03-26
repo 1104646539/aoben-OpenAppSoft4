@@ -1293,6 +1293,11 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
         currentIndex = 0;
         List<CheckResult> selectedList = testAdapter.getSelectedList();
         for (int i = 0; i < selectedList.size(); i++) {
+            if (!selectedList.get(i).resultJudge.contains("阴性") && !selectedList.get(i).resultJudge.contains("阳性")
+                    && !selectedList.get(i).resultJudge.contains("合格") && !selectedList.get(i).resultJudge.contains("不合格")) {
+                Timber.i("无效值不上传");
+                return;
+            }
             DetectionResultBean detectionResultBean = checkResultTranDetectionBean(selectedList.get(i));
             hibernate.save(detectionResultBean);
             detectionResultBean.setID(hibernate.getStatus());

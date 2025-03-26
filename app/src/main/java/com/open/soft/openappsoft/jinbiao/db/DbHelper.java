@@ -108,7 +108,7 @@ public class DbHelper {
     private static void InitDbData(DbUtils db) {
 
         String concentrateUnit = "μg/kg";
-        CardCompanyModel cardModel = new CardCompanyModel("奥本", "200", "800", "120", "290");
+        CardCompanyModel cardModel = new CardCompanyModel("奥本", "300", "900", "120", "330");
         //初始化检测项目
         ArrayList<LineModel> list = new ArrayList<>();
 //        String[] projectNames1 = new String[]{"氯霉素", "呋喃唑酮", "呋喃他酮",

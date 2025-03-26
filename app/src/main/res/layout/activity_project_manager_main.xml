@@ -80,7 +80,7 @@
                 android:layout_margin="50dp"
                 android:layout_marginLeft="30dp"
                 android:text="试剂厂商"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <Button
                 android:id="@+id/activity_project_manager_btn_sampletype"

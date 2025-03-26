@@ -574,6 +574,11 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
 
     private void uploadResult() {
         if (detectionResultBean != null) {
+            if (!detectionResultBean.getDetectionResult().contains("阴性") && !detectionResultBean.getDetectionResult().contains("阳性")
+                    && !detectionResultBean.getDetectionResult().contains("合格") && !detectionResultBean.getDetectionResult().contains("不合格")) {
+                Timber.i("无效值不上传");
+                return;
+            }
             List<DetectionResultBean> list_upload = new ArrayList<>();
             list_upload.add(detectionResultBean);
             UploadThread2 uploadThread2 = new UploadThread2(this, list_upload, new UploadThread2.onUploadListener() {

@@ -9,7 +9,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 31
         versionCode 12
-        versionName "1.0.12-Test"
+        versionName "1.0.13-Test"
 //
 //        ndk {//thgppf  123456
 //            // 设置支持的SO库架构

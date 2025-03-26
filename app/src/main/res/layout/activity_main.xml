@@ -253,7 +253,7 @@
         android:layout_height="0dp"
         android:background="@color/THEME_COLOR"
         android:gravity="center"
-        android:text="北京奥本生物技术有限公司"
+        android:text="信达安食品检测（天津）有限公司"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

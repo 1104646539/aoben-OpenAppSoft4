@@ -1858,7 +1858,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         printData = ToolUtils.GetPrintInfo2(resultModel, this, source);
 //        APPUtils.showToast(this, printData);
         byte[] data = printData.getBytes(Charset.forName("gb2312"));
-        Timber.i("data="+new String(data,Charset.forName("gbk")));
+        Timber.i("data=" + new String(data, Charset.forName("gbk")));
         if (!SerialUtils.COM4_SendData(data)) {
             APPUtils.showToast(this, "打印数据发送失败");
         }
@@ -2133,6 +2133,12 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 
     private void uploadResult() {
         if (detectionResultBean != null) {
+            if (!detectionResultBean.getDetectionResult().contains("阴性") && !detectionResultBean.getDetectionResult().contains("阳性")
+                    && !detectionResultBean.getDetectionResult().contains("合格") && !detectionResultBean.getDetectionResult().contains("不合格")) {
+                Timber.i("无效值不上传");
+                return;
+            }
+
             List<DetectionResultBean> list_upload = new ArrayList<>();
             list_upload.add(detectionResultBean);
             UploadThread2 uploadThread2 = new UploadThread2(this, list_upload, new UploadThread2.onUploadListener() {
@@ -2610,29 +2616,29 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             //测试 图像数据
 //            imageData =
             int len = Integer.valueOf(selectedProject.ScanEnd) - Integer.valueOf(selectedProject.ScanStart);
-            String temp = "OK0.22,";
+            String temp = "No signal";
+//            String temp = "OK12.22,";
             String img = "";
             int value;
             imageData = new byte[len * 2];
-            for (int i = 0; i < len; i++) {
-                int ff = 500 + i;
-
-                imageData[2 * i] = (byte) ((ff & 0xff) << 8);
-                imageData[2 * i + 1] = (byte) ((ff & 0xff));
-
-
-                int int1 = (imageData[2 * i] & 0xff) << 8;
-                value = int1 + (imageData[2 * i + 1] & 0xff);
-                Timber.i("ff="+ff+" value="+value);
-//                if (i != 0) {
-//                    img += ",";
-//                }
+//            for (int i = 0; i < len; i++) {
+//                int ff = 500 + i;
 //
-//                img += ff;
-            }
+//                imageData[2 * i] = (byte) ((ff & 0xff) << 8);
+//                imageData[2 * i + 1] = (byte) ((ff & 0xff));
+//
+//
+//                int int1 = (imageData[2 * i] & 0xff) << 8;
+//                value = int1 + (imageData[2 * i + 1] & 0xff);
+//                Timber.i("ff=" + ff + " value=" + value);
+////                if (i != 0) {
+////                    img += ",";
+////                }
+////
+////                img += ff;
+//            }
             temp += (img + "\n");
             showResult(temp);
-//            imageData = img.getBytes();
             handlerMess1.sendEmptyMessage(100);
             return;
         }
@@ -2698,7 +2704,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             Timber.d("RecImageData=errorCount >= 100");
             return null;
         }
-        Timber.d("response="+new String(response,Charset.forName("gbk")));
+        Timber.d("response=" + new String(response, Charset.forName("gbk")));
         int index = -1;
         for (int i = 0; i < currentDataLength; i++) {
             if (response[i] == ',') {
@@ -2710,12 +2716,12 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             Timber.d("RecImageData=errorCount index == -1");
             return null;
         }
-        Timber.d("response2="+new String(response,Charset.forName("gbk")));
-        Timber.d("currentDataLength="+currentDataLength);
+        Timber.d("response2=" + new String(response, Charset.forName("gbk")));
+        Timber.d("currentDataLength=" + currentDataLength);
 
         byte[] data = new byte[currentDataLength - index - 1];
         System.arraycopy(response, index + 1, data, 0, data.length);
-        Timber.d("data="+data);
+        Timber.d("data=" + data);
 
         showResult(new String(response));
         return data;
@@ -2727,7 +2733,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         String[] strs = str.split(",");
         String linjie_str = etLjz.getText().toString();
         float linjie_num = Float.parseFloat(linjie_str);
-        String drValue = strs[0].replace("OK","");
+        String drValue = strs[0].replace("OK", "");
 //        if (strs.length > 1) {
 //            drValue = strs[1];
 //        } else {
