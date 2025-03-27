@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 
+import com.gsls.gt.GT;
 import com.open.soft.openappsoft.R;
 import com.open.soft.openappsoft.jinbiao.base.BaseActivity;
 
@@ -18,6 +19,7 @@ public class SelectActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		GT.WindowUtils.hideActionBar(this);
 		setContentView(R.layout.activity_select_main);
 		context = this;
 	}

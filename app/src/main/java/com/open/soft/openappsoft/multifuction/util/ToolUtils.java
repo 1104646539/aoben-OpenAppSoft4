@@ -247,7 +247,7 @@ public class ToolUtils {
                 sb.append(result.resultJudge + "\n");
 
 
-                if ("农药残留".equals(result.projectName)) {
+                if ("有机磷和氨基甲酸酯类".equals(result.projectName)) {
                     sb.append("抑 制 率:");
                 } else {
                     sb.append("检 测 值:");
@@ -330,7 +330,7 @@ public class ToolUtils {
             sb.append(merge("检测", 15) + " "
                     + ToolUtils.long2String(resultList.get(0).testTime,
                     "yyyy-MM-dd") + "\n\n");
-            if ("农药残留".equals(resultList.get(0).projectName)) {
+            if ("有机磷和氨基甲酸酯类".equals(resultList.get(0).projectName)) {
                 sb.append("通道号  " + "" + "" + "抑制率 " + "" + "判定结果 " +
                         "样品名称 " + "" + "\n");
             } else {
@@ -464,7 +464,7 @@ public class ToolUtils {
                     sb.append("限量标准:");
                     sb.append(resultList.get(0).xlz + "\n");
                 }
-                if (result.projectName.equals("农药残留")) {
+                if (result.projectName.equals("有机磷和氨基甲酸酯类")) {
                     sb.append("抑 制 率:");
                 } else {
                     sb.append("检 测 值:");
@@ -496,7 +496,7 @@ public class ToolUtils {
             sb.append(merge("检测", 15) + " "
                     + ToolUtils.long2String(resultList.get(0).testTime,
                     "yyyy-MM-dd") + "\n\n");
-            if ("农药残留".equals(resultList.get(0).projectName)) {
+            if ("有机磷和氨基甲酸酯类".equals(resultList.get(0).projectName)) {
                 sb.append("通道号  " + "" + "" + "抑制率 " + "" + "判定结果 " +
                         "样品名称 " + "\n");
             } else {

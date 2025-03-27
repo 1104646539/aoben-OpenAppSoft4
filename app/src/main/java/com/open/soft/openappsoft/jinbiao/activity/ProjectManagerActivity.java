@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.gsls.gt.GT;
 import com.open.soft.openappsoft.R;
 import com.open.soft.openappsoft.jinbiao.base.BaseActivity;
 
@@ -26,6 +27,7 @@ public class ProjectManagerActivity extends BaseActivity implements OnClickListe
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		GT.WindowUtils.hideActionBar(this);
 		setContentView(R.layout.activity_project_manager_main);
 		
 		btn_CheckUnit = (Button) findViewById(R.id.activity_project_manager_btn_checkunit);

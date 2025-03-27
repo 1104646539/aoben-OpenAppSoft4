@@ -18,7 +18,7 @@
         android:layout_weight="1"
         android:background="@color/THEME_COLOR"
         android:gravity="center"
-        android:text="农药残留检测"
+        android:text="分光光度检测"
         android:textColor="@color/white"
         />
 

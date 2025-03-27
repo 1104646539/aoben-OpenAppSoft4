@@ -91,7 +91,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 //            Global.cardWarmTime = 30;
 //            Global.cardReactionTime = 30;
 //        }
-        tv_title.setText("农药残留检测");
+        tv_title.setText("有机磷和氨基甲酸酯类检测");
 
         if (getIntent().getBooleanExtra("isBoot", false)) {//每次开机都清零
             sp.edit().putFloat(SPResource.KEY_COMPARE_VALUE, 0).apply();

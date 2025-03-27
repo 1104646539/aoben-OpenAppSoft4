@@ -78,7 +78,7 @@ public class ResultQueryActivity extends Activity implements View.OnClickListene
     private Button btnReturn;
     private Button btnExportData;
 
-    private final static String EXPORT_DIR = "/农药残留检测/";
+    private final static String EXPORT_DIR = "/有机磷和氨基甲酸酯类检测/";
     private final static String[] EXCEL_HEADER = {"经营户/负责人", "商品名", "检测项目名", "检测值", "检测单位名称", "检测结果"};
 
     private static String[] HEADERS = new String[]{"检测编号", "检测项目", "检测人员", "通道",

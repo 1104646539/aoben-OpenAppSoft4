@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.gsls.gt.GT;
 import com.open.soft.openappsoft.R;
 import com.open.soft.openappsoft.jinbiao.base.BaseActivity;
 import com.open.soft.openappsoft.jinbiao.model.SharedPreferencesUtil;
@@ -21,6 +22,7 @@ private EditText min_txt;
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		GT.WindowUtils.hideActionBar(this);
 		setContentView(R.layout.activity_network_setting_main);
 
 //		port = (EditText) findViewById(R.id.setting_port);

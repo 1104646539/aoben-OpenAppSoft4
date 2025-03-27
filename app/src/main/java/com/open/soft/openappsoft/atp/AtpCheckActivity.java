@@ -331,7 +331,7 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
             resultModel.sample_name = tv_check_sample.getText().toString();
             resultModel.sample_number = et_Sample_Num.getText().toString();
             resultModel.sample_type = tv_check_type.getText().toString();
-            resultModel.project_name = "ATP";
+            resultModel.project_name = "表面洁净度";
 //            resultModel.sample_unit = sampleUnit_model.getName();
             resultModel.xian = etJcx.getText().toString();
             resultModel.lin = etJcx.getText().toString();

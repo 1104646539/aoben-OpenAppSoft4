@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.gsls.gt.GT;
 import com.open.soft.openappsoft.R;
 import com.open.soft.openappsoft.jinbiao.adapter.ProductAdapter;
 import com.open.soft.openappsoft.jinbiao.base.BaseActivity;
@@ -40,6 +41,7 @@ public class ProductActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		GT.WindowUtils.hideActionBar(this);
 		setContentView(R.layout.activity_card_main);
 		db = DbHelper.GetInstance();
 		listview = (ListView) findViewById(R.id.card_listview);

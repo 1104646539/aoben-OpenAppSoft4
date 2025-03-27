@@ -92,7 +92,7 @@
                             android:textColor="@color/white"
                             android:textSize="32sp"
                             android:paddingTop="15dp"
-                            android:text="农药残留"
+                            android:text="有机磷和氨基甲酸酯类"
                             android:visibility="gone"/>
 
 

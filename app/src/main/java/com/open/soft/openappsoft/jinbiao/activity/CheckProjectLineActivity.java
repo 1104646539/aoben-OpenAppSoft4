@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gsls.gt.GT;
 import com.open.soft.openappsoft.R;
 import com.open.soft.openappsoft.jinbiao.adapter.LineAdapter;
 import com.open.soft.openappsoft.jinbiao.base.BaseActivity;
@@ -68,6 +69,7 @@ public class CheckProjectLineActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		GT.WindowUtils.hideActionBar(this);
 		setContentView(R.layout.check_project_line_edit);
 		db = DbHelper.GetInstance();
 		source = Integer.parseInt(getIntent().getStringExtra("source"));

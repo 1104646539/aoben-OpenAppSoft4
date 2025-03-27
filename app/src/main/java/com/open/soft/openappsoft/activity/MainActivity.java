@@ -300,7 +300,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         Global.URI_MULT = sdPath + pdf_name;
         if (SharedPreferencesUtil.getDefaultSharedPreferences(this).getBoolean("isFirst", true)) {
             Project project = new Project("",
-                    "农药残留",
+                    "有机磷和氨基甲酸酯类",
                     "GB/T 5009.199", 50f, 1f, 0f, 410);
             project.save(project);
             for (int i = 0; i < projectNames.length; i++) {

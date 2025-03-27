@@ -8,13 +8,13 @@
     <string name="main_activit_title">多功能食品安全检测仪</string>
     <string name="hello_world">Hello world!</string>
     <!-- 农药残留按钮名字 -->
-    <string name="nongCanButton">农药残留</string>
+    <string name="nongCanButton">有机磷和氨基甲酸酯类</string>
     <!-- 多功能按钮名字 -->
     <string name="duoGongNengButton">分光光度模块</string>
     <!-- 金标按钮名字 -->
     <string name="jinBiaoButton">胶体金检测模块</string>
     <!-- ATP按钮名字 -->
-    <string name="ATPButton">ATP荧光检测</string>
+    <string name="ATPButton">ATP检测</string>
     <!--<string name="app_name">多功能检测</string>-->
     <string name="excel_name">t_bianmabiao2.xls</string>
     <string name="dis_numberaz">1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_</string>

@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.utils.http.Global;
+import com.gsls.gt.GT;
 import com.open.soft.openappsoft.R;
 import com.open.soft.openappsoft.jinbiao.adapter.ResultAdapterT;
 import com.open.soft.openappsoft.jinbiao.base.BaseActivity;
@@ -113,6 +114,7 @@ public class ResultActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_main);
 
+        GT.WindowUtils.hideActionBar(this);
         db = DbHelper.GetInstance();
 
         initView();

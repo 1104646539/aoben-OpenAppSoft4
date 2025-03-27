@@ -1639,7 +1639,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
 
                             mProject = new Project();
                             mProject.checker = "";
-                            mProject.projectName = "农药残留";
+                            mProject.projectName = "有机磷和氨基甲酸酯类";
                             mProject.testStandard = "GB/T 5009.199";
                             mProject.cardXlz = 50.0f;
                             mProject.k = 1.0f;
@@ -2435,7 +2435,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
      */
     private boolean isNc() {
 
-        if (mProject != null && "农药残留".equals(mProject.getName())) {
+        if (mProject != null && "有机磷和氨基甲酸酯类".equals(mProject.getName())) {
             return true;
         } else if (mProject != null && "有机磷和氨基甲酸酯类".equals(mProject.getName())) {
             return true;
