@@ -74,7 +74,7 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
     /**
      * 反应时间
      */
-    int reactionTime = 20;
+    int reactionTime = 15;
 
     private final String TAG = AtpCheckActivity.class.getSimpleName();
 
