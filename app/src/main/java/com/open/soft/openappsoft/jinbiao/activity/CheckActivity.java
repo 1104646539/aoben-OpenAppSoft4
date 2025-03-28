@@ -153,7 +153,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 
 
     private EditText et_Sample_Num = null;
-    private EditText et_SampleTime = null;
+    private TextView et_SampleTime = null;
     private EditText et_companyCode = null;
     private TableRow llCompany;
 
@@ -1229,7 +1229,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         }
 
 
-        et_SampleTime = (EditText) findViewById(R.id.checkactivity_et_SampleTime);
+        et_SampleTime = findViewById(R.id.checkactivity_et_SampleTime);
         et_SampleTime.setOnClickListener(this);
         String time = GetCurrentTime();
 
@@ -1502,7 +1502,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 //        detectionResultBean.setLimitStandard(resultModel.xian + resultModel.concentrateUnit);//限量标准
 //        detectionResultBean.setLimitStandard(limit_standard);//限量标准
         detectionResultBean.setCriticalValue(resultModel.lin);//临界值
-        detectionResultBean.setDetectionValue(resultModel.check_value);//检测值
+        detectionResultBean.setDetectionValue(resultModel.check_value );//检测值
         detectionResultBean.setSampleConcentration(resultModel.style_long);//样品浓度
         detectionResultBean.setDetectionResult(resultModel.check_result);//检测结果
         detectionResultBean.setDetectionTime(resultModel.time);//检测时间
@@ -1522,6 +1522,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         detectionResultBean.setDeptId(DeptId); // 上传数据的DeptId参数
         detectionResultBean.companyCode = resultModel.companyCode;
         detectionResultBean.samplingDate = taskModel.getSamplingTime();
+        detectionResultBean.setUnit(resultModel.concentrateUnit);
 
 
         Log.d("zdl", "===============companyCode================" + detectionResultBean.companyCode);

@@ -134,13 +134,13 @@ public class DbHelper {
 
 
 
-        String[] projectNames1 = new String[]{
-                "盐酸克伦特罗",
-                "沙丁胺醇",
-                "莱克多巴胺",
-                "三聚氰胺",
-                "氯霉素"
-        };
+//        String[] projectNames1 = new String[]{
+//                "盐酸克伦特罗",
+//                "沙丁胺醇",
+//                "莱克多巴胺",
+//                "三聚氰胺",
+//                "氯霉素"
+//        };
 
 
 //        String[] projectNames1 = new String[]{
@@ -149,15 +149,16 @@ public class DbHelper {
 
 
 
-        for (int i = 0; i < projectNames1.length; i++) {
-            list.add(new LineModel(2, projectNames1[i], cardModel.name, cardModel.ScanStart, cardModel.ScanEnd, cardModel.CTPeakWidth, cardModel.CTPeakDistance, "1", "0.1", concentrateUnit));
-        }
-        try {
-            db.saveAll(list);
-            db.save(cardModel);
-        } catch (DbException e) {
-            e.printStackTrace();
-        }
+//        for (int i = 0; i < projectNames1.length; i++) {
+//            list.add(new LineModel(2, projectNames1[i], cardModel.name, cardModel.ScanStart, cardModel.ScanEnd,
+//                    cardModel.CTPeakWidth, cardModel.CTPeakDistance, "1", "0.1", concentrateUnit));
+//        }
+//        try {
+//            db.saveAll(list);
+//            db.save(cardModel);
+//        } catch (DbException e) {
+//            e.printStackTrace();
+//        }
         try {
 //        1、	检测单位：检测站
             {

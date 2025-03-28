@@ -406,6 +406,7 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
         detectionResultBean.setOperatorId(com.example.utils.http.Global.ID); // 上传数据的OperatorId参数
         detectionResultBean.companyCode = resultModel.companyCode;
         detectionResultBean.samplingDate = taskModel.getSamplingTime();
+        detectionResultBean.setUnit("");
 
 
         Log.d("zdl", "===============companyCode================" + detectionResultBean.companyCode);

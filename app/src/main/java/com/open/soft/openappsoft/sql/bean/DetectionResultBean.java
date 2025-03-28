@@ -54,6 +54,7 @@ public class DetectionResultBean {
     public String specimenTypeChildCode;               //样品类型code
     public String uploadID;               //上传返回的
     public String samplingDate;               //抽样时间
+    public String unit;               //检测值 单位
 
 
     public DetectionResultBean() {
@@ -231,6 +232,14 @@ public class DetectionResultBean {
 
     public void setCheckRunningNumber(int checkRunningNumber) {
         CheckRunningNumber = checkRunningNumber;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     public String getNumberSamples() {

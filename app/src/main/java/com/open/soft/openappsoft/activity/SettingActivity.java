@@ -144,7 +144,9 @@ public class SettingActivity extends Activity implements View.OnClickListener {
             initCn("M417", sp_name);
 
             //赋值
-            String name = new GT.GT_SharedPreferences(this, "companyName", true).query("name").toString();
+//            String name = new GT.GT_SharedPreferences(this, "companyName", true).query("name").toString();
+            String name = SharedPreferencesUtil.getDefaultSharedPreferences(SettingActivity.this).getString("companyName", "");
+
             if (!"0".equals(name)) {
 //                InterfaceURL.companyName = name;//赋值
 //                et_name.setText(name);
@@ -168,8 +170,8 @@ public class SettingActivity extends Activity implements View.OnClickListener {
 //                                } else {
 //                                    Global.company_name = "Aoben";
 //                                }
-
-                                new GT.GT_SharedPreferences(SettingActivity.this, "companyName", true).save("name", name);
+                            SharedPreferencesUtil.getDefaultSharedPreferences(SettingActivity.this).edit().putString("companyName", name).commit();
+//                                new GT.GT_SharedPreferences(SettingActivity.this, "companyName", true).save("name", name);
                                 GT.toast(SettingActivity.this, "修改成功！");
                                 InterfaceURL.companyName = name;
                             } else {

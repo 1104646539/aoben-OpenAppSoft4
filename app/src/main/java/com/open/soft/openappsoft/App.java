@@ -64,7 +64,7 @@ public class App extends Application {
         SDKInitializer.initialize(getApplicationContext());
 
         //jinbiao
-        DbHelper.InitDb(getApplicationContext());
+
         int time = SharedPreferencesUtil.getTime(this, "time");
         if (time == 1) {
             SharedPreferencesUtil.setTime(this, "time", 1);

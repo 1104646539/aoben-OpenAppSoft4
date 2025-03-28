@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:background="@color/bg_buy"
         android:orientation="horizontal">
 
@@ -24,15 +24,14 @@
         <TextView
             android:id="@+id/tv_add_task"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:paddingLeft="30dp"
-            android:paddingTop="10dp"
-            android:paddingRight="30dp"
-            android:paddingBottom="10dp"
+            android:gravity="center"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
             android:text="添加任务"
             android:textColor="@color/white"
-            android:textSize="22sp" />
+            android:textSize="26sp" />
     </RelativeLayout>
 
     <LinearLayout

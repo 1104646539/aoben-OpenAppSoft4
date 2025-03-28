@@ -1103,9 +1103,9 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
                             cr.sampleSource,
                             arrayState[stateIndex] + idnex++,//通道
                             System.currentTimeMillis(),//检测时间
-                            value + "%",//抑制率
+                            value + mProject.unit,//抑制率
                             value <= xlz ? "合格" : "不合格",//检测结果
-                            xlz + "%",//限量值
+                            xlz + "",//限量值
                             "",
                             com.example.utils.http.Global.NAME == null ? "无" : com.example.utils.http.Global.NAME,//用户名
                             cr.weight,//重量
@@ -1207,7 +1207,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
                             cr.sampleSource,
                             arrayState[stateIndex] + idnex++,
                             System.currentTimeMillis(),
-                            value == 0 ? "0" : df.format(value) + "",
+                            value == 0 ? "0"+ mProject.unit : df.format(value) + mProject.unit,
                             value <= xlz ? "合格" : "不合格",
                             df.format(xlz) + "",
                             "",
@@ -1307,14 +1307,13 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
     }
 
     private DetectionResultBean checkResultTranDetectionBean(CheckResult checkResult) {
-
         detectionResultBean = new DetectionResultBean();
         detectionResultBean.setSQLType("分光光度");//设置当前数据的模块名称(防止以后需求改动的需要)
         detectionResultBean.setNumberSamples(checkResult.taskID);//样品编号
         detectionResultBean.setDetectionTime(checkResult.testTime);//检测时间
         detectionResultBean.setAisle(checkResult.channel);//通道
         detectionResultBean.setSampleName(checkResult.sampleName);//样品名称
-        detectionResultBean.setDetectionValue(checkResult.testValue);//抑制率/检测值
+        detectionResultBean.setDetectionValue(checkResult.testValue + mProject.unit);//抑制率/检测值
         detectionResultBean.setDetectionResult(checkResult.resultJudge);//检测结果
         detectionResultBean.setUnitsUnderInspection(checkResult.bcheckedOrganization);//被检测单位
         detectionResultBean.setUnitsUnderInspectionCode(checkResult.bcheckedOrganizationCode);//被检测单位Code
@@ -1324,104 +1323,22 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
         detectionResultBean.setCommodityPlaceOrigin(checkResult.sampleSource);//商品来源
         detectionResultBean.setUploadStatus("未上传");
         detectionResultBean.setSpecimenType(checkResult.sampleType); // 样品类型
-        detectionResultBean.setLimitStandard(checkResult.xlz); // 限量标准
+        detectionResultBean.setLimitStandard(checkResult.xlz+mProject.unit); // 限量标准
 //        detectionResultBean.setCriticalValue(checkResult.xlz); // 临界值
         detectionResultBean.setTestItem(checkResult.projectName); // 检测项目
         detectionResultBean.setQRCode(card_number); // 试剂盒二维码字符串
         detectionResultBean.setOperatorId(com.example.utils.http.Global.ID); // 上传数据的OperatorId参数
 //        detectionResultBean.setAreaId(terrace); // 上传数据的AreaId参数
 //        detectionResultBean.setDeptId(DeptId); // 上传数据的DeptId参数
-        detectionResultBean.setXgd(checkResult.xgd);//吸光度
+        detectionResultBean.setXgd(checkResult.xgd+ mProject.unit);//吸光度
         detectionResultBean.companyCode = checkResult.companyCode; //组织代码
 
         detectionResultBean.setSpecimenTypeCode(checkResult.sampleTypeCode);//样本类型Code
         detectionResultBean.setSpecimenTypeChild(checkResult.sampleTypeChild);//样本子类型
         detectionResultBean.setSpecimenTypeChildCode(checkResult.sampleTypeChildCode);////样本子类型Code
         detectionResultBean.setSamplingDate(checkResult.SamplingTime);////抽样时间
+        detectionResultBean.setUnit(mProject.unit);////单位
         return detectionResultBean;
-    }
-
-
-    public void upDateShuju() {
-        int[] SelectArray = testAdapter.getSelectedArray();
-        for (int k = 0; k < SelectArray.length; k++) {
-            SamplNumlist.add(sampleidlist[SelectArray[k] - 1]);
-            yplblist.add(yplbIdlist[SelectArray[k] - 1]);
-            typelist.add(sampletypelist[SelectArray[k] - 1]);
-            locId.add(locListId[SelectArray[k] - 1]);
-            locsp1Id.add(locSp1Id[SelectArray[k] - 1]);
-            locsp2Id.add(locSp2Id[SelectArray[k] - 1]);
-            locsp3Id.add(locSp3Id[SelectArray[k] - 1]);
-            subProductId.add(sublistProductId[SelectArray[k] - 1]);
-        }
-        if (savaDatas == null || savaDatas.size() == 0) return;
-        if (currentIndex < savaDatas.size()) {
-            //上传数据
-            detectionResultBean = new DetectionResultBean();
-            CheckResult checkResult = savaDatas.get(currentIndex);
-            detectionResultBean.setSQLType("分光光度");//设置当前数据的模块名称(防止以后需求改动的需要)
-            detectionResultBean.setNumberSamples(checkResult.sampleNum);//样品编号
-            detectionResultBean.setDetectionTime(checkResult.testTime);//检测时间
-            detectionResultBean.setAisle(checkResult.channel);//通道
-            detectionResultBean.setSampleName(checkResult.sampleName);//样品名称
-            detectionResultBean.setDetectionValue(checkResult.testValue);//抑制率/检测值
-            detectionResultBean.setDetectionResult(checkResult.resultJudge);//检测结果
-            detectionResultBean.setUnitsUnderInspection(checkResult.bcheckedOrganization);//被检测单位
-            detectionResultBean.setInspector(checkResult.checker);//检测人员
-            detectionResultBean.setDetectionCompany(checkResult.checkedOrganization);//检测单位
-            detectionResultBean.setWeight(checkResult.weight);//重量
-            detectionResultBean.setCommodityPlaceOrigin(checkResult.sampleSource);//商品来源
-            detectionResultBean.setUploadStatus("未上传");
-            detectionResultBean.setSpecimenType(checkResult.sampleType); // 样品类型
-            detectionResultBean.setLimitStandard(limit_standard); // 限量标准
-            detectionResultBean.setCriticalValue(critical_value); // 临界值
-            detectionResultBean.setTestItem(jiance_xiangmu); // 检测项目
-            detectionResultBean.setQRCode(card_number); // 试剂盒二维码字符串
-            detectionResultBean.setOperatorId(com.example.utils.http.Global.ID); // 上传数据的OperatorId参数
-            detectionResultBean.setAreaId(terrace); // 上传数据的AreaId参数
-            detectionResultBean.setDeptId(DeptId); // 上传数据的DeptId参数
-            detectionResultBean.setXgd(checkResult.xgd);//吸光度
-            detectionResultBean.companyCode = checkResult.companyCode; //组织代码
-            if (locsp1Id.get(currentIndex) == null) {
-                detectionResultBean.setSpId1("");
-            } else {
-                detectionResultBean.setSpId1(locsp1Id.get(currentIndex).toString());//省
-            }
-            if (locsp2Id.get(currentIndex) == null) {
-                detectionResultBean.setSpId2("");
-            } else {
-                detectionResultBean.setSpId2(locsp2Id.get(currentIndex).toString());
-            }
-            if (locsp3Id.get(currentIndex) == null) {
-                detectionResultBean.setSpId3("");
-            } else {
-                detectionResultBean.setSpId3(locsp3Id.get(currentIndex).toString());
-            }
-
-            detectionResultBean.setSampleId(sampleId);//总分类
-            if (subProductId.get(currentIndex) == null) {
-                detectionResultBean.setYplbId("");
-            } else {
-                detectionResultBean.setYplbId(subProductId.get(currentIndex).toString());
-            }
-            if (yplblist.get(currentIndex) == null) {
-                detectionResultBean.setObjectId("");
-            } else {
-                detectionResultBean.setObjectId(yplblist.get(currentIndex).toString());
-
-            }
-            Log.d("zdl", "===开始上传===" + currentIndex);
-            Log.d("zdl", "start=====:" + detectionResultBean.toString());
-            if (!com.example.utils.http.Global.isAdimin) {
-                //走的这个
-                uploadResult(currentIndex);
-            } else {
-                MainActivity.hibernate.save(detectionResultBean);
-            }
-        } else {
-            Toast.makeText(act, "数据上传完成", Toast.LENGTH_LONG).show();
-            MessageDialog.show("提示", "数据上传完成" + errMsg, "确定");
-        }
     }
 
     private DetectionResultBean detectionResultBean;
@@ -1625,58 +1542,58 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
         // 波长
 
 
-        if (isOneStart) {
-            isOneStart = false;
-
-            GT.Thread.runJava(new Runnable() {
-                @Override
-                public void run() {
-                    GT.Thread.sleep(1000);
-
-                    GT.Thread.runAndroid(PesticideTestActivity2.this, new Runnable() {
-                        @Override
-                        public void run() {
-
-                            mProject = new Project();
-                            mProject.checker = "";
-                            mProject.projectName = "有机磷和氨基甲酸酯类";
-                            mProject.testStandard = "GB/T 5009.199";
-                            mProject.cardXlz = 50.0f;
-                            mProject.k = 1.0f;
-                            mProject.b = 0.0f;
-                            mProject.bochang = 410;
-                            mProject.isSelect = false;
-
-                            Log.d("波长", mProject.projectName);
-
-                            if (isNc()) {
-                                tv_yzl.setText("抑制率");
-                                tvCompareValue.setVisibility(View.VISIBLE);
-                                btnCompare.setText("对照");
-
-                                initSp();
-                            } else {
-                                Ac = 0;
-                                tv_yzl.setText("检测值");
-                                APPUtils.showToast(PesticideTestActivity2.this, "请先进行调零");
-                                tvCompareValue.setVisibility(View.GONE);
-                                btnCompare.setText("调零");
-
-                                btnTest.setEnabled(false);
-                            }
-                            countDownClear();
-                            openLight(mProject.bochang);
-
-                            // 波长
-
-                        }
-                    });
-
-                }
-            });
-
-
-        }
+//        if (isOneStart) {
+//            isOneStart = false;
+//
+//            GT.Thread.runJava(new Runnable() {
+//                @Override
+//                public void run() {
+//                    GT.Thread.sleep(1000);
+//
+//                    GT.Thread.runAndroid(PesticideTestActivity2.this, new Runnable() {
+//                        @Override
+//                        public void run() {
+//
+//                            mProject = new Project();
+//                            mProject.checker = "";
+//                            mProject.projectName = "有机磷和氨基甲酸酯类";
+//                            mProject.testStandard = "GB/T 5009.199";
+//                            mProject.cardXlz = 50.0f;
+//                            mProject.k = 1.0f;
+//                            mProject.b = 0.0f;
+//                            mProject.bochang = 410;
+//                            mProject.isSelect = false;
+//
+//                            Log.d("波长", mProject.projectName);
+//
+//                            if (isNc()) {
+//                                tv_yzl.setText("抑制率");
+//                                tvCompareValue.setVisibility(View.VISIBLE);
+//                                btnCompare.setText("对照");
+//
+//                                initSp();
+//                            } else {
+//                                Ac = 0;
+//                                tv_yzl.setText("检测值");
+//                                APPUtils.showToast(PesticideTestActivity2.this, "请先进行调零");
+//                                tvCompareValue.setVisibility(View.GONE);
+//                                btnCompare.setText("调零");
+//
+//                                btnTest.setEnabled(false);
+//                            }
+//                            countDownClear();
+//                            openLight(mProject.bochang);
+//
+//                            // 波长
+//
+//                        }
+//                    });
+//
+//                }
+//            });
+//
+//
+//        }
 
 
     }

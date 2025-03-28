@@ -126,7 +126,7 @@
                         <TextView
                             android:id="@+id/tv_check_type"
                             android:onClick="ClickDialog"
-                            style="@style/meninput_edittext_style" />
+                            style="@style/checkactivity_textview_style" />
                     </TableRow>
 
                     <TableRow
@@ -145,7 +145,7 @@
                         <Spinner
                             android:id="@+id/check_shiji_spinner"
                             android:visibility="gone"
-                            style="@style/checkactivity_spinner_style" />
+                            style="@style/checkactivity_textview_style" />
                     </TableRow>
 
                     <TableRow
@@ -164,7 +164,7 @@
 
                         <TextView
                             android:id="@+id/tv_check_sample"
-                            style="@style/meninput_edittext_style"
+                            style="@style/checkactivity_textview_style"
                             android:layout_width="100dp"
                             android:onClick="ClickDialog" />
                     </TableRow>
@@ -180,12 +180,12 @@
 
                         <Spinner
                             android:id="@+id/check_project_spinner"
-                            style="@style/checkactivity_spinner_style"
+                            style="@style/checkactivity_textview_style"
                             android:visibility="visible" />
 
                         <TextView
                             android:id="@+id/tv_check_project"
-                            style="@style/meninput_edittext_style"
+                            style="@style/checkactivity_textview_style"
                             android:visibility="visible" />
                     </TableRow>
 
@@ -254,19 +254,13 @@
                             android:layout_marginRight="10dp"
                             android:text="检测时间:" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/checkactivity_et_SampleTime"
                             android:lines="1"
                             android:inputType="text"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="20dp"
-                            android:layout_weight="1"
-                            android:cursorVisible="false"
-                            android:editable="false"
                             android:singleLine="true"
-                            android:textSize="20sp" />
-
+                            style="@style/checkactivity_textview_style"
+                            android:textColor="@color/text_black" />
                     </TableRow>
 
                     <TableRow

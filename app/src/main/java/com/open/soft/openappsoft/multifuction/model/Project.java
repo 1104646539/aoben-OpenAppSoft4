@@ -23,6 +23,7 @@ public class Project extends BaseData<Project> implements FiltrateModel, Parcela
     public float cardXlz;
     public float k;
     public float b;
+    public String unit;
 
     public int bochang;
 
@@ -31,7 +32,7 @@ public class Project extends BaseData<Project> implements FiltrateModel, Parcela
 
     public Project(){}
 
-    public Project(String checker, String projectName, String testStandard, float cardXlz, float k, float b, int bochang) {
+    public Project(String checker, String projectName, String testStandard, float cardXlz, float k, float b, int bochang,String unit) {
         this.checker = checker;
         this.projectName = projectName;
         this.testStandard = testStandard;
@@ -39,6 +40,7 @@ public class Project extends BaseData<Project> implements FiltrateModel, Parcela
         this.k = k;
         this.b = b;
         this.bochang = bochang;
+        this.unit = unit;
     }
 
     public String toString2() {
@@ -64,6 +66,7 @@ public class Project extends BaseData<Project> implements FiltrateModel, Parcela
 //        this.cardXlz = cardXlz;
 //    }
 
+
     @Override
     public String getName() {
         return projectName;
@@ -83,6 +86,7 @@ public class Project extends BaseData<Project> implements FiltrateModel, Parcela
         dest.writeDouble(this.k);
         dest.writeDouble(this.b);
         dest.writeByte(this.isSelect ? (byte) 1 : (byte) 0);
+        dest.writeString(this.unit);
     }
 
     protected Project(Parcel in) {
@@ -93,6 +97,7 @@ public class Project extends BaseData<Project> implements FiltrateModel, Parcela
         this.k = in.readFloat();
         this.b = in.readFloat();
         this.isSelect = in.readByte() != 0;
+        this.unit = in.readString();
     }
 
     public static final Parcelable.Creator<Project> CREATOR = new Parcelable.Creator<Project>() {

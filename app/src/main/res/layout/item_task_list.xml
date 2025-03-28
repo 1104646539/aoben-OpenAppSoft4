@@ -11,11 +11,16 @@
         android:id="@+id/tv_id"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="1.2"
         android:gravity="center"
         android:text="任务ID"
         android:textColor="@color/black"
-        android:textSize="22sp" />
+        android:textSize="26sp" />
+
+    <View
+        android:layout_width="1px"
+        android:layout_height="match_parent"
+        android:background="@color/gray3" />
 
     <TextView
         android:id="@+id/tv_name"
@@ -25,7 +30,12 @@
         android:gravity="center"
         android:text="样品名"
         android:textColor="@color/black"
-        android:textSize="22sp" />
+        android:textSize="26sp" />
+
+    <View
+        android:layout_width="1px"
+        android:layout_height="match_parent"
+        android:background="@color/gray3" />
 
     <TextView
         android:id="@+id/tv_bjdw"
@@ -35,7 +45,12 @@
         android:gravity="center"
         android:text="受检单位"
         android:textColor="@color/black"
-        android:textSize="22sp" />
+        android:textSize="26sp" />
+
+    <View
+        android:layout_width="1px"
+        android:layout_height="match_parent"
+        android:background="@color/gray3" />
 
     <TextView
         android:id="@+id/tv_time"
@@ -45,5 +60,5 @@
         android:gravity="center"
         android:text="抽样时间"
         android:textColor="@color/black"
-        android:textSize="22sp" />
+        android:textSize="26sp" />
 </LinearLayout>

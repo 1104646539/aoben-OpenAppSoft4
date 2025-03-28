@@ -48,7 +48,9 @@ import com.open.soft.openappsoft.data2.JingWeiDataBean;
 import com.open.soft.openappsoft.jinbiao.activity.CheckActivity;
 import com.open.soft.openappsoft.jinbiao.activity.CheckActivityByMen;
 import com.open.soft.openappsoft.jinbiao.activity.TSCheckActivity;
+import com.open.soft.openappsoft.jinbiao.db.DbHelper;
 import com.open.soft.openappsoft.jinbiao.location.LocationService;
+import com.open.soft.openappsoft.jinbiao.model.CardCompanyModel;
 import com.open.soft.openappsoft.jinbiao.model.CompanyNameData;
 import com.open.soft.openappsoft.jinbiao.model.LineModel;
 import com.open.soft.openappsoft.jinbiao.model.PdfRootBean;
@@ -221,13 +223,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     private LocationReceiver1 locationReceiver1;//自定义内部类广播 服务于 定位
 
 
-    String[] projectNames = new String[]{
-            "甲醛", "吊白块", "二氧化硫", "亚硝酸盐", "双氧水", "硼砂", "甲醇", "硫酸铝钾", "重金属铅", "山梨酸钾", "溴酸钾", "糖精钠", "组胺",
-            "挥发性盐基氮", "丙二醛", "蛋白质", "氨基酸态氮", "硫氰酸盐", "过氧化苯甲酰", "谷氨酸钠", "碘酸钾", "食醋总酸", "硫酸镁", "甜蜜素",
-            "苯甲酸钠", "羟甲基糠醛", "果糖和葡萄糖", "重金属铬", "重金属镉", "蜂蜜中蔗糖", "钾离子", "柠檬黄", "日落黄", "胭脂红", "苋菜红",
-            "亮蓝", "靛蓝", "尿素", "硫化钠", "亚铁氰化钾", "硫酸铜", "余氯", "氯离子", "硝酸盐", "酱油总酸", "过氧化值", "茶多酚", "酸价", "食用油酸价"
-
-    };
+//    String[] projectNames = new String[]{
+//            "甲醛", "吊白块", "二氧化硫", "亚硝酸盐", "双氧水", "硼砂", "甲醇", "硫酸铝钾", "重金属铅", "山梨酸钾", "溴酸钾", "糖精钠", "组胺",
+//            "挥发性盐基氮", "丙二醛", "蛋白质", "氨基酸态氮", "硫氰酸盐", "过氧化苯甲酰", "谷氨酸钠", "碘酸钾", "食醋总酸", "硫酸镁", "甜蜜素",
+//            "苯甲酸钠", "羟甲基糠醛", "果糖和葡萄糖", "重金属铬", "重金属镉", "蜂蜜中蔗糖", "钾离子", "柠檬黄", "日落黄", "胭脂红", "苋菜红",
+//            "亮蓝", "靛蓝", "尿素", "硫化钠", "亚铁氰化钾", "硫酸铜", "余氯", "氯离子", "硝酸盐", "酱油总酸", "过氧化值", "茶多酚", "酸价", "食用油酸价"
+//    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -299,19 +300,19 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         String pdf_name = Global.companyCode_value + "_" + Global.deviceType_value + "_" + Global.samplingMode_value + ".pdf";
         Global.URI_MULT = sdPath + pdf_name;
         if (SharedPreferencesUtil.getDefaultSharedPreferences(this).getBoolean("isFirst", true)) {
-            Project project = new Project("",
-                    "有机磷和氨基甲酸酯类",
-                    "GB/T 5009.199", 50f, 1f, 0f, 410);
-            project.save(project);
-            for (int i = 0; i < projectNames.length; i++) {
-                Project project2 = new Project("",
-                        projectNames[i],
-                        "GB/T 5009.199", 1f, 1f, 0f, 410);
-                project.save(project2);
-            }
+//            Project project = new Project("",
+//                    "有机磷和氨基甲酸酯类",
+//                    "GB/T 5009.199", 50f, 1f, 0f, 410, "k");
+//            project.save(project);
+//            for (int i = 0; i < projectNames.length; i++) {
+//                Project project2 = new Project("",
+//                        projectNames[i],
+//                        "GB/T 5009.199", 1f, 1f, 0f, 410, "k");
+//                project.save(project2);
+//            }
 
 //            projects = (ArrayList<Project>) new Project().findAll();
-            initBook();
+//            initBook();
             initXlzMap();
         }
 
@@ -688,72 +689,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
         String pdf_name = Global.companyCode_value + "_" + Global.deviceType_value + "_" + Global.samplingMode_value + ".pdf";
 
-//        GT.HttpUtil.postRequest(InterfaceURL.BASE_URL + "Other/GetManual", data, new GT.HttpUtil.OnLoadData() {
-//            @Override
-//            public void onSuccess(String response) {
-//                PdfRootBean pdfRootBean = new Gson().fromJson(response, PdfRootBean.class);
-//                if (pdfRootBean != null) {
-//                    if (pdfRootBean.getData() != null) {
-//                        url_pdf = pdfRootBean.getData().getUrl();
-//                        new DownloadUtil().download(url_pdf, appSavePath, pdf_name, new DownloadUtil.OnDownloadListener() {
-//                            @Override
-//                            public void onDownloadSuccess(File file) {
-//                                runOnUiThread(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        progressDialog.dismiss();
-//                                        //操作手册
-//                                        String appSavePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
-//                                        Global.URI_MULT = appSavePath + pdf_name;
-//                                        openPDFInNative(MainActivity.this, Global.URI_MULT);
-//                                    }
-//                                });
-//
-//                            }
-//
-//                            @Override
-//                            public void onDownloading(int progress) {
-//                                runOnUiThread(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        progressDialog.setMessage("正在更新最新PDF，请稍等...已完成 " + progress + "%");
-//                                    }
-//                                });
-//                            }
-//
-//                            @Override
-//                            public void onDownloadFailed(Exception e) {
-//                                runOnUiThread(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        progressDialog.dismiss();
-//                                    }
-//                                });
-//
-//                            }
-//                        });
-//                    } else {
-//                        String errMsg = pdfRootBean.getErrMsg();
-//                        runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                Toast.makeText(MainActivity.this, "暂无此操作手册，敬请等待更新。。。", Toast.LENGTH_LONG).show();
-//                                progressDialog.dismiss();
-//                            }
-//                        });
-//                    }
-//
-//
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onError(String response) {
-//                Toast.makeText(MainActivity.this, "暂无此操作手册，敬请等待更新。。。", Toast.LENGTH_LONG).show();
-//                progressDialog.dismiss();
-//            }
-//        });
         HashMap dataMap = new HashMap();
         dataMap.put("companyCode", Global.companyCode_value);
         dataMap.put("deviceType", Global.deviceType_value);
@@ -860,12 +795,19 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         new Thread() {
             @Override
             public void run() {
-
-                initDB();
-
-                InputStream is = null;
-                FileOutputStream fos = null;
                 try {
+                    //初始化测试用的
+                    initDB();
+
+                    //初始化金标的
+                    DbHelper.InitDb(getApplicationContext());
+
+                    //初始化项目
+                    initXlsProject();
+
+                    InputStream is = null;
+                    FileOutputStream fos = null;
+
                     is = getAssets().open(getResources().getString(R.string.excel_name));
 
                     File tempFile = new File(getCacheDir(), "test.xls");//临时文件，第二个参数为文件名字，可随便取
@@ -928,9 +870,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                         }
                     }
                     new SampleName().saveAll(list);
-                    SharedPreferencesUtil.getDefaultSharedPreferences(MainActivity.this).edit().putBoolean("isFirst", false).apply();
-                    if (com.open.soft.openappsoft.multifuction.util.Global.DEBUG)
+
+
+                    if (com.open.soft.openappsoft.multifuction.util.Global.DEBUG) {
                         progressDialog.dismiss();
+                    }
+                    SharedPreferencesUtil.getDefaultSharedPreferences(MainActivity.this).edit().putBoolean("isFirst", false).apply();
+
                 } catch (final Exception e) {
                     runOnUiThread(new Runnable() {
                         @Override
@@ -940,8 +886,67 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                         }
                     });
                 }
+
             }
         }.start();
+    }
+
+    CardCompanyModel cardModel = new CardCompanyModel("奥本", "300", "900", "120", "330");
+
+    /**
+     * 初始化项目
+     *
+     * @throws Exception
+     */
+    private void initXlsProject() throws Exception {
+        DbHelper.GetInstance().save(cardModel);
+        InputStream is = null;
+        FileOutputStream fos = null;
+        is = getAssets().open(getResources().getString(R.string.excel_projects_name));
+
+        File tempFile = new File(getCacheDir(), "test2.xls");//临时文件，第二个参数为文件名字，可随便取
+        fos = new FileOutputStream(tempFile);
+        byte[] buf = new byte[1024];
+        int len;
+        while ((len = is.read(buf)) > 0) {//while循环进行读取
+            fos.write(buf, 0, len);
+        }
+        fos.close();
+        is.close();
+
+        Workbook book = Workbook.getWorkbook(tempFile);//用读取到的表格文件来实例化工作簿对象（符合常理，我们所希望操作的就是Excel工作簿文件）
+        Sheet[] sheets = book.getSheets(); //得到所有的工作表
+        List<Project> projects = new ArrayList<>();
+        List<LineModel> lineModels = new ArrayList<>();
+        if (sheets.length > 0) {
+            Sheet sheet = book.getSheet(0);
+            int row = sheet.getRows();
+            for (int i = 1; i < row; i++) {
+                String moduleName = sheet.getCell(0, i).getContents();
+                String projectName = sheet.getCell(1, i).getContents();
+                String xlz = sheet.getCell(5, i).getContents();
+                String unit = sheet.getCell(6, i).getContents();
+                String func = sheet.getCell(7, i).getContents();
+                String k = sheet.getCell(8, i).getContents();
+                String b = sheet.getCell(9, i).getContents();
+                Timber.i("projectName=" + projectName + " func=" + func);
+                if (!TextUtils.isEmpty(func) && !TextUtils.isEmpty(projectName)) {
+                    if (func.contains("比色法") || func.contains("消线法")) {
+                        lineModels.add(new LineModel(func.contains("消线法") ? 2 : 3, projectName, cardModel.name, cardModel.ScanStart, cardModel.ScanEnd,
+                                cardModel.CTPeakWidth, cardModel.CTPeakDistance, xlz, xlz, unit));
+                    } else if (func.contains("分光光度") || func.contains("酶抑制法")) {
+                        float K = Float.valueOf(k);
+                        float B = Float.valueOf(b);
+                        float XLZ = Float.valueOf(xlz);
+                        Project project = new Project("", projectName, "", XLZ, K, B, 410, unit);
+                        projects.add(project);
+                    }
+
+                }
+            }
+        }
+        DbHelper.GetInstance().saveAll(lineModels);
+        new Project().saveAll(projects);
     }
 
     String[] initName1 = {"畜禽产品类", "农产品类", "水产品类", "加工制成类", "餐饮器具类"};

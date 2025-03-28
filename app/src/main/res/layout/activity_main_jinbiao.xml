@@ -52,15 +52,26 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="30dp"
+                android:padding="50dp"
                 android:layout_weight="1.0"
-                android:background="@drawable/main_change_btu_shape"
+                style="@style/BtnBottom"
                 android:onClick="ClickDinXin"
                 android:text="定性检测"
                 android:textSize="30sp"
                 android:layout_margin="10dp"
                 />
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="50dp"
+                android:layout_weight="1.0"
+                style="@style/BtnBottom"
+                android:onClick="ClickProject"
+                android:text="项目管理"
+                android:textSize="30sp"
+                android:layout_margin="10dp"
+                />
 
         </LinearLayout>
 
@@ -72,24 +83,13 @@
             android:orientation="horizontal"
             android:gravity="center"
             >
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="30dp"
-                android:layout_weight="1.0"
-                android:background="@drawable/main_change_btu_shape"
-                android:onClick="ClickProject"
-                android:text="项目管理"
-                android:textSize="30sp"
-                android:layout_margin="10dp"
-                />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="30dp"
+                android:padding="50dp"
                 android:layout_weight="1.0"
-                android:background="@drawable/main_change_btu_shape"
+                style="@style/BtnBottom"
                 android:onClick="ClickSelect"
                 android:text="功能选项"
                 android:textSize="30sp"
@@ -99,9 +99,9 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="30dp"
+                android:padding="50dp"
                 android:layout_weight="1.0"
-                android:background="@drawable/main_change_btu_shape"
+                style="@style/BtnBottom"
                 android:onClick="ClickExit"
                 android:text="进出卡"
                 android:textSize="30sp"

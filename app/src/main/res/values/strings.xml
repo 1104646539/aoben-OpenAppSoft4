@@ -17,6 +17,7 @@
     <string name="ATPButton">ATP检测</string>
     <!--<string name="app_name">多功能检测</string>-->
     <string name="excel_name">t_bianmabiao2.xls</string>
+    <string name="excel_projects_name">aoben_projects.xls</string>
     <string name="dis_numberaz">1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_</string>
     <string name="upload_url">http://eco.ahau.edu.cn/jc/dtrans</string>
 

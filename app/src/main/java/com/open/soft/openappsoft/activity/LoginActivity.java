@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -24,8 +25,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 
 import com.example.utils.http.AreaResultBean;
 import com.example.utils.http.Global;
@@ -39,6 +42,7 @@ import com.google.gson.Gson;
 import com.gsls.gt.GT;
 import com.open.soft.openappsoft.App;
 import com.open.soft.openappsoft.R;
+import com.open.soft.openappsoft.atp.AtpArgActivity;
 import com.open.soft.openappsoft.data2.JiaMiData;
 import com.open.soft.openappsoft.data2.JiaMiDataBean;
 import com.open.soft.openappsoft.jinbiao.model.SharedPreferencesUtil;
@@ -72,6 +76,7 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
     Button btn_login;
     Button btn_login_admin;
     private TextView tv_homeLocation;
+    private TextView tv_title;
     public static SharedPreferences2 sp_ServiceUrl;
 
     @SuppressLint("HandlerLeak")
@@ -86,9 +91,49 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
                         getAreaList();
                     }
                 }, 1000 * 3);
+            } else if (msg.what == What_Click_atp) {
+                clickSettings = 0;
             }
         }
     };
+    int clickSettings = 0;
+    int What_Click_atp = 100;
+
+    private void ClickSnDialog() {
+        clickSettings++;
+        if (clickSettings > 5) {
+            clickSettings = 0;
+            showSnDialog();
+        } else {
+            handler.removeMessages(What_Click_atp);
+            handler.sendEmptyMessageDelayed(What_Click_atp, 2000);
+        }
+    }
+
+    private void showSnDialog() {
+        final EditText et_name = new EditText(this);
+
+        //赋值
+//        String name = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString("companyName", "W123");
+        String name = InterfaceURL.companyName;
+
+        et_name.setText(name);
+        new AlertDialog.Builder(this).setTitle("请输入设备名(SN)")
+                .setView(et_name)
+                .setPositiveButton("确定", (dialogInterface, i) -> {
+                    //按下确定键后的事件
+                    String name1 = et_name.getText().toString();
+                    if (null != name1 && !"null".equals(name1) && name1.length() > 0) {
+                        SharedPreferencesUtil.getDefaultSharedPreferences(this).edit().putString("companyName", name1).commit();
+//                                new GT.GT_SharedPreferences(SettingActivity.this, "companyName", true).save("name", name);
+                        GT.toast(this, "修改成功！");
+                        InterfaceURL.companyName = name1;
+                    } else {
+                        GT.toast(this, "设备名(SN)不能为空！");
+                    }
+                }).setNegativeButton("取消", null).show();
+
+    }
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -103,6 +148,7 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
         sp_ServiceUrl = new SharedPreferences2(this, "companyName");
 
         spinner = findViewById(R.id.spr_pt);
+        tv_title = findViewById(R.id.tv_title);
         et_user = findViewById(R.id.et_user);
         et_psw = findViewById(R.id.et_psw);
         btn_login = findViewById(R.id.btn_login);
@@ -116,6 +162,7 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
         progressDialog.setCancelable(false);//设置无法在登录的时候取消
 //        progressDialog.show();
         btn_login.setOnClickListener(this);
+        tv_title.setOnClickListener(this);
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         receiver = new NetworkReceiver();
         registerReceiver(receiver, filter);
@@ -316,7 +363,9 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
     private void initSp() {
 
         String url_api = sp_ServiceUrl.query("url_api", Global.BASE_URL).toString();
-        GT.logs("查询出来的URL:" + url_api);
+        InterfaceURL.companyName = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString("companyName", InterfaceURL.companyName);
+
+        GT.logs("查询出来的URL:" + url_api + " InterfaceURL.companyName=" + InterfaceURL.companyName);
 //        if (!"0".equals(url_api)) {
 //            Global.BASE_URL = InterfaceURL.BASE_URL = url_api;
 //        } else {
@@ -473,6 +522,9 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
                 break;
             case R.id.btn_login_admin:
                 startAdmin();
+                break;
+            case R.id.tv_title:
+                ClickSnDialog();
                 break;
         }
     }
