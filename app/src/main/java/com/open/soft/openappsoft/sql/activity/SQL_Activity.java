@@ -3,11 +3,9 @@ package com.open.soft.openappsoft.sql.activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -19,17 +17,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
 import com.gsls.gt.GT;
 import com.kongzue.dialogx.dialogs.MessageDialog;
 import com.lidroid.xutils.DbUtils;
@@ -38,9 +32,6 @@ import com.open.soft.openappsoft.activity.LoginActivity;
 import com.open.soft.openappsoft.activity.MainActivity;
 import com.open.soft.openappsoft.jinbiao.activity.ResultActivity;
 import com.open.soft.openappsoft.jinbiao.db.DbHelper;
-import com.open.soft.openappsoft.jinbiao.model.TestDataBean1;
-import com.open.soft.openappsoft.jinbiao.model.TestDataBean2;
-import com.open.soft.openappsoft.jinbiao.model.TestDataBean3;
 import com.open.soft.openappsoft.jinbiao.util.SerialUtils;
 import com.open.soft.openappsoft.jinbiao.util.ToolUtils;
 import com.open.soft.openappsoft.multifuction.activity.ResultQueryActivity;
@@ -52,7 +43,6 @@ import com.open.soft.openappsoft.util.UploadThread2;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.text.DateFormat;
@@ -75,13 +65,6 @@ import jxl.write.WritableCellFormat;
 import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 import timber.log.Timber;
 
 /**
@@ -121,6 +104,8 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
     private CheckBox cb_activity_sql;
     @GT.Annotations.GT_View(R.id.ll_moduleName)
     private LinearLayout ll_moduleName;
+    @GT.Annotations.GT_View(R.id.ll_select_all)
+    private LinearLayout ll_select_all;
     @GT.Annotations.GT_View(R.id.ll_detectionItem)
     private View ll_detectionItem;
 
@@ -181,13 +166,7 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
         cb_activity_sql.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                for (int i = 0; i < temporaryData.size(); i++) {
-                    DetectionResultBean detectionResultBean = temporaryData.get(i);
-                    detectionResultBean.setSelect(isChecked);
-                    temporaryData.set(i, detectionResultBean);
-                }
-                sqlAdapter.setDetectionProjectBeanList(temporaryData);
+                selectedAll(isChecked);
             }
         });
         //查询模块
@@ -244,13 +223,34 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 
             }
         });
+
+        ll_select_all.setOnClickListener((v)->{
+            selectedAll(!isChecked);
+        });
+    }
+
+    boolean isChecked = false;
+
+    /**
+     * 全选，全不选
+     *
+     * @param isChecked
+     */
+    private void selectedAll(boolean isChecked) {
+        for (int i = 0; i < temporaryData.size(); i++) {
+            DetectionResultBean detectionResultBean = temporaryData.get(i);
+            detectionResultBean.setSelect(isChecked);
+            temporaryData.set(i, detectionResultBean);
+        }
+        sqlAdapter.setDetectionProjectBeanList(temporaryData);
+        this.isChecked = isChecked;
     }
 
     //更新数据库数据
     private void updateSQLData() {
         progressDialog.show();
 //        if ("多参数食品安全检测仪".equals(InterfaceURL.oneModule)) {
-            detectionResultBeans = hibernate.flashback("ID").queryAll(DetectionResultBean.class);//loadData 加载数据 全部
+        detectionResultBeans = hibernate.flashback("ID").queryAll(DetectionResultBean.class);//loadData 加载数据 全部
 //        } else if ("农药残留单项精准分析仪".equals(InterfaceURL.oneModule)) {
 //            detectionResultBeans = hibernate.flashback("ID").where("SQLType = ?", "胶体金").queryAll(DetectionResultBean.class);//loadData 加载数据 单金标或分光光度
 //        } else if ("农药残留检测仪".equals(InterfaceURL.oneModule)) {
@@ -281,7 +281,7 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 
 
         //模块名称
-        arrayString = new String[]{"全部", "分光光度", "胶体金","ATP"};
+        arrayString = new String[]{"全部", "分光光度", "胶体金", "ATP"};
         stringArrayAdapter = new ArrayAdapter<>(SQL_Activity.this, R.layout.sp_style, R.id.tv_sp_size, arrayString);
         sp_moduleName.setAdapter(stringArrayAdapter);
 
@@ -417,9 +417,13 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
         }
     }
 
-    @GT.Annotations.GT_Click({R.id.btn_clear, R.id.btn_delete, R.id.btn_print, R.id.btn_uploading, R.id.btn_export, R.id.btn_return, R.id.btn_fggb, R.id.btn_jtj, R.id.cb_activity_sql, R.id.tv_select_all})
+    @GT.Annotations.GT_Click({R.id.btn_clear, R.id.btn_delete, R.id.btn_print, R.id.btn_uploading, R.id.btn_export, R.id.btn_return, R.id.btn_fggb, R.id.btn_jtj, R.id.cb_activity_sql,  R.id.ll_select_all})
     public void clickView(View view) {
         switch (view.getId()) {
+            case R.id.ll_select_all:
+                //清空
+                selectedAll(!this.isChecked);
+                break;
             case R.id.btn_clear:
                 //清空
                 ClickClear(view);
@@ -734,7 +738,7 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 
                 // 朝内打印
 //                            printData = GetPrintInfo4(detectionResultBean, this);
-            }else if ("ATP".equals(detectionResultBean.getSQLType())) {
+            } else if ("ATP".equals(detectionResultBean.getSQLType())) {
                 // 朝外打印
                 printData = GetPrintInfo5(detectionResultBean, this);
 
@@ -744,7 +748,7 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 
 //            APPUtils.showToast(this, printData);
             byte[] data = printData.getBytes(Charset.forName("gb2312"));
-            Timber.d("data="+new String(data,Charset.forName("gb2312")));
+            Timber.d("data=" + new String(data, Charset.forName("gb2312")));
 
             if (!SerialUtils.COM4_SendData(data)) {
                 APPUtils.showToast(this, "打印数据发送失败");
@@ -916,8 +920,6 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
             APPUtils.showToast(this, "请先选择要上传的数据");
         }
     }
-
-
 
 
     // 胶体金数据打印[朝外打印]
@@ -1155,6 +1157,7 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 
         return sb.toString();
     }
+
     // ATP数据打印[朝外打印]
     public static String GetPrintInfo5(DetectionResultBean detectionResultBean, Context context) {
         StringBuffer sb = new StringBuffer("\n\n");

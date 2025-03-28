@@ -324,9 +324,10 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
             long time = new Date().getTime();// new Date()为获取当前系统时间
             resultModel = new ResultModel();
             testTime = GetCurrentTime();
+            resultModel.taskID = taskModel.taskID;
             resultModel.number = testTime;
             resultModel.company_name = tv_check_company.getText().toString();
-            resultModel.persion = tv_check_persion.getText().toString();
+            resultModel.persion = com.example.utils.http.Global.NAME;
 //			resultModel.shiji = shiji_model.getName();
             resultModel.sample_name = tv_check_sample.getText().toString();
             resultModel.sample_number = et_Sample_Num.getText().toString();
@@ -376,7 +377,7 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
         detectionResultBean.setSQLType("ATP");
         detectionResultBean.setCheckRunningNumber(resultModel.id);//检测流水号
         detectionResultBean.setDetectionCompany(resultModel.company_name);//检测单位
-        detectionResultBean.setInspector(resultModel.persion);//检测人员
+        detectionResultBean.setInspector(com.example.utils.http.Global.NAME);//检测人员
         detectionResultBean.setCommodityPlaceOrigin(resultModel.sample_unit);//商品来源
         detectionResultBean.setTestItem(resultModel.project_name);//检测项目
         detectionResultBean.setSampleName(resultModel.sample_name);//样品名称
@@ -394,7 +395,7 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
         detectionResultBean.setDetectionTime(resultModel.time);//检测时间
 
         // 新增
-        detectionResultBean.setNumberSamples(sample_number);// 样品编号
+        detectionResultBean.setNumberSamples(taskModel.taskID);// 样品编号
         detectionResultBean.setUploadStatus("未上传");
 
         detectionResultBean.setUnitsUnderInspection(taskModel.getCompanyName()); // 被检单位

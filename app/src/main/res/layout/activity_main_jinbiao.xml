@@ -46,6 +46,7 @@
                 android:onClick="ClickLin"
                 android:text="定量检测"
                 android:textSize="30sp"
+                android:visibility="gone"
                 android:layout_margin="10dp"
                 />
             <Button
@@ -106,7 +107,7 @@
                 android:textSize="30sp"
                 android:layout_margin="10dp"
                 />
-            
+
         </LinearLayout>
 
     </LinearLayout>

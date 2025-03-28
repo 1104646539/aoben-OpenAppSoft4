@@ -38,6 +38,7 @@
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_margin="40dp"
+                android:visibility="gone"
                 android:layout_weight="1.0"
                 android:background="@drawable/main_change_btu_shape"
                 android:onClick="ClickShowJin"
@@ -77,6 +78,7 @@
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_margin="40dp"
+                android:visibility="gone"
                 android:layout_weight="1.0"
                 android:background="@drawable/main_change_btu_shape"
                 android:onClick="ClickRound"
@@ -89,6 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:visibility="gone"
             android:orientation="horizontal"
             >
 

@@ -1310,7 +1310,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
 
         detectionResultBean = new DetectionResultBean();
         detectionResultBean.setSQLType("分光光度");//设置当前数据的模块名称(防止以后需求改动的需要)
-        detectionResultBean.setNumberSamples(checkResult.sampleNum);//样品编号
+        detectionResultBean.setNumberSamples(checkResult.taskID);//样品编号
         detectionResultBean.setDetectionTime(checkResult.testTime);//检测时间
         detectionResultBean.setAisle(checkResult.channel);//通道
         detectionResultBean.setSampleName(checkResult.sampleName);//样品名称

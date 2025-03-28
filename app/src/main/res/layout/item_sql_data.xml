@@ -19,7 +19,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:layout_weight="0.5"
+            android:layout_weight="0.6"
             android:background="#F6F4F4"
             android:gravity="center">
 
@@ -57,13 +57,7 @@
             android:singleLine="true"
             android:visibility="gone" />
 
-        <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
-            android:id="@+id/tv_numberSamples"
-            style="@style/tvItemTitle"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:singleLine="true"
-            android:visibility="gone" />
+
 
         <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
             android:id="@+id/tv_sampleName"
@@ -100,7 +94,13 @@
             android:layout_weight="1"
             android:singleLine="true" />
 
-
+        <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
+            android:id="@+id/tv_numberSamples"
+            style="@style/tvItemTitle"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:singleLine="true"
+            android:visibility="visible" />
         <com.open.soft.openappsoft.multifuction.view.MarqueeTextView
             android:id="@+id/tv_specimenType"
             style="@style/tvItemTitle"

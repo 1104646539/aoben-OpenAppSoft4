@@ -413,7 +413,7 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
 //        } else {
 //            Global.ismixedentry = true;
 //        }
-        Global.NAME = user;
+        Global.NAME = APPUtils.isNull(resultBean.getName()) ? user : resultBean.getName();
         SharedPreferences sp = this.getSharedPreferences("userPass", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();   //获取编辑器
 //        editor.putString("DeptId", resultBean.getDeptId()); //存入部门ID

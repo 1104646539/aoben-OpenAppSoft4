@@ -121,6 +121,7 @@ public class UploadThread2 extends Thread {
         UploadBean uploadBean = new UploadBean();
         uploadBean.setCheckUser(ToolUtil.nullToString(checkResult.getInspector(), ""));
         uploadBean.setSampleName(ToolUtil.nullToString(checkResult.getSampleName(), ""));
+        uploadBean.setSampleCode(ToolUtil.nullToString(checkResult.getNumberSamples(), ""));
         uploadBean.setCheckItemName(ToolUtil.nullToString(checkResult.getTestItem(), ""));
         uploadBean.setCheckMothedName(ToolUtil.nullToString("123", ""));
         uploadBean.setDeviceSn(ToolUtil.nullToString(InterfaceURL.companyName, ""));

@@ -1295,113 +1295,6 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 
     }
 
-    private String getUploadData() {
-        StringBuffer sb = new StringBuffer();
-        sb.append("data={");
-        sb.append("\"sample_number\":");
-        sb.append("\"" + et_Sample_Num.getText().toString().trim() + "\"" + ",");
-        sb.append("\"test_unit_name\":");
-        sb.append("\"" + companylist.get(companySpinner.getSelectedItemPosition()).getName() + "\"" + ",");
-        sb.append("\"test_item\":");
-        sb.append("\"" + projectlist.get(projectSpinner.getSelectedItemPosition()).getName() + "\"" + ",");
-        sb.append("\"sample_unit\":");
-        sb.append("\"" + sampleUnitList.get(sampleUnitSpinner.getSelectedItemPosition()).getName() + "\"" + ",");
-        sb.append("\"sample_type\":");
-        sb.append("\"" + typelist.get(typeSpinner.getSelectedItemPosition()).getName() + "\"" + ",");
-        sb.append("\"test_results\":");
-        sb.append("\"" + etResult.getText().toString().trim() + "\"" + ",");
-        sb.append("\"critical_value\":");
-        if (source.equals("2")) {
-            sb.append("\"" + etDr.getText().toString().trim() + "\"" + ",");
-        } else {
-            sb.append("\"" + etConcentrate.getText().toString().trim() + "\"" + ",");
-        }
-        sb.append("\"test_man\":");
-        sb.append("\"" + persionlist.get(persionSpinner.getSelectedItemPosition()).getName() + "\"" + ",");
-        sb.append("\"test_time\":");
-        sb.append("\"" + testTime + "\"" + ",");
-        sb.append("\"sample_time\":");
-        sb.append("\"" + et_SampleTime.getText().toString().trim() + "\"");
-        sb.append("}");
-
-        return sb.toString();
-    }
-
-    private void GetDataFrom(final String msg) {
-        //在子线程中操作网络请求
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //urlConnection请求服务器，验证
-                Message message = Message.obtain();
-                try {
-                    //1：url对象
-                    String urlString = " http://www.huaxialj.com/gspt_all_api/api_hltstkj/pda/API/Application/root/Controller/root_antibiotic/Antibiotic_test_results_colloidal.php";
-                    Log.i("BASE_URL", urlString);
-                    URL url = new URL(urlString);
-                    //2;url.openconnection
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-                    byte[] data = msg.getBytes("utf-8");
-                    //3
-                    conn.setDoInput(true);                  //打开输入流，以便从服务器获取数据
-                    conn.setDoOutput(true);
-                    conn.setRequestMethod("POST");
-                    conn.setUseCaches(false);               //使用Post方式不能使用缓存
-                    conn.setConnectTimeout(10 * 1000);
-                    //设置请求体的类型是文本类型
-                    conn.setRequestProperty("Content-Type", "application/X0-www-form-urlencoded");
-                    //设置请求体的长度
-                    conn.setRequestProperty("Content-Length", String.valueOf(data.length));
-
-                    conn.getOutputStream().write(data);
-                    //4
-                    int code = conn.getResponseCode();
-                    if (code == 200) {
-                        InputStream is = conn.getInputStream();
-                        String result = getStringFromInputStream(is);
-                        String[] st = result.split(",");
-                        String str = null;
-                        if (st.length == 2) {
-                            str = st[0];
-                            str = str.substring(str.indexOf(':') + 2);
-                            str = str.replace("\"", "");
-                        }
-                        if (str != null) {
-                            String s = decodeUnicode(str);
-                            System.out.println("=====================服务器返回的信息：" + result);
-                            System.out.println("=====================上传结果：" + s);
-                            if (s != null) {
-                                if (s.contains("成功")) {
-                                    message.obj = s;
-                                } else {
-                                    message.obj = "上传失败";
-                                }
-                            } else {
-                                message.obj = "上传失败";
-                            }
-                        }
-                    } else {
-                        message.obj = "上传失败";
-                    }
-                } catch (UnknownHostException ex) {
-                    ex.printStackTrace();
-                    message.obj = "上传失败,请检查网络连接！";
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                    message.obj = "上传失败,请检查网络连接！";
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    message.obj = "上传失败！";
-                } finally {
-                    uploadingFlag = false;
-                    message.what = 200;
-                    handler.sendMessage(message);
-                }
-            }
-        }).start();
-    }
-
     private String locationMsg = "";
     private String LocationX = "";
     private String LocationY = "";
@@ -1544,9 +1437,10 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             long time = new Date().getTime();// new Date()为获取当前系统时间
             resultModel = new ResultModel();
             testTime = GetCurrentTime();
+            resultModel.taskID = taskModel.taskID;
             resultModel.number = testTime;
             resultModel.company_name = tv_check_company.getText().toString();
-            resultModel.persion = tv_check_persion.getText().toString();
+            resultModel.persion = com.example.utils.http.Global.NAME;
 //			resultModel.shiji = shiji_model.getName();
             resultModel.sample_name = tv_check_sample.getText().toString();
             resultModel.sample_number = et_Sample_Num.getText().toString();
@@ -1596,7 +1490,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         detectionResultBean.setSQLType("胶体金");
         detectionResultBean.setCheckRunningNumber(resultModel.id);//检测流水号
         detectionResultBean.setDetectionCompany(resultModel.company_name);//检测单位
-        detectionResultBean.setInspector(resultModel.persion);//检测人员
+        detectionResultBean.setInspector(com.example.utils.http.Global.NAME);//检测人员
         detectionResultBean.setCommodityPlaceOrigin(resultModel.sample_unit);//商品来源
         detectionResultBean.setTestItem(resultModel.project_name);//检测项目
         detectionResultBean.setSampleName(resultModel.sample_name);//样品名称
@@ -1614,7 +1508,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         detectionResultBean.setDetectionTime(resultModel.time);//检测时间
 
         // 新增
-        detectionResultBean.setNumberSamples(sample_number);// 样品编号
+        detectionResultBean.setNumberSamples(taskModel.taskID);// 样品编号
         detectionResultBean.setUploadStatus("未上传");
 
         detectionResultBean.setUnitsUnderInspection(taskModel.getCompanyName()); // 被检单位
@@ -2616,27 +2510,22 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             //测试 图像数据
 //            imageData =
             int len = Integer.valueOf(selectedProject.ScanEnd) - Integer.valueOf(selectedProject.ScanStart);
-            String temp = "No signal";
-//            String temp = "OK12.22,";
+//            String temp = "No signal";
+            String temp = "OK12.22,";
             String img = "";
             int value;
             imageData = new byte[len * 2];
-//            for (int i = 0; i < len; i++) {
-//                int ff = 500 + i;
-//
-//                imageData[2 * i] = (byte) ((ff & 0xff) << 8);
-//                imageData[2 * i + 1] = (byte) ((ff & 0xff));
-//
-//
-//                int int1 = (imageData[2 * i] & 0xff) << 8;
-//                value = int1 + (imageData[2 * i + 1] & 0xff);
-//                Timber.i("ff=" + ff + " value=" + value);
-////                if (i != 0) {
-////                    img += ",";
-////                }
-////
-////                img += ff;
-//            }
+            for (int i = 0; i < len; i++) {
+                int ff = 500 + i;
+
+                imageData[2 * i] = (byte) ((ff & 0xff) << 8);
+                imageData[2 * i + 1] = (byte) ((ff & 0xff));
+
+
+                int int1 = (imageData[2 * i] & 0xff) << 8;
+                value = int1 + (imageData[2 * i + 1] & 0xff);
+                Timber.i("ff=" + ff + " value=" + value);
+            }
             temp += (img + "\n");
             showResult(temp);
             handlerMess1.sendEmptyMessage(100);
