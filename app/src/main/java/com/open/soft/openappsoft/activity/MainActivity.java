@@ -929,6 +929,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 String func = sheet.getCell(7, i).getContents();
                 String k = sheet.getCell(8, i).getContents();
                 String b = sheet.getCell(9, i).getContents();
+                String bc = sheet.getCell(10, i).getContents();
                 Timber.i("projectName=" + projectName + " func=" + func);
                 if (!TextUtils.isEmpty(func) && !TextUtils.isEmpty(projectName)) {
                     if (func.contains("比色法") || func.contains("消线法")) {
@@ -938,7 +939,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                         float K = Float.valueOf(k);
                         float B = Float.valueOf(b);
                         float XLZ = Float.valueOf(xlz);
-                        Project project = new Project("", projectName, "", XLZ, K, B, 410, unit);
+                        int BC = Integer.valueOf(bc);
+                        Project project = new Project("", projectName, "", XLZ, K, B, BC, unit);
                         projects.add(project);
                     }
 

@@ -23,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/et_content"
+            android:imeOptions="actionDone"
             android:background="@null"
             android:textColor="@color/text_black"
             android:textSize="32sp" />

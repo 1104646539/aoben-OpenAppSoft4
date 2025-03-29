@@ -350,7 +350,6 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
         statusDialog = new StatusDialog(this, this);
         statusDialog.setOnProgressStatus(this);
         initView();
-
         receivedata();
 
         sp = getSharedPreferences("userPass", MODE_PRIVATE);
@@ -483,8 +482,8 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
             ArrayAdapter<Project> adapter = new ArrayAdapter<Project>(this, R.layout.item_select_project, R.id.tv_project_name, projects);
             adapter.setDropDownViewResource(R.layout.item_select_project_drop);
             spn_project.setAdapter(adapter);
-            spn_project.setSelection(projects.size() - 1);
-            mProject = projects.get(projects.size() - 1);
+            spn_project.setSelection(0);
+            mProject = projects.get(0);
             spn_project.setOnItemSelectedListener(this);
         }
         openLight(mProject.bochang);
@@ -1041,7 +1040,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
      */
     public void countDownClear() {
 
-        if (isNc()) {//現在是否是检测农药残留項目
+        if (isNc() && !Global.DEBUG) {//現在是否是检测农药残留項目
             reactionTime = Global.cardWarmTime;
         } else {
             reactionTime = 3;
@@ -1207,7 +1206,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
                             cr.sampleSource,
                             arrayState[stateIndex] + idnex++,
                             System.currentTimeMillis(),
-                            value == 0 ? "0"+ mProject.unit : df.format(value) + mProject.unit,
+                            value == 0 ? "0" + mProject.unit : df.format(value) + mProject.unit,
                             value <= xlz ? "合格" : "不合格",
                             df.format(xlz) + "",
                             "",
@@ -1323,14 +1322,14 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
         detectionResultBean.setCommodityPlaceOrigin(checkResult.sampleSource);//商品来源
         detectionResultBean.setUploadStatus("未上传");
         detectionResultBean.setSpecimenType(checkResult.sampleType); // 样品类型
-        detectionResultBean.setLimitStandard(checkResult.xlz+mProject.unit); // 限量标准
+        detectionResultBean.setLimitStandard(checkResult.xlz + mProject.unit); // 限量标准
 //        detectionResultBean.setCriticalValue(checkResult.xlz); // 临界值
         detectionResultBean.setTestItem(checkResult.projectName); // 检测项目
         detectionResultBean.setQRCode(card_number); // 试剂盒二维码字符串
         detectionResultBean.setOperatorId(com.example.utils.http.Global.ID); // 上传数据的OperatorId参数
 //        detectionResultBean.setAreaId(terrace); // 上传数据的AreaId参数
 //        detectionResultBean.setDeptId(DeptId); // 上传数据的DeptId参数
-        detectionResultBean.setXgd(checkResult.xgd+ mProject.unit);//吸光度
+        detectionResultBean.setXgd(checkResult.xgd + mProject.unit);//吸光度
         detectionResultBean.companyCode = checkResult.companyCode; //组织代码
 
         detectionResultBean.setSpecimenTypeCode(checkResult.sampleTypeCode);//样本类型Code
