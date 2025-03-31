@@ -162,7 +162,7 @@
 
                         <TextView
                             android:id="@+id/tv_check_sample"
-                            style="@style/meninput_edittext_style"
+                            style="@style/checkactivity_textview_style"
                             android:layout_width="100dp"
                             android:onClick="ClickDialog" />
                     </TableRow>
