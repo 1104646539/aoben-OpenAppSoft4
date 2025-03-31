@@ -144,10 +144,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
         } catch (DbException e) {
             e.printStackTrace();
         }
-        //被检测单位
+        //受检单位
         List<BCheckOrg> bCheckOrgs = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            BCheckOrg co = new BCheckOrg("被检测单位" + (i + 1));
+            BCheckOrg co = new BCheckOrg("受检单位" + (i + 1));
             bCheckOrgs.add(co);
         }
         try {
@@ -288,7 +288,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             prints_check.add(new Print("判定结果", true, true, true));
             prints_check.add(new Print("通道号", true, true, true));
             prints_check.add(new Print("样品编号", true, false, false));
-            prints_check.add(new Print("被检测单位", true, false, false));
+            prints_check.add(new Print("受检单位", true, true, true));
             prints_check.add(new Print("重量", true, false, false));
             prints_check.add(new Print("商品来源", true, false, false));
             prints_check.add(new Print("限量标准", true, false, false));
@@ -301,7 +301,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             prints_data_manager.add(new Print("吸光度", true, true, true));
             prints_data_manager.add(new Print("判定结果", true, true, true));
             prints_data_manager.add(new Print("通道号", true, true, true));
-            prints_data_manager.add(new Print("被检测单位", true, false, false));
+            prints_data_manager.add(new Print("受检单位", true, true, true));
             prints_data_manager.add(new Print("检测单位", true, true, false));
             prints_data_manager.add(new Print("检测人员", true, true, false));
             prints_data_manager.add(new Print("商品来源", true, false, false));

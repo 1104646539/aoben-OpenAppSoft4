@@ -73,7 +73,7 @@
                 android:layout_marginRight="30dp"
                 style="?android:attr/borderlessButtonStyle"
                 android:padding="40dp"
-                android:text="被检单位"
+                android:text="受检单位"
                 android:textColor="@android:color/white"
                 android:textSize="58dp"
                 android:background="@drawable/btn_default1"

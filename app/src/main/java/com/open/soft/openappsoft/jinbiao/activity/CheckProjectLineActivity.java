@@ -75,7 +75,7 @@ public class CheckProjectLineActivity extends BaseActivity {
 		source = Integer.parseInt(getIntent().getStringExtra("source"));
 
 		initView();
-		
+
 		showAllList();
 		if (cardlist == null) {
 			cardlist = new ArrayList<CardCompanyModel>();
@@ -90,7 +90,7 @@ public class CheckProjectLineActivity extends BaseActivity {
 		if (card_list == null || card_list.length <= 0) {
 			card_list = new String[1];
 			card_list[0] = "请先添加卡厂商";
-		}		
+		}
 
 		if (source == 1) {
 			title.setText("显线金标编辑");
@@ -118,7 +118,7 @@ public class CheckProjectLineActivity extends BaseActivity {
 			sc_ct_width_tv.setText("采样终点");
 		}
 
-	
+
 		listview.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -142,7 +142,7 @@ public class CheckProjectLineActivity extends BaseActivity {
 						}
 					}
 				}
-				
+
 			}
 		});
 
@@ -150,7 +150,7 @@ public class CheckProjectLineActivity extends BaseActivity {
 		if(cardlist != null && cardlist.size()>0){
 			cardCompanyModel= cardlist.get(0);
 		}
-		
+
 		card_spinner.setAdapter(card_adapter);
 		card_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -181,7 +181,6 @@ public class CheckProjectLineActivity extends BaseActivity {
 			list = db.findAll(Selector.from(LineModel.class).where("source", "=", source));
 			cardlist = db.findAll(CardCompanyModel.class);
 		} catch (DbException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -214,7 +213,7 @@ public class CheckProjectLineActivity extends BaseActivity {
 	}
 
 	public void Value(LineModel model) {
-		
+
 		name.setText(model.getName());
 		start.setText(model.getScanStart());
 		end.setText(model.getScanEnd());
@@ -314,7 +313,7 @@ public class CheckProjectLineActivity extends BaseActivity {
 		selectmodel.setX0(x.getText().toString());
 		selectmodel.setP(p.getText().toString());
 		selectmodel.setConcentrateUnit(unitZh.getText().toString());
-		
+
 
 		try {
 			db.update(selectmodel, "name","card_name", "ScanStart", "ScanEnd", "CTDistance", "CTWidth",
@@ -380,7 +379,7 @@ public class CheckProjectLineActivity extends BaseActivity {
 //			return;
 //		}
 		queryOne(name.getText().toString());
-		
+
 	}
 	private void queryOne(String name) {
 		// TODO Auto-generated method stub
@@ -424,8 +423,8 @@ public class CheckProjectLineActivity extends BaseActivity {
 		}
 	}
 	public void clear() {
-		
-		name.setText("");		
+
+		name.setText("");
 		xian.setText("");
 		value.setText("");
 		k.setText("");

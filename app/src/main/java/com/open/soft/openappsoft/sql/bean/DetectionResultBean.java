@@ -29,8 +29,8 @@ public class DetectionResultBean {
     private String detectionValue;              //抑制率/检测值
     private String testItem;                    //检测项目
     private String detectionResult;             //检测结果
-    private String unitsUnderInspection;        //被检单位
-    private String unitsUnderInspectionCode;        //被检单位Code
+    private String unitsUnderInspection;        //受检单位
+    private String unitsUnderInspectionCode;        //受检单位Code
     private String inspector;                   //检测人员
     private String detectionCompany;            //检测单位
     private String weight;                      //重量

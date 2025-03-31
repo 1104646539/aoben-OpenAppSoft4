@@ -75,7 +75,7 @@
             style="@style/TextViewProjectItem"
             android:layout_width="0dp"
             android:layout_weight="1.5"
-            android:text="被检单位" />
+            android:text="受检单位" />
 
         <include layout="@layout/v_spliter" />
 

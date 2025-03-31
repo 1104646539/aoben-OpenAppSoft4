@@ -82,7 +82,7 @@ public class ResultQueryActivity extends Activity implements View.OnClickListene
     private final static String[] EXCEL_HEADER = {"经营户/负责人", "商品名", "检测项目名", "检测值", "检测单位名称", "检测结果"};
 
     private static String[] HEADERS = new String[]{"检测编号", "检测项目", "检测人员", "通道",
-            "临界值", "T/C值", "检测结果", "被检单位",
+            "临界值", "T/C值", "检测结果", "受检单位",
             "样品名称", "上传状态", "商品来源",
             "限量标准", "检测时间"};
     private List<CheckResult> resultList;
@@ -678,7 +678,7 @@ public class ResultQueryActivity extends Activity implements View.OnClickListene
                 for (int i = 0; i < resultList.size(); i++) {
                     CheckResult result = resultList.get(i);
                     int lineIdx = 4 + i;
-                    sheet.addCell(new Label(0, lineIdx, result.bcheckedOrganization, defaultCellFormat)); //被检单位
+                    sheet.addCell(new Label(0, lineIdx, result.bcheckedOrganization, defaultCellFormat)); //受检单位
                     sheet.addCell(new Label(1, lineIdx, result.sampleName, defaultCellFormat)); //商品名
                     sheet.addCell(new Label(2, lineIdx, result.projectName, defaultCellFormat)); //检测项目
                     sheet.addCell(new Label(3, lineIdx, result.testValue, defaultCellFormat)); //检测值

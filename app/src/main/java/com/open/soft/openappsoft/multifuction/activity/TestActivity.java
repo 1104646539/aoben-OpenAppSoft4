@@ -74,7 +74,7 @@ public class TestActivity extends AppCompatActivity {
     protected boolean validateCommonDataIsComplete() {
 
         if (TextUtils.isEmpty(etCheckedOrg.getText().toString())) {
-            APPUtils.showToast(act, "请输入被检单位");
+            APPUtils.showToast(act, "请输入受检单位");
             return false;
         }
         if (TextUtils.isEmpty(etSampleSource.getText().toString())) {

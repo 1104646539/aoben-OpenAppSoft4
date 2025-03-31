@@ -250,10 +250,10 @@ public class FenGuangActivity<T> extends TestActivity implements View.OnClickLis
     public static int DIALOG_SAMPLE_NAME = 3;//样品名称
     private Dialog dialog;
     private ListView lv;
-    private List<BCheckOrg> checkOrgs;//被检测单位
+    private List<BCheckOrg> checkOrgs;//受检单位
     private List<SampleSource> sampleSources;//商品来源
     private List<SampleName> sampleNames;//样品名称
-    private List<BCheckOrg> checkOrgs_s = new ArrayList<>();//被检测单位
+    private List<BCheckOrg> checkOrgs_s = new ArrayList<>();//受检单位
     private List<SampleSource> sampleSources_s = new ArrayList<>();//商品来源
     private List<SampleName> sampleNames_s = new ArrayList<>();//样品名称
     public FiltrateAdapter filtrateAdapter;
@@ -459,7 +459,7 @@ public class FenGuangActivity<T> extends TestActivity implements View.OnClickLis
             return false;
         }
         if (TextUtils.isEmpty(etCheckedOrg.getText().toString().trim())) {
-            APPUtils.showToast(this, "请选择被检单位");
+            APPUtils.showToast(this, "请选择受检单位");
             return false;
         }
         if (TextUtils.isEmpty(etSampleSource.getText().toString().trim())) {
@@ -710,7 +710,7 @@ public class FenGuangActivity<T> extends TestActivity implements View.OnClickLis
 
     protected boolean validateCommonDataIsComplete() {
         if (TextUtils.isEmpty(etCheckedOrg.getText().toString())) {
-            APPUtils.showToast(act, "请输入被检单位");
+            APPUtils.showToast(act, "请输入受检单位");
             return false;
         }
         if (TextUtils.isEmpty(etSampleSource.getText().toString())) {

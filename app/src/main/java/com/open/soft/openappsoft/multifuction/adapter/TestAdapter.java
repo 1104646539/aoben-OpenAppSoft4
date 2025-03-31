@@ -45,13 +45,13 @@ public class TestAdapter<T> extends RecyclerView.Adapter {
     public static String TAG = TestAdapter.class.getSimpleName();
     private List<CheckResult> checkResults = new ArrayList<>();
     private AppCompatActivity context;
-    public static int DIALOG_CHECKED_ORG = 1;//被检测单位
+    public static int DIALOG_CHECKED_ORG = 1;//受检单位
     public static int DIALOG_SAMPLE_SOURCE = 2;//商品来源
     public static int DIALOG_SAMPLE_NAME = 3;//样品名称
-    static List<BCheckOrg> bcheckedOrg;//被检测单位
+    static List<BCheckOrg> bcheckedOrg;//受检单位
     static List<SampleSource> sampleSources;//商品来源
     static List<SampleName> sampleNames;//样品名称
-    static List<BCheckOrg> bcheckedOrg_s = new ArrayList<>();//被检测单位
+    static List<BCheckOrg> bcheckedOrg_s = new ArrayList<>();//受检单位
     static List<SampleSource> sampleSources_s = new ArrayList<>();//商品来源
     static List<SampleName> sampleNames_s = new ArrayList<>();//样品名称
     public List<CheckResult> getData() {
@@ -100,7 +100,7 @@ public class TestAdapter<T> extends RecyclerView.Adapter {
         viewHolder.tv_sample_aisle_number.setText(checkResult.channel != null ? checkResult.channel : "");
         viewHolder.tv_sample_name.setText(checkResult.sampleName != null ? checkResult.sampleName : "");
         viewHolder.tv_bchecked_org.setText(checkResult.bcheckedOrganization != null ? checkResult.bcheckedOrganization : "");
-        viewHolder.tv_sample_source.setText(checkResult.sampleType != null ? checkResult.sampleType : "");
+        viewHolder.tv_sample_source.setText(checkResult.checkedOrganization != null ? checkResult.checkedOrganization : "");
         viewHolder.et_sample_number.setText(checkResult.taskID != null ? checkResult.taskID : "");
         viewHolder.tv_yzl.setText(checkResult.testValue != null ? checkResult.testValue : "");
         viewHolder.tv_judge.setText(checkResult.resultJudge != null ? checkResult.resultJudge : "");
@@ -523,7 +523,7 @@ public class TestAdapter<T> extends RecyclerView.Adapter {
                     return false;
                 }
 //                    else if (!isNotNull(checkResult.bcheckedOrganization)) {
-//                    showToast("请输入" + checkResult.channel + "的被检单位");
+//                    showToast("请输入" + checkResult.channel + "的受检单位");
 //                    return false;
 //                } else if (!isNotNull(checkResult.sampleSource)) {
 //                    showToast("请输入" + checkResult.channel + "的商品来源");
@@ -563,10 +563,10 @@ public class TestAdapter<T> extends RecyclerView.Adapter {
         FiltrateAdapter filtrateAdapter;
         ListView lv;
         EditText et_content;
-        //        List<BCheckOrg> bcheckedOrg;//被检测单位
+        //        List<BCheckOrg> bcheckedOrg;//受检单位
 //        List<SampleSource> sampleSources;//商品来源
 //        List<SampleName> sampleNames;//样品名称
-//        List<BCheckOrg> bcheckedOrg_s;//被检测单位
+//        List<BCheckOrg> bcheckedOrg_s;//受检单位
 //        List<SampleSource> sampleSources_s;//商品来源
 //        List<SampleName> sampleNames_s;//样品名称
         View item_view;

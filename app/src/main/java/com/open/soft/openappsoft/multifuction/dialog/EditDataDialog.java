@@ -31,7 +31,7 @@ import java.util.List;
 
 public class EditDataDialog<T> extends Dialog {
     /**
-     * 被检测单位
+     * 受检单位
      */
     public static final int DIALOG_TYPE_BCHEKEORG = 1000;
     /**
@@ -106,7 +106,7 @@ public class EditDataDialog<T> extends Dialog {
             recyclerView.setLayoutManager(manager);
             recyclerView.setAdapter(dialogSelectAdapter);
         }
-        if (type == DIALOG_TYPE_BCHEKEORG) {//被检测单位
+        if (type == DIALOG_TYPE_BCHEKEORG) {//受检单位
             dialogSelectAdapter.setSelect(false);
             bCheckOrgs = new BCheckOrg().findAll();
             dialogSelectAdapter.dataChange(bCheckOrgs);
@@ -237,7 +237,7 @@ public class EditDataDialog<T> extends Dialog {
                     Toast.makeText(context, "添加失败", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (type == DIALOG_TYPE_BCHEKEORG) {//被检测单位
+                if (type == DIALOG_TYPE_BCHEKEORG) {//受检单位
                     if (new BCheckOrg().save(new BCheckOrg(str))) {//保存成功
                         bCheckOrgs = new BCheckOrg().findAll();
                         dialogSelectAdapter.dataChange(bCheckOrgs);
@@ -280,7 +280,7 @@ public class EditDataDialog<T> extends Dialog {
                     Toast.makeText(context, "请选择删除项目", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (type == DIALOG_TYPE_BCHEKEORG) {//被检测单位
+                if (type == DIALOG_TYPE_BCHEKEORG) {//受检单位
                     if (new BCheckOrg().delete((BCheckOrg) filtrateModel)) {//保存成功
                         bCheckOrgs = new BCheckOrg().findAll();
                         dialogSelectAdapter.dataChange(bCheckOrgs);
@@ -329,7 +329,7 @@ public class EditDataDialog<T> extends Dialog {
                 }
                 String changeName = et_content.getText().toString().trim();
 
-                if (type == DIALOG_TYPE_BCHEKEORG) {//被检测单位
+                if (type == DIALOG_TYPE_BCHEKEORG) {//受检单位
 //                    new BCheckOrg().saveOrUpdate((BCheckOrg) filtrateModel);
                     bCheckOrgs.get(dialogSelectAdapter.getSelectPosition()).bco_name = changeName;
                     new BCheckOrg().saveOrUpdate(bCheckOrgs.get(dialogSelectAdapter.getSelectPosition()));
@@ -385,7 +385,7 @@ public class EditDataDialog<T> extends Dialog {
 
     private void onAdapterFilter(String str, int type) {
         if (str.equals("")) {
-            if (type == DIALOG_TYPE_BCHEKEORG) {//被检测单位
+            if (type == DIALOG_TYPE_BCHEKEORG) {//受检单位
                 bCheckOrgs = new BCheckOrg().findAll();
                 dialogSelectAdapter.dataChange(bCheckOrgs);
                 Log.d("onAdapterFilter", "size=" + bCheckOrgs.size());
@@ -401,7 +401,7 @@ public class EditDataDialog<T> extends Dialog {
                 dialogSelectAdapter.dataChange(inspectors);
             }
         } else {
-            if (type == DIALOG_TYPE_BCHEKEORG) {//被检测单位
+            if (type == DIALOG_TYPE_BCHEKEORG) {//受检单位
                 dialogSelectAdapter.dataChange(filter(str, (List<T>) bCheckOrgs));
             } else if (type == DIALOG_TYPE_CHECKORG) {//检测单位
                 dialogSelectAdapter.dataChange(filter(str, (List<T>) checkOrgs));

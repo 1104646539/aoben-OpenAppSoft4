@@ -56,7 +56,7 @@
                             style="@style/text_label"
                             android:layout_width="150dp"
                             android:layout_height="wrap_content"
-                            android:text="任务编号" />
+                            android:text="样本编号" />
 
                         <EditText
                             android:id="@+id/et_id"
@@ -186,12 +186,22 @@
                         android:layout_height="wrap_content"
                         android:text="样品名称" />
 
+                    <EditText
+                        android:id="@+id/et_sample_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="40dp"
+                        android:text="-"
+                        android:textColor="@color/black"
+                        android:textSize="26sp" />
                     <TextView
                         android:id="@+id/tv_sample_name"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:paddingLeft="40dp"
+                        android:visibility="gone"
                         android:text="请选择"
                         android:textColor="@color/black"
                         android:textSize="26sp" />
@@ -251,7 +261,7 @@
                             style="@style/text_label"
                             android:layout_width="150dp"
                             android:layout_height="wrap_content"
-                            android:text="检测机构" />
+                            android:text="检测单位" />
 
                         <FrameLayout
                             android:layout_width="match_parent"

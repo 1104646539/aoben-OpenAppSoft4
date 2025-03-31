@@ -613,7 +613,7 @@ public class TitrationTestActivity extends AppCompatActivity implements StatusDi
             com.open.soft.openappsoft.multifuction.util.APPUtils.showToast(this, "请输入样品来源");
             return;
         } else if ("".equals(testedunit) || testedunit == null) {
-            com.open.soft.openappsoft.multifuction.util.APPUtils.showToast(this, "请输入被检测单位");
+            com.open.soft.openappsoft.multifuction.util.APPUtils.showToast(this, "请输入受检单位");
             return;
         } else if ("".equals(num) || num == null) {
             com.open.soft.openappsoft.multifuction.util.APPUtils.showToast(this, "请输入滴加试剂总量");
@@ -928,7 +928,7 @@ public class TitrationTestActivity extends AppCompatActivity implements StatusDi
                 "\"ResultData\":\n" +
                 "[\n" +
                 "{\"Title\":\"" + "样品名称" + "\",\"Id\":\"" + "SamplingName" + "\",\"Value\":\"" + sample_name + "\"},\n" +
-                "{\"Title\":\"" + "被检测单位" + "\",\"Id\":\"" + "SamplingDept" + "\",\"Value\":\"" + tested_unit + "\"},\n" +
+                "{\"Title\":\"" + "受检单位" + "\",\"Id\":\"" + "SamplingDept" + "\",\"Value\":\"" + tested_unit + "\"},\n" +
                 "{\"Title\":\"" + "样品来源" + "\",\"Id\":\"" + "SamplingSource" + "\",\"Value\":\"" + sample_source + "\"}\n" +
                 "]\n" +
                 "}";
@@ -1028,7 +1028,7 @@ public class TitrationTestActivity extends AppCompatActivity implements StatusDi
         sb.append(checkDiDingResult.samlename + "\n");
         sb.append("样品来源：  ");
         sb.append(checkDiDingResult.samplesource + "\n");
-        sb.append("被检测单位：");
+        sb.append("受检单位：");
         sb.append(checkDiDingResult.testedunit + "\n");
         sb.append("试剂添加量：");
         sb.append(checkDiDingResult.num + "滴" + "\n");

@@ -395,7 +395,7 @@
                     style="@style/tvItemTitle"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
-                    android:text="被检单位" />
+                    android:text="受检单位" />
 
                 <TextView
                     style="@style/tvItemTitle"

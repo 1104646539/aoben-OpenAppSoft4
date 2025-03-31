@@ -1088,7 +1088,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
                     Timber.i("限量值：" + xlz);
                     CheckResult tempResult = new CheckResult(
                             cr.checkedOrganization,
-                            cr.bcheckedOrganization,//被检测单位
+                            cr.bcheckedOrganization,//受检单位
                             cr.bcheckedOrganizationCode,
                             cr.SamplingTime,
                             cr.taskID,
@@ -1192,7 +1192,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
                     //开始保存数据
                     CheckResult tempResult = new CheckResult(
                             cr.checkedOrganization,
-                            cr.bcheckedOrganization,//被检测单位
+                            cr.bcheckedOrganization,//受检单位
                             cr.bcheckedOrganizationCode,
                             cr.SamplingTime,
                             cr.taskID,
@@ -1314,8 +1314,8 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
         detectionResultBean.setSampleName(checkResult.sampleName);//样品名称
         detectionResultBean.setDetectionValue(checkResult.testValue + mProject.unit);//抑制率/检测值
         detectionResultBean.setDetectionResult(checkResult.resultJudge);//检测结果
-        detectionResultBean.setUnitsUnderInspection(checkResult.bcheckedOrganization);//被检测单位
-        detectionResultBean.setUnitsUnderInspectionCode(checkResult.bcheckedOrganizationCode);//被检测单位Code
+        detectionResultBean.setUnitsUnderInspection(checkResult.bcheckedOrganization);//受检单位
+        detectionResultBean.setUnitsUnderInspectionCode(checkResult.bcheckedOrganizationCode);//受检单位Code
         detectionResultBean.setInspector(checkResult.checker);//检测人员
         detectionResultBean.setDetectionCompany(checkResult.checkedOrganization);//检测单位
         detectionResultBean.setWeight(checkResult.weight);//重量
@@ -1374,7 +1374,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
 
         if (TextUtils.isEmpty(((CheckResult) testAdapter.getData()
                 .get(compareChannelIndex)).bcheckedOrganization)) {
-            APPUtils.showToast(act, "被检单位");
+            APPUtils.showToast(act, "受检单位");
             return false;
         }
         if (TextUtils.isEmpty(((CheckResult) testAdapter.getData()
@@ -2579,7 +2579,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
 //                    "            \"Value\":\"" + savaDatas.get(currentIndex).xlz + "\"\n" +
 //                    "            }\n" +
 //                    "            ,{\n" +
-//                    "                \"Title\":\"被检测单位\",\n" +
+//                    "                \"Title\":\"受检单位\",\n" +
 //                    "                \"Id\":\"sampleSource\",\n" +
 //                    "                \"Value\":\"" + savaDatas.get(currentIndex).bcheckedOrganization + "\"\n" +
 //                    "                },\n" +

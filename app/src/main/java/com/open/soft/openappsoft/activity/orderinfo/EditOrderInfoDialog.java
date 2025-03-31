@@ -94,8 +94,8 @@ public class EditOrderInfoDialog extends Dialog {
             tv_label_id.setText("样品子类ID");
         }else if (type == OrderInfoModel.type_check) {
             ll_id.setVisibility(View.GONE);
-            tv_title.setText("检测机构" + hilt);
-            tv_label_name.setText("检测机构");
+            tv_title.setText("检测单位" + hilt);
+            tv_label_name.setText("检测单位");
         }
         tv_cancel.setOnClickListener(view -> {
             if(onAdd!=null){

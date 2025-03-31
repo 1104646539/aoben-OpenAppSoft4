@@ -8,7 +8,7 @@ public class CheckDiDingResult {
     public String testresult;  // 检测结果
     public String samlename;  // 样品名称
     public String samplesource;  // 样品来源
-    public String testedunit;  // 被检测单位
+    public String testedunit;  // 受检单位
     public String testmethod;  // 检测方法
     public String nationallimit;  // 国家限量
     public long testTime;  // 检测时间

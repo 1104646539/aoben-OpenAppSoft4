@@ -79,7 +79,7 @@
                         style="@style/CheckBox_ResultQuery"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="被检单位:" />
+                        android:text="受检单位:" />
 
                     <Spinner
                         android:id="@+id/spn_checked_organization"

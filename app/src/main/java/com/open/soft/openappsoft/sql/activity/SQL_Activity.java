@@ -929,7 +929,7 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 
 //        sb.append("样品编号：");
 //        sb.append(detectionResultBean.getNumberSamples() + "\n");
-        sb.append("被检单位：");
+        sb.append("受检单位：");
         sb.append(detectionResultBean.getUnitsUnderInspection() + "\n");
 
 
@@ -1081,7 +1081,7 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 
 //        sb.append("样品编号：");
 //        sb.append(detectionResultBean.getNumberSamples() + "\n");
-        sb.append("被检单位：");
+        sb.append("受检单位：");
         sb.append(detectionResultBean.getUnitsUnderInspection() + "\n");
 
 
@@ -1162,7 +1162,7 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 
 //        sb.append("样品编号：");
 //        sb.append(detectionResultBean.getNumberSamples() + "\n");
-        sb.append("被检单位：");
+        sb.append("受检单位：");
         sb.append(detectionResultBean.getUnitsUnderInspection() + "\n");
 
 
@@ -1347,7 +1347,7 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
     // 导出
     private final static String EXPORT_DIR = "/检测记录/";
     //    private final static String[] EXCEL_HEADER = {"经营户/负责人", "商品名", "检测项目名", "检测值", "检测单位名称", "检测结果"};
-    private final static String[] EXCEL_HEADER = {"数据类型", "检测流水号", "样品编号", "检测时间", "通道", "样品名称", "样品类型", "限量标准", "临界值", "样品浓度", "T/C值", "检测项目", "检测结果", "被检测单位", "检测人员", "检测单位", "重量", "商品来源", "上传状态"};
+    private final static String[] EXCEL_HEADER = {"数据类型", "检测流水号", "样品编号", "检测时间", "通道", "样品名称", "样品类型", "限量标准", "临界值", "样品浓度", "T/C值", "检测项目", "检测结果", "受检单位", "检测人员", "检测单位", "重量", "商品来源", "上传状态"};
     private List<DetectionResultBean> list_exportdata;
     private int export_status = 0;
 
@@ -1486,7 +1486,7 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
                     sheet.addCell(new Label(10, lineIdx, drb.getDetectionValue(), defaultCellFormat)); //抑制率/检测值
                     sheet.addCell(new Label(11, lineIdx, drb.getTestItem(), defaultCellFormat)); //检测项目
                     sheet.addCell(new Label(12, lineIdx, drb.getDetectionResult(), defaultCellFormat)); //检测结果
-                    sheet.addCell(new Label(13, lineIdx, drb.getUnitsUnderInspection(), defaultCellFormat)); //被检单位
+                    sheet.addCell(new Label(13, lineIdx, drb.getUnitsUnderInspection(), defaultCellFormat)); //受检单位
                     sheet.addCell(new Label(14, lineIdx, drb.getInspector(), defaultCellFormat)); //检测人员
                     sheet.addCell(new Label(15, lineIdx, drb.getDetectionCompany(), defaultCellFormat)); //检测单位
                     sheet.addCell(new Label(16, lineIdx, drb.getInspector(), defaultCellFormat)); //重量

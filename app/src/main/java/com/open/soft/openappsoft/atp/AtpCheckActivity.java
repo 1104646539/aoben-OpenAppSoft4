@@ -340,7 +340,7 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
             resultModel.style_long = etConcentrate.getText().toString();
             resultModel.check_result = result;
             resultModel.time = time;
-            resultModel.concentrateUnit = "";
+            resultModel.concentrateUnit = "RLU";
             resultModel.sample_unit = taskModel.getCompanyName();
             resultModel.shiji = tv_check_b.getText().toString();
             resultModel.companyCode = et_companyCode.getText().toString();
@@ -398,8 +398,8 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
         detectionResultBean.setNumberSamples(taskModel.taskID);// 样品编号
         detectionResultBean.setUploadStatus("未上传");
 
-        detectionResultBean.setUnitsUnderInspection(taskModel.getCompanyName()); // 被检单位
-        detectionResultBean.setUnitsUnderInspectionCode(taskModel.getCompanyCode()); // 被检单位
+        detectionResultBean.setUnitsUnderInspection(taskModel.getCompanyName()); // 受检单位
+        detectionResultBean.setUnitsUnderInspectionCode(taskModel.getCompanyCode()); // 受检单位
         detectionResultBean.setAisle(""); // 通道
         detectionResultBean.setWeight(""); // 重量
         detectionResultBean.setSampleConcentration(""); // 浓度

@@ -43,7 +43,7 @@ public class OrderInfoModel {
     public final static int type_sample_type_child = 3;
 
     /**
-     * 检测机构
+     * 检测单位
      * 不需要
      */
     public final static int type_check = 4;

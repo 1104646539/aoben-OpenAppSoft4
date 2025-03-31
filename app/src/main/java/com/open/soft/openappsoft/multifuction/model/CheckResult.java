@@ -6,7 +6,7 @@ public class CheckResult extends BaseData<CheckResult> {
 
 
     public String checkedOrganization = "";//检测单位
-    public String bcheckedOrganization = "";//被检测单位
+    public String bcheckedOrganization = "";//受检单位
     public String bcheckedOrganizationCode = "";//被检测代码
     public String SamplingTime = "";//抽样时间
     public String taskID = "";//任务ID

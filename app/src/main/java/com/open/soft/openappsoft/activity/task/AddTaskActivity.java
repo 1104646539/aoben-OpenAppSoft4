@@ -45,7 +45,8 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
     Spinner spn_sample_type_main, spn_sample_type_child, spn_bjcdw_name, spn_jcdw_name;
     TextView tv_sampling_date;
     TextView tv_commit, tv_cancel;
-    TextView tv_sample_name;
+//    TextView tv_sample_name;
+    EditText et_sample_name;
     TextView tv_sample_type_main, tv_sample_type_child, tv_bjcdw_name, tv_jcdw_name;
     EditText et_id;
 
@@ -120,7 +121,7 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
         et_id = findViewById(R.id.et_id);
         tv_cancel = findViewById(R.id.tv_cancel);
         tv_commit = findViewById(R.id.tv_commit);
-        tv_sample_name = findViewById(R.id.tv_sample_name);
+        et_sample_name = findViewById(R.id.et_sample_name);
         tv_sample_type_main = findViewById(R.id.tv_sample_type_main);
         tv_sample_type_child = findViewById(R.id.tv_sample_type_child);
         tv_bjcdw_name = findViewById(R.id.tv_bjcdw_name);
@@ -128,7 +129,7 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
 
         tv_cancel.setOnClickListener(this);
         tv_commit.setOnClickListener(this);
-        tv_sample_name.setOnClickListener(this);
+//        et_sample_name.setOnClickListener(this);
 
         ArrayAdapter<OrderInfoModel> adapter_bjcdw = new ArrayAdapter(this, R.layout.item_select_project, R.id.tv_project_name, bjcdws);
         adapter_bjcdw.setDropDownViewResource(R.layout.item_select_project_drop);
@@ -211,53 +212,53 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
     }
 
     private void showSampleNameDialog() {
-        if (dialog_sample_name == null) {
-            dialog_sample_name = new Dialog(this);
-
-            View dialogContentView = LayoutInflater.from(this)
-                    .inflate(R.layout.dialog_filtrate_select, null, false);
-            lv = dialogContentView.findViewById(R.id.lv);
-            et_content = dialogContentView.findViewById(R.id.et_content);
-            filtrateAdapter = new FiltrateAdapter(this);
-
-            dialog_sample_name.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            filtrateAdapter.setData(sample_names);
-
-            et_content.setSingleLine();
-            et_content.setImeOptions(EditorInfo.IME_ACTION_NEXT);
-            dialog_sample_name.setContentView(dialogContentView);
-
-            lv.setAdapter(filtrateAdapter);
-            lv.setOnItemClickListener((parent, view, position, id) -> {
-                tv_sample_name.setText(sample_names.get(position).sampleName);
-                //将最近选择的排列在最前面
-                sample_names.get(position).setTime(new Date().getTime());
-                new SampleName().saveOrUpdate(sample_names.get(position));
-                SampleName sn = sample_names.get(position);
-                if (position < sample_names.size()) {
-                    sample_names.remove(sn);
-                    sample_names.add(0, sn);
-                }
-//                sample_names.remove(position);
-//                sample_names.add(0, sn);
-//                    Log.d(TAG, "选择了样品名是=" + sampleNames.get(sposition).sampleName + "position=" + sposition);
-                if (dialog_sample_name != null && dialog_sample_name.isShowing()) {
-                    dialog_sample_name.dismiss();
-                }
-            });
-            et_content.setOnEditorActionListener((tv, actionId, event) -> {
-                boolean handled = false;
-                if (actionId == EditorInfo.IME_ACTION_NEXT) {
-                    tv_sample_name.setText(et_content.getText());
-                    handled = true;
-                    dialog_sample_name.dismiss();
-                    et_content.setText("");
-                }
-                return handled;
-            });
-        }
-        dialog_sample_name.show();
-        et_content.setText("");
+//        if (dialog_sample_name == null) {
+//            dialog_sample_name = new Dialog(this);
+//
+//            View dialogContentView = LayoutInflater.from(this)
+//                    .inflate(R.layout.dialog_filtrate_select, null, false);
+//            lv = dialogContentView.findViewById(R.id.lv);
+//            et_content = dialogContentView.findViewById(R.id.et_content);
+//            filtrateAdapter = new FiltrateAdapter(this);
+//
+//            dialog_sample_name.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//            filtrateAdapter.setData(sample_names);
+//
+//            et_content.setSingleLine();
+//            et_content.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+//            dialog_sample_name.setContentView(dialogContentView);
+//
+//            lv.setAdapter(filtrateAdapter);
+//            lv.setOnItemClickListener((parent, view, position, id) -> {
+//                tv_sample_name.setText(sample_names.get(position).sampleName);
+//                //将最近选择的排列在最前面
+//                sample_names.get(position).setTime(new Date().getTime());
+//                new SampleName().saveOrUpdate(sample_names.get(position));
+//                SampleName sn = sample_names.get(position);
+//                if (position < sample_names.size()) {
+//                    sample_names.remove(sn);
+//                    sample_names.add(0, sn);
+//                }
+////                sample_names.remove(position);
+////                sample_names.add(0, sn);
+////                    Log.d(TAG, "选择了样品名是=" + sampleNames.get(sposition).sampleName + "position=" + sposition);
+//                if (dialog_sample_name != null && dialog_sample_name.isShowing()) {
+//                    dialog_sample_name.dismiss();
+//                }
+//            });
+//            et_content.setOnEditorActionListener((tv, actionId, event) -> {
+//                boolean handled = false;
+//                if (actionId == EditorInfo.IME_ACTION_NEXT) {
+//                    tv_sample_name.setText(et_content.getText());
+//                    handled = true;
+//                    dialog_sample_name.dismiss();
+//                    et_content.setText("");
+//                }
+//                return handled;
+//            });
+//        }
+//        dialog_sample_name.show();
+//        et_content.setText("");
     }
 
     @Override
@@ -294,7 +295,7 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
     private void commit() {
         if (!verify()) return;
         String samplingDate = tv_sampling_date.getText().toString();
-        String sampleName = tv_sample_name.getText().toString();
+        String sampleName = et_sample_name.getText().toString();
         String jcx = et_jcx.getText().toString();
         TaskModel taskModel = new TaskModel(et_id.getText().toString(), jcdw.name, sample_type_main.code, sample_type_main.name,
                 sample_type_child.code, sample_type_child.name, sampleName, bjcdw.name, bjcdw.code, samplingDate, Global.NAME, jcx);
@@ -309,17 +310,17 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
     }
 
     private boolean verify() {
-        if (APPUtils.isNull(tv_sample_name.getText().toString()) || "请选择".equals(tv_sample_name.getText().toString())) {
-            APPUtils.showToast(this, "请选择样品名");
+        if (APPUtils.isNull(et_sample_name.getText().toString()) || "-".equals(et_sample_name.getText().toString())) {
+            APPUtils.showToast(this, "请输入样品名");
             return false;
         } else if (APPUtils.isNull(et_id.getText().toString())) {
-            APPUtils.showToast(this, "请输入任务ID");
+            APPUtils.showToast(this, "请输入样本编号");
             return false;
         } else if (bjcdw == null) {
             APPUtils.showToast(this, "请选择受检单位");
             return false;
         } else if (jcdw == null) {
-            APPUtils.showToast(this, "请选择检测机构");
+            APPUtils.showToast(this, "请选择检测单位");
             return false;
         } else if (sample_type_main == null) {
             APPUtils.showToast(this, "请选择样品主类");

@@ -5,7 +5,7 @@ public class GetSamplingInfoResultBean {
     /**
      * SamplingName : 千禧 样本名称
      * SamplingType : 水果类 样本类型
-     * SamplingDept : 菜市场 被检单位
+     * SamplingDept : 菜市场 受检单位
      * SamplingSource : 摊位 样本来源
      */
 

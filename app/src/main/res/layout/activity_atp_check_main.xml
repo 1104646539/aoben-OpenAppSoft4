@@ -134,7 +134,7 @@
                         <TextView
                             style="@style/checkactivity_textview_style"
                             android:layout_marginRight="10dp"
-                            android:text="被检单位:" />
+                            android:text="受检单位:" />
 
                         <TextView
                             android:id="@+id/tv_check_b"

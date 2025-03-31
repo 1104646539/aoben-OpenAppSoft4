@@ -266,7 +266,7 @@ public class TSDialogFragmentDemo2 extends GT.GT_Dialog.BaseDialogFragment imple
                     APPUtils.showToast(activity, "请先输入样品编号");
                 }
 //                else if ("".equals(et_input_bjdw.getText().toString()) || et_input_bjdw.getText().toString() == null) {
-//                    APPUtils.showToast(activity, "请先输入被检单位");
+//                    APPUtils.showToast(activity, "请先输入受检单位");
 //                }
                 else {
                     samplename = et_input_ypmc.getText().toString();
@@ -292,7 +292,7 @@ public class TSDialogFragmentDemo2 extends GT.GT_Dialog.BaseDialogFragment imple
                     } catch (Exception e) {
                         samplesource += "";
                     }
-                    //被检单位判断填写
+                    //受检单位判断填写
                     if (needCompanyCode.equals("0")) {
                         samplebcheckedOrganization = et_input_bjdw.getText().toString();
 
@@ -307,7 +307,7 @@ public class TSDialogFragmentDemo2 extends GT.GT_Dialog.BaseDialogFragment imple
                     intent.putExtra("sampleid", sampleid);//样品编号
                     intent.putExtra("sampletype", sampletype);//样品类别
                     intent.putExtra("samplesource", samplesource);//样品来源省市区拼接
-                    intent.putExtra("samplebcheckedOrganization", samplebcheckedOrganization);//被检单位
+                    intent.putExtra("samplebcheckedOrganization", samplebcheckedOrganization);//受检单位
                     intent.putExtra("yplbId", jsSubTypeId);//样品类别id
                     intent.putExtra("jsSubProductId", jsSubProductId);//样品类别productid
                     intent.putExtra("spId1", spId1);//省

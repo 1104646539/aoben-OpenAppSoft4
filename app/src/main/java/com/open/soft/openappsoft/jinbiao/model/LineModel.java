@@ -36,6 +36,11 @@ public class LineModel {
 		this.Jcx = jcx;
 		this.Ljz = ljz;
 		this.ConcentrateUnit = concentrateUnit;
+
+		this.A1 = "";
+		this.A2 = "";
+		this.X0 = "";
+		this.P = "";
 	}
 
 	public String getCard_name() {

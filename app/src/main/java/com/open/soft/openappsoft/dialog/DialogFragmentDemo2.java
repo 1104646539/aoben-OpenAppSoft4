@@ -241,7 +241,7 @@ public class DialogFragmentDemo2 extends GT.GT_Dialog.BaseDialogFragment impleme
                     APPUtils.showToast(activity, "请先输入样品编号");
                 }
 //                else if ("".equals(et_input_bjdw.getText().toString()) || et_input_bjdw.getText().toString() == null) {
-//                    APPUtils.showToast(activity, "请先输入被检单位");
+//                    APPUtils.showToast(activity, "请先输入受检单位");
 //                }
                 else {
                     samplename = et_input_ypmc.getText().toString();
@@ -267,7 +267,7 @@ public class DialogFragmentDemo2 extends GT.GT_Dialog.BaseDialogFragment impleme
                     } catch (Exception e) {
                         samplesource += "";
                     }
-                    //被检单位判断填写  这里拿到的
+                    //受检单位判断填写  这里拿到的
                     if (needCompanyCode.equals("0")) {
                         samplebcheckedOrganization = et_input_bjdw.getText().toString();
 

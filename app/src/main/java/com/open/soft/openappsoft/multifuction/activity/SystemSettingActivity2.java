@@ -75,7 +75,7 @@ public class SystemSettingActivity2 extends Activity implements View.OnClickList
     private Button btnIdSetting;
     private Button btnUploadSetting;
     private SharedPreferences sp;
-    private EditDataDialog editDataDialog_bc;//被检测单位
+    private EditDataDialog editDataDialog_bc;//受检单位
     private EditDataDialog editDataDialog_c;//检测单位
     private EditDataDialog editDataDialog_ss;//商品来源
     private EditDataDialog editDataDialog_sn;//样品名称
@@ -178,7 +178,7 @@ public class SystemSettingActivity2 extends Activity implements View.OnClickList
 //        prints_check.add(new Print("判定结果", true, true, true));
 //        prints_check.add(new Print("通道号", true, true, true));
 //        prints_check.add(new Print("样品编号", true, false, false));
-//        prints_check.add(new Print("被检测单位", true, false, false));
+//        prints_check.add(new Print("受检单位", true, false, false));
 //        prints_check.add(new Print("重量", true, false, false));
 //        prints_check.add(new Print("商品来源", true, false, false));
 //        prints_check.add(new Print("限量值", true, true, false));
@@ -189,7 +189,7 @@ public class SystemSettingActivity2 extends Activity implements View.OnClickList
 //        prints_data_manager.add(new Print("抑制率", true, true, true));
 //        prints_data_manager.add(new Print("判定结果", true, true, true));
 //        prints_data_manager.add(new Print("通道号", true, true, true));
-//        prints_data_manager.add(new Print("被检测单位", true, false, false));
+//        prints_data_manager.add(new Print("受检单位", true, false, false));
 //        prints_data_manager.add(new Print("检测单位", true, true, false));
 //        prints_data_manager.add(new Print("检测人员", true, true, false));
 //        prints_data_manager.add(new Print("商品来源", true, false, false));
@@ -244,12 +244,12 @@ public class SystemSettingActivity2 extends Activity implements View.OnClickList
     }
 
     /**
-     * 被检测单位
+     * 受检单位
      *
      * @param v
      */
     public void onBCheckOrg(View v) {
-        editDataDialog_bc.showDialog("被检测单位",
+        editDataDialog_bc.showDialog("受检单位",
                 EditDataDialog.DIALOG_TYPE_BCHEKEORG, null);
     }
 

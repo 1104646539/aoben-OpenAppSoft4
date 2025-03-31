@@ -76,11 +76,11 @@ public class UploadBean {
      */
     private String checkTime;
     /**
-     * 检测机构ID
+     * 检测单位ID
      */
     private String checkOrgId;
     /**
-     * 检测机构
+     * 检测单位
      */
     private String checkOrg;
     /**

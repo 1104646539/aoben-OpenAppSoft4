@@ -258,7 +258,7 @@ public class CheckPaintActivity extends AppCompatActivity implements View.OnClic
     // 限量标准
     private String limit_standard;
 
-    // 被检测单位
+    // 受检单位
     private String tested_unit;
 
     // 样品编号
@@ -1494,7 +1494,7 @@ public class CheckPaintActivity extends AppCompatActivity implements View.OnClic
                     "                \"Value\":\"" + tv_checkactivity_sampleunit.getText().toString() + "\"\n" +
                     "                },\n" +
                     "{\n" +
-                    "    \"Title\":\"被检测单位\",\n" +
+                    "    \"Title\":\"受检单位\",\n" +
                     "    \"Id\":\"samplingDept\",\n" +
                     "    \"Value\":\"" + tv_checkactivity_sampleunit.getText().toString() + "\"\n" +
                     "    },\n" +
@@ -1546,7 +1546,7 @@ public class CheckPaintActivity extends AppCompatActivity implements View.OnClic
                     "                \"Value\":\"" + tv_checkactivity_sampleunit.getText().toString() + "\"\n" +
                     "                },\n" +
                     "{\n" +
-                    "    \"Title\":\"被检测单位\",\n" +
+                    "    \"Title\":\"受检单位\",\n" +
                     "    \"Id\":\"samplingDept\",\n" +
                     "    \"Value\":\"" + tv_checkactivity_sampleunit.getText().toString() + "\"\n" +
                     "    },\n" +
@@ -2015,7 +2015,7 @@ public class CheckPaintActivity extends AppCompatActivity implements View.OnClic
         detectionResultBean.setNumberSamples(sample_number);// 样品编号
         detectionResultBean.setUploadStatus("未上传");
 
-        detectionResultBean.setUnitsUnderInspection(tested_unit); // 被检单位
+        detectionResultBean.setUnitsUnderInspection(tested_unit); // 受检单位
         detectionResultBean.setAisle(""); // 通道
         detectionResultBean.setWeight(""); // 重量
         detectionResultBean.setSampleConcentration(""); // 浓度

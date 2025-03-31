@@ -876,7 +876,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         }.start();
     }
 
-    CardCompanyModel cardModel = new CardCompanyModel("奥本", "300", "900", "120", "330");
+    CardCompanyModel cardModel = new CardCompanyModel("信达安检测", "300", "900", "120", "330");
 
     /**
      * 初始化项目
@@ -918,7 +918,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 Timber.i("projectName=" + projectName + " func=" + func);
                 if (!TextUtils.isEmpty(func) && !TextUtils.isEmpty(projectName)) {
                     if (func.contains("比色法") || func.contains("消线法")) {
-                        lineModels.add(new LineModel(func.contains("消线法") ? 2 : 3, projectName, cardModel.name, cardModel.ScanStart, cardModel.ScanEnd,
+                        lineModels.add(new LineModel(func.contains("消线法") ? 2 : 3, projectName, cardModel.name, cardModel.ScanStart,
+                                cardModel.ScanEnd,
                                 cardModel.CTPeakWidth, cardModel.CTPeakDistance, xlz, xlz, unit));
                     } else if (func.contains("分光光度") || func.contains("酶抑制法")) {
                         float K = Float.valueOf(k);
@@ -942,7 +943,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     String[] initCode2 = {"A001", "A002", "A003", "T001", "T002", "P001", "P002", "P003", "C001", "P004", "C002", "C003", "P005", "C004", "P006", "F001", "P007", "P999"};
     String[] initName3 = {"农贸市场1", "农贸市场2"};
     String[] initCode3 = {"00100001", "222200000"};
-    String[] initName4 = {"检测机构1", "检测机构2"};
+    String[] initName4 = {"检测单位1", "检测单位2"};
 
     private void initDB() {
 
@@ -1317,7 +1318,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             prints_check.add(new Print("判定结果", true, true, true));
             prints_check.add(new Print("通道号", true, true, true));
 //            prints_check.add(new Print("样品编号", true, false, false));
-            prints_check.add(new Print("被检测单位", true, false, false));
+            prints_check.add(new Print("受检单位", true, true, true));
             prints_check.add(new Print("重量", true, false, false));
             prints_check.add(new Print("商品来源", true, false, false));
             prints_check.add(new Print("限量标准", true, false, false));
@@ -1330,11 +1331,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             prints_data_manager.add(new Print("吸光度", true, true, true));
             prints_data_manager.add(new Print("判定结果", true, true, true));
             prints_data_manager.add(new Print("通道号", true, true, true));
-            prints_data_manager.add(new Print("被检测单位", true, false, false));
+            prints_data_manager.add(new Print("受检单位", true, true, true));
             prints_data_manager.add(new Print("检测单位", true, true, false));
             prints_data_manager.add(new Print("检测人员", true, true, false));
 //            prints_data_manager.add(new Print("商品来源", true, false, false));
-            prints_data_manager.add(new Print("样品编号", true, false, false));
+            prints_data_manager.add(new Print("样品编号", true, true, true));
             prints_data_manager.add(new Print("重量", true, false, false));
             prints_data_manager.add(new Print("限量标准", true, true, false));
 //            prints_data_manager.add(new Print("限量标准", true, true, false));

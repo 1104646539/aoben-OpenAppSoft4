@@ -213,8 +213,8 @@ public class ToolUtils {
                 if (print.isSelectMultiple || print.isRequired) {
                     if ("样品编号".equals(print.p_name)) {
                         isPrint_sampleNum = true;//样品编号
-                    } else if ("被检测单位".equals(print.p_name)) {
-                        isPrint_bcheckedOrganization = true;//被检测单位
+                    } else if ("受检单位".equals(print.p_name)) {
+                        isPrint_bcheckedOrganization = true;//受检单位
                     } else if ("重量".equals(print.p_name)) {
                         isPrint_weight = true;//重量
                     } else if ("商品来源".equals(print.p_name)) {
@@ -265,7 +265,7 @@ public class ToolUtils {
                 //}
 
                 if (isPrint_bcheckedOrganization) {
-                    sb.append("被检单位:");
+                    sb.append("受检单位:");
                     sb.append(result.bcheckedOrganization + "\n");
                 }
 
@@ -403,8 +403,8 @@ public class ToolUtils {
                 if (print.isSelectMultiple || print.isRequired) {
                     if ("样品编号".equals(print.p_name)) {
                         isPrint_sampleNum = true;//样品编号
-                    } else if ("被检测单位".equals(print.p_name)) {
-                        isPrint_bcheckedOrganization = true;//被检测单位
+                    } else if ("受检单位".equals(print.p_name)) {
+                        isPrint_bcheckedOrganization = true;//受检单位
                     } else if ("重量".equals(print.p_name)) {
                         isPrint_weight = true;//重量
                     } else if ("商品来源".equals(print.p_name)) {
@@ -457,7 +457,7 @@ public class ToolUtils {
                     sb.append(result.testStandard + "\n");
                 }
                 if (isPrint_bcheckedOrganization) {
-                    sb.append("被检单位:");
+                    sb.append("受检单位:");
                     sb.append(result.bcheckedOrganization + "\n");
                 }
                 if (isPrint_standardValue) {
@@ -582,7 +582,7 @@ public class ToolUtils {
             sb.append(result.testValue + "\n");
             sb.append("检测结果:");
             sb.append(result.resultJudge + "\n");
-            sb.append("被检单位:");
+            sb.append("受检单位:");
             sb.append(result.checkedOrganization + "\n");
             sb.append("样品名称:");
             sb.append(result.sampleName + "\n");

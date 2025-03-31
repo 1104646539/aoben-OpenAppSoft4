@@ -262,7 +262,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
     // 限量标准
     private String limit_standard;
 
-    // 被检测单位
+    // 受检单位
     private String tested_unit;
 
     // 样品编号
@@ -1505,8 +1505,8 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         detectionResultBean.setNumberSamples(taskModel.taskID);// 样品编号
         detectionResultBean.setUploadStatus("未上传");
 
-        detectionResultBean.setUnitsUnderInspection(taskModel.getCompanyName()); // 被检单位
-        detectionResultBean.setUnitsUnderInspectionCode(taskModel.getCompanyCode()); // 被检单位
+        detectionResultBean.setUnitsUnderInspection(taskModel.getCompanyName()); // 受检单位
+        detectionResultBean.setUnitsUnderInspectionCode(taskModel.getCompanyCode()); // 受检单位
         detectionResultBean.setAisle(""); // 通道
         detectionResultBean.setWeight(""); // 重量
         detectionResultBean.setSampleConcentration(""); // 浓度
