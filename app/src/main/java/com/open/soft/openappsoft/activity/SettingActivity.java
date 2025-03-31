@@ -51,7 +51,7 @@ public class SettingActivity extends Activity implements View.OnClickListener {
     private Button btn_open_3;
     private Button btn_open_4;
     private Button btn_open_5;
-    private Button btn_sample_type_main, btn_sample_type_child, btn_bcheck_ori, btn_check_ori,btn_sample;
+    private Button btn_sample_type_main, btn_sample_type_child, btn_bcheck_ori, btn_check_ori, btn_sample;
     private TextView tv_mac_url;
     private TextView tv_title;
 
@@ -143,40 +143,19 @@ public class SettingActivity extends Activity implements View.OnClickListener {
 
             initCn("M417", sp_name);
 
-            //赋值
-//            String name = new GT.GT_SharedPreferences(this, "companyName", true).query("name").toString();
-            String name = SharedPreferencesUtil.getDefaultSharedPreferences(SettingActivity.this).getString("companyName", "");
-
-            if (!"0".equals(name)) {
-//                InterfaceURL.companyName = name;//赋值
-//                et_name.setText(name);
-            }
-
-            new AlertDialog.Builder(this).setTitle("请输入设备名(SN)")
-//                    .setIcon(android.R.drawable.sym_def_app_icon)
+            et_name.setText(InterfaceURL.companyName);
+            new AlertDialog.Builder(this).setTitle("请输入公司名")
                     .setView(et_name)
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            //按下确定键后的事件
-                            String name = et_name.getText().toString();
-//                            String name = sp_name.getSelectedItem().toString();
+                    .setPositiveButton("确定", (dialogInterface, i) -> {
+                        //按下确定键后的事件
+                        String name = et_name.getText().toString();
 
-                            if (null != name && !"null".equals(name) && name.length() > 0) {
-
-                                // 修改
-//                                if ("信达安检测技术（天津）有限公司".equals(name)) {
-//                                    Global.company_name = "Xindaan";
-//                                } else {
-//                                    Global.company_name = "Aoben";
-//                                }
+                        if (null != name && !"null".equals(name) && name.length() > 0) {
                             SharedPreferencesUtil.getDefaultSharedPreferences(SettingActivity.this).edit().putString("companyName", name).commit();
-//                                new GT.GT_SharedPreferences(SettingActivity.this, "companyName", true).save("name", name);
-                                GT.toast(SettingActivity.this, "修改成功！");
-                                InterfaceURL.companyName = name;
-                            } else {
-                                GT.toast(SettingActivity.this, "设备名(SN)不能为空！");
-                            }
+                            GT.toast(SettingActivity.this, "修改成功！");
+                            InterfaceURL.companyName = name;
+                        } else {
+                            GT.toast(SettingActivity.this, "公司名不能为空！");
                         }
                     }).setNegativeButton("取消", null).show();
 
@@ -185,11 +164,12 @@ public class SettingActivity extends Activity implements View.OnClickListener {
             if (setTitleDialog == null) {
                 setTitleDialog = new SetTitleDialog(this);
             }
-            setTitleDialog.showDialog("", "", 1);
+            setTitleDialog.showDialog("", InterfaceURL.oneModule, 1);
             setTitleDialog.setOnConfirmListener(new SetTitleDialog.OnConfirmListener() {
                 @Override
                 public void onConfirmPw(String pw) {
-                    LoginActivity.sp_ServiceUrl.save("TitleSet", pw);
+                    InterfaceURL.oneModule = pw;
+                    SharedPreferencesUtil.getDefaultSharedPreferences(SettingActivity.this).edit().putString("oneModule", pw).commit();
                     Toast.makeText(SettingActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -209,7 +189,7 @@ public class SettingActivity extends Activity implements View.OnClickListener {
             Intent intent = new Intent(this, EditInfoActivity.class);
             intent.putExtra("type", OrderInfoModel.type_check);
             startActivity(intent);
-        }else if (v.getId() == R.id.btn_sample){
+        } else if (v.getId() == R.id.btn_sample) {
             Intent intent = new Intent(this, SampleNameActivity.class);
             startActivity(intent);
         }

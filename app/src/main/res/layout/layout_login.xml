@@ -20,6 +20,18 @@
         app:layout_constraintDimensionRatio="h,15:1"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tv_device_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="60dp"
+        android:text="设备号:"
+        android:textColor="@color/text_black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -49,9 +61,9 @@
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/et_filleted_corner"
                 android:hint="账号"
-                android:paddingLeft="5dp"
-                android:lines="1"
                 android:inputType="text"
+                android:lines="1"
+                android:paddingLeft="5dp"
                 android:textSize="26sp" />
 
         </LinearLayout>
@@ -106,6 +118,7 @@
             android:textSize="30dp" />
 
     </LinearLayout>
+
 
     <TextView
         android:id="@+id/tv_homeLocation"

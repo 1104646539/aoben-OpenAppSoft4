@@ -145,39 +145,39 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
         TextView tv_homeLocation = findViewById(R.id.tv_homeLocation);
         String verName = GT.ApplicationUtils.getVerName(this);
-        tv_homeLocation.setText("v" + verName);
+        tv_homeLocation.setText(InterfaceURL.companyName + " v" + verName);
 
         //动态标题
         TextView tv_title = findViewById(R.id.tv_title);
-        String title = LoginActivity.sp_ServiceUrl.query("TitleSet").toString();
-        if (title.isEmpty() || title.equals("0")) {
-            tv_title.setText(InterfaceURL.oneModule);
-        } else {
-            tv_title.setText(title);
-        }
+//        String title = InterfaceURL.oneModule;
+//        if (title.isEmpty() || title.equals("0")) {
+        tv_title.setText(InterfaceURL.oneModule);
+//        } else {
+//            tv_title.setText(title);
+//        }
         //内测渠道
-        tv_homeLocation.setOnLongClickListener(v -> {
-            final EditText inputServer = new EditText(MainActivity.this);
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setTitle("测试专用，暂不开放").setIcon(android.R.drawable.ic_dialog_info).setView(inputServer)
-                    .setNegativeButton("取消", null);
-            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    String input = inputServer.getText().toString();
-
-                    if ("test".equals(input)) {
-                        Intent intent = new Intent(MainActivity.this, com.open.soft.openappsoft.jinbiao.activity.CheckPaintActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                        intent.putExtra("source", "2");// 定性
-                        startActivity(intent);
-                    }
-                }
-            });
-            builder.show();
-
-
-            return false;
-        });
+//        tv_homeLocation.setOnLongClickListener(v -> {
+//            final EditText inputServer = new EditText(MainActivity.this);
+//            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+//            builder.setTitle("测试专用，暂不开放").setIcon(android.R.drawable.ic_dialog_info).setView(inputServer)
+//                    .setNegativeButton("取消", null);
+//            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                public void onClick(DialogInterface dialog, int which) {
+//                    String input = inputServer.getText().toString();
+//
+//                    if ("test".equals(input)) {
+//                        Intent intent = new Intent(MainActivity.this, com.open.soft.openappsoft.jinbiao.activity.CheckPaintActivity.class);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+//                        intent.putExtra("source", "2");// 定性
+//                        startActivity(intent);
+//                    }
+//                }
+//            });
+//            builder.show();
+//
+//
+//            return false;
+//        });
 
     }
 
@@ -568,13 +568,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                     Global.companyCode_value = Global.company_name;
                 }
 
-                if ("多参数食品安全检测仪".equals(interfaceURL.oneModule)) {
-                    Global.deviceType_value = "M417";
-                } else if ("农药残留检测仪".equals(interfaceURL.oneModule)) {
-                    Global.deviceType_value = "MC4011";
-                } else if ("农药残留单项精准分析仪".equals(interfaceURL.oneModule)) {
-                    Global.deviceType_value = "NAD4074";
-                }
 
                 if (Global.isVoluntarily) {
                     Global.samplingMode_value = "scan";
@@ -666,14 +659,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             Global.companyCode_value = Global.company_name;
         }
 
-        if ("多参数食品安全检测仪".equals(interfaceURL.oneModule)) {
-            Global.deviceType_value = "M417";
-        } else if ("农药残留检测仪".equals(interfaceURL.oneModule)) {
-            Global.deviceType_value = "MC4011";
-        } else if ("农药残留单项精准分析仪".equals(interfaceURL.oneModule)) {
-            Global.deviceType_value = "NAD4074";
-
-        }
 
         if (Global.isVoluntarily) {
             Global.samplingMode_value = "scan";

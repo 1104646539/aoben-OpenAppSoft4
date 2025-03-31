@@ -28,7 +28,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="设备名称"
+            android:text="标题名称"
             android:textColor="@color/text_black"
             android:textSize="34sp" />
 

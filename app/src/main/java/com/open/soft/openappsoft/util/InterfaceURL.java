@@ -8,7 +8,8 @@ public class InterfaceURL {
 //    public static String  oneModule = "农药残留检测仪";//MC4011  分光光度
 
     //公司名称
-    public static String companyName = "W123";//默认的公司名称
+    public static String companyName = "信达安食品检测（天津）有限公司";//默认的公司名称
+    public static String deviceNum = "W123";//设备号
 
     //是否检测App更新
 

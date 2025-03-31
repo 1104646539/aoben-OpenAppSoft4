@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -25,7 +24,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
@@ -40,31 +38,18 @@ import com.example.utils.http.Result;
 import com.example.utils.http.RetrofitServiceManager;
 import com.google.gson.Gson;
 import com.gsls.gt.GT;
-import com.open.soft.openappsoft.App;
 import com.open.soft.openappsoft.R;
-import com.open.soft.openappsoft.atp.AtpArgActivity;
 import com.open.soft.openappsoft.data2.JiaMiData;
 import com.open.soft.openappsoft.data2.JiaMiDataBean;
 import com.open.soft.openappsoft.jinbiao.model.SharedPreferencesUtil;
-import com.open.soft.openappsoft.jinbiao.util.ToolUtils;
-import com.open.soft.openappsoft.multifuction.model.CheckResult;
 import com.open.soft.openappsoft.multifuction.util.Network;
-import com.open.soft.openappsoft.multifuction.util.SerialUtils;
 import com.open.soft.openappsoft.util.APPUtils;
 import com.open.soft.openappsoft.util.InterfaceURL;
 import com.open.soft.openappsoft.util.SharedPreferences2;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.nio.charset.Charset;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
 import timber.log.Timber;
 
 public class LoginActivity extends Activity implements OrderPresenter.OrderInterface, View.OnClickListener {
@@ -77,6 +62,7 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
     Button btn_login_admin;
     private TextView tv_homeLocation;
     private TextView tv_title;
+    private TextView tv_device_num;
     public static SharedPreferences2 sp_ServiceUrl;
 
     @SuppressLint("HandlerLeak")
@@ -115,21 +101,22 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
 
         //赋值
 //        String name = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString("companyName", "W123");
-        String name = InterfaceURL.companyName;
+        String name = InterfaceURL.deviceNum;
 
         et_name.setText(name);
-        new AlertDialog.Builder(this).setTitle("请输入设备名(SN)")
+        new AlertDialog.Builder(this).setTitle("请输入设备号(SN)")
                 .setView(et_name)
                 .setPositiveButton("确定", (dialogInterface, i) -> {
                     //按下确定键后的事件
                     String name1 = et_name.getText().toString();
                     if (null != name1 && !"null".equals(name1) && name1.length() > 0) {
-                        SharedPreferencesUtil.getDefaultSharedPreferences(this).edit().putString("companyName", name1).commit();
+                        SharedPreferencesUtil.getDefaultSharedPreferences(this).edit().putString("deviceNum", name1).commit();
 //                                new GT.GT_SharedPreferences(SettingActivity.this, "companyName", true).save("name", name);
                         GT.toast(this, "修改成功！");
-                        InterfaceURL.companyName = name1;
+                        InterfaceURL.deviceNum = name1;
+                        updateDevice();
                     } else {
-                        GT.toast(this, "设备名(SN)不能为空！");
+                        GT.toast(this, "设备号(SN)不能为空！");
                     }
                 }).setNegativeButton("取消", null).show();
 
@@ -148,6 +135,7 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
         sp_ServiceUrl = new SharedPreferences2(this, "companyName");
 
         spinner = findViewById(R.id.spr_pt);
+        tv_device_num = findViewById(R.id.tv_device_num);
         tv_title = findViewById(R.id.tv_title);
         et_user = findViewById(R.id.et_user);
         et_psw = findViewById(R.id.et_psw);
@@ -172,14 +160,13 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
 
         //设置标题
         TextView tv_title = findViewById(R.id.tv_title);
-        String title = sp_ServiceUrl.query("TitleSet").toString();
-        if (title.isEmpty() || title.equals("0")) {
-            tv_title.setText(InterfaceURL.oneModule);
-        } else {
-            tv_title.setText(title);
-        }
-        //tv_title.setText(InterfaceURL.oneModule);
-
+//        String title = sp_ServiceUrl.query("TitleSet").toString();
+//        if (title.isEmpty() || title.equals("0")) {
+        tv_title.setText(InterfaceURL.oneModule);
+//        } else {
+//            tv_title.setText(title);
+//        }
+        updateDevice();
         //检测App更新
         if (InterfaceURL.isDetectionAppUpdate) {
             ProgressDialog progressDialog;
@@ -325,6 +312,10 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
 //
     }
 
+    private void updateDevice() {
+        tv_device_num.setText("设备号:" + InterfaceURL.deviceNum);
+    }
+
 
     //初始化 上次登录过的账号密码
     private void initUserPass() {
@@ -363,9 +354,11 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
     private void initSp() {
 
         String url_api = sp_ServiceUrl.query("url_api", Global.BASE_URL).toString();
+        InterfaceURL.deviceNum = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString("deviceNum", InterfaceURL.deviceNum);
         InterfaceURL.companyName = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString("companyName", InterfaceURL.companyName);
+        InterfaceURL.oneModule = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString("oneModule", InterfaceURL.oneModule);
 
-        GT.logs("查询出来的URL:" + url_api + " InterfaceURL.companyName=" + InterfaceURL.companyName);
+        GT.logs("查询出来的URL:" + url_api + " InterfaceURL.companyName=" + InterfaceURL.deviceNum);
 //        if (!"0".equals(url_api)) {
 //            Global.BASE_URL = InterfaceURL.BASE_URL = url_api;
 //        } else {
@@ -613,7 +606,7 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
         editor.apply();                //提交修改，否则不生效
         progressDialog.show();
 
-        orderPresenter.login(new LoginBean(InterfaceURL.companyName, user, psw, "2", Global.KEY), this, this, pass, progressDialog);
+        orderPresenter.login(new LoginBean(InterfaceURL.deviceNum, user, psw, "2", Global.KEY), this, this, pass, progressDialog);
     }
 
     public static String getMD5Str(String str) {

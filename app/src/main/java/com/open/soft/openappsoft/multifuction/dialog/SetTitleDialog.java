@@ -55,12 +55,13 @@ public class SetTitleDialog extends Dialog {
         if (isShowing()) {
             dismiss();
         }
+        et_content.setText(msg);
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (onConfirmListener != null) {
                     if (et_content.getText().toString().trim().isEmpty()) {
-                        Toast.makeText(context, "请输入设备名称", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "请输入软件名称", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     dismiss();

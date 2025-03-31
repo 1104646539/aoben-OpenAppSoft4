@@ -339,12 +339,6 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         // 隐藏标题
         GT.WindowUtils.hideActionBar(this);
 
-        // 单金标隐藏胶体金模块定时检测按钮，多参数不隐藏
-//        if ("农药残留单项精准分析仪".equals(InterfaceURL.oneModule)) {
-//            move_time.setVisibility(View.GONE);
-//        } else if ("多参数食品安全检测仪".equals(InterfaceURL.oneModule)) {
-//            move_time.setVisibility(View.GONE);
-//        }
 
 //        tv_check_company.setText(com.example.utils.http.Global.Dept + "");
         tv_check_persion.setText(com.example.utils.http.Global.NAME + "");

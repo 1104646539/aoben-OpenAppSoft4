@@ -11,7 +11,6 @@ import com.example.utils.http.Result;
 import com.example.utils.http.ToolUtil;
 import com.example.utils.http.model.UploadBean;
 import com.google.gson.Gson;
-import com.open.soft.openappsoft.multifuction.model.CheckResult;
 import com.open.soft.openappsoft.sql.bean.DetectionResultBean;
 
 import java.util.Date;
@@ -124,7 +123,7 @@ public class UploadThread2 extends Thread {
         uploadBean.setSampleCode(ToolUtil.nullToString(checkResult.getNumberSamples(), ""));
         uploadBean.setCheckItemName(ToolUtil.nullToString(checkResult.getTestItem(), ""));
         uploadBean.setCheckMothedName(ToolUtil.nullToString("123", ""));
-        uploadBean.setDeviceSn(ToolUtil.nullToString(InterfaceURL.companyName, ""));
+        uploadBean.setDeviceSn(ToolUtil.nullToString(InterfaceURL.deviceNum, ""));
         uploadBean.setSampleType(ToolUtil.nullToString(checkResult.getSpecimenType(), ""));
         uploadBean.setSampleTypeId(ToolUtil.nullToString(checkResult.getSpecimenTypeCode(), ""));
         uploadBean.setSampleSubType(ToolUtil.nullToString(checkResult.getSpecimenTypeChild(), ""));

@@ -639,11 +639,6 @@ public class CheckActivityByMen extends BaseActivity implements OnClickListener,
         // 隐藏标题
         GT.WindowUtils.hideActionBar(this);
         //初始化第一个下拉组件数据
-        if ("农药残留单项精准分析仪".equals(InterfaceURL.oneModule)) {
-            initSp("0001", 1);
-        } else if ("多参数食品安全检测仪".equals(InterfaceURL.oneModule) || "农药残留检测仪".equals(InterfaceURL.oneModule)) {
-            initSp1("0001", 1);
-        }
 
 
         // 初始化样品类型下拉组件
@@ -676,14 +671,7 @@ public class CheckActivityByMen extends BaseActivity implements OnClickListener,
         et_jcxxdz.setText(LocationAddress);
 
         // 单金标隐藏胶体金模块定时检测按钮，多参数不隐藏
-        if ("农药残留单项精准分析仪".equals(InterfaceURL.oneModule)) {
             move_time.setVisibility(View.GONE);
-        } else if ("多参数食品安全检测仪".equals(InterfaceURL.oneModule)) {
-//            move_time.setVisibility(View.VISIBLE);
-            move_time.setVisibility(View.GONE);
-        }
-
-        //
         sp_yplx_normal = findViewById(R.id.sp_yplx_normal);
 
         // 获取参数

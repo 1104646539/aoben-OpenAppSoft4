@@ -316,13 +316,6 @@ public class APPUtils {
         CheckService checkService = RetrofitServiceManager.getInstance().getCheckService();
 
 //        Map<String, String> map = new HashMap<>();
-//        if ("多参数食品安全检测仪".equals(InterfaceURL.oneModule)) {//多参数
-//            map.put("requestAppVersionsName", "OpenAppSoft3");
-//        } else if ("农药残留检测仪".equals(InterfaceURL.oneModule)) {//单农残
-//            map.put("requestAppVersionsName", "OpenAppSoft2");
-//        } else if ("农药残留单项精准分析仪".equals(InterfaceURL.oneModule)) {//单金标
-//            map.put("requestAppVersionsName", "OpenAppSoft1");
-//        }
 //        map.put("app","qingdao001");
         checkService.GetUpdate(Global.URL_UPDATE, Global.APP_NAME).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<BaseResult<UpdateBean>>() {

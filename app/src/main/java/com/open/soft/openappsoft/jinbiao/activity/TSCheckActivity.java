@@ -145,9 +145,9 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
     /**
      * 后续修改添加下拉框
      */
-    private JsonList jsType = new JsonList(),jsSubType=new JsonList();
-    private int jsTypePosition,jsSubTypePosition;
-    private String jsTypeId,jsSubTypeId,jsSubProductId;
+    private JsonList jsType = new JsonList(), jsSubType = new JsonList();
+    private int jsTypePosition, jsSubTypePosition;
+    private String jsTypeId, jsSubTypeId, jsSubProductId;
     private String needCompanyCode;
     /**
      * 读取数据超时次数，如果超过3次，则终止此次检测
@@ -173,7 +173,7 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
 
     private EditText et_Sample_Num = null;
     private EditText et_SampleTime = null;
-    private TextView et_companyCode=null;
+    private TextView et_companyCode = null;
     private TableRow llCompany;
 
     private String[] company_list = null;
@@ -653,11 +653,7 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
         // 隐藏标题
         GT.WindowUtils.hideActionBar(this);
         //初始化第一个下拉组件数据
-        if ("农药残留单项精准分析仪".equals(InterfaceURL.oneModule)) {
-            initSp("0001", 1);
-        } else if ("多参数食品安全检测仪".equals(InterfaceURL.oneModule) || "农药残留检测仪".equals(InterfaceURL.oneModule)) {
-            initSp1("0001", 1);
-        }
+        initSp("0001", 1);
 
 
         // 初始化样品类型下拉组件
@@ -690,12 +686,7 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
         et_jcxxdz.setText(LocationAddress);
 
         // 单金标隐藏胶体金模块定时检测按钮，多参数不隐藏
-        if ("农药残留单项精准分析仪".equals(InterfaceURL.oneModule)) {
-            move_time.setVisibility(View.GONE);
-        } else if ("多参数食品安全检测仪".equals(InterfaceURL.oneModule)) {
-//            move_time.setVisibility(View.VISIBLE);
-            move_time.setVisibility(View.GONE);
-        }
+        move_time.setVisibility(View.GONE);
 
 
 //        sp_yplx_normal = findViewById(R.id.sp_yplx_normal);
@@ -719,7 +710,7 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
                     jsTypePosition = position;
                     tv_yplx_normal.setText(jsType.getJsonMap(jsTypePosition).getString("sampleName"));
                     jsTypeId = jsType.getJsonMap(jsTypePosition).getString("sampleId");
-                    Log.i("lcy", "onClick: ----jsTypeId-----"+jsTypeId);
+                    Log.i("lcy", "onClick: ----jsTypeId-----" + jsTypeId);
                     if (jsType.size() > 0) {
                         // 样品名称下拉框初始化
                         initSampleNameSpinner();
@@ -732,11 +723,11 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
         tv_check_sample.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (tv_yplx_normal.getText().equals("请选择")){
+                if (tv_yplx_normal.getText().equals("请选择")) {
                     Toast.makeText(TSCheckActivity.this, "请先选择样品类型", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     List<String> list = new ArrayList();
-                    if (jsSubType.size()>0){
+                    if (jsSubType.size() > 0) {
                         for (int i = 0; i < jsSubType.size(); i++) {
                             list.add(jsSubType.getJsonMap(i).getString("objectName"));
                         }
@@ -744,9 +735,9 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
                             jsSubTypePosition = position;
                             tv_check_sample.setText(jsSubType.getJsonMap(jsSubTypePosition).getString("objectName"));
                             jsSubTypeId = jsSubType.getJsonMap(jsSubTypePosition).getString("objectId");
-                            jsSubProductId=jsSubType.getJsonMap(jsSubTypePosition).getString("productId");
+                            jsSubProductId = jsSubType.getJsonMap(jsSubTypePosition).getString("productId");
                         });
-                    }else {
+                    } else {
                         list.add("暂无数据请重新选择样品类型");
                         DialogUitl.listDialog(TSCheckActivity.this, list, position -> {
                             tv_check_sample.setText("请选择");
@@ -1719,10 +1710,8 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
         long_tv = (TextView) findViewById(R.id.check_edit_tv_long);
         et_Sample_Num = (EditText) findViewById(R.id.checkactivity_et_SampleNum);
         //组织机构代码
-        et_companyCode=findViewById(R.id.checkactivity_et_company);
-        llCompany=findViewById(R.id.tr_ll);
-
-
+        et_companyCode = findViewById(R.id.checkactivity_et_company);
+        llCompany = findViewById(R.id.tr_ll);
 
 
         et_CheckedEnterprise = (EditText) findViewById(R.id.et_CheckedEnterprise);
@@ -1811,13 +1800,13 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
         });
 
         //判断是否需要组织机构代码
-        needCompanyCode= com.example.utils.http.Global.NEEDCompanyCode;
-        if (needCompanyCode.equals("0")){
+        needCompanyCode = com.example.utils.http.Global.NEEDCompanyCode;
+        if (needCompanyCode.equals("0")) {
             llCompany.setVisibility(View.GONE);
             ivSearchCheck.setVisibility(View.GONE);
             Log.i("lcy", "initView: ----View.GONE---");
 
-        }else {
+        } else {
             et_CheckedEnterprise.setVisibility(View.GONE);
             tvCheckedEnterprise.setVisibility(View.VISIBLE);
         }
@@ -1826,8 +1815,8 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(TSCheckActivity.this, SearchActivity.class);
-                intent.putExtra("ts","TSCheckActivity");
-                startActivityForResult(intent,1001);
+                intent.putExtra("ts", "TSCheckActivity");
+                startActivityForResult(intent, 1001);
             }
         });
     }
@@ -2086,7 +2075,7 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
             resultModel.concentrateUnit = selectedProject.ConcentrateUnit;
             resultModel.sample_unit = tv_checkactivity_sampleunit.getText().toString();
             resultModel.shiji = tv_check_b.getText().toString();
-            resultModel.companyCode=et_companyCode.getText().toString();
+            resultModel.companyCode = et_companyCode.getText().toString();
 //            resultModel.upload_status = 1;
 //            resultModel.sample_id = et_Sample_Num.getText().toString();
 
@@ -2153,7 +2142,7 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
         detectionResultBean.setOperatorId(com.example.utils.http.Global.ID); // 上传数据的OperatorId参数
         detectionResultBean.setAreaId(terrace); // 上传数据的AreaId参数
         detectionResultBean.setDeptId(DeptId); // 上传数据的DeptId参数
-        detectionResultBean.companyCode=resultModel.companyCode;//组织机构
+        detectionResultBean.companyCode = resultModel.companyCode;//组织机构
         detectionResultBean.setYplbId(productId);
         detectionResultBean.setObjectId(objectId);
 
@@ -2252,7 +2241,7 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
 
         //如果样品名称为null 那就弹出对话框
 //|| et_CheckedEnterprise.getText().toString().length() == 0
-        if (tv_check_sample.getText().toString().equals("请选择")  || et_Sample_Num.getText().toString().length() == 0 || et_yplydz.getText().toString().length() == 0) {
+        if (tv_check_sample.getText().toString().equals("请选择") || et_Sample_Num.getText().toString().length() == 0 || et_yplydz.getText().toString().length() == 0) {
             String str = "";
             if (tv_check_sample.getText().equals("请选择")) {
                 str = "样品名称不能为空";
@@ -2399,8 +2388,6 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
                         }
                     }
                 });
-
-
 
 
                 GT.Thread.runAndroid(TSCheckActivity.this, new Runnable() {
@@ -2804,7 +2791,7 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
         String str_api = "";
         //唐山提交
         str_api = "CommonManual/UpdateManualSampling";
-        yplbId=jsTypeId;
+        yplbId = jsTypeId;
         //id位置
         String ipAddress = GT.Network.getIPAddress(this);
 
@@ -2829,12 +2816,12 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
 
         // 新的上传
         if ("农药残留单项精准分析仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
-            String checkedEnterprise="";
-            if (needCompanyCode.equals("0")){
-                checkedEnterprise=et_CheckedEnterprise.getText().toString();
+            String checkedEnterprise = "";
+            if (needCompanyCode.equals("0")) {
+                checkedEnterprise = et_CheckedEnterprise.getText().toString();
 
-            }else {
-                checkedEnterprise=tvCheckedEnterprise.getText().toString();
+            } else {
+                checkedEnterprise = tvCheckedEnterprise.getText().toString();
             }
 
             data = "[{\"QRCode\":\"" + QRCode22.replaceAll("\\s*", "") + "\",\n" +
@@ -2866,12 +2853,12 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
                     "]";
 
         } else if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
-            String checkedEnterprise="";
-            if (needCompanyCode.equals("0")){
-                checkedEnterprise=et_CheckedEnterprise.getText().toString();
+            String checkedEnterprise = "";
+            if (needCompanyCode.equals("0")) {
+                checkedEnterprise = et_CheckedEnterprise.getText().toString();
 
-            }else {
-                checkedEnterprise=tvCheckedEnterprise.getText().toString();
+            } else {
+                checkedEnterprise = tvCheckedEnterprise.getText().toString();
             }
             data = "[{\"QRCode\":\"" + QRCode22.replaceAll("\\s*", "") + "\",\n" +
                     "\"LocationX\":\"" + LocationX + "\",\n" +
@@ -4185,6 +4172,7 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
 //            }
 //        });
     }
+
     /**
      * 点击页面空白处时，让键盘消失
      *
@@ -4254,19 +4242,20 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d("zdl","=========onActivityResult========requestCode====="+requestCode);
-        Log.d("zdl","=========onActivityResult=======resultCode======"+resultCode);
+        Log.d("zdl", "=========onActivityResult========requestCode=====" + requestCode);
+        Log.d("zdl", "=========onActivityResult=======resultCode======" + resultCode);
 
-        if (requestCode == 1001 && resultCode == 502){
+        if (requestCode == 1001 && resultCode == 502) {
             String companyName = data.getStringExtra("companyName");
             String companyNum = data.getStringExtra("companyNum");
             et_companyCode.setText(companyNum);
             tvCheckedEnterprise.setText(companyName);
-            Log.d("zdl","=========onActivityResult=======companyName======"+companyName);
+            Log.d("zdl", "=========onActivityResult=======companyName======" + companyName);
         }
     }
+
     //接收添加企业传过来的消息
-    @Subscribe(threadMode = ThreadMode.POSTING,sticky = true)
+    @Subscribe(threadMode = ThreadMode.POSTING, sticky = true)
     public void onEventMainThread(AddComBean addComBean) {
         String companyName = addComBean.companyName;
         String companyNum = addComBean.companyNum;
@@ -4274,9 +4263,8 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
         tvCheckedEnterprise.setText(companyName);
 //每次用完需要移除
         EventBus.getDefault().removeStickyEvent(addComBean);
-        Log.i("lcy", "onEventMainThread: ---TScheckActivity拿到了值--"+addComBean.companyName);
+        Log.i("lcy", "onEventMainThread: ---TScheckActivity拿到了值--" + addComBean.companyName);
     }
-
 
 
 }

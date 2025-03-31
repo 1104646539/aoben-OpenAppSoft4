@@ -63,13 +63,6 @@ public class knowledgeActivity extends Activity {
 
         Map<String, String> map = new HashMap<>();
 
-        if ("多参数食品安全检测仪".equals(InterfaceURL.oneModule)) {
-            map.put("type", "M417");
-        } else if ("农药残留检测仪".equals(InterfaceURL.oneModule)) {
-            map.put("type", "MC4011");
-        } else if ("农药残留单项精准分析仪".equals(InterfaceURL.oneModule)) {
-            map.put("type", "NAD4074");
-        }
         // 从本地获取网址
 //        EditURLDialog editURLDialog = new EditURLDialog(knowledgeActivity.this);
         new GT.HttpUtil().postRequest(InterfaceURL.BASE_URL + "/Other/GetKnowledge", map, new GT.HttpUtil.OnLoadDataListener() {
