@@ -132,6 +132,7 @@
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:visibility="visible">
 
                         <TextView
@@ -150,6 +151,7 @@
 
                     <TableRow
                         android:layout_width="match_parent"
+                        android:layout_marginTop="5dp"
                         android:layout_height="wrap_content">
 
                         <TextView
@@ -171,6 +173,7 @@
 
                     <TableRow
                         android:layout_width="match_parent"
+
                         android:layout_height="wrap_content">
 
                         <TextView
@@ -230,6 +233,7 @@
                     <TableRow
                         android:id="@+id/tr_ll"
                         android:layout_width="match_parent"
+                        android:layout_marginTop="5dp"
                         android:layout_height="wrap_content">
 
                         <TextView
@@ -237,11 +241,11 @@
                             android:layout_marginRight="10dp"
                             android:text="组织机构:" />
 
-                        <EditText
+                        <TextView
                             android:hint=""
                             android:lines="1"
                             android:id="@+id/checkactivity_et_company"
-                            style="@style/checkactivity_edittext_style"
+                            style="@style/checkactivity_textview_style"
                             android:maxLength="50" />
                     </TableRow>
 
@@ -265,6 +269,7 @@
 
                     <TableRow
                         android:layout_width="match_parent"
+                        android:layout_marginTop="5dp"
                         android:layout_height="wrap_content">
 
                         <TextView
@@ -272,17 +277,18 @@
                             android:layout_marginRight="10dp"
                             android:text="限量标准:" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/check_edit_jcx"
                             android:lines="1"
                             android:inputType="text"
-                            style="@style/checkactivity_edittext_style"
+                            style="@style/checkactivity_textview_style"
                             android:enabled="false"
                             android:textColor="@color/text_black" />
                     </TableRow>
 
                     <TableRow
                         android:layout_width="match_parent"
+                        android:layout_marginTop="5dp"
                         android:layout_height="wrap_content">
 
                         <TextView
@@ -290,17 +296,18 @@
                             android:layout_marginRight="10dp"
                             android:text="临界值:" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/check_edit_lin"
                             android:lines="1"
                             android:inputType="text"
-                            style="@style/checkactivity_edittext_style"
+                            style="@style/checkactivity_textview_style"
                             android:enabled="false"
                             android:textColor="@color/text_black" />
                     </TableRow>
 
                     <TableRow
                         android:layout_width="match_parent"
+                        android:layout_marginTop="5dp"
                         android:layout_height="wrap_content">
 
                         <TextView
@@ -308,16 +315,17 @@
                             android:layout_marginRight="10dp"
                             android:text="T/C值:" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/check_edit_value"
                             android:lines="1"
-                            style="@style/checkactivity_edittext_style"
+                            style="@style/checkactivity_textview_style"
                             android:enabled="false"
                             android:textColor="@color/text_black" />
                     </TableRow>
 
                     <TableRow
                         android:layout_width="match_parent"
+                        android:layout_marginTop="5dp"
                         android:layout_height="wrap_content">
 
                         <TextView
@@ -326,16 +334,17 @@
                             android:layout_marginRight="10dp"
                             android:text="样品浓度:" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/check_edit_long"
                             android:lines="1"
-                            style="@style/checkactivity_edittext_style"
+                            style="@style/checkactivity_textview_style"
                             android:enabled="false"
                             android:textColor="@color/text_black" />
                     </TableRow>
 
                     <TableRow
                         android:layout_width="match_parent"
+                        android:layout_marginTop="5dp"
                         android:layout_height="wrap_content">
 
                         <TextView
@@ -343,10 +352,10 @@
                             android:layout_marginRight="10dp"
                             android:text="检测结果:" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/check_edit_result"
                             android:lines="1"
-                            style="@style/checkactivity_edittext_style"
+                            style="@style/checkactivity_textview_style"
                             android:enabled="false"
                             android:textColor="@color/text_black" />
                     </TableRow>

@@ -48,7 +48,7 @@ public class DetectionResultBean {
     private String xgd;                      //吸光度
     public String companyCode;               //组织机构代码
     public String objectId;               //组织机构代码
-    public String taskID;               //任务ID
+    public String taskID;               //样品编号
     public String specimenTypeCode;               //样品类型code
     public String specimenTypeChild;               //样品类型code
     public String specimenTypeChildCode;               //样品类型code

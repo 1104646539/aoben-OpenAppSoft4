@@ -208,7 +208,7 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
 
         tv_homeLocation = findViewById(R.id.tv_homeLocation);
         String verName = GT.ApplicationUtils.getVerName(this);
-        tv_homeLocation.setText("v" + verName);
+        tv_homeLocation.setText(InterfaceURL.companyName + " v" + verName);
 
 
         getEncryptionMethod();

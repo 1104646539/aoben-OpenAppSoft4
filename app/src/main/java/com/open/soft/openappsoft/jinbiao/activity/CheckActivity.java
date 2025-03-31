@@ -135,26 +135,26 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
     private int readTimeOutCount = 0;
     private Spinner companySpinner = null;
     private Spinner persionSpinner = null;
-    private Spinner shijiSpinner = null;
+    //    private Spinner shijiSpinner = null;
     private Spinner sampleSpinner = null;
     private Spinner projectSpinner = null;
     private Spinner typeSpinner = null;
     private Spinner sampleUnitSpinner = null;
 
-    private EditText etJcx = null;
-    private EditText etLjz = null;
-    private EditText etDr = null;
-    private EditText etConcentrate = null;
-    private EditText etResult = null;
+    private TextView etJcx = null;
+    private TextView etLjz = null;
+    private TextView etDr = null;
+    private TextView etConcentrate = null;
+    private TextView etResult = null;
     private TextView long_tv = null;
     private TextView tv_checkactivity_sampleunit = null;
     private TextView tv_check_b = null;
     private TextView tv_title_mode1;
 
 
-    private EditText et_Sample_Num = null;
+    private TextView et_Sample_Num = null;
     private TextView et_SampleTime = null;
-    private EditText et_companyCode = null;
+    private TextView et_companyCode = null;
     private TableRow llCompany;
 
     private String[] company_list = null;
@@ -500,7 +500,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 
         company_adater = new ArrayAdapter<String>(CheckActivity.this, R.layout.item_simple_spiner, company_list);//simple_spinner_item
         persion_adapter = new ArrayAdapter<String>(CheckActivity.this, R.layout.item_simple_spiner, persion_list);
-        shiji_adapter = new ArrayAdapter<String>(CheckActivity.this, R.layout.item_simple_spiner, shiji_list);
+//        shiji_adapter = new ArrayAdapter<String>(CheckActivity.this, R.layout.item_simple_spiner, shiji_list);
         sample_adapter = new ArrayAdapter<String>(CheckActivity.this, R.layout.item_simple_spiner, sample_list);
         project_adapter = new ArrayAdapter<String>(CheckActivity.this, R.layout.item_simple_spiner, project_list);
         type_adapter = new ArrayAdapter<String>(CheckActivity.this, R.layout.item_simple_spiner, type_list);
@@ -508,7 +508,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 
         companySpinner.setAdapter(company_adater);
         persionSpinner.setAdapter(persion_adapter);
-        shijiSpinner.setAdapter(shiji_adapter);
+//        shijiSpinner.setAdapter(shiji_adapter);
         sampleSpinner.setAdapter(sample_adapter);
         projectSpinner.setAdapter(project_adapter);
         typeSpinner.setAdapter(type_adapter);
@@ -535,7 +535,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int arg2, long arg3) {
-                if (projectlist.size() > 0) {
+                if (projectlist != null && projectlist.size() > 0) {
                     selectedProject = projectlist.get(arg2);
                     etLjz.setText(selectedProject.getLjz());
                     etJcx.setText(selectedProject.getJcx());
@@ -598,22 +598,22 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             }
         });
 
-        shijiSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                       int arg2, long arg3) {
-                if (shijilist.size() > 0) {
-                    ShiJiModel model = shijilist.get(arg2);
-                    shiji_model = model;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-
-            }
-        });
+//        shijiSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+//
+//            @Override
+//            public void onItemSelected(AdapterView<?> arg0, View arg1,
+//                                       int arg2, long arg3) {
+//                if (shijilist.size() > 0) {
+//                    ShiJiModel model = shijilist.get(arg2);
+//                    shiji_model = model;
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> arg0) {
+//
+//            }
+//        });
         sampleSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 
@@ -1193,7 +1193,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         tv_check_b = (TextView) findViewById(R.id.tv_check_b);
         companySpinner = (Spinner) findViewById(R.id.check_company_spinner);
         persionSpinner = (Spinner) findViewById(R.id.check_persion_spinner);
-        shijiSpinner = (Spinner) findViewById(R.id.check_shiji_spinner);
+//        shijiSpinner = (Spinner) findViewById(R.id.check_shiji_spinner);
         sampleSpinner = (Spinner) findViewById(R.id.check_sample_spinner);
 
         projectSpinner = (Spinner) findViewById(R.id.check_project_spinner);
@@ -1207,13 +1207,13 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 
         tv_check_type = (TextView) findViewById(R.id.tv_check_type);
         tv_check_project = (TextView) findViewById(R.id.tv_check_project);
-        etJcx = (EditText) findViewById(R.id.check_edit_jcx);
-        etLjz = (EditText) findViewById(R.id.check_edit_lin);
-        etDr = (EditText) findViewById(R.id.check_edit_value);
-        etConcentrate = (EditText) findViewById(R.id.check_edit_long);
+        etJcx =  findViewById(R.id.check_edit_jcx);
+        etLjz =  findViewById(R.id.check_edit_lin);
+        etDr =  findViewById(R.id.check_edit_value);
+        etConcentrate =  findViewById(R.id.check_edit_long);
         long_tv = (TextView) findViewById(R.id.check_edit_tv_long);
 
-        et_Sample_Num = (EditText) findViewById(R.id.checkactivity_et_SampleNum);
+        et_Sample_Num =  findViewById(R.id.checkactivity_et_SampleNum);
         et_companyCode = findViewById(R.id.checkactivity_et_company);
         llCompany = findViewById(R.id.tr_ll);
         //判断是否需要组织机构代码
@@ -1229,7 +1229,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 
         et_SampleTime.setText(time);
 
-        etResult = (EditText) findViewById(R.id.check_edit_result);
+        etResult =  findViewById(R.id.check_edit_result);
         btn_Imm_Check = (Button) findViewById(R.id.btn_Imm_Check);
         move_time = (Button) findViewById(R.id.move_time);
         move_time.setOnClickListener(this);
@@ -1496,7 +1496,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 //        detectionResultBean.setLimitStandard(resultModel.xian + resultModel.concentrateUnit);//限量标准
 //        detectionResultBean.setLimitStandard(limit_standard);//限量标准
         detectionResultBean.setCriticalValue(resultModel.lin);//临界值
-        detectionResultBean.setDetectionValue(resultModel.check_value );//检测值
+        detectionResultBean.setDetectionValue(resultModel.check_value);//检测值
         detectionResultBean.setSampleConcentration(resultModel.style_long);//样品浓度
         detectionResultBean.setDetectionResult(resultModel.check_result);//检测结果
         detectionResultBean.setDetectionTime(resultModel.time);//检测时间

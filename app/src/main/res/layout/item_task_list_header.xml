@@ -7,13 +7,22 @@
     android:paddingTop="5dp"
     android:paddingBottom="5dp">
 
+    <ImageView
+        android:id="@+id/iv_selected"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:visibility="gone"
+        android:padding="5dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/cb_selector" />
+
     <TextView
         android:id="@+id/tv_id"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1.2"
         android:gravity="center"
-        android:text="任务ID"
+        android:text="样品编号"
         android:textColor="@color/white"
         android:textSize="28sp" />
 
@@ -30,20 +39,20 @@
     <TextView
         android:id="@+id/tv_bjdw"
         android:layout_width="0dp"
-        android:gravity="center"
-        android:text="受检单位"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:gravity="center"
+        android:text="受检单位"
         android:textColor="@color/white"
         android:textSize="28sp" />
 
     <TextView
         android:id="@+id/tv_time"
         android:layout_width="0dp"
-        android:gravity="center"
-        android:text="抽样时间"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:gravity="center"
+        android:text="抽样时间"
         android:textColor="@color/white"
         android:textSize="28sp" />
 </LinearLayout>

@@ -242,7 +242,7 @@
     <style name="checkactivity_textview_style">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/text_black</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:layout_marginLeft">10dp</item>

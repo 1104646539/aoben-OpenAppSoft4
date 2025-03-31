@@ -192,10 +192,12 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
                     if (APPUtils.isNull(model.name)) {
                         APPUtils.showToast(EditInfoActivity.this, "请输入受检单位");
 
-                    } else if (APPUtils.isNull(model.code)) {
-                        APPUtils.showToast(EditInfoActivity.this, "请输入受检单位代码");
-
-                    } else {
+                    }
+//                    else if (APPUtils.isNull(model.code)) {
+//                        APPUtils.showToast(EditInfoActivity.this, "请输入受检单位代码");
+//
+//                    }
+                    else {
                         orderInfoDialog.dismiss();
                         addOrSave(showMode == EditOrderInfoDialog.ShowMode_add, model);
                     }

@@ -9,7 +9,7 @@ public class CheckResult extends BaseData<CheckResult> {
     public String bcheckedOrganization = "";//受检单位
     public String bcheckedOrganizationCode = "";//被检测代码
     public String SamplingTime = "";//抽样时间
-    public String taskID = "";//任务ID
+    public String taskID = "";//样品编号
     public String projectName;//检测项目
     public String sampleName;//样品名称
     public String sampleNum = "";//样品编号

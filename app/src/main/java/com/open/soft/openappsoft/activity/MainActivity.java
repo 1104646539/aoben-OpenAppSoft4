@@ -237,7 +237,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_main);
-
+        //初始化金标的
+        DbHelper.InitDb(getApplicationContext());
         // 初始化
         initModel();
         initView();
@@ -784,9 +785,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                     //初始化测试用的
                     initDB();
 
-                    //初始化金标的
-                    DbHelper.InitDb(getApplicationContext());
-
                     //初始化项目
                     initXlsProject();
 
@@ -805,56 +803,56 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                     fos.close();
                     is.close();
 
-                    Workbook book = Workbook.getWorkbook(tempFile);//用读取到的表格文件来实例化工作簿对象（符合常理，我们所希望操作的就是Excel工作簿文件）
-                    Sheet[] sheets = book.getSheets(); //得到所有的工作表
-                    List<SampleName> list = new ArrayList<>();
-                    if (sheets.length > 0) {
-                        Sheet sheet = book.getSheet(0);
-                        for (int i = 1; i < sheet.getRows(); i++) {
-                            String sampleName = sheet.getCell(2, i).getContents();
-                            if (!TextUtils.isEmpty(sampleName)) {
-                                String sampleNumber = sheet.getCell(1, i).getContents();
-                                String sampleType = sheet.getCell(2, i).getContents();
-                                SampleName sn = new SampleName(sampleName, sampleType, sampleNumber);
-                                schedule += 1;
-
-                                if (i == 1) {
-                                    SampleName.ProjectList<SampleName.Project> snps = new SampleName.ProjectList<>();
-                                    for (int j = 4; j < sheet.getColumns(); j++) {
-                                        String projectName = sheet.getCell(j, 0).getContents();
-                                        String projectJcx = sheet.getCell(j, i).getContents();
-//                                    Log.d(TAG,"column="+j+"sampleName="+sampleName+"projectName="+projectName);
-                                        if (projectName != null && projectJcx != null && !projectJcx.equals("")) {
-                                            SampleName.Project snp = new SampleName.Project();
-                                            snp.projectName = projectName;
-                                            snp.jcx = Float.valueOf(projectJcx);
-                                            snp.parent_id = sampleName;
-                                            snps.add(snp);
-                                        }
-                                    }
-                                    sn.projects = snps;
-                                    new SampleName.Project().saveAll(snps);
-                                }
-//                                CheckOrg checkOrg = new CheckOrg();
-//                                checkOrg.co_id = i;
-
-                                list.add(sn);
-                                GT.Thread.runAndroid(MainActivity.this, new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        if (schedule < 1345) {
-                                            progressDialog.setMessage("正在初始化数据，请等待……" + schedule + "/1348");
-                                        } else {
-                                            progressDialog.setMessage("初始化完成！");
-                                            progressDialog.dismiss();
-                                        }
-                                    }
-                                });
-//                                log("i=" + i + "sn=" + sn.toString());
-                            }
-                        }
-                    }
-                    new SampleName().saveAll(list);
+//                    Workbook book = Workbook.getWorkbook(tempFile);//用读取到的表格文件来实例化工作簿对象（符合常理，我们所希望操作的就是Excel工作簿文件）
+//                    Sheet[] sheets = book.getSheets(); //得到所有的工作表
+//                    List<SampleName> list = new ArrayList<>();
+//                    if (sheets.length > 0) {
+//                        Sheet sheet = book.getSheet(0);
+//                        for (int i = 1; i < sheet.getRows(); i++) {
+//                            String sampleName = sheet.getCell(2, i).getContents();
+//                            if (!TextUtils.isEmpty(sampleName)) {
+//                                String sampleNumber = sheet.getCell(1, i).getContents();
+//                                String sampleType = sheet.getCell(2, i).getContents();
+//                                SampleName sn = new SampleName(sampleName, sampleType, sampleNumber);
+//                                schedule += 1;
+//
+//                                if (i == 1) {
+//                                    SampleName.ProjectList<SampleName.Project> snps = new SampleName.ProjectList<>();
+//                                    for (int j = 4; j < sheet.getColumns(); j++) {
+//                                        String projectName = sheet.getCell(j, 0).getContents();
+//                                        String projectJcx = sheet.getCell(j, i).getContents();
+////                                    Log.d(TAG,"column="+j+"sampleName="+sampleName+"projectName="+projectName);
+//                                        if (projectName != null && projectJcx != null && !projectJcx.equals("")) {
+//                                            SampleName.Project snp = new SampleName.Project();
+//                                            snp.projectName = projectName;
+//                                            snp.jcx = Float.valueOf(projectJcx);
+//                                            snp.parent_id = sampleName;
+//                                            snps.add(snp);
+//                                        }
+//                                    }
+//                                    sn.projects = snps;
+//                                    new SampleName.Project().saveAll(snps);
+//                                }
+////                                CheckOrg checkOrg = new CheckOrg();
+////                                checkOrg.co_id = i;
+//
+//                                list.add(sn);
+//                                GT.Thread.runAndroid(MainActivity.this, new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        if (schedule < 1345) {
+//                                            progressDialog.setMessage("正在初始化数据，请等待……" + schedule + "/1348");
+//                                        } else {
+//                                            progressDialog.setMessage("初始化完成！");
+//                                            progressDialog.dismiss();
+//                                        }
+//                                    }
+//                                });
+////                                log("i=" + i + "sn=" + sn.toString());
+//                            }
+//                        }
+//                    }
+//                    new SampleName().saveAll(list);
 
 
                     if (com.open.soft.openappsoft.multifuction.util.Global.DEBUG) {
@@ -863,10 +861,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                     SharedPreferencesUtil.getDefaultSharedPreferences(MainActivity.this).edit().putBoolean("isFirst", false).apply();
 
                 } catch (final Exception e) {
+
+                } finally {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            e.printStackTrace();
                             progressDialog.dismiss();
                         }
                     });

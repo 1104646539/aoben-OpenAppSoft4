@@ -52,7 +52,8 @@
                     android:background="@drawable/btn_default1"
                     android:text="样本主类"
                     android:textColor="#ffffff"
-                    android:textSize="36sp" />
+                    android:textSize="36sp"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/btn_sample_type_child"
@@ -62,17 +63,20 @@
                     android:background="@drawable/btn_default1"
                     android:text="样本子类"
                     android:textColor="#ffffff"
-                    android:textSize="36sp" />
+                    android:textSize="36sp"
+                    android:visibility="gone" />
 
                 <Button
-                    android:id="@+id/btn_bcheck_ori"
+                    android:id="@+id/btn_open_3"
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
                     android:background="@drawable/btn_default1"
-                    android:text="受检单位"
+                    android:text="本机归属地设置"
                     android:textColor="#ffffff"
-                    android:textSize="36sp" />
+                    android:textSize="36sp"
+                    android:visibility="gone" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -102,14 +106,15 @@
                     android:textSize="36sp" />
 
                 <Button
-                    android:id="@+id/btn_open_1"
+                    android:id="@+id/btn_bcheck_ori"
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
                     android:background="@drawable/btn_default1"
-                    android:text="网站设置"
+                    android:text="受检单位"
                     android:textColor="#ffffff"
                     android:textSize="36sp" />
+
 
                 <Button
                     android:id="@+id/btn_open_2"
@@ -125,9 +130,10 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="20dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal">
+
 
                 <Button
                     android:id="@+id/btn_open_4"
@@ -151,17 +157,16 @@
                     android:textSize="36sp"
                     android:visibility="visible" />
 
-
                 <Button
-                    android:id="@+id/btn_open_3"
+                    android:id="@+id/btn_open_1"
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
                     android:background="@drawable/btn_default1"
-                    android:text="本机归属地设置"
+                    android:text="网站设置"
                     android:textColor="#ffffff"
-                    android:textSize="36sp"
-                    android:visibility="invisible" />
+                    android:textSize="36sp" />
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

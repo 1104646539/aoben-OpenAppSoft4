@@ -56,16 +56,16 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
      * 读取数据超时次数，如果超过3次，则终止此次检测新的
      */
     private int readTimeOutCount = 0;
-    private EditText etJcx = null;
-    private EditText etLjz = null;
-    private EditText etConcentrate = null;
-    private EditText etResult = null;
+    private TextView etJcx = null;
+    private TextView etLjz = null;
+    private TextView etConcentrate = null;
+    private TextView etResult = null;
     private TextView long_tv = null;
     private TextView tv_check_b = null;
 
-    private EditText et_Sample_Num = null;
-    private EditText et_SampleTime = null;
-    private EditText et_companyCode = null;
+    private TextView et_Sample_Num = null;
+    private TextView et_SampleTime = null;
+    private TextView et_companyCode = null;
     private TableRow llCompany;
 
     private Button upload_data;
@@ -230,11 +230,11 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
 
         tv_check_type = (TextView) findViewById(R.id.tv_check_type);
         tv_check_project = (TextView) findViewById(R.id.tv_check_project);
-        etJcx = (EditText) findViewById(R.id.check_edit_jcx);
-        etConcentrate = (EditText) findViewById(R.id.check_edit_long);
+        etJcx =  findViewById(R.id.check_edit_jcx);
+        etConcentrate =  findViewById(R.id.check_edit_long);
         long_tv = (TextView) findViewById(R.id.check_edit_tv_long);
 
-        et_Sample_Num = (EditText) findViewById(R.id.checkactivity_et_SampleNum);
+        et_Sample_Num =  findViewById(R.id.checkactivity_et_SampleNum);
         et_companyCode = findViewById(R.id.checkactivity_et_company);
         llCompany = findViewById(R.id.tr_ll);
         //判断是否需要组织机构代码
@@ -244,13 +244,13 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
         }
 
 
-        et_SampleTime = (EditText) findViewById(R.id.checkactivity_et_SampleTime);
+        et_SampleTime =  findViewById(R.id.checkactivity_et_SampleTime);
         et_SampleTime.setOnClickListener(this);
         String time = GetCurrentTime();
 
         et_SampleTime.setText(time);
 
-        etResult = (EditText) findViewById(R.id.check_edit_result);
+        etResult =  findViewById(R.id.check_edit_result);
         btn_Imm_Check = (Button) findViewById(R.id.btn_Imm_Check);
         upload_data = (Button) findViewById(R.id.upload_data);
 

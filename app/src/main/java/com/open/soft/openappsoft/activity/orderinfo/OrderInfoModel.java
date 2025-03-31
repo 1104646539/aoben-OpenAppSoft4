@@ -47,6 +47,7 @@ public class OrderInfoModel {
      * 不需要
      */
     public final static int type_check = 4;
+
     @NonNull
     @Override
     public String toString() {

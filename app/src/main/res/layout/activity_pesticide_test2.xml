@@ -259,7 +259,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="5"
                     android:gravity="center"
-                    android:text="任务ID"
+                    android:text="样品编号"
                     android:textColor="@android:color/black"
                     android:textSize="28sp" />
 

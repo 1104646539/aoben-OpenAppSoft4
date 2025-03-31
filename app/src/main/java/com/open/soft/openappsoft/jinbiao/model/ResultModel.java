@@ -21,7 +21,7 @@ public class ResultModel {
 	public String sample_unit;//商品来源
 	public String sample_number;//数据库版本为2
 	public String companyCode;//组织机构
-	public String taskID;//任务ID
+	public String taskID;//样品编号
 //	public String productId;//样品id
 
 	// 新增

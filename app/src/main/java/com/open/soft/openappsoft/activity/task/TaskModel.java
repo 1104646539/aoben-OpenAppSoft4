@@ -6,6 +6,8 @@ import com.gsls.gt.GT;
 public class TaskModel {
     @GT.Hibernate.GT_Key
     public int id;
+    @GT.Hibernate.GT_Column(setNotInit = true)
+    public boolean selected = false;
     public String taskID;
 
     /**
