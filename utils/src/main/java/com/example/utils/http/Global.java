@@ -28,6 +28,14 @@ public class Global {
      */
     public static String APP_NAME = "qingdao001";
     /**
+     * Latitude 纬度
+     */
+    public static double Latitude = 0;
+    /**
+     * Longitude 经度
+     */
+    public static double Longitude = 0;
+    /**
      * 加密 key
      */
     public static String ENCODE_KEY = "e2fd36a50c8c4759a5aaf1f094543a17";

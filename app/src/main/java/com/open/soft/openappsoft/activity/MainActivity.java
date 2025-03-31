@@ -67,6 +67,7 @@ import com.open.soft.openappsoft.multifuction.util.ToolUtils;
 import com.open.soft.openappsoft.sql.activity.SQL_Activity;
 import com.open.soft.openappsoft.sql.bean.DetectionResultBean;
 import com.open.soft.openappsoft.util.AESUtil;
+import com.open.soft.openappsoft.util.APPUtils;
 import com.open.soft.openappsoft.util.InterfaceURL;
 
 import org.json.JSONObject;
@@ -103,13 +104,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     private View btn_open_setting;//
     private View btn_open_know;//
 
-    /*private int count = 3;//定位次数
+    /*private int count = 2;//定位次数
     private String locationMsg = "";//定位消息
     private LocationService locationService;//定位服务*/
 
 
     // 百度定位次数
-    public int count = 3;//定位次数
+    public int count = 2;//定位次数
     public String locationMsg = "";//定位消息
     public LocationService locationService;//定位服务
 
@@ -985,8 +986,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             LocationY = "";
             LocationAddress = "";
 
+
+            Timber.i("onReceiveLocation " + location.getLatitude() + "," + location.getLongitude() + " location.getLocType()=" + location.getLocType() +" "+location);
             // TODO Auto-generated method stub
             if (null != location && location.getLocType() != BDLocation.TypeServerError) {
+                Global.Latitude = location.getLatitude();
+                Global.Longitude = location.getLongitude();
+
                 StringBuffer sb = new StringBuffer(256);
                 sb.append("time : ");
                 /**
@@ -1121,21 +1127,18 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                         count1 = 3;
                         changeLocation();
                     }
-                }
-
-                // 获取到定位数据的情况
-                else {
+                } else {
                     count--;
                     String[] split = locationMsg.split(",");
                     if (count <= 0) {
                         locationService.stop();//停止获取定位信息
-                        count = 3;
+                        count = 2;
 //                        locationService.unregisterListener(mListener); //注销掉监听
                     }
 
                     if (split.length == 3) {
                         locationService.stop();//停止获取定位信息
-                        count = 3;
+                        count = 2;
 //                        locationService.unregisterListener(mListener); //注销掉监听
                         runOnUiThread(new Runnable() {
                             @Override
@@ -1159,6 +1162,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
                 }
 
+            } else {
+//                runOnUiThread(() -> {
+//                    APPUtils.showToast(MainActivity.this, "获取定位失败");
+//                });
             }
         }
 
@@ -1514,11 +1521,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                             }
 
                             mLocationClient.stopLocation();
-                            count = 3;
+                            count = 2;
                         }
                         if (count1 <= 0) {
                             mLocationClient.stopLocation();
-                            count = 3;
+                            count = 2;
                         }
                     }
                 }

@@ -136,6 +136,8 @@ public class UploadThread2 extends Thread {
         uploadBean.setResultValue(ToolUtil.nullToString(checkResult.getDetectionValue(), ""));
         uploadBean.setCheckOrg(ToolUtil.nullToString(checkResult.getDetectionCompany(), ""));
         uploadBean.setCheckTime(ToolUtil.date2String(new Date(checkResult.getDetectionTime()), ToolUtil.DateTime1));
+        uploadBean.setLatitude(""+Global.Latitude);
+        uploadBean.setLongitude(""+Global.Longitude);
         return uploadBean;
     }
 //    public static UploadBean transToUploadModel(CheckResult checkResult) {

@@ -76,6 +76,14 @@ public class UploadBean {
      */
     private String checkTime;
     /**
+     * longitude
+     */
+    private String longitude;
+    /**
+     * latitude
+     */
+    private String latitude;
+    /**
      * 检测单位ID
      */
     private String checkOrgId;
@@ -87,14 +95,6 @@ public class UploadBean {
      * 必填 设备SN
      */
     private String deviceSn;
-    /**
-     * 位置经度
-     */
-    private String longitude;
-    /**
-     * 位置纬度
-     */
-    private String latitude;
     /**
      * 检测地址
      */
