@@ -22,15 +22,14 @@
             android:textSize="22sp" />
 
         <TextView
-            android:id="@+id/tv_add_task"
+            android:id="@+id/tv_start"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:visibility="gone"
             android:gravity="center"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
-            android:text="添加任务"
+            android:text="开始检测"
             android:textColor="@color/white"
             android:textSize="26sp" />
     </RelativeLayout>

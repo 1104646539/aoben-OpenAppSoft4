@@ -283,6 +283,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
                 TaskModel taskModel = taskModels.get(position);
                 Timber.i("选择的任务=" + new Gson().toJson(taskModel));
 
+                resultList.get(clickPosition).sampleNum = taskModel.getTaskID();
                 resultList.get(clickPosition).sampleName = taskModel.getSampleName();
                 resultList.get(clickPosition).taskID = taskModel.getTaskID();
                 resultList.get(clickPosition).bcheckedOrganization = taskModel.getCompanyName();

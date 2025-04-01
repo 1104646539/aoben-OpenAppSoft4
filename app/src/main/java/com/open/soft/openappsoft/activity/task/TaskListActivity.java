@@ -18,7 +18,10 @@ import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.exception.DbException;
 import com.open.soft.openappsoft.R;
 import com.open.soft.openappsoft.activity.MainActivity;
+import com.open.soft.openappsoft.atp.AtpCheckActivity;
+import com.open.soft.openappsoft.jinbiao.activity.CheckActivity;
 import com.open.soft.openappsoft.jinbiao.db.DbHelper;
+import com.open.soft.openappsoft.multifuction.activity.PesticideTestActivity2;
 import com.open.soft.openappsoft.util.APPUtils;
 
 import java.util.ArrayList;
@@ -31,8 +34,10 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
     Button btn_add_task, btn_remove_task;
     TaskListAdapter adapter;
     ImageView iv_selected;
+    TextView tv_start;
     GT.Hibernate hibernate;
     int source;
+    String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,7 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_task_list);
         hibernate = MainActivity.hibernate;
         source = getIntent().getIntExtra(TestTaskActivity.Key_type, TestTaskActivity.source_pesticide);
+        type = getIntent().getStringExtra("type");
         initView();
         findData();
     }
@@ -50,7 +56,9 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
         btn_add_task = findViewById(R.id.btn_add_task);
         btn_remove_task = findViewById(R.id.btn_remove_task);
         iv_selected = findViewById(R.id.iv_selected);
+        tv_start = findViewById(R.id.tv_start);
 
+        tv_start.setOnClickListener(this);
         btn_remove_task.setOnClickListener(this);
         btn_add_task.setOnClickListener(this);
         iv_selected.setOnClickListener(this);
@@ -63,7 +71,13 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void findData() {
-        List<TaskModel> temp = hibernate.flashback("id").queryAll(TaskModel.class);
+        List<TaskModel> temp;
+        if (source == TestTaskActivity.source_atp) {
+            temp = hibernate.flashback("id").where("jcx != ?", "").queryAll(TaskModel.class);
+        } else {
+            temp = hibernate.flashback("id").queryAll(TaskModel.class);
+
+        }
         taskList.clear();
         if (temp != null) {
             taskList.addAll(temp);
@@ -83,6 +97,25 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             case R.id.iv_selected:
                 selectedAllTask();
                 break;
+            case R.id.tv_start:
+                start();
+                finish();
+                break;
+        }
+    }
+
+    private void start() {
+        if (source == TestTaskActivity.source_pesticide) {
+            startActivity(new Intent(this, PesticideTestActivity2.class));
+        } else if (source == TestTaskActivity.source_jinbiao) {
+            Intent intent1 = new Intent(this, CheckActivity.class);
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+            intent1.putExtra("source", type);// 定量
+            startActivity(intent1);
+        } else if (source == TestTaskActivity.source_atp) {
+            Intent intent1 = new Intent(this, AtpCheckActivity.class);
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+            startActivity(intent1);
         }
     }
 
@@ -95,7 +128,7 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             for (int i = 0; i < taskList.size(); i++) {
                 TaskModel tm = taskList.get(i);
                 tm.selected = isSelectedAll;
-                taskList.set(i,tm);
+                taskList.set(i, tm);
             }
             adapter.notifyDataSetChanged();
         }
@@ -105,7 +138,7 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
         if (taskList != null && !taskList.isEmpty()) {
             List<TaskModel> selectedList = adapter.getSelectedList();
             for (int i = 0; i < selectedList.size(); i++) {
-                MainActivity.hibernate.delete(TaskModel.class,selectedList.get(i).id);
+                MainActivity.hibernate.delete(TaskModel.class, selectedList.get(i).id);
             }
             findData();
 //            APPUtils.showToast(this, "删除" + (MainActivity.hibernate.isStatus() ? "成功" : "失败"));

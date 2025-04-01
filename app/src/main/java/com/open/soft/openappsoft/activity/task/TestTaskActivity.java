@@ -45,7 +45,8 @@ public class TestTaskActivity extends AppCompatActivity implements View.OnClickL
         switch (view.getId()) {
             case R.id.btn_task_settings:
                 Intent intent = new Intent(this, TaskListActivity.class);
-                intent.putExtra(Key_type,source);
+                intent.putExtra(Key_type, source);
+                intent.putExtra("type", type);// 定量
                 startActivity(intent);
                 break;
             case R.id.btn_task_start:
@@ -56,7 +57,7 @@ public class TestTaskActivity extends AppCompatActivity implements View.OnClickL
                     intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                     intent1.putExtra("source", type);// 定量
                     startActivity(intent1);
-                }else if (source == source_atp) {
+                } else if (source == source_atp) {
                     Intent intent1 = new Intent(this, AtpCheckActivity.class);
                     intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                     startActivity(intent1);

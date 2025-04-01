@@ -186,7 +186,7 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
 
         if (!isAtp()) {
             ll_jcx.setVisibility(View.GONE);
-            et_jcx.setText("100");
+//            et_jcx.setText("100");
         }
     }
 

@@ -927,8 +927,8 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
         sb.append("检 测 限：");
         sb.append(detectionResultBean.getLimitStandard() + "\n");
 
-//        sb.append("样品编号：");
-//        sb.append(detectionResultBean.getNumberSamples() + "\n");
+        sb.append("样品编号：");
+        sb.append(detectionResultBean.getNumberSamples() + "\n");
         sb.append("受检单位：");
         sb.append(detectionResultBean.getUnitsUnderInspection() + "\n");
 
@@ -1160,8 +1160,8 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
         sb.append("检 测 限：");
         sb.append(detectionResultBean.getLimitStandard() + "\n");
 
-//        sb.append("样品编号：");
-//        sb.append(detectionResultBean.getNumberSamples() + "\n");
+        sb.append("样品编号：");
+        sb.append(detectionResultBean.getNumberSamples() + "\n");
         sb.append("受检单位：");
         sb.append(detectionResultBean.getUnitsUnderInspection() + "\n");
 

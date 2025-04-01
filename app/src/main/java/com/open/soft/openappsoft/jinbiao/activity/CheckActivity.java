@@ -416,6 +416,9 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             }
             projectlist = db.findAll(Selector.from(LineModel.class));
 
+//            if (projectlist != null && !projectlist.isEmpty()) {
+//
+//            }
 //            if (projectlist == null) {
 //                projectlist = new ArrayList<LineModel>();
 //            }
@@ -1207,13 +1210,13 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 
         tv_check_type = (TextView) findViewById(R.id.tv_check_type);
         tv_check_project = (TextView) findViewById(R.id.tv_check_project);
-        etJcx =  findViewById(R.id.check_edit_jcx);
-        etLjz =  findViewById(R.id.check_edit_lin);
-        etDr =  findViewById(R.id.check_edit_value);
-        etConcentrate =  findViewById(R.id.check_edit_long);
+        etJcx = findViewById(R.id.check_edit_jcx);
+        etLjz = findViewById(R.id.check_edit_lin);
+        etDr = findViewById(R.id.check_edit_value);
+        etConcentrate = findViewById(R.id.check_edit_long);
         long_tv = (TextView) findViewById(R.id.check_edit_tv_long);
 
-        et_Sample_Num =  findViewById(R.id.checkactivity_et_SampleNum);
+        et_Sample_Num = findViewById(R.id.checkactivity_et_SampleNum);
         et_companyCode = findViewById(R.id.checkactivity_et_company);
         llCompany = findViewById(R.id.tr_ll);
         //判断是否需要组织机构代码
@@ -1229,7 +1232,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 
         et_SampleTime.setText(time);
 
-        etResult =  findViewById(R.id.check_edit_result);
+        etResult = findViewById(R.id.check_edit_result);
         btn_Imm_Check = (Button) findViewById(R.id.btn_Imm_Check);
         move_time = (Button) findViewById(R.id.move_time);
         move_time.setOnClickListener(this);
