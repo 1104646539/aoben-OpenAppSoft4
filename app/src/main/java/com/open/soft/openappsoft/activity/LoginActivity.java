@@ -328,8 +328,8 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
             et_user.setText(user);
             et_psw.setText(pass);
         } else {
-            et_user.setText("admin");
-            et_psw.setText("123456");
+//            et_user.setText("admin");
+//            et_psw.setText("123456");
         }
     }
 
@@ -499,10 +499,10 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
         switch (v.getId()) {
             case R.id.btn_login:
                 //判断是否为第一次 Admin 登录
-                if ("Admin".equals(et_user.getText().toString()) || "admin".equals(et_user.getText().toString()) || "ADMIN".equals(et_user.getText().toString())) {
-                    startAdmin();
-                    return;
-                }
+//                if ("Admin".equals(et_user.getText().toString()) || "admin".equals(et_user.getText().toString()) || "ADMIN".equals(et_user.getText().toString())) {
+//                    startAdmin();
+//                    return;
+//                }
 
                 if (verify()) {
                     getEncryptionMethod();
