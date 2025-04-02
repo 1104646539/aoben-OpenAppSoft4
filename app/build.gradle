@@ -8,8 +8,8 @@ android {
         applicationId "com.open.soft.openappsoft"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 21
-        versionName "1.0.21"
+        versionCode 22
+        versionName "1.0.22"
 //
 //        ndk {//thgppf  123456
 //            // 设置支持的SO库架构
@@ -115,6 +115,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.5.0'
     implementation files('libs\\okgo-3.0.4.jar')
     implementation files('libs\\tbs_sdk_thirdapp_v4.3.0.386_44286_sharewithdownloadwithfile_withoutGame_obfs_20230210_114429.jar')
+    implementation files('libs\\TinyPinyin-2.0.3.RELEASE.jar')
     //对话框
     def dialogx_version = "0.0.43.beta13"
     api "com.github.kongzue.DialogX:DialogX:${dialogx_version}"

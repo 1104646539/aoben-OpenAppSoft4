@@ -789,20 +789,20 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                     //初始化项目
                     initXlsProject();
 
-                    InputStream is = null;
-                    FileOutputStream fos = null;
+//                    InputStream is = null;
+//                    FileOutputStream fos = null;
 
-                    is = getAssets().open(getResources().getString(R.string.excel_name));
+//                    is = getAssets().open(getResources().getString(R.string.excel_name));
 
-                    File tempFile = new File(getCacheDir(), "test.xls");//临时文件，第二个参数为文件名字，可随便取
-                    fos = new FileOutputStream(tempFile);
-                    byte[] buf = new byte[1024];
-                    int len;
-                    while ((len = is.read(buf)) > 0) {//while循环进行读取
-                        fos.write(buf, 0, len);
-                    }
-                    fos.close();
-                    is.close();
+//                    File tempFile = new File(getCacheDir(), "test.xls");//临时文件，第二个参数为文件名字，可随便取
+//                    fos = new FileOutputStream(tempFile);
+//                    byte[] buf = new byte[1024];
+//                    int len;
+//                    while ((len = is.read(buf)) > 0) {//while循环进行读取
+//                        fos.write(buf, 0, len);
+//                    }
+//                    fos.close();
+//                    is.close();
 
 //                    Workbook book = Workbook.getWorkbook(tempFile);//用读取到的表格文件来实例化工作簿对象（符合常理，我们所希望操作的就是Excel工作簿文件）
 //                    Sheet[] sheets = book.getSheets(); //得到所有的工作表

@@ -15,6 +15,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.icu.text.Collator;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -61,6 +62,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IFillFormatter;
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.promeg.pinyinhelper.Pinyin;
 import com.google.gson.Gson;
 import com.gsls.gt.GT;
 import com.kongzue.dialogx.dialogs.MessageDialog;
@@ -111,9 +113,14 @@ import java.sql.Time;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -414,11 +421,15 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             if (typelist == null) {
                 typelist = new ArrayList<SampleTypeModel>();
             }
-            projectlist = db.findAll(Selector.from(LineModel.class));
 
-//            if (projectlist != null && !projectlist.isEmpty()) {
-//
-//            }
+            projectlist = db.findAll(Selector.from(LineModel.class));
+            if (projectlist != null && !projectlist.isEmpty()) {
+                Collections.sort(projectlist, (b1, b2) -> {
+                    String b1code = Pinyin.toPinyin(b1.name.toCharArray()[0]);
+                    String b2code = Pinyin.toPinyin(b2.name.toCharArray()[0]);
+                    return b1code.compareTo(b2code);
+                });
+            }
 //            if (projectlist == null) {
 //                projectlist = new ArrayList<LineModel>();
 //            }
@@ -1430,44 +1441,44 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
      * @param result
      */
     public void saveCheck_ResultData(String result) {
-        try {
-            long time = new Date().getTime();// new Date()为获取当前系统时间
-            resultModel = new ResultModel();
-            testTime = GetCurrentTime();
-            resultModel.taskID = taskModel.taskID;
-            resultModel.number = testTime;
-            resultModel.company_name = tv_check_company.getText().toString();
-            resultModel.persion = com.example.utils.http.Global.NAME;
+//        try {
+        long time = new Date().getTime();// new Date()为获取当前系统时间
+        resultModel = new ResultModel();
+        testTime = GetCurrentTime();
+        resultModel.taskID = taskModel.taskID;
+        resultModel.number = testTime;
+        resultModel.company_name = tv_check_company.getText().toString();
+        resultModel.persion = com.example.utils.http.Global.NAME;
 //			resultModel.shiji = shiji_model.getName();
-            resultModel.sample_name = tv_check_sample.getText().toString();
-            resultModel.sample_number = et_Sample_Num.getText().toString();
-            resultModel.sample_type = tv_check_type.getText().toString();
-            resultModel.project_name = selectedProject.getName();
+        resultModel.sample_name = tv_check_sample.getText().toString();
+        resultModel.sample_number = et_Sample_Num.getText().toString();
+        resultModel.sample_type = tv_check_type.getText().toString();
+        resultModel.project_name = selectedProject.getName();
 //            resultModel.sample_unit = sampleUnit_model.getName();
-            resultModel.xian = etJcx.getText().toString();
-            resultModel.lin = etLjz.getText().toString();
-            resultModel.check_value = etDr.getText().toString();
-            resultModel.style_long = etConcentrate.getText().toString();
-            resultModel.check_result = result;
-            resultModel.time = time;
-            resultModel.concentrateUnit = selectedProject.ConcentrateUnit;
-            resultModel.sample_unit = tv_checkactivity_sampleunit.getText().toString();
-            resultModel.shiji = tv_check_b.getText().toString();
-            resultModel.companyCode = et_companyCode.getText().toString();
+        resultModel.xian = etJcx.getText().toString();
+        resultModel.lin = etLjz.getText().toString();
+        resultModel.check_value = etDr.getText().toString();
+        resultModel.style_long = etConcentrate.getText().toString();
+        resultModel.check_result = result;
+        resultModel.time = time;
+        resultModel.concentrateUnit = selectedProject.ConcentrateUnit;
+        resultModel.sample_unit = tv_checkactivity_sampleunit.getText().toString();
+        resultModel.shiji = tv_check_b.getText().toString();
+        resultModel.companyCode = et_companyCode.getText().toString();
 //            resultModel.sample_id = et_Sample_Num.getText().toString();
 //            resultModel.upload_status = 1;
-            upload_data.setEnabled(true);
-            //保存检测结果
-            db.save(resultModel);
-            //保存新表
-            saveNewTable(resultModel);
-            // 添加检测项目
+        upload_data.setEnabled(true);
+        //保存检测结果
+//            db.save(resultModel);
+        //保存新表
+        saveNewTable(resultModel);
+        // 添加检测项目
 //            save_projectname_to_LineModel();
 
 
-        } catch (DbException e) {
-            e.printStackTrace();
-        }
+//        } catch (DbException e) {
+//            e.printStackTrace();
+//        }
     }
 
 

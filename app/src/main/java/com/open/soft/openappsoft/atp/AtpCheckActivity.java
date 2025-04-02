@@ -320,7 +320,7 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
      * @param result
      */
     public void saveCheck_ResultData(String result) {
-        try {
+//        try {
             long time = new Date().getTime();// new Date()为获取当前系统时间
             resultModel = new ResultModel();
             testTime = GetCurrentTime();
@@ -348,16 +348,16 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
 //            resultModel.upload_status = 1;
             upload_data.setEnabled(true);
             //保存检测结果
-            db.save(resultModel);
+//            db.save(resultModel);
             //保存新表
             saveNewTable(resultModel);
             // 添加检测项目
 //            save_projectname_to_LineModel();
 
 
-        } catch (DbException e) {
-            e.printStackTrace();
-        }
+//        } catch (DbException e) {
+//            e.printStackTrace();
+//        }
     }
 
 
