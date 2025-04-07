@@ -3,7 +3,7 @@ package com.open.soft.openappsoft.util;
 public class InterfaceURL {
 
     //模块名称
-    public static String oneModule = "多参数食品安全检测仪";//M417  多参数
+    public static String oneModule = "多参数食品安全分析仪";//M417  多参数
 //    public static String oneModule = "农药残留单项精准分析仪";//NAD4074    胶体金
 //    public static String  oneModule = "农药残留检测仪";//MC4011  分光光度
 

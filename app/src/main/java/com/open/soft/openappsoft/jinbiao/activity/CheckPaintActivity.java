@@ -1517,7 +1517,7 @@ public class CheckPaintActivity extends AppCompatActivity implements View.OnClic
                     "]";
 
 
-        } else if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)|| "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
+        } else if ("多参数食品安全分析仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)|| "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
             str_api = "QR/SendResult";
             data = "{\"QRCode\":\"" + QRCode1.replaceAll("\\s*", "") + "\",\n" +
                     "\"LocationX\":\"" + LocationX + "\",\n" +
@@ -1654,7 +1654,7 @@ public class CheckPaintActivity extends AppCompatActivity implements View.OnClic
                         }
 
                     }
-                } else if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)|| "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
+                } else if ("多参数食品安全分析仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)|| "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
                     testDataBean3 = new Gson().fromJson(ret, TestDataBean3.class);
 
                     if (testDataBean3 != null) {
@@ -1756,7 +1756,7 @@ public class CheckPaintActivity extends AppCompatActivity implements View.OnClic
 //                        }
 //
 //                    }
-//                } else if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)|| "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
+//                } else if ("多参数食品安全分析仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)|| "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
 //                    testDataBean3 = new Gson().fromJson(response, TestDataBean3.class);
 //
 //                    if (testDataBean3 != null) {

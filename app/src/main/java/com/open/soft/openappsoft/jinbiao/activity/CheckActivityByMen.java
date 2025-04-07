@@ -1327,7 +1327,7 @@ public class CheckActivityByMen extends BaseActivity implements OnClickListener,
 
             }
 
-        } else if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)|| "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
+        } else if ("多参数食品安全分析仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)|| "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
 
             switch (parent.getId()) {
                 case R.id.sp1:
@@ -2866,7 +2866,7 @@ public class CheckActivityByMen extends BaseActivity implements OnClickListener,
                     break;
                 }
             }
-        } else if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)|| "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
+        } else if ("多参数食品安全分析仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)|| "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
             str_api = "CommonManual/UpdateManualSampling";
             for (int i = 0; i < sp_yplxArray.length; i++) {
                 if (sp_yplx1.getSelectedItem().toString().equals(sp_yplxArray[i])) {
@@ -2946,7 +2946,7 @@ public class CheckActivityByMen extends BaseActivity implements OnClickListener,
                     "]}\n" +
                     "]";
 
-        } else if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)|| "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
+        } else if ("多参数食品安全分析仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)|| "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
 
             String input = tv_check_sample.getText().toString();
             String regex = "\\\\u000f";

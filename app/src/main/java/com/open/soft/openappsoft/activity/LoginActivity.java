@@ -256,7 +256,7 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
 //            sb.append("检测单位：");
 //            sb.append("信达安" + "\n");
 //
-//            sb.append("多参数食品安全检测仪" + "\n\n");
+//            sb.append("多参数食品安全分析仪" + "\n\n");
 //
 //        sb.append("\n\n");
 //        }

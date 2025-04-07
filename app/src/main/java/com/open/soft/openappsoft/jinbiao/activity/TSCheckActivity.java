@@ -1294,7 +1294,7 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
 
             }
 
-        } else if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
+        } else if ("多参数食品安全分析仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
 
             switch (parent.getId()) {
                 case R.id.sp1:
@@ -2852,7 +2852,7 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
                     "]}\n" +
                     "]";
 
-        } else if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
+        } else if ("多参数食品安全分析仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
             String checkedEnterprise = "";
             if (needCompanyCode.equals("0")) {
                 checkedEnterprise = et_CheckedEnterprise.getText().toString();

@@ -14,7 +14,7 @@
         android:layout_weight="1"
         android:background="@color/THEME_COLOR"
         android:gravity="center"
-        android:text="多参数食品安全检测仪"
+        android:text="多参数食品安全分析仪"
         android:textColor="@color/white"
         android:textSize="36sp"
         app:layout_constraintDimensionRatio="h,15:1"

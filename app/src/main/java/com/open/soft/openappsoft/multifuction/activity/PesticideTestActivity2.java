@@ -2536,7 +2536,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
 //
 //        // 只有单金标且登录用户是唐山的用户才使用 "Tangshan/SendForNAD4074" api
 //        // 其他的都是 "CommonManual/GetSamplingTypeList" api
-//        if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
+//        if ("多参数食品安全分析仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
 //            str_api = "QR/SendResult";
 //        }
 //
@@ -2556,7 +2556,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
 //        }
 //
 //        // 新的上传
-//        if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
+//        if ("多参数食品安全分析仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
 //
 //            data = "{\"QRCode\":\"" + card_number.replaceAll("\\s*", "") + "\",\n" +
 //                    "\"LocationX\":\"" + LocationX + "\",\n" +
@@ -2663,7 +2663,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
 //
 //        // 只有单金标且登录用户是唐山的用户才使用 "Tangshan/SendForNAD4074" api
 //        // 其他的都是 "CommonManual/GetSamplingTypeList" api
-//        if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
+//        if ("多参数食品安全分析仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
 //            str_api = "CommonManual/UpdateManualSampling";
 //        }
 //        if ("".equals(LocationX) && "".equals(LocationY) && "".equals(LocationAddress)) {
@@ -2693,7 +2693,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
 //        // 获取参数  归属地 本地判断是否是唐山界面进行样本名称选择
 //        String AreaId = com.example.utils.http.Global.admin_pt;
 //        if (AreaId.equals("TangshanNMEnterprise")) {
-//            if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
+//            if ("多参数食品安全分析仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
 //                data = "[{\"QRCode\":\"" + card_number.replaceAll("\\s*", "") + "\",\n" +
 //                        "\"LocationX\":\"" + LocationX + "\",\n" +
 //                        "\"LocationY\":\"" + LocationY + "\",\n" +
@@ -2724,7 +2724,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
 //            }
 //
 //        } else {
-//            if ("多参数食品安全检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
+//            if ("多参数食品安全分析仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule) || "农药残留检测仪".equals(com.open.soft.openappsoft.util.InterfaceURL.oneModule)) {
 //                data = "[{\"QRCode\":\"" + card_number.replaceAll("\\s*", "") + "\",\n" +
 //                        "\"LocationX\":\"" + LocationX + "\",\n" +
 //                        "\"LocationY\":\"" + LocationY + "\",\n" +
