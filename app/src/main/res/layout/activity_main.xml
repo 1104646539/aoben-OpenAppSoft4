@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/tv_homeLocation"
+        app:layout_constraintBottom_toTopOf="@+id/ll_bottom"
         app:layout_constraintTop_toBottomOf="@+id/tv_title">
 
         <LinearLayout
@@ -246,18 +246,32 @@
 
     </LinearLayout>
 
-
-    <TextView
-        android:id="@+id/tv_homeLocation"
+    <LinearLayout
+        android:id="@+id/ll_bottom"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:background="@color/THEME_COLOR"
-        android:gravity="center"
-        android:text="信达安食品检测（天津）有限公司"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="h,20:1" />
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent">
 
+        <TextView
+            android:id="@+id/tv_homeLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="信达安食品检测（天津）有限公司"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

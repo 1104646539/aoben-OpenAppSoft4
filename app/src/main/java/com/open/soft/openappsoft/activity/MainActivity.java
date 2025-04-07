@@ -135,6 +135,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     final static long DURATION = 1000;// 规定有效时间
     long[] mHits = new long[COUNTS];
 
+    TextView tv_location;
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -458,6 +460,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         btn_open_3 = findViewById(R.id.btn_open_3);
         btn_open_4 = findViewById(R.id.btn_open_4);
         ll_sql = findViewById(R.id.ll_sql);
+        tv_location = findViewById(R.id.tv_location);
         btn_open_setting = findViewById(R.id.btn_open_setting);
         btn_open_login = findViewById(R.id.btn_open_login);
         btn_open_know = findViewById(R.id.btn_open_know);
@@ -470,12 +473,15 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         btn_open_login.setOnClickListener(this);
         btn_open_know.setOnClickListener(this);
         btn_open_book.setOnClickListener(this);
+        tv_location.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
+            case R.id.tv_location:
+                reLocation();
+                break;
             case R.id.btn_open_2:
                 //分光光度
 //                if (!Global.isAdimin) {
@@ -637,6 +643,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         }
 
 
+    }
+
+    private void reLocation() {
+        locationService.requestLocation();
+        APPUtils.showToast(this,"正在重新定位，请稍后……");
+        showLocation(null);
     }
 
     // 访问操作手册接口，返回pdf地址
@@ -987,11 +999,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             LocationAddress = "";
 
 
-            Timber.i("定位 onReceiveLocation " + location.getLatitude() + "," + location.getLongitude() + " location.getLocType()=" + location.getLocType() +" "+location);
+            Timber.i("定位 onReceiveLocation " + location.getLatitude() + "," + location.getLongitude() + " location.getLocType()=" + location.getLocType() + " " + location);
             // TODO Auto-generated method stub
             if (null != location && location.getLocType() != BDLocation.TypeServerError) {
                 Global.Latitude = location.getLatitude();
                 Global.Longitude = location.getLongitude();
+                Timber.i("" + location.getAddrStr() + location.getAddress().address);
+                showLocation(location.getAddrStr());
 
                 StringBuffer sb = new StringBuffer(256);
                 sb.append("time : ");
@@ -1224,6 +1238,16 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
         }
     };
+
+    private void showLocation(String addr) {
+        runOnUiThread(() -> {
+            if (APPUtils.isNull(addr)) {
+                tv_location.setText("正在定位:……");
+            } else {
+                tv_location.setText(addr);
+            }
+        });
+    }
 
     @Override
     public void onBackPressed() {
