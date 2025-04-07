@@ -106,6 +106,7 @@
                                 android:id="@+id/tv_jcdw_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:gravity="center_vertical"
                                 android:paddingLeft="10dp"
                                 android:text="请选择"
                                 android:textColor="@color/black"
@@ -142,6 +143,7 @@
                                 android:id="@+id/tv_bjcdw_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:gravity="center_vertical"
                                 android:paddingLeft="10dp"
                                 android:text="请选择"
                                 android:textColor="@color/black"
@@ -187,6 +189,7 @@
                                 android:id="@+id/tv_sample_type_main"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:gravity="center_vertical"
                                 android:paddingLeft="10dp"
                                 android:text="请选择"
                                 android:textColor="@color/black"
@@ -224,6 +227,7 @@
                                 android:id="@+id/tv_sample_type_child"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:gravity="center_vertical"
                                 android:paddingLeft="10dp"
                                 android:text="请选择"
                                 android:textColor="@color/black"
@@ -273,9 +277,9 @@
                     android:id="@+id/ll_jcx"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -289,7 +293,10 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:hint="请输入"
                         android:inputType="numberDecimal"
+                        android:paddingLeft="10dp"
+                        android:textColorHint="@color/text_black"
                         android:textSize="24sp" />
 
                 </LinearLayout>
@@ -311,6 +318,7 @@
                         android:id="@+id/tv_sampling_date"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:gravity="center_vertical"
                         android:paddingLeft="10dp"
                         android:text="请选择"
                         android:textColor="@color/black"

@@ -11,6 +11,7 @@
     <dimen name="wh_size">150dp</dimen>
     <dimen name="textSize">22sp</dimen>
     <dimen name="distance">22dp</dimen>
+    <dimen name="spacing_smaller">0dp</dimen>
 
 
 </resources>

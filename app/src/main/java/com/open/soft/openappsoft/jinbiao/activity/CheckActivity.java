@@ -72,6 +72,7 @@ import com.lidroid.xutils.db.sqlite.WhereBuilder;
 import com.lidroid.xutils.exception.DbException;
 import com.open.soft.openappsoft.R;
 import com.open.soft.openappsoft.activity.MainActivity;
+import com.open.soft.openappsoft.activity.task.MySpinnerAdapter;
 import com.open.soft.openappsoft.activity.task.TaskListAdapter2;
 import com.open.soft.openappsoft.activity.task.TaskModel;
 import com.open.soft.openappsoft.dialog.DialogFragmentPaint;
@@ -184,7 +185,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
     private ArrayAdapter<String> persion_adapter = null;
     private ArrayAdapter<String> shiji_adapter = null;
     private ArrayAdapter<String> sample_adapter = null;
-    private ArrayAdapter<String> project_adapter = null;
+    private MySpinnerAdapter<String> project_adapter = null;
     private ArrayAdapter<String> type_adapter = null;
     private ArrayAdapter<String> sampleUnit_adapter = null;
 
@@ -516,7 +517,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         persion_adapter = new ArrayAdapter<String>(CheckActivity.this, R.layout.item_simple_spiner, persion_list);
 //        shiji_adapter = new ArrayAdapter<String>(CheckActivity.this, R.layout.item_simple_spiner, shiji_list);
         sample_adapter = new ArrayAdapter<String>(CheckActivity.this, R.layout.item_simple_spiner, sample_list);
-        project_adapter = new ArrayAdapter<String>(CheckActivity.this, R.layout.item_simple_spiner_selected, project_list);
+        project_adapter = new MySpinnerAdapter<String>(CheckActivity.this, R.layout.item_simple_spiner, R.layout.item_simple_spiner_selected, Arrays.asList(project_list));
         project_adapter.setDropDownViewResource(R.layout.item_simple_spiner);
         type_adapter = new ArrayAdapter<String>(CheckActivity.this, R.layout.item_simple_spiner, type_list);
         sampleUnit_adapter = new ArrayAdapter<String>(CheckActivity.this, R.layout.item_simple_spiner, sampleUnit_list);
@@ -549,9 +550,10 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                       int arg2, long arg3) {
-                if (projectlist != null && projectlist.size() > 0) {
-                    selectedProject = projectlist.get(arg2);
+                                       int position, long arg3) {
+                position -= 1;
+                if (position >= 0 && projectlist != null && projectlist.size() > 0) {
+                    selectedProject = projectlist.get(position);
                     etLjz.setText(selectedProject.getLjz());
                     etJcx.setText(selectedProject.getJcx());
                 }
@@ -1510,9 +1512,9 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         detectionResultBean.setLimitStandard(resultModel.xian + resultModel.concentrateUnit);//检测限
 //        detectionResultBean.setLimitStandard(resultModel.xian + resultModel.concentrateUnit);//检测限
 //        detectionResultBean.setLimitStandard(limit_standard);//检测限
-        detectionResultBean.setCriticalValue(resultModel.lin );//临界值
-        detectionResultBean.setDetectionValue(resultModel.check_value );//检测值
-        detectionResultBean.setSampleConcentration(resultModel.style_long );//样品浓度
+        detectionResultBean.setCriticalValue(resultModel.lin);//临界值
+        detectionResultBean.setDetectionValue(resultModel.check_value);//检测值
+        detectionResultBean.setSampleConcentration(resultModel.style_long);//样品浓度
         detectionResultBean.setDetectionResult(resultModel.check_result);//检测结果
         detectionResultBean.setDetectionTime(resultModel.time);//检测时间
 
@@ -1580,7 +1582,6 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 
     private boolean ValidateDataToTest() {
 
-
         return true;
     }
 
@@ -1647,6 +1648,9 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 //        APPUtils.showToast(CheckActivity.this, "扫描二维码中，请稍后...");
 
         if (selectedProject == null) {
+            isTest = false;
+            APPUtils.showToast(CheckActivity.this, "请选择检测项目");
+            tv_scanTime.setText("请选择检测项目");
             isTest = false;
             return;
         }

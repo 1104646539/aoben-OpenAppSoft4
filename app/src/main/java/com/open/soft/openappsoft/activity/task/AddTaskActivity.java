@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,6 +73,10 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
     LinearLayout ll_jcx;
     int source;
 
+    boolean first_jcdw = true;
+
+    private Handler handler = new Handler();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,22 +136,20 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
         tv_commit.setOnClickListener(this);
 //        et_sample_name.setOnClickListener(this);
 
-        ArrayAdapter<OrderInfoModel> adapter_bjcdw = new ArrayAdapter(this, R.layout.item_simple_spiner, bjcdws);
+        tv_sample_type_child.setVisibility(View.VISIBLE);
+        tv_sample_type_main.setVisibility(View.VISIBLE);
+        tv_bjcdw_name.setVisibility(View.VISIBLE);
+        tv_jcdw_name.setVisibility(View.VISIBLE);
+
+        MySpinnerAdapter<OrderInfoModel> adapter_bjcdw = new MySpinnerAdapter(this, R.layout.item_simple_spiner, R.layout.item_simple_spiner, bjcdws);
 //        adapter_bjcdw.setDropDownViewResource(R.layout.item_select_project_drop);
         spn_bjcdw_name.setAdapter(adapter_bjcdw);
-        if (!bjcdws.isEmpty()) {
-            spn_bjcdw_name.setSelection(bjcdws.size() - 1);
-            bjcdw = bjcdws.get(bjcdws.size() - 1);
-        }
         spn_bjcdw_name.setOnItemSelectedListener(this);
 
-        ArrayAdapter<OrderInfoModel> adapter_jcdw = new ArrayAdapter(this, R.layout.item_simple_spiner, jcdws);
+
+        MySpinnerAdapter<OrderInfoModel> adapter_jcdw = new MySpinnerAdapter(this, R.layout.item_simple_spiner, R.layout.item_simple_spiner, jcdws);
 //        adapter_jcdw.setDropDownViewResource(R.layout.item_select_project_drop);
         spn_jcdw_name.setAdapter(adapter_jcdw);
-        if (!jcdws.isEmpty()) {
-            spn_jcdw_name.setSelection(jcdws.size() - 1);
-            jcdw = jcdws.get(jcdws.size() - 1);
-        }
         spn_jcdw_name.setOnItemSelectedListener(this);
 
 //        ArrayAdapter<OrderInfoModel> adapter_sample_type_child = new ArrayAdapter(this, R.layout.item_select_project, R.id.tv_project_name, sample_type_childs);
@@ -158,13 +161,9 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
 //        }
 //        spn_sample_type_child.setOnItemSelectedListener(this);
 
-        ArrayAdapter<OrderInfoModel> adapter_sample_type_main = new ArrayAdapter(this, R.layout.item_simple_spiner, sample_type_mains);
+        MySpinnerAdapter<OrderInfoModel> adapter_sample_type_main = new MySpinnerAdapter(this, R.layout.item_simple_spiner,R.layout.item_simple_spiner, sample_type_mains);
 //        adapter_sample_type_main.setDropDownViewResource(R.layout.item_select_project_drop);
         spn_sample_type_main.setAdapter(adapter_sample_type_main);
-        if (!sample_type_mains.isEmpty()) {
-            spn_sample_type_main.setSelection(sample_type_mains.size() - 1);
-            sample_type_main = sample_type_mains.get(sample_type_mains.size() - 1);
-        }
         spn_sample_type_main.setOnItemSelectedListener(this);
 
         tv_sampling_date.setOnClickListener(this);
@@ -179,15 +178,23 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
 //        spn_sample_type_child.setVisibility(sample_type_childs.isEmpty() ? View.GONE : View.VISIBLE);
 //        tv_sample_type_child.setVisibility(!sample_type_childs.isEmpty() ? View.GONE : View.VISIBLE);
 
-        spn_bjcdw_name.setVisibility(bjcdws.isEmpty() ? View.GONE : View.VISIBLE);
-        tv_bjcdw_name.setVisibility(!bjcdws.isEmpty() ? View.GONE : View.VISIBLE);
-        spn_jcdw_name.setVisibility(jcdws.isEmpty() ? View.GONE : View.VISIBLE);
-        tv_jcdw_name.setVisibility(!jcdws.isEmpty() ? View.GONE : View.VISIBLE);
-
+        changeViewVisibility();
         if (!isAtp()) {
             ll_jcx.setVisibility(View.GONE);
 //            et_jcx.setText("100");
         }
+    }
+
+    private void changeViewVisibility() {
+        spn_bjcdw_name.setVisibility(bjcdws.isEmpty() ? View.GONE : View.VISIBLE);
+        tv_bjcdw_name.setVisibility(!bjcdws.isEmpty() ? View.GONE : View.VISIBLE);
+        spn_jcdw_name.setVisibility(jcdws.isEmpty() ? View.GONE : View.VISIBLE);
+        tv_jcdw_name.setVisibility(!jcdws.isEmpty() ? View.GONE : View.VISIBLE);
+        spn_sample_type_main.setVisibility(sample_type_mains.isEmpty() ? View.GONE : View.VISIBLE);
+        tv_sample_type_main.setVisibility(!sample_type_mains.isEmpty() ? View.GONE : View.VISIBLE);
+        spn_sample_type_child.setVisibility(sample_type_childs.isEmpty() ? View.GONE : View.VISIBLE);
+        tv_sample_type_child.setVisibility(!sample_type_childs.isEmpty() ? View.GONE : View.VISIBLE);
+
     }
 
     private boolean isAtp() {
@@ -200,16 +207,26 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        position -= 1;
         if (parent.getId() == R.id.spn_bjcdw_name) {
-            bjcdw = bjcdws.get(position);
+            if (position >= 0) {
+                bjcdw = bjcdws.get(position);
+            }
         } else if (parent.getId() == R.id.spn_sample_type_main) {
-            sample_type_main = sample_type_mains.get(position);
+            if (position >= 0) {
+                sample_type_main = sample_type_mains.get(position);
+            }
             showChildType();
         } else if (parent.getId() == R.id.spn_sample_type_child) {
-            sample_type_child = sample_type_childs.get(position);
+            if (position >= 0) {
+                sample_type_child = sample_type_childs.get(position);
+            }
         } else if (parent.getId() == R.id.spn_jcdw_name) {
-            jcdw = jcdws.get(position);
+            if (position >= 0) {
+                jcdw = jcdws.get(position);
+            }
         }
+        changeViewVisibility();
     }
 
     private void showChildType() {
@@ -226,13 +243,9 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
             }
 
             sample_type_childs = temp;
-            ArrayAdapter<OrderInfoModel> adapter_sample_type_child = new ArrayAdapter(this, R.layout.item_simple_spiner, sample_type_childs);
+            MySpinnerAdapter<OrderInfoModel> adapter_sample_type_child = new MySpinnerAdapter(this, R.layout.item_simple_spiner, R.layout.item_simple_spiner,sample_type_childs);
 //            adapter_sample_type_child.setDropDownViewResource(R.layout.item_select_project_drop);
             spn_sample_type_child.setAdapter(adapter_sample_type_child);
-            if (sample_type_childs != null && !sample_type_childs.isEmpty()) {
-                spn_sample_type_child.setSelection(0);
-                sample_type_child = sample_type_childs.get(0);
-            }
             spn_sample_type_child.setVisibility(sample_type_childs.isEmpty() ? View.GONE : View.VISIBLE);
             tv_sample_type_child.setVisibility(!sample_type_childs.isEmpty() ? View.GONE : View.VISIBLE);
 
