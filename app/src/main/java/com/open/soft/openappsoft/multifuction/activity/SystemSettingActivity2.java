@@ -182,7 +182,7 @@ public class SystemSettingActivity2 extends Activity implements View.OnClickList
 //        prints_check.add(new Print("重量", true, false, false));
 //        prints_check.add(new Print("商品来源", true, false, false));
 //        prints_check.add(new Print("限量值", true, true, false));
-//        prints_check.add(new Print("限量标准", true, true, false));
+//        prints_check.add(new Print("检测限", true, true, false));
 //
 //        prints_data_manager.add(new Print("检测时间", true, true, true));
 //        prints_data_manager.add(new Print("样品名称", true, true, true));
@@ -196,7 +196,7 @@ public class SystemSettingActivity2 extends Activity implements View.OnClickList
 //        prints_data_manager.add(new Print("样品编号", true, false, false));
 //        prints_data_manager.add(new Print("重量", true, false, false));
 //        prints_data_manager.add(new Print("限量值", true, true, false));
-//        prints_data_manager.add(new Print("限量标准", true, true, false));
+//        prints_data_manager.add(new Print("检测限", true, true, false));
 //
 //
 //        Log.d("initData", "data b");

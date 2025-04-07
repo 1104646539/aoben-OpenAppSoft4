@@ -195,7 +195,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
 
     private Button btn_changemethod;
 
-    // 限量标准
+    // 检测限
     private String limit_standard = "";
 
     // 临界值
@@ -1065,7 +1065,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
         List<CheckResult> crs = testAdapter.getData();
         for (int i = 0; i < Global.CHANNEL_COUNT; i++) {
             if (selectedChannels.length > index && selectedChannels[index] == i + 1) {
-                double xlz = getXLZ(i);//限量标准值
+                double xlz = getXLZ(i);//检测限值
 
                 CheckResult cr = crs.get(i);
                 if (isNc()) {
@@ -1105,7 +1105,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
                             System.currentTimeMillis(),//检测时间
                             value + mProject.unit,//抑制率
                             value <= xlz ? "合格" : "不合格",//检测结果
-                            xlz + "",//限量值
+                            xlz + mProject.unit,//限量值
                             "",
                             com.example.utils.http.Global.NAME == null ? "无" : com.example.utils.http.Global.NAME,//用户名
                             cr.weight,//重量
@@ -1171,7 +1171,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
 
                     Timber.i("value:" + value);
                     value = Double.parseDouble(df.format(value));
-                    double jcx = mProject.cardXlz;//检出限
+                    double jcx = mProject.cardXlz;//检测限
 
                     /*if (value < jcx) {
                         value = 0;
@@ -1209,7 +1209,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
                             System.currentTimeMillis(),
                             value == 0 ? "0" + mProject.unit : df.format(value) + mProject.unit,
                             value <= xlz ? "合格" : "不合格",
-                            df.format(xlz) + "",
+                            df.format(xlz) + mProject.unit,
                             "",
                             com.example.utils.http.Global.NAME == null ? "无" : com.example.utils.http.Global.NAME,
                             cr.weight, new Random().nextInt(100000) + "", logresult + "", companyCode);
@@ -1323,7 +1323,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
         detectionResultBean.setCommodityPlaceOrigin(checkResult.sampleSource);//商品来源
         detectionResultBean.setUploadStatus("未上传");
         detectionResultBean.setSpecimenType(checkResult.sampleType); // 样品类型
-        detectionResultBean.setLimitStandard(checkResult.xlz + mProject.unit); // 限量标准
+        detectionResultBean.setLimitStandard(checkResult.xlz + mProject.unit); // 检测限
 //        detectionResultBean.setCriticalValue(checkResult.xlz); // 临界值
         detectionResultBean.setTestItem(checkResult.projectName); // 检测项目
         detectionResultBean.setQRCode(card_number); // 试剂盒二维码字符串

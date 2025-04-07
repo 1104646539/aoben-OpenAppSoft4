@@ -91,7 +91,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 //            Global.cardWarmTime = 30;
 //            Global.cardReactionTime = 30;
 //        }
-        tv_title.setText("有机磷和氨基甲酸酯类检测");
+//        tv_title.setText("有机磷和氨基甲酸酯类检测");
 
         if (getIntent().getBooleanExtra("isBoot", false)) {//每次开机都清零
             sp.edit().putFloat(SPResource.KEY_COMPARE_VALUE, 0).apply();
@@ -290,11 +290,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
             prints_check.add(new Print("样品编号", true, false, false));
             prints_check.add(new Print("受检单位", true, true, true));
             prints_check.add(new Print("重量", true, false, false));
-            prints_check.add(new Print("商品来源", true, false, false));
-            prints_check.add(new Print("限量标准", true, false, false));
+            prints_check.add(new Print("商品来源", false, false, false));
+            prints_check.add(new Print("检测限", true, false, false));
             prints_check.add(new Print("检测单位", true, false, false));
             prints_check.add(new Print("检测人员", true, false, false));
-//            prints_check.add(new Print("限量标准", true, true, false));
+//            prints_check.add(new Print("检测限", true, true, false));
 
             prints_data_manager.add(new Print("检测时间", true, true, true));
             prints_data_manager.add(new Print("样品名称", true, true, true));
@@ -304,11 +304,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
             prints_data_manager.add(new Print("受检单位", true, true, true));
             prints_data_manager.add(new Print("检测单位", true, true, false));
             prints_data_manager.add(new Print("检测人员", true, true, false));
-            prints_data_manager.add(new Print("商品来源", true, false, false));
+            prints_data_manager.add(new Print("商品来源", false, false, false));
             prints_data_manager.add(new Print("样品编号", true, false, false));
             prints_data_manager.add(new Print("重量", true, false, false));
-            prints_data_manager.add(new Print("限量标准", true, true, false));
-//            prints_data_manager.add(new Print("限量标准", true, true, false));
+            prints_data_manager.add(new Print("检测限", true, true, false));
+//            prints_data_manager.add(new Print("检测限", true, true, false));
 
 
             spUtils.setDataList(SPResource.KEY_PRINT_CHECK_DATA, prints_check);

@@ -17,7 +17,7 @@
     <TextView
         android:id="@+id/tv_card_xlz"
         style="@style/TextViewProjectItem"
-        android:text="限量标准"
+        android:text="检测限"
         android:visibility="gone"
         android:layout_weight="1"
         android:layout_width="0dp" />
@@ -34,7 +34,7 @@
     <TextView
         android:id="@+id/tv_jcx"
         style="@style/TextViewProjectItem"
-        android:text="检出限"
+        android:text="检测限"
         android:layout_weight="1"
         android:layout_width="0dp" />
 

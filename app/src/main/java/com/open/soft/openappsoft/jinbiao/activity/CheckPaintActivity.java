@@ -255,7 +255,7 @@ public class CheckPaintActivity extends AppCompatActivity implements View.OnClic
     // 接收到二维码之后向下位机请求结果的次数
     private int request_count = 0;*/
 
-    // 限量标准
+    // 检测限
     private String limit_standard;
 
     // 受检单位
@@ -2003,8 +2003,8 @@ public class CheckPaintActivity extends AppCompatActivity implements View.OnClic
         detectionResultBean.setTestItem(resultModel.project_name);//检测项目
         detectionResultBean.setSampleName(resultModel.sample_name);//样品名称
         detectionResultBean.setSpecimenType(resultModel.sample_type);//样品类型
-//        detectionResultBean.setLimitStandard(resultModel.xian + resultModel.concentrateUnit);//限量标准
-        detectionResultBean.setLimitStandard(resultModel.xian);//限量标准
+//        detectionResultBean.setLimitStandard(resultModel.xian + resultModel.concentrateUnit);//检测限
+        detectionResultBean.setLimitStandard(resultModel.xian);//检测限
         detectionResultBean.setCriticalValue(resultModel.lin);//临界值
         detectionResultBean.setDetectionValue(resultModel.check_value);//检测值
         detectionResultBean.setSampleConcentration(resultModel.style_long);//样品浓度

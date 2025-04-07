@@ -178,7 +178,7 @@
                     android:layout_width="60dp"
                     android:layout_height="30dp"
                     android:gravity="center_vertical|right"
-                    android:text="限量标准:" />
+                    android:text="检测限:" />
 
                 <View
                     android:layout_width="1dp"
@@ -372,7 +372,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|left"
                     android:paddingLeft="5dp"
-                    android:text="限量标准" />
+                    android:text="检测限" />
 
                 <View
                     android:layout_width="1dp"

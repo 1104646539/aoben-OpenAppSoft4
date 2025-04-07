@@ -226,7 +226,7 @@ public class ProjectActivity extends Activity implements View.OnClickListener, P
 //            return false;
 //        }
         if (TextUtils.isEmpty(etCardXlz.getText())) {
-            APPUtils.showToast(act, "请输入检出限");
+            APPUtils.showToast(act, "请输入检测限");
             return false;
         }
         if (TextUtils.isEmpty(etK.getText())){

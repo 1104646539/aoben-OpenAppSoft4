@@ -364,7 +364,7 @@
                     style="@style/tvItemTitle"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="限量标准" />
+                    android:text="检测限" />
 
                 <TextView
                     style="@style/tvItemTitle"

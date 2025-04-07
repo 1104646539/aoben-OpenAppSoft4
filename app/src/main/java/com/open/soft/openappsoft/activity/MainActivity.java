@@ -785,7 +785,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 try {
                     //初始化测试用的
                     initDB();
-
+                    //初始化金标的卡厂商
+                    DbHelper.GetInstance().save(cardModel);
                     //初始化项目
                     initXlsProject();
 
@@ -884,7 +885,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
      * @throws Exception
      */
     private void initXlsProject() throws Exception {
-        DbHelper.GetInstance().save(cardModel);
         InputStream is = null;
         FileOutputStream fos = null;
         is = getAssets().open(getResources().getString(R.string.excel_projects_name));
@@ -987,7 +987,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             LocationAddress = "";
 
 
-            Timber.i("onReceiveLocation " + location.getLatitude() + "," + location.getLongitude() + " location.getLocType()=" + location.getLocType() +" "+location);
+            Timber.i("定位 onReceiveLocation " + location.getLatitude() + "," + location.getLongitude() + " location.getLocType()=" + location.getLocType() +" "+location);
             // TODO Auto-generated method stub
             if (null != location && location.getLocType() != BDLocation.TypeServerError) {
                 Global.Latitude = location.getLatitude();
@@ -1327,10 +1327,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             prints_check.add(new Print("受检单位", true, true, true));
             prints_check.add(new Print("重量", true, false, false));
             prints_check.add(new Print("商品来源", true, false, false));
-            prints_check.add(new Print("限量标准", true, false, false));
+            prints_check.add(new Print("检测限", true, false, false));
             prints_check.add(new Print("检测单位", true, false, false));
             prints_check.add(new Print("检测人员", true, false, false));
-//            prints_check.add(new Print("限量标准", true, true, false));
+//            prints_check.add(new Print("检测限", true, true, false));
 
             prints_data_manager.add(new Print("检测时间", true, true, true));
             prints_data_manager.add(new Print("样品名称", true, true, true));
@@ -1343,8 +1343,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 //            prints_data_manager.add(new Print("商品来源", true, false, false));
             prints_data_manager.add(new Print("样品编号", true, true, true));
             prints_data_manager.add(new Print("重量", true, false, false));
-            prints_data_manager.add(new Print("限量标准", true, true, false));
-//            prints_data_manager.add(new Print("限量标准", true, true, false));
+            prints_data_manager.add(new Print("检测限", true, true, false));
+//            prints_data_manager.add(new Print("检测限", true, true, false));
 
 
             spUtils.setDataList(SPResource.KEY_PRINT_CHECK_DATA, prints_check);

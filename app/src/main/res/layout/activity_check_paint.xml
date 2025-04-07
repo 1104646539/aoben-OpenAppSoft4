@@ -269,7 +269,7 @@
                         <TextView
                             style="@style/checkactivity_textview_style"
                             android:layout_marginRight="10dp"
-                            android:text="限量标准:" />
+                            android:text="检测限:" />
 
                         <EditText
                             android:id="@+id/check_edit_jcx"

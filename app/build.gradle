@@ -8,22 +8,39 @@ android {
         applicationId "com.open.soft.openappsoft"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 23
-        versionName "1.0.23"
+        versionCode 24
+        versionName "1.0.24"
 //
 //        ndk {//thgppf  123456
 //            // 设置支持的SO库架构
 //            abiFilters 'armeabi',"x86","x86_64"
 //        }
     }
-//    signingConfigs {
-//        release {
-//            storeFile file('D:\\jks\\TND.jks')
-//            storePassword '123456'
-//            keyPassword '123456'qda
-//            keyAlias 'tnd'
+    signingConfigs {
+        debug {
+            storeFile file('E:\\systemsignedt3.jks')
+            storePassword 'tkyltkyl'
+            keyAlias 'TKYL'
+            keyPassword 'tkyltkyl'
+        }
+//        debug {
+//            storeFile file('J:\\TongKang10\\aoben\\keystore\\debug.keystore')
+//            storePassword 'android'
+//            keyAlias 'androiddebugkey'
+//            keyPassword 'android'
 //        }
-//    }
+    }
+    //release版本输出包名自动追加版本号和版本名称
+    applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                //只处理生产版本
+                if (buildType.name == 'release') {
+                    def createTime = new Date().format("YYYY-MM-dd", TimeZone.getTimeZone("GMT+08:00"))
+                    outputFileName = "多参数食品安全分析仪" + defaultConfig.versionName + "_" + createTime + ".apk"
+                }
+            }
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -33,7 +50,11 @@ android {
 //            signingConfig signingConfigs.release
         }
         debug {
-//            signingConfig signingConfigs.release
+            minifyEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {

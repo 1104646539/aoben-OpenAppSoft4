@@ -23,7 +23,7 @@ public class DetectionResultBean {
     private String aisle;                       //通道
     private String sampleName;                  //样品名称
     private String specimenType;                //样品类型
-    private String limitStandard;               //限量标准
+    private String limitStandard;               //检测限
     private String criticalValue;               //临界值
     private String sampleConcentration;         //样品浓度
     private String detectionValue;              //抑制率/检测值

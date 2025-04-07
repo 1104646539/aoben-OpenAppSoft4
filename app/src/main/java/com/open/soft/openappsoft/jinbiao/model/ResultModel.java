@@ -15,7 +15,7 @@ public class ResultModel {
 	public long time;//检测时间
 	public String sample_name;//样品名称
 	public String sample_type;//样品类型
-	//限量标准
+	//检测限
 	public String xian;
 	public String concentrateUnit;
 	public String sample_unit;//商品来源

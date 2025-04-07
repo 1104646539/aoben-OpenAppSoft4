@@ -385,9 +385,9 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
         detectionResultBean.setSpecimenTypeCode(taskModel.getSampleTypeId());//样品类型
         detectionResultBean.setSpecimenTypeChild(taskModel.getSampleSubType());//样品类型
         detectionResultBean.setSpecimenTypeChildCode(taskModel.getSampleSubTypeId());//样品类型
-        detectionResultBean.setLimitStandard(resultModel.xian);//限量标准
-//        detectionResultBean.setLimitStandard(resultModel.xian + resultModel.concentrateUnit);//限量标准
-//        detectionResultBean.setLimitStandard(limit_standard);//限量标准
+        detectionResultBean.setLimitStandard(resultModel.xian);//检测限
+//        detectionResultBean.setLimitStandard(resultModel.xian + resultModel.concentrateUnit);//检测限
+//        detectionResultBean.setLimitStandard(limit_standard);//检测限
         detectionResultBean.setCriticalValue(resultModel.lin);//临界值
         detectionResultBean.setDetectionValue(resultModel.check_value);//检测值
         detectionResultBean.setSampleConcentration(resultModel.style_long);//样品浓度

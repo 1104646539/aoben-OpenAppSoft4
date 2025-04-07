@@ -219,10 +219,10 @@ public class ToolUtils {
                         isPrint_weight = true;//重量
                     } else if ("商品来源".equals(print.p_name)) {
                         isPrint_sampleSource = true;//商品来源
-                    } else if ("限量标准".equals(print.p_name)) {
+                    } else if ("检测限".equals(print.p_name)) {
                         isPrint_standardValue = true;//限量值
-                    } else if ("限量标准".equals(print.p_name)) {
-                        isPrint_testStandard = true;//限量标准
+                    } else if ("检测限".equals(print.p_name)) {
+                        isPrint_testStandard = true;//检测限
                     } else if ("检测人员".equals(print.p_name)) {
                         isPrint_checkp = true;//检测人员
                     } else if ("检测单位".equals(print.p_name)) {
@@ -255,7 +255,7 @@ public class ToolUtils {
                 sb.append(result.testValue + "\n");
 
                 //if (isPrint_standardValue) {
-                sb.append("限量标准:");
+                sb.append("检测限:");
                 sb.append(result.xlz + "\n");
                 //}
 
@@ -275,8 +275,8 @@ public class ToolUtils {
                 }
 
                 // if (isPrint_sampleSource) {
-                sb.append("样品来源:");
-                sb.append(result.sampleSource + "\n");
+//                sb.append("样品来源:");
+//                sb.append(result.sampleSource + "\n");
                 // }
 
                 sb.append("检测项目:");
@@ -304,7 +304,7 @@ public class ToolUtils {
                 sb.append(title+"\n");
                 sb.append("\n\n");
 //                if (isPrint_testStandard) {
-//                    sb.append("限量标准:");
+//                    sb.append("检测限:");
 //                    sb.append(result.testStandard + "\n");
 //                }
 
@@ -315,10 +315,10 @@ public class ToolUtils {
             for (int i = 0; i < prints.size(); i++) {
                 Print print = prints.get(i);
                 if (print.isSelectMerge || print.isRequired) {
-                    if ("限量标准".equals(print.p_name)) {
-                        isPrint_standardValue = true;//限量标准
-                    } else if ("限量标准".equals(print.p_name)) {
-                        isPrint_testStandard = true;//限量标准
+                    if ("检测限".equals(print.p_name)) {
+                        isPrint_standardValue = true;//检测限
+                    } else if ("检测限".equals(print.p_name)) {
+                        isPrint_testStandard = true;//检测限
                     } else if ("检测人员".equals(print.p_name)) {
                         isPrint_checkp = true;//检测人员
                     } else if ("检测单位".equals(print.p_name)) {
@@ -354,7 +354,7 @@ public class ToolUtils {
                 sb.append("\n\n");
             }
             if (isPrint_standardValue) {
-                sb.append("限量标准:" + "");
+                sb.append("检测限:" + "");
                 sb.append(resultList.get(0).xlz + "\n");
             }
             sb.append("\n\n\n");
@@ -409,10 +409,10 @@ public class ToolUtils {
                         isPrint_weight = true;//重量
                     } else if ("商品来源".equals(print.p_name)) {
                         isPrint_sampleSource = true;//商品来源
-                    } else if ("限量标准".equals(print.p_name)) {
-                        isPrint_standardValue = true;//限量标准
-                    } else if ("限量标准".equals(print.p_name)) {
-                        isPrint_testStandard = true;//限量标准
+                    } else if ("检测限".equals(print.p_name)) {
+                        isPrint_standardValue = true;//检测限
+                    } else if ("检测限".equals(print.p_name)) {
+                        isPrint_testStandard = true;//检测限
                     } else if ("检测人员".equals(print.p_name)) {
                         isPrint_checkp = true;//检测人员
                     } else if ("检测单位".equals(print.p_name)) {
@@ -453,7 +453,7 @@ public class ToolUtils {
                     sb.append(result.weight + "\n");
                 }
                 if (isPrint_testStandard) {
-                    sb.append("限量标准:");
+                    sb.append("检测限:");
                     sb.append(result.testStandard + "\n");
                 }
                 if (isPrint_bcheckedOrganization) {
@@ -461,7 +461,7 @@ public class ToolUtils {
                     sb.append(result.bcheckedOrganization + "\n");
                 }
                 if (isPrint_standardValue) {
-                    sb.append("限量标准:");
+                    sb.append("检测限:");
                     sb.append(resultList.get(0).xlz + "\n");
                 }
                 if (result.projectName.equals("有机磷和氨基甲酸酯类")) {
@@ -481,10 +481,10 @@ public class ToolUtils {
             for (int i = 0; i < prints.size(); i++) {
                 Print print = prints.get(i);
                 if (print.isSelectMerge || print.isRequired) {
-                    if ("限量标准".equals(print.p_name)) {
-                        isPrint_standardValue = true;//限量标准
-                    } else if ("限量标准".equals(print.p_name)) {
-                        isPrint_testStandard = true;//限量标准
+                    if ("检测限".equals(print.p_name)) {
+                        isPrint_standardValue = true;//检测限
+                    } else if ("检测限".equals(print.p_name)) {
+                        isPrint_testStandard = true;//检测限
                     } else if ("检测人员".equals(print.p_name)) {
                         isPrint_checkp = true;//检测人员
                     } else if ("检测单位".equals(print.p_name)) {
@@ -528,11 +528,11 @@ public class ToolUtils {
                 sb.append(resultList.get(0).checkedOrganization + "\n");
             }
 //            if (isPrint_standardValue) {
-//                sb.append("限量标准:" + "");
+//                sb.append("检测限:" + "");
 //                sb.append(resultList.get(0).xlz + "\n");
 //            }
             if (isPrint_testStandard) {
-                sb.append("限量标准:");
+                sb.append("检测限:");
                 sb.append(resultList.get(0).testStandard + "\n");
             }
             sb.append("\n\n\n");
@@ -590,7 +590,7 @@ public class ToolUtils {
             sb.append(result.sampleNum + "\n");
             sb.append("商品来源:");
             sb.append(result.sampleSource + "\n");
-            sb.append("限量标准:");
+            sb.append("检测限:");
             sb.append(result.testStandard + "\n");
             sb.append("检测时间:");
             sb.append(ToolUtils.long2String(result.testTime, "yyyy-MM-dd HH:mm:ss") + "\n");

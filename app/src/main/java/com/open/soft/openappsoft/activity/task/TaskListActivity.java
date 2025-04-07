@@ -34,7 +34,7 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
     Button btn_add_task, btn_remove_task;
     TaskListAdapter adapter;
     ImageView iv_selected;
-    TextView tv_start;
+    Button btn_start;
     GT.Hibernate hibernate;
     int source;
     String type;
@@ -56,9 +56,9 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
         btn_add_task = findViewById(R.id.btn_add_task);
         btn_remove_task = findViewById(R.id.btn_remove_task);
         iv_selected = findViewById(R.id.iv_selected);
-        tv_start = findViewById(R.id.tv_start);
+        btn_start = findViewById(R.id.btn_start);
 
-        tv_start.setOnClickListener(this);
+        btn_start.setOnClickListener(this);
         btn_remove_task.setOnClickListener(this);
         btn_add_task.setOnClickListener(this);
         iv_selected.setOnClickListener(this);
@@ -97,7 +97,7 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
             case R.id.iv_selected:
                 selectedAllTask();
                 break;
-            case R.id.tv_start:
+            case R.id.btn_start:
                 start();
                 finish();
                 break;

@@ -345,7 +345,7 @@ public class CheckProjectLineActivity extends BaseActivity {
 		}
 
 		if (xian.getText().toString().length() <= 0) {
-			Toast.makeText(this, "请输入限量标准", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "请输入检测限", Toast.LENGTH_SHORT).show();
 			return;
 		}
 

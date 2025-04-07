@@ -51,7 +51,7 @@ public class TaskModel {
      */
     private String jcdw;
     /**
-     *  ATP专用 检出限
+     *  ATP专用 检测限
      */
     private String jcx;
 

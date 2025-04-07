@@ -363,7 +363,7 @@ public class AddTaskActivity extends AppCompatActivity implements AdapterView.On
         }
 
         if (isAtp() && APPUtils.isNull(et_jcx.getText().toString())) {
-            APPUtils.showToast(this, "请输入检出限");
+            APPUtils.showToast(this, "请输入检测限");
             return false;
         }
 

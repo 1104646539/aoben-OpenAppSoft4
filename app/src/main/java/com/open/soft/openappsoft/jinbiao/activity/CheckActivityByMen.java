@@ -2162,8 +2162,8 @@ public class CheckActivityByMen extends BaseActivity implements OnClickListener,
         detectionResultBean.setTestItem(resultModel.project_name);//检测项目
         detectionResultBean.setSampleName(resultModel.sample_name);//样品名称
         detectionResultBean.setSpecimenType(resultModel.sample_type);//样品类型
-        detectionResultBean.setLimitStandard(resultModel.xian);//限量标准
-//        detectionResultBean.setLimitStandard(resultModel.xian + resultModel.concentrateUnit);//限量标准
+        detectionResultBean.setLimitStandard(resultModel.xian);//检测限
+//        detectionResultBean.setLimitStandard(resultModel.xian + resultModel.concentrateUnit);//检测限
         detectionResultBean.setCriticalValue(resultModel.lin);//临界值
         detectionResultBean.setDetectionValue(resultModel.check_value);//检测值
         detectionResultBean.setSampleConcentration(resultModel.style_long);//样品浓度
@@ -2174,8 +2174,8 @@ public class CheckActivityByMen extends BaseActivity implements OnClickListener,
 //        detectionResultBean.setUploadStatus("已上传");
         detectionResultBean.setUploadStatus(upload_status == 1 ? "已上传" : "未上传");
         detectionResultBean.setNumberSamples(et_Sample_Num.getText().toString());// 样品编号
-        detectionResultBean.setLimitStandard(resultModel.xian); // 限量标准
-        detectionResultBean.setUnitsUnderInspection(et_CheckedEnterprise.getText().toString() + ""); // 限量标准
+        detectionResultBean.setLimitStandard(resultModel.xian); // 检测限
+        detectionResultBean.setUnitsUnderInspection(et_CheckedEnterprise.getText().toString() + ""); // 检测限
         detectionResultBean.setSpId1(spId1 + ""); // 省级id
         detectionResultBean.setSpId2(spId2 + ""); // 市级id
         detectionResultBean.setSpId3(spId3 + ""); // 县级id

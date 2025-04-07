@@ -55,6 +55,7 @@
             <Button
                 android:id="@+id/activity_project_manager_btn_checkpicture"
                 style="@style/BtnBottom"
+                android:visibility="gone"
                 android:padding="50dp"
                 android:text="检测图片" />
 

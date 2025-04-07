@@ -67,7 +67,7 @@
         <TextView
             android:id="@+id/tv_jcx_item_project"
             style="@style/item_project_style"
-            android:text="限量标准"
+            android:text="检测限"
             android:layout_weight="1"/>
 
         <View

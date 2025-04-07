@@ -84,7 +84,7 @@ public class ResultQueryActivity extends Activity implements View.OnClickListene
     private static String[] HEADERS = new String[]{"检测编号", "检测项目", "检测人员", "通道",
             "临界值", "T/C值", "检测结果", "受检单位",
             "样品名称", "上传状态", "商品来源",
-            "限量标准", "检测时间"};
+            "检测限", "检测时间"};
     private List<CheckResult> resultList;
     private ListView lv;
     private CheckResultAdapter adapter;

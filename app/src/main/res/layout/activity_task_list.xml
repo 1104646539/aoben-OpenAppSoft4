@@ -21,17 +21,17 @@
             android:textColor="@color/white"
             android:textSize="22sp" />
 
-        <TextView
-            android:id="@+id/tv_start"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:gravity="center"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
-            android:text="开始检测"
-            android:textColor="@color/white"
-            android:textSize="26sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/tv_start"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:gravity="center"-->
+<!--            android:paddingLeft="50dp"-->
+<!--            android:paddingRight="50dp"-->
+<!--            android:text="开始检测"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="26sp" />-->
     </RelativeLayout>
 
     <LinearLayout
@@ -52,6 +52,12 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <Button
+                android:layout_width="wrap_content"
+                style="@style/BtnBottom"
+                android:id="@+id/btn_start"
+                android:layout_height="wrap_content"
+                android:text="开始检测" />
             <Button
                 android:layout_width="wrap_content"
                 style="@style/BtnBottom"

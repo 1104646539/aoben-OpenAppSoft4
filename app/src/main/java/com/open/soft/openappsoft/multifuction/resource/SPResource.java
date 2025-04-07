@@ -97,7 +97,7 @@ public class SPResource {
      */
     public static final String KEY_STANDARD_VALUE = "standard_value";
     /**
-     * 限量标准
+     * 检测限
      */
     public static final String KEY_TEST_STANDARD = "test_standard";
     /**

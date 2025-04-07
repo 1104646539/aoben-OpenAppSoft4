@@ -266,7 +266,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
     // 绘图按钮
     private Button btn_paint1;
 
-    // 限量标准
+    // 检测限
     private String limit_standard;
 
     // 受检单位
@@ -516,7 +516,8 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         persion_adapter = new ArrayAdapter<String>(CheckActivity.this, R.layout.item_simple_spiner, persion_list);
 //        shiji_adapter = new ArrayAdapter<String>(CheckActivity.this, R.layout.item_simple_spiner, shiji_list);
         sample_adapter = new ArrayAdapter<String>(CheckActivity.this, R.layout.item_simple_spiner, sample_list);
-        project_adapter = new ArrayAdapter<String>(CheckActivity.this, R.layout.item_simple_spiner, project_list);
+        project_adapter = new ArrayAdapter<String>(CheckActivity.this, R.layout.item_simple_spiner_selected, project_list);
+        project_adapter.setDropDownViewResource(R.layout.item_simple_spiner);
         type_adapter = new ArrayAdapter<String>(CheckActivity.this, R.layout.item_simple_spiner, type_list);
         sampleUnit_adapter = new ArrayAdapter<String>(CheckActivity.this, R.layout.item_simple_spiner, sampleUnit_list);
 
@@ -1454,15 +1455,15 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         resultModel.sample_number = et_Sample_Num.getText().toString();
         resultModel.sample_type = tv_check_type.getText().toString();
         resultModel.project_name = selectedProject.getName();
-//            resultModel.sample_unit = sampleUnit_model.getName();
-        resultModel.xian = etJcx.getText().toString();
-        resultModel.lin = etLjz.getText().toString();
-        resultModel.check_value = etDr.getText().toString();
-        resultModel.style_long = etConcentrate.getText().toString();
+//        resultModel.sample_unit = sampleUnit_model.getName();
+        resultModel.xian = etJcx.getText().toString() + selectedProject.ConcentrateUnit;
+        resultModel.lin = etLjz.getText().toString() + selectedProject.ConcentrateUnit;
+        resultModel.check_value = etDr.getText().toString() + selectedProject.ConcentrateUnit;
+        resultModel.style_long = etConcentrate.getText().toString() + selectedProject.ConcentrateUnit;
         resultModel.check_result = result;
         resultModel.time = time;
         resultModel.concentrateUnit = selectedProject.ConcentrateUnit;
-        resultModel.sample_unit = tv_checkactivity_sampleunit.getText().toString();
+        resultModel.sample_unit = taskModel.getCompanyName();
         resultModel.shiji = tv_check_b.getText().toString();
         resultModel.companyCode = et_companyCode.getText().toString();
 //            resultModel.sample_id = et_Sample_Num.getText().toString();
@@ -1506,12 +1507,12 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         detectionResultBean.setSpecimenTypeCode(taskModel.getSampleTypeId());//样品类型
         detectionResultBean.setSpecimenTypeChild(taskModel.getSampleSubType());//样品类型
         detectionResultBean.setSpecimenTypeChildCode(taskModel.getSampleSubTypeId());//样品类型
-        detectionResultBean.setLimitStandard(resultModel.xian);//限量标准
-//        detectionResultBean.setLimitStandard(resultModel.xian + resultModel.concentrateUnit);//限量标准
-//        detectionResultBean.setLimitStandard(limit_standard);//限量标准
-        detectionResultBean.setCriticalValue(resultModel.lin);//临界值
-        detectionResultBean.setDetectionValue(resultModel.check_value);//检测值
-        detectionResultBean.setSampleConcentration(resultModel.style_long);//样品浓度
+        detectionResultBean.setLimitStandard(resultModel.xian + resultModel.concentrateUnit);//检测限
+//        detectionResultBean.setLimitStandard(resultModel.xian + resultModel.concentrateUnit);//检测限
+//        detectionResultBean.setLimitStandard(limit_standard);//检测限
+        detectionResultBean.setCriticalValue(resultModel.lin );//临界值
+        detectionResultBean.setDetectionValue(resultModel.check_value );//检测值
+        detectionResultBean.setSampleConcentration(resultModel.style_long );//样品浓度
         detectionResultBean.setDetectionResult(resultModel.check_result);//检测结果
         detectionResultBean.setDetectionTime(resultModel.time);//检测时间
 
@@ -2723,22 +2724,22 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 100:
-                    int[] ints = ToolUtils.byte2Int(imageData);
-
-                    new_ints = ints;
-
-                    Intent intent = new Intent();
-                    intent.putExtra("ints", ints);
-                    (CheckActivity.this).onActivityResult(CheckActivity.REQUEST_CODE, Activity.RESULT_OK, intent);
-
-                    String ints_data = "";
-                    for (int i = 0; i < ints.length; i++) {
-                        ints_data += ints[i] + ",";
-                    }
-                    int scanStart = Integer.parseInt("300");
-                    InitChart();
+//                    int[] ints = ToolUtils.byte2Int(imageData);
+//
+//                    new_ints = ints;
+//
+//                    Intent intent = new Intent();
+//                    intent.putExtra("ints", ints);
+//                    (CheckActivity.this).onActivityResult(CheckActivity.REQUEST_CODE, Activity.RESULT_OK, intent);
+//
+//                    String ints_data = "";
+//                    for (int i = 0; i < ints.length; i++) {
+//                        ints_data += ints[i] + ",";
+//                    }
+//                    int scanStart = Integer.parseInt("300");
+//                    InitChart();
                     try {
-                        setData(ints, scanStart);
+//                        setData(ints, scanStart);
 //                        savaImage();
 //                        // 获取图片路径
 //                        String imgaepath = getImagePath();
