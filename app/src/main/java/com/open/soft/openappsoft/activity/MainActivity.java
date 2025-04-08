@@ -258,6 +258,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         locationService = new LocationService(getApplicationContext());
         locationService.registerListener(mListener);
         locationService.start();
+        showLocation(null);
 
         // 注册广播(百度)
         locationReceiver = new LocationReceiver();
@@ -647,7 +648,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     private void reLocation() {
         locationService.requestLocation();
-        APPUtils.showToast(this,"正在重新定位，请稍后……");
+        APPUtils.showToast(this, "正在重新定位，请稍后……");
         showLocation(null);
     }
 
@@ -1004,8 +1005,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             if (null != location && location.getLocType() != BDLocation.TypeServerError) {
                 Global.Latitude = location.getLatitude();
                 Global.Longitude = location.getLongitude();
-                Timber.i("" + location.getAddrStr() + location.getAddress().address);
-                showLocation(location.getAddrStr());
+                Global.Addr = location.getAddrStr();
+                Timber.i("定位 " + location.getAddrStr());
+
+                showLocation(Global.Addr);
 
                 StringBuffer sb = new StringBuffer(256);
                 sb.append("time : ");
@@ -1122,7 +1125,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                     sb.append("\ndescribe : ");
                     sb.append("无法获取有效定位依据导致定位失败，一般是由于手机的原因，处于飞行模式下一般会造成这种结果，可以试着重启手机");
                 }
-
+                Timber.i(""+sb.toString());
                 if ("".equals(locationMsg)) {
                     count--;
                     // 切换定位方法
@@ -1244,7 +1247,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             if (APPUtils.isNull(addr)) {
                 tv_location.setText("正在定位:……");
             } else {
-                tv_location.setText(addr);
+                tv_location.setText("当前位置:" + addr);
             }
         });
     }

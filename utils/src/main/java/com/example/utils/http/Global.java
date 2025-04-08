@@ -36,6 +36,10 @@ public class Global {
      */
     public static double Longitude = 0;
     /**
+     * 定位位置
+     */
+    public static String Addr = null;
+    /**
      * 加密 key
      */
     public static String ENCODE_KEY = "e2fd36a50c8c4759a5aaf1f094543a17";

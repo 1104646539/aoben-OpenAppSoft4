@@ -327,9 +327,9 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
         if (user.length() > 0 && pass.length() > 0) {
             et_user.setText(user);
             et_psw.setText(pass);
-        } else {
-//            et_user.setText("admin");
-//            et_psw.setText("123456");
+        } else if(com.open.soft.openappsoft.multifuction.util.Global.DEBUG){
+            et_user.setText("qdadmin");
+            et_psw.setText("123456");
         }
     }
 
