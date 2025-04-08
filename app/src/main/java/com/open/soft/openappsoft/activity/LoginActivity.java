@@ -324,10 +324,11 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
         SharedPreferences sp = getSharedPreferences("userPass", MODE_PRIVATE);
         String user = sp.getString("user", "");
         String pass = sp.getString("pass", "");
+        Timber.i("user=" + user +" pass="+pass);
         if (user.length() > 0 && pass.length() > 0) {
             et_user.setText(user);
             et_psw.setText(pass);
-        } else if(com.open.soft.openappsoft.multifuction.util.Global.DEBUG){
+        } else if (com.open.soft.openappsoft.multifuction.util.Global.DEBUG) {
             et_user.setText("qdadmin");
             et_psw.setText("123456");
         }
@@ -659,44 +660,44 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
 
         final boolean[] is_complete = {false};
         reslut = new boolean[1];
-        new GT.HttpUtil().getRequest(InterfaceURL.BASE_URL + "System/GetAreaList", new GT.HttpUtil.OnLoadDataListener() {
-            @Override
-            public void onSuccess(String response, Object o) {
-                String string = response;
-                Timber.i("string:" + string);
-                JiaMiDataBean jiaMiDataBean = new Gson().fromJson(string, JiaMiDataBean.class);
-                List<JiaMiData> data = jiaMiDataBean.getData();
-
-                Timber.i("Global.admin_pt:" + Global.admin_pt);
-                for (int i = 0; i < data.size(); i++) {
-                    if (data.get(i).getId().equals(Global.admin_pt)) {
-                        if ("MD5".equals(data.get(i).getEncryptionType())) {
-//                            jiamipsw = getMD5Str(psw).toUpperCase();
-                            jiamipsw = getMD5Str(psw);
-                            Timber.i("MD5加密后未处理的的密码://" + jiamipsw + "//");
-                            jiamipsw = jiamipsw.trim();
-                            Timber.i("MD5加密后的处理过的密码://" + jiamipsw + "//");
-                            is_complete[0] = true;
-                            reslut[0] = is_complete[0];
-                            break;
-                        } else if ("base64".equals(data.get(i).getEncryptionType())) {
-                            jiamipsw = Base64.encodeToString(psw.getBytes(), Base64.DEFAULT);
-                            Timber.i("base64加密后未处理的密码://" + jiamipsw + "//");
-                            jiamipsw = jiamipsw.trim();
-                            Timber.i("base64加密后的处理过的密码://" + jiamipsw + "//");
-                            is_complete[0] = true;
-                            reslut[0] = is_complete[0];
-                            break;
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onError(String response, Object o) {
-
-            }
-        });
+//        new GT.HttpUtil().getRequest(InterfaceURL.BASE_URL + "System/GetAreaList", new GT.HttpUtil.OnLoadDataListener() {
+//            @Override
+//            public void onSuccess(String response, Object o) {
+//                String string = response;
+//                Timber.i("string:" + string);
+//                JiaMiDataBean jiaMiDataBean = new Gson().fromJson(string, JiaMiDataBean.class);
+//                List<JiaMiData> data = jiaMiDataBean.getData();
+//
+//                Timber.i("Global.admin_pt:" + Global.admin_pt);
+//                for (int i = 0; i < data.size(); i++) {
+//                    if (data.get(i).getId().equals(Global.admin_pt)) {
+//                        if ("MD5".equals(data.get(i).getEncryptionType())) {
+////                            jiamipsw = getMD5Str(psw).toUpperCase();
+//                            jiamipsw = getMD5Str(psw);
+//                            Timber.i("MD5加密后未处理的的密码://" + jiamipsw + "//");
+//                            jiamipsw = jiamipsw.trim();
+//                            Timber.i("MD5加密后的处理过的密码://" + jiamipsw + "//");
+//                            is_complete[0] = true;
+//                            reslut[0] = is_complete[0];
+//                            break;
+//                        } else if ("base64".equals(data.get(i).getEncryptionType())) {
+//                            jiamipsw = Base64.encodeToString(psw.getBytes(), Base64.DEFAULT);
+//                            Timber.i("base64加密后未处理的密码://" + jiamipsw + "//");
+//                            jiamipsw = jiamipsw.trim();
+//                            Timber.i("base64加密后的处理过的密码://" + jiamipsw + "//");
+//                            is_complete[0] = true;
+//                            reslut[0] = is_complete[0];
+//                            break;
+//                        }
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onError(String response, Object o) {
+//
+//            }
+//        });
 //        new GT.OkHttp(InterfaceURL.BASE_URL + "System/GetAreaList").loadData(new Callback() {
 //            @Override
 //            public void onFailure(Call call, IOException e) {

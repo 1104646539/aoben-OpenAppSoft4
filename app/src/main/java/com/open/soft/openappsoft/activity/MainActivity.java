@@ -694,72 +694,72 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         dataMap.put("deviceType", Global.deviceType_value);
         dataMap.put("samplingMode", Global.samplingMode_value);
         progressDialog.show();
-        new GT.HttpUtil().postRequest(InterfaceURL.BASE_URL + "Other/GetManual", dataMap, new GT.HttpUtil.OnLoadData() {
-            @Override
-            public void onSuccess(String response, Object o) {
-                PdfRootBean pdfRootBean = new Gson().fromJson(response, PdfRootBean.class);
-                if (pdfRootBean != null) {
-                    if (pdfRootBean.getData() != null) {
-                        url_pdf = pdfRootBean.getData().getUrl();
-                        new DownloadUtil().download(url_pdf, appSavePath, pdf_name, new DownloadUtil.OnDownloadListener() {
-                            @Override
-                            public void onDownloadSuccess(File file) {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        progressDialog.dismiss();
-                                        //操作手册
-                                        String appSavePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
-                                        Global.URI_MULT = appSavePath + pdf_name;
-                                        openPDFInNative(MainActivity.this, Global.URI_MULT);
-                                    }
-                                });
-
-                            }
-
-                            @Override
-                            public void onDownloading(int progress) {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        progressDialog.setMessage("正在更新最新PDF，请稍等...已完成 " + progress + "%");
-                                    }
-                                });
-                            }
-
-                            @Override
-                            public void onDownloadFailed(Exception e) {
-                                Timber.i(e);
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        progressDialog.dismiss();
-                                    }
-                                });
-
-                            }
-                        });
-                    } else {
-                        String errMsg = pdfRootBean.getErrMsg();
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(MainActivity.this, "暂无此操作手册，敬请等待更新。。。", Toast.LENGTH_LONG).show();
-                                progressDialog.dismiss();
-                            }
-                        });
-                    }
-                }
-            }
-
-            @Override
-            public void onError(String response, Object o) {
-                super.onError(response, o);
-                Toast.makeText(MainActivity.this, "暂无此操作手册，敬请等待更新。。。", Toast.LENGTH_LONG).show();
-                progressDialog.dismiss();
-
-            }
-        }, false);
+//        new GT.HttpUtil().postRequest(InterfaceURL.BASE_URL + "Other/GetManual", dataMap, new GT.HttpUtil.OnLoadData() {
+//            @Override
+//            public void onSuccess(String response, Object o) {
+//                PdfRootBean pdfRootBean = new Gson().fromJson(response, PdfRootBean.class);
+//                if (pdfRootBean != null) {
+//                    if (pdfRootBean.getData() != null) {
+//                        url_pdf = pdfRootBean.getData().getUrl();
+//                        new DownloadUtil().download(url_pdf, appSavePath, pdf_name, new DownloadUtil.OnDownloadListener() {
+//                            @Override
+//                            public void onDownloadSuccess(File file) {
+//                                runOnUiThread(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        progressDialog.dismiss();
+//                                        //操作手册
+//                                        String appSavePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
+//                                        Global.URI_MULT = appSavePath + pdf_name;
+//                                        openPDFInNative(MainActivity.this, Global.URI_MULT);
+//                                    }
+//                                });
+//
+//                            }
+//
+//                            @Override
+//                            public void onDownloading(int progress) {
+//                                runOnUiThread(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        progressDialog.setMessage("正在更新最新PDF，请稍等...已完成 " + progress + "%");
+//                                    }
+//                                });
+//                            }
+//
+//                            @Override
+//                            public void onDownloadFailed(Exception e) {
+//                                Timber.i(e);
+//                                runOnUiThread(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        progressDialog.dismiss();
+//                                    }
+//                                });
+//
+//                            }
+//                        });
+//                    } else {
+//                        String errMsg = pdfRootBean.getErrMsg();
+//                        runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                Toast.makeText(MainActivity.this, "暂无此操作手册，敬请等待更新。。。", Toast.LENGTH_LONG).show();
+//                                progressDialog.dismiss();
+//                            }
+//                        });
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onError(String response, Object o) {
+//                super.onError(response, o);
+//                Toast.makeText(MainActivity.this, "暂无此操作手册，敬请等待更新。。。", Toast.LENGTH_LONG).show();
+//                progressDialog.dismiss();
+//
+//            }
+//        }, false);
 
     }
 
