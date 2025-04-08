@@ -1313,7 +1313,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
         detectionResultBean.setDetectionTime(checkResult.testTime);//检测时间
         detectionResultBean.setAisle(checkResult.channel);//通道
         detectionResultBean.setSampleName(checkResult.sampleName);//样品名称
-        detectionResultBean.setDetectionValue(checkResult.testValue + mProject.unit);//抑制率/检测值
+        detectionResultBean.setDetectionValue(checkResult.testValue );//抑制率/检测值
         detectionResultBean.setDetectionResult(checkResult.resultJudge);//检测结果
         detectionResultBean.setUnitsUnderInspection(checkResult.bcheckedOrganization);//受检单位
         detectionResultBean.setUnitsUnderInspectionCode(checkResult.bcheckedOrganizationCode);//受检单位Code
@@ -1323,14 +1323,14 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
         detectionResultBean.setCommodityPlaceOrigin(checkResult.sampleSource);//商品来源
         detectionResultBean.setUploadStatus("未上传");
         detectionResultBean.setSpecimenType(checkResult.sampleType); // 样品类型
-        detectionResultBean.setLimitStandard(checkResult.xlz + mProject.unit); // 检测限
+        detectionResultBean.setLimitStandard(checkResult.xlz ); // 检测限
 //        detectionResultBean.setCriticalValue(checkResult.xlz); // 临界值
         detectionResultBean.setTestItem(checkResult.projectName); // 检测项目
         detectionResultBean.setQRCode(card_number); // 试剂盒二维码字符串
         detectionResultBean.setOperatorId(com.example.utils.http.Global.ID); // 上传数据的OperatorId参数
 //        detectionResultBean.setAreaId(terrace); // 上传数据的AreaId参数
 //        detectionResultBean.setDeptId(DeptId); // 上传数据的DeptId参数
-        detectionResultBean.setXgd(checkResult.xgd + mProject.unit);//吸光度
+        detectionResultBean.setXgd(checkResult.xgd);//吸光度
         detectionResultBean.companyCode = checkResult.companyCode; //组织代码
 
         detectionResultBean.setSpecimenTypeCode(checkResult.sampleTypeCode);//样本类型Code

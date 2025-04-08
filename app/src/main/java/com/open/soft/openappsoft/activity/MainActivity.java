@@ -258,7 +258,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         locationService = new LocationService(getApplicationContext());
         locationService.registerListener(mListener);
         locationService.start();
-        showLocation(null);
+        showLocation("");
 
         // 注册广播(百度)
         locationReceiver = new LocationReceiver();
@@ -647,9 +647,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     }
 
     private void reLocation() {
-        locationService.requestLocation();
+        locationService.stop();
+        locationService.start();
         APPUtils.showToast(this, "正在重新定位，请稍后……");
-        showLocation(null);
+        showLocation("");
     }
 
     // 访问操作手册接口，返回pdf地址
@@ -968,13 +969,15 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             OrderInfoModel orderInfoModel = new OrderInfoModel(initName2[i], initCode2[i], OrderInfoModel.type_sample_type_child);
             hibernate.save(orderInfoModel);
         }
-        for (int i = 0; i < initName3.length; i++) {
-            OrderInfoModel orderInfoModel = new OrderInfoModel(initName3[i], initCode3[i], OrderInfoModel.type_bcheck);
-            hibernate.save(orderInfoModel);
-        }
-        for (int i = 0; i < initName4.length; i++) {
-            OrderInfoModel orderInfoModel = new OrderInfoModel(initName4[i], "", OrderInfoModel.type_check);
-            hibernate.save(orderInfoModel);
+        if (com.open.soft.openappsoft.multifuction.util.Global.DEBUG) {
+            for (int i = 0; i < initName3.length; i++) {
+                OrderInfoModel orderInfoModel = new OrderInfoModel(initName3[i], initCode3[i], OrderInfoModel.type_bcheck);
+                hibernate.save(orderInfoModel);
+            }
+            for (int i = 0; i < initName4.length; i++) {
+                OrderInfoModel orderInfoModel = new OrderInfoModel(initName4[i], "", OrderInfoModel.type_check);
+                hibernate.save(orderInfoModel);
+            }
         }
     }
 
@@ -1125,7 +1128,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                     sb.append("\ndescribe : ");
                     sb.append("无法获取有效定位依据导致定位失败，一般是由于手机的原因，处于飞行模式下一般会造成这种结果，可以试着重启手机");
                 }
-                Timber.i(""+sb.toString());
+                Timber.i("" + sb.toString());
                 if ("".equals(locationMsg)) {
                     count--;
                     // 切换定位方法
@@ -1242,9 +1245,15 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         }
     };
 
+    /**
+     * 显示定位结果
+     * @param addr
+     */
     private void showLocation(String addr) {
         runOnUiThread(() -> {
-            if (APPUtils.isNull(addr)) {
+            if (addr == null) {
+                tv_location.setText("定位失败");
+            } else if ("".equals(addr)) {
                 tv_location.setText("正在定位:……");
             } else {
                 tv_location.setText("当前位置:" + addr);

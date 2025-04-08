@@ -1509,7 +1509,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         detectionResultBean.setSpecimenTypeCode(taskModel.getSampleTypeId());//样品类型
         detectionResultBean.setSpecimenTypeChild(taskModel.getSampleSubType());//样品类型
         detectionResultBean.setSpecimenTypeChildCode(taskModel.getSampleSubTypeId());//样品类型
-        detectionResultBean.setLimitStandard(resultModel.xian + resultModel.concentrateUnit);//检测限
+        detectionResultBean.setLimitStandard(resultModel.xian );//检测限
 //        detectionResultBean.setLimitStandard(resultModel.xian + resultModel.concentrateUnit);//检测限
 //        detectionResultBean.setLimitStandard(limit_standard);//检测限
         detectionResultBean.setCriticalValue(resultModel.lin);//临界值
