@@ -91,7 +91,7 @@ public class Global {
     public static String SamplingMode = "";
 
     /**
-     * 操作说明的路径
+     * 厂家信息的路径 pdf
      */
     public static String URI_MULT = "";
     public static String URI_JINBIAO = "";

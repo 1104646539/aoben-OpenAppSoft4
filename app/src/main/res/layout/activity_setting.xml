@@ -144,7 +144,7 @@
                     android:text="公司名设置"
                     android:textColor="#ffffff"
                     android:textSize="36sp"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/btn_open_5"
@@ -153,6 +153,27 @@
                     android:layout_weight="1"
                     android:background="@drawable/btn_default1"
                     android:text="修改标题"
+                    android:textColor="#ffffff"
+                    android:textSize="36sp"
+                    android:visibility="visible" />
+                <Button
+                    android:id="@+id/btn_pdf"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_default1"
+                    android:text="厂家信息"
+                    android:textColor="#ffffff"
+                    android:textSize="36sp"
+                    android:visibility="visible" />
+
+                <Button
+                    android:id="@+id/btn_video"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_default1"
+                    android:text="操作视频"
                     android:textColor="#ffffff"
                     android:textSize="36sp"
                     android:visibility="visible" />
@@ -166,7 +187,7 @@
                     android:text="样品名称"
                     android:textColor="#ffffff"
                     android:textSize="36sp"
-                    android:visibility="invisible" />
+                    android:visibility="gone" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

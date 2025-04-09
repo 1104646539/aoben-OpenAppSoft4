@@ -103,7 +103,7 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
     private String sample_number;
 
     private GT.Hibernate hibernate;
-
+    private String unit = "RLU";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -230,11 +230,11 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
 
         tv_check_type = (TextView) findViewById(R.id.tv_check_type);
         tv_check_project = (TextView) findViewById(R.id.tv_check_project);
-        etJcx =  findViewById(R.id.check_edit_jcx);
-        etConcentrate =  findViewById(R.id.check_edit_long);
+        etJcx = findViewById(R.id.check_edit_jcx);
+        etConcentrate = findViewById(R.id.check_edit_long);
         long_tv = (TextView) findViewById(R.id.check_edit_tv_long);
 
-        et_Sample_Num =  findViewById(R.id.checkactivity_et_SampleNum);
+        et_Sample_Num = findViewById(R.id.checkactivity_et_SampleNum);
         et_companyCode = findViewById(R.id.checkactivity_et_company);
         llCompany = findViewById(R.id.tr_ll);
         //判断是否需要组织机构代码
@@ -244,13 +244,13 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
         }
 
 
-        et_SampleTime =  findViewById(R.id.checkactivity_et_SampleTime);
+        et_SampleTime = findViewById(R.id.checkactivity_et_SampleTime);
         et_SampleTime.setOnClickListener(this);
         String time = GetCurrentTime();
 
         et_SampleTime.setText(time);
 
-        etResult =  findViewById(R.id.check_edit_result);
+        etResult = findViewById(R.id.check_edit_result);
         btn_Imm_Check = (Button) findViewById(R.id.btn_Imm_Check);
         upload_data = (Button) findViewById(R.id.upload_data);
 
@@ -321,37 +321,37 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
      */
     public void saveCheck_ResultData(String result) {
 //        try {
-            long time = new Date().getTime();// new Date()为获取当前系统时间
-            resultModel = new ResultModel();
-            testTime = GetCurrentTime();
-            resultModel.taskID = taskModel.taskID;
-            resultModel.number = testTime;
-            resultModel.company_name = tv_check_company.getText().toString();
-            resultModel.persion = com.example.utils.http.Global.NAME;
+        long time = new Date().getTime();// new Date()为获取当前系统时间
+        resultModel = new ResultModel();
+        testTime = GetCurrentTime();
+        resultModel.taskID = taskModel.taskID;
+        resultModel.number = testTime;
+        resultModel.company_name = tv_check_company.getText().toString();
+        resultModel.persion = com.example.utils.http.Global.NAME;
 //			resultModel.shiji = shiji_model.getName();
-            resultModel.sample_name = tv_check_sample.getText().toString();
-            resultModel.sample_number = et_Sample_Num.getText().toString();
-            resultModel.sample_type = tv_check_type.getText().toString();
-            resultModel.project_name = "表面洁净度";
+        resultModel.sample_name = tv_check_sample.getText().toString();
+        resultModel.sample_number = et_Sample_Num.getText().toString();
+        resultModel.sample_type = tv_check_type.getText().toString();
+        resultModel.project_name = "表面洁净度";
 //            resultModel.sample_unit = sampleUnit_model.getName();
-            resultModel.xian = etJcx.getText().toString();
-            resultModel.lin = etJcx.getText().toString();
-            resultModel.check_value = etConcentrate.getText().toString();
-            resultModel.style_long = etConcentrate.getText().toString();
-            resultModel.check_result = result;
-            resultModel.time = time;
-            resultModel.concentrateUnit = "RLU";
-            resultModel.sample_unit = taskModel.getCompanyName();
-            resultModel.shiji = tv_check_b.getText().toString();
-            resultModel.companyCode = et_companyCode.getText().toString();
+        resultModel.xian = etJcx.getText().toString() + unit;
+        resultModel.lin = etJcx.getText().toString() + unit;
+        resultModel.check_value = etConcentrate.getText().toString() + unit;
+        resultModel.style_long = etConcentrate.getText().toString();
+        resultModel.check_result = result;
+        resultModel.time = time;
+        resultModel.concentrateUnit = unit;
+        resultModel.sample_unit = taskModel.getCompanyName();
+        resultModel.shiji = tv_check_b.getText().toString();
+        resultModel.companyCode = et_companyCode.getText().toString();
 //            resultModel.sample_id = et_Sample_Num.getText().toString();
 //            resultModel.upload_status = 1;
-            upload_data.setEnabled(true);
-            //保存检测结果
+        upload_data.setEnabled(true);
+        //保存检测结果
 //            db.save(resultModel);
-            //保存新表
-            saveNewTable(resultModel);
-            // 添加检测项目
+        //保存新表
+        saveNewTable(resultModel);
+        // 添加检测项目
 //            save_projectname_to_LineModel();
 
 

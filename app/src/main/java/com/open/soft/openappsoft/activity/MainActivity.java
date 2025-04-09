@@ -146,15 +146,16 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 //            InterfaceURL.companyName = name;//赋值
 //        }
 
-        TextView tv_homeLocation = findViewById(R.id.tv_homeLocation);
-        String verName = GT.ApplicationUtils.getVerName(this);
-        tv_homeLocation.setText(InterfaceURL.companyName + " v" + verName);
+//        TextView tv_homeLocation = findViewById(R.id.tv_homeLocation);
+//        String verName = GT.ApplicationUtils.getVerName(this);
+////        tv_homeLocation.setText(InterfaceURL.companyName + " v" + verName);
+//        tv_homeLocation.setText("v" + verName);
 
         //动态标题
-        TextView tv_title = findViewById(R.id.tv_title);
+//        TextView tv_title = findViewById(R.id.tv_title);
 //        String title = InterfaceURL.oneModule;
 //        if (title.isEmpty() || title.equals("0")) {
-        tv_title.setText(InterfaceURL.oneModule);
+//        tv_title.setText(InterfaceURL.oneModule);
 //        } else {
 //            tv_title.setText(title);
 //        }
@@ -214,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     }
 
     public static GT.GT_SharedPreferences gt_sp;
-
+    private TextView tv_title;
 
     // 百度定位
     private LocationReceiver locationReceiver;
@@ -268,6 +269,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
         mac_url = getMacDefault(this) + "";
         mac_url = handleMacUrl(mac_url);
+
+        tv_title.setText(getString(R.string.app_name) + " V" + GT.ApplicationUtils.getVerName(this));
 
         gt_sp = new GT.GT_SharedPreferences(this, getClass().getName(), true);
         qrCode = new QRCode(this);
@@ -330,7 +333,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         com.open.soft.openappsoft.multifuction.util.Global.ATP_K = SharedPreferencesUtil.getDefaultSharedPreferences(this).getFloat("atp_k", com.open.soft.openappsoft.multifuction.util.Global.ATP_K);
         com.open.soft.openappsoft.multifuction.util.Global.ATP_B = SharedPreferencesUtil.getDefaultSharedPreferences(this).getFloat("atp_b", com.open.soft.openappsoft.multifuction.util.Global.ATP_B);
         /*//动态标题
-        TextView tv_title = findViewById(R.id.tv_title);
+
 
         String title = gt_sp.query("TitleSet").toString();
         if(title.isEmpty() || title.equals("0")){
@@ -417,7 +420,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         intent.putExtra("isFile", true);
         intent.putExtra("url", FILE_NAME);
         intent.putExtra("fileType", "pdf");
-        intent.putExtra("title", "操作说明");
+        intent.putExtra("title", "厂家信息");
         context.startActivity(intent);
     }
 
@@ -457,6 +460,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
      * 初始化界面
      */
     private void initView() {
+        tv_title = findViewById(R.id.tv_title);
         btn_open_2 = findViewById(R.id.btn_open_2);
         btn_open_3 = findViewById(R.id.btn_open_3);
         btn_open_4 = findViewById(R.id.btn_open_4);
@@ -583,6 +587,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 } else {
                     Global.samplingMode_value = "input";
                 }
+//                String pdf_name = Global.companyCode_value + "_" + Global.deviceType_value + "_" + Global.samplingMode_value + ".pdf";
                 String pdf_name = Global.companyCode_value + "_" + Global.deviceType_value + "_" + Global.samplingMode_value + ".pdf";
 
 //                String appSavePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
@@ -1248,6 +1253,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     /**
      * 显示定位结果
+     *
      * @param addr
      */
     private void showLocation(String addr) {

@@ -1,9 +1,11 @@
 package com.open.soft.openappsoft.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -51,6 +53,8 @@ public class SettingActivity extends Activity implements View.OnClickListener {
     private Button btn_open_3;
     private Button btn_open_4;
     private Button btn_open_5;
+    private Button btn_pdf;
+    private Button btn_video;
     private Button btn_sample_type_main, btn_sample_type_child, btn_bcheck_ori, btn_check_ori, btn_sample;
     private TextView tv_mac_url;
     private TextView tv_title;
@@ -78,6 +82,8 @@ public class SettingActivity extends Activity implements View.OnClickListener {
         btn_open_3 = (Button) findViewById(R.id.btn_open_3);
         btn_open_4 = (Button) findViewById(R.id.btn_open_4);
         btn_open_5 = (Button) findViewById(R.id.btn_open_5);
+        btn_pdf = (Button) findViewById(R.id.btn_pdf);
+        btn_video = (Button) findViewById(R.id.btn_video);
         btn_sample_type_main = (Button) findViewById(R.id.btn_sample_type_main);
         btn_sample_type_child = (Button) findViewById(R.id.btn_sample_type_child);
         btn_bcheck_ori = (Button) findViewById(R.id.btn_bcheck_ori);
@@ -100,6 +106,8 @@ public class SettingActivity extends Activity implements View.OnClickListener {
         btn_sample_type_child.setOnClickListener(this);
         tv_title.setOnClickListener(this);
         btn_sample.setOnClickListener(this);
+        btn_pdf.setOnClickListener(this);
+        btn_video.setOnClickListener(this);
 
     }
 
@@ -192,7 +200,23 @@ public class SettingActivity extends Activity implements View.OnClickListener {
         } else if (v.getId() == R.id.btn_sample) {
             Intent intent = new Intent(this, SampleNameActivity.class);
             startActivity(intent);
+        } else if (v.getId() == R.id.btn_video) {
+
+        } else if (v.getId() == R.id.btn_pdf) {
+            String appSavePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
+            String pdf_name = "2.pdf";
+            Global.URI_MULT = appSavePath + pdf_name;
+            openPDFInNative(this, Global.URI_MULT);
         }
+    }
+
+    public static void openPDFInNative(Context context, String FILE_NAME) {
+        Intent intent = new Intent(context, FileActivity.class);
+        intent.putExtra("isFile", true);
+        intent.putExtra("url", FILE_NAME);
+        intent.putExtra("fileType", "pdf");
+        intent.putExtra("title", "厂家信息");
+        context.startActivity(intent);
     }
 
     private void onSettingPT() {
