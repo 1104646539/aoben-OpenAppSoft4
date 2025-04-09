@@ -270,7 +270,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         mac_url = getMacDefault(this) + "";
         mac_url = handleMacUrl(mac_url);
 
-        tv_title.setText(getString(R.string.app_name) + " V" + GT.ApplicationUtils.getVerName(this));
+        tv_title.setText(InterfaceURL.oneModule + " V" + GT.ApplicationUtils.getVerName(this));
 
         gt_sp = new GT.GT_SharedPreferences(this, getClass().getName(), true);
         qrCode = new QRCode(this);

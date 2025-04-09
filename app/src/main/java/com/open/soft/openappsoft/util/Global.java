@@ -52,5 +52,6 @@ public class Global {
      */
     public static final int SERIAL_PORT_STOPBITS = 1;
 
+    public static final byte[] getValueInstruction = "GetATPData".getBytes();
 
 }

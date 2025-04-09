@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:baselineAligned="false"
+    android:background="@color/colorPrimary"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="horizontal">       
+
+    <RelativeLayout 
+        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        >
+        <TextView 
+            android:id="@+id/activity_systemsetting_tv_RecLabel"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="接收到的数据"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            />
+        <TextView 
+            android:id="@+id/activity_systemsetting_tv_RecData"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:singleLine="false"
+            android:scrollbars="vertical"
+            android:layout_below="@id/activity_systemsetting_tv_RecLabel"
+            android:layout_marginTop="5dp"
+			android:layout_marginBottom="5dp"
+            android:background="@color/white"
+            android:textSize="20sp"
+            />
+        
+        <TextView 
+            android:id="@+id/activity_systemsetting_tv_SendLabel"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="已发送的数据"
+            android:layout_below="@id/activity_systemsetting_tv_RecData"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            />
+        <TextView 
+            android:id="@+id/activity_systemsetting_tv_SendData"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:singleLine="false"
+            android:scrollbars="vertical"
+            android:layout_below="@id/activity_systemsetting_tv_SendLabel"
+            android:layout_marginTop="5dp"
+			android:layout_marginBottom="5dp"
+            android:background="@color/white"
+            android:textSize="20sp"
+            />
+                      
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_margin="10dp"
+        android:layout_marginLeft="5dp"
+        >
+        
+		<Button 
+            android:id="@+id/activity_systemsetting_btn_Zero"
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="150dp" 
+            android:layout_marginBottom="30dp"        
+            android:text="调  零"
+            android:background="@drawable/check_selector"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp"
+            />
+     
+		<Button 
+            android:id="@+id/activity_systemsetting_btn_Test"
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            android:text="检  测"
+            android:layout_marginTop="150dp"   
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="30dp"  
+            android:textColor="#FFFFFF"
+            android:background="@drawable/check_selector"
+            android:textSize="40sp"
+            />
+        
+        <Button 
+            android:id="@+id/activity_systemsetting_btn_ClearRecData"
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            android:text="清空接收"
+            android:layout_marginTop="30dp" 
+            android:layout_below="@id/activity_systemsetting_btn_Test"
+            android:layout_alignLeft="@id/activity_systemsetting_btn_Zero"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/check_selector"
+            android:textSize="40sp"
+            />
+
+        
+        <Button 
+            android:id="@+id/activity_systemsetting_btn_ClearSend"
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            android:text="清空发送"
+            android:layout_marginTop="30dp" 
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/activity_systemsetting_btn_Test"
+            android:background="@drawable/check_selector"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp"
+            />
+     
+    </RelativeLayout>
+    
+</LinearLayout>

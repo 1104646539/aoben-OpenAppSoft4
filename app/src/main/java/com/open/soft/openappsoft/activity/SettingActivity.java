@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -201,7 +202,10 @@ public class SettingActivity extends Activity implements View.OnClickListener {
             Intent intent = new Intent(this, SampleNameActivity.class);
             startActivity(intent);
         } else if (v.getId() == R.id.btn_video) {
-
+            Uri uri = Uri.parse("android.resource://"+getPackageName()+"/raw/test.mp4");
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(uri, "video/mp4");
+            startActivity(intent);
         } else if (v.getId() == R.id.btn_pdf) {
             String appSavePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
             String pdf_name = "2.pdf";

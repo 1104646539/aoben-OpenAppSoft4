@@ -34,6 +34,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".atp.SystemSetting"
+            android:exported="false" />
+        <activity
             android:name=".atp.AtpArgActivity"
             android:exported="false" />
         <activity

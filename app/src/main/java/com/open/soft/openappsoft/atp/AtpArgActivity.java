@@ -2,6 +2,7 @@ package com.open.soft.openappsoft.atp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -75,5 +76,10 @@ public class AtpArgActivity extends AppCompatActivity implements View.OnClickLis
         sharedPreferences.edit().putFloat("atp_b", Global.ATP_B).commit();
         APPUtils.showToast(this, "保存成功");
         finish();
+    }
+
+    public void ClickTL(View view) {
+        Intent intent = new Intent(this,SystemSetting.class);
+        startActivity(intent);
     }
 }
