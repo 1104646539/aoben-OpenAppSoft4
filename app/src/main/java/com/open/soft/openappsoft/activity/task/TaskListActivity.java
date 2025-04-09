@@ -75,8 +75,7 @@ public class TaskListActivity extends AppCompatActivity implements View.OnClickL
         if (source == TestTaskActivity.source_atp) {
             temp = hibernate.flashback("id").where("jcx != ?", "").queryAll(TaskModel.class);
         } else {
-            temp = hibernate.flashback("id").queryAll(TaskModel.class);
-
+            temp = hibernate.flashback("id").where("jcx = ?","").queryAll(TaskModel.class);
         }
         taskList.clear();
         if (temp != null) {

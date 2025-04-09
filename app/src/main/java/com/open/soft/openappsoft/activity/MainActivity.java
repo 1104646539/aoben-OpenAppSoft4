@@ -929,12 +929,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 String k = sheet.getCell(8, i).getContents();
                 String b = sheet.getCell(9, i).getContents();
                 String bc = sheet.getCell(10, i).getContents();
+                String ljz = sheet.getCell(11, i).getContents();
                 Timber.i("projectName=" + projectName + " func=" + func);
                 if (!TextUtils.isEmpty(func) && !TextUtils.isEmpty(projectName)) {
                     if (func.contains("比色法") || func.contains("消线法")) {
                         lineModels.add(new LineModel(func.contains("消线法") ? 2 : 3, projectName, cardModel.name, cardModel.ScanStart,
                                 cardModel.ScanEnd,
-                                cardModel.CTPeakWidth, cardModel.CTPeakDistance, xlz, xlz, unit));
+                                cardModel.CTPeakWidth, cardModel.CTPeakDistance, xlz, ljz, unit));
                     } else if (func.contains("分光光度") || func.contains("酶抑制法")) {
                         float K = Float.valueOf(k);
                         float B = Float.valueOf(b);

@@ -1000,7 +1000,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
     }
 
     private void loadTaskModel() {
-        List<TaskModel> temp = hibernate.queryAll(TaskModel.class);
+        List<TaskModel> temp = hibernate.where("jcx = ?","").queryAll(TaskModel.class);
         taskModels.clear();
         if (temp != null) {
             taskModels.addAll(temp);
