@@ -22,6 +22,7 @@ import com.open.soft.openappsoft.util.CustomFormatTree;
 import com.open.soft.openappsoft.util.InterfaceURL;
 import com.tencent.smtt.export.external.TbsCoreSettings;
 import com.tencent.smtt.sdk.QbSdk;
+import com.tencent.smtt.sdk.TbsListener;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,7 +51,7 @@ public class App extends Application {
         //这个是打开日志
         BaseOkHttp.TIME_OUT_DURATION = 10;
         BaseOkHttp.DEBUGMODE = true;
-        Timber.plant(new CustomFormatTree(new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/log.txt")));
+        Timber.plant(new CustomFormatTree(new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/log.txt")));
 
         defaultSP = SharedPreferencesUtil.getDefaultSharedPreferences(this);
         /***
@@ -77,7 +78,7 @@ public class App extends Application {
         map.put(TbsCoreSettings.TBS_SETTINGS_USE_SPEEDY_CLASSLOADER, true);
         map.put(TbsCoreSettings.TBS_SETTINGS_USE_DEXLOADER_SERVICE, true);
         QbSdk.initTbsSettings(map);
-
+        QbSdk.setDownloadWithoutWifi(true);
         QbSdk.initX5Environment(this, new QbSdk.PreInitCallback() {
             @Override
             public void onCoreInitFinished() {
@@ -89,6 +90,27 @@ public class App extends Application {
                 Log.d(TAG, " onCreate initX5Environment onViewInitFinished b=" + b);
             }
         });
+        QbSdk.setTbsListener(new TbsListener() {
+            @Override
+            public void onDownloadFinish(int i) {
+                //tbs内核下载完成回调
+                Log.d(TAG, " onCreate initX5Environment onDownloadFinish i=" + i);
 
+            }
+
+            @Override
+            public void onInstallFinish(int i) {
+                //内核安装完成回调，
+                Log.d(TAG, " onCreate initX5Environment onInstallFinish i=" + i);
+
+            }
+
+            @Override
+            public void onDownloadProgress(int i) {
+                //下载进度监听
+                Log.d(TAG, " onCreate initX5Environment onDownloadProgress i=" + i);
+
+            }
+        });
     }
 }

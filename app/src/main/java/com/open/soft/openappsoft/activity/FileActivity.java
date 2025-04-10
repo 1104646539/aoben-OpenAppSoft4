@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.example.utils.http.Global;
+import com.github.barteksc.pdfviewer.PDFView;
 import com.open.soft.openappsoft.R;
 import com.open.soft.openappsoft.util.InterfaceURL;
 import com.tencent.smtt.sdk.TbsReaderView;
@@ -23,14 +24,15 @@ public class FileActivity extends Activity implements TbsReaderView.ReaderCallba
     TextView tv_title;
     boolean isFile = false;
     InterfaceURL interfaceURL = new InterfaceURL();
-
+    PDFView pdf_view;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file);
 
-        String pdf_name = Global.companyCode_value +"_"+ Global.deviceType_value + "_" + Global.samplingMode_value + ".pdf";
+        initView();
+        String pdf_name = Global.companyCode_value + "_" + Global.deviceType_value + "_" + Global.samplingMode_value + ".pdf";
 
         String appSavePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
         Global.URI_MULT = appSavePath + "/" + pdf_name;
@@ -42,25 +44,30 @@ public class FileActivity extends Activity implements TbsReaderView.ReaderCallba
         if (title != null) {
             tv_title.setText(title);
         }
-        tbsReaderView = new TbsReaderView(this, this);
-        LinearLayout rootRl = findViewById(R.id.ll);
-        rootRl.addView(tbsReaderView, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-        Bundle bundle = new Bundle();
-        bundle.putString("filePath", url);
-        bundle.putString("tempPath", Environment.getExternalStorageDirectory().getPath());
-        boolean result = tbsReaderView.preOpen(fileType, false);
-        Log.d(TAG, "onCreate result=" + result);
-        if (result) {
-            tbsReaderView.openFile(bundle);
-        }
+        pdf_view.fromAsset("test.pdf").load();
+//        tbsReaderView = new TbsReaderView(this, this);
+//        LinearLayout rootRl = findViewById(R.id.ll);
+//        rootRl.addView(tbsReaderView, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+//        Bundle bundle = new Bundle();
+//        bundle.putString("filePath", url);
+//        bundle.putString("tempPath", Environment.getExternalStorageDirectory().getPath());
+//        boolean result = tbsReaderView.preOpen(fileType, false);
+//        Log.d(TAG, "onCreate result=" + result);
+//        if (result) {
+//            tbsReaderView.openFile(bundle);
+//        }
 
 //        loadData();
+    }
+
+    private void initView() {
+        pdf_view = findViewById(R.id.pdf_view);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        tbsReaderView.onStop();
+//        tbsReaderView.onStop();
     }
 
     @Override

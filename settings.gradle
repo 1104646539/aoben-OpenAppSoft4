@@ -1,2 +1,3 @@
 include ':app', ':MPChartLib', ':qrcodescan', ':utils', ':xutils'
 include ':basejson'
+include ':android-pdf-viewer'

@@ -202,13 +202,12 @@ public class SettingActivity extends Activity implements View.OnClickListener {
             Intent intent = new Intent(this, SampleNameActivity.class);
             startActivity(intent);
         } else if (v.getId() == R.id.btn_video) {
-            Uri uri = Uri.parse("android.resource://"+getPackageName()+"/raw/test.mp4");
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(uri, "video/mp4");
+            Intent intent = new Intent(this, VideoActivity.class);
+            intent.putExtra("title", "操作视频");
             startActivity(intent);
         } else if (v.getId() == R.id.btn_pdf) {
             String appSavePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
-            String pdf_name = "2.pdf";
+            String pdf_name = "test2.pdf";
             Global.URI_MULT = appSavePath + pdf_name;
             openPDFInNative(this, Global.URI_MULT);
         }
