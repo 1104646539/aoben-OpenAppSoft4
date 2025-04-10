@@ -24,6 +24,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.utils.http.ToolUtil;
 import com.gsls.gt.GT;
 import com.kongzue.dialogx.dialogs.MessageDialog;
 import com.lidroid.xutils.DbUtils;
@@ -224,7 +225,7 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
             }
         });
 
-        ll_select_all.setOnClickListener((v)->{
+        ll_select_all.setOnClickListener((v) -> {
             selectedAll(!isChecked);
         });
     }
@@ -348,10 +349,10 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
             e.printStackTrace();
         }
         //检测结果
-            arrayString = new String[]{"全部", "合格", "不合格", "阳性", "阴性", "无效"};
-            stringArrayAdapter = new ArrayAdapter<>(SQL_Activity.this, R.layout.sp_style, R.id.tv_sp_size, arrayString);
-            sp_detectionResult.setAdapter(stringArrayAdapter);
-            sp_detectionResult.setOnItemSelectedListener(this);
+        arrayString = new String[]{"全部", "合格", "不合格", "阳性", "阴性", "无效"};
+        stringArrayAdapter = new ArrayAdapter<>(SQL_Activity.this, R.layout.sp_style, R.id.tv_sp_size, arrayString);
+        sp_detectionResult.setAdapter(stringArrayAdapter);
+        sp_detectionResult.setOnItemSelectedListener(this);
 
         //样品类型
         try {
@@ -399,7 +400,7 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
         }
     }
 
-    @GT.Annotations.GT_Click({R.id.btn_clear, R.id.btn_delete, R.id.btn_print, R.id.btn_uploading, R.id.btn_export, R.id.btn_return, R.id.btn_fggb, R.id.btn_jtj, R.id.cb_activity_sql,  R.id.ll_select_all})
+    @GT.Annotations.GT_Click({R.id.btn_clear, R.id.btn_delete, R.id.btn_print, R.id.btn_uploading, R.id.btn_export, R.id.btn_return, R.id.btn_fggb, R.id.btn_jtj, R.id.cb_activity_sql, R.id.ll_select_all})
     public void clickView(View view) {
         switch (view.getId()) {
             case R.id.ll_select_all:
@@ -1347,7 +1348,8 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
     // 导出
     private final static String EXPORT_DIR = "/检测记录/";
     //    private final static String[] EXCEL_HEADER = {"经营户/负责人", "商品名", "检测项目名", "检测值", "检测单位名称", "检测结果"};
-    private final static String[] EXCEL_HEADER = {"数据类型", "检测流水号", "样品编号", "检测时间", "通道", "样品名称", "样品类型", "检测限", "临界值", "样品浓度", "T/C值", "检测项目", "检测结果", "受检单位", "检测人员", "检测单位", "重量", "商品来源", "上传状态"};
+//    private final static String[] EXCEL_HEADER = {"数据类型", "检测流水号", "样品编号", "检测时间", "通道", "样品名称", "样品类型", "检测限", "临界值", "样品浓度", "T/C值", "检测项目", "检测结果", "受检单位", "检测人员", "检测单位", "重量", "商品来源", "上传状态"};
+    private final static String[] EXCEL_HEADER = {"数据类型", "检测流水号", "样品编号", "检测时间", "通道", "样品名称", "样品类型", "检测限", "临界值", "T/C值", "检测项目", "检测结果", "受检单位", "检测人员", "检测单位", "商品来源", "上传状态"};
     private List<DetectionResultBean> list_exportdata;
     private int export_status = 0;
 
@@ -1429,69 +1431,69 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
             //set column width
             for (int i = 0; i < EXCEL_HEADER.length; i++) {
                 String header = EXCEL_HEADER[i];
-                sheet.setColumnView(i, header.getBytes().length + 2);
+                sheet.setColumnView(i, header.getBytes().length + 10);
             }
             //set row height
-            sheet.setRowView(0, 600);
-
-            //write header
+//            sheet.setRowView(0, 600);
+//
+//            //write header
             WritableFont defaultFont = new WritableFont(WritableFont.ARIAL, 11);
             WritableCellFormat defaultCellFormat = new WritableCellFormat(defaultFont);
             defaultCellFormat.setAlignment(Alignment.CENTRE);
             defaultCellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
-
+//
             WritableFont defaultHeaderFont = new WritableFont(WritableFont.ARIAL, 11, WritableFont.NO_BOLD, false, UnderlineStyle.NO_UNDERLINE, Colour.RED);
-            WritableFont mainHeaderFont = new WritableFont(WritableFont.ARIAL, 14, WritableFont.BOLD);
-            WritableCellFormat mainHeaderCellFormat = new WritableCellFormat(mainHeaderFont);
-            mainHeaderCellFormat.setAlignment(Alignment.CENTRE);
-            mainHeaderCellFormat.setVerticalAlignment(VerticalAlignment.CENTRE);
-            mainHeaderCellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
-            sheet.addCell(new Label(0, 0, "检测信息导入", mainHeaderCellFormat));
-            sheet.mergeCells(0, 0, 18, 0);
-
-
+//            WritableFont mainHeaderFont = new WritableFont(WritableFont.ARIAL, 14, WritableFont.BOLD);
+//            WritableCellFormat mainHeaderCellFormat = new WritableCellFormat(mainHeaderFont);
+//            mainHeaderCellFormat.setAlignment(Alignment.CENTRE);
+//            mainHeaderCellFormat.setVerticalAlignment(VerticalAlignment.CENTRE);
+//            mainHeaderCellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
+//            sheet.addCell(new Label(0, 0, "检测信息导入", mainHeaderCellFormat));
+//            sheet.mergeCells(0, 0, 18, 0);
+//
+//
             WritableCellFormat headerCellFormat = new WritableCellFormat(defaultHeaderFont);
             headerCellFormat.setAlignment(Alignment.CENTRE);
-            headerCellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
-            sheet.addCell(new Label(0, 1, "检测时间", headerCellFormat));
-            sheet.addCell(new Label(1, 1, com.open.soft.openappsoft.multifuction.util.Global.getCurrentDate(), defaultCellFormat));
-            sheet.addCell(new Label(2, 1, "", defaultCellFormat));
-            sheet.mergeCells(2, 1, 18, 1);
+//            headerCellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
+//            sheet.addCell(new Label(0, 1, "检测时间", headerCellFormat));
+//            sheet.addCell(new Label(1, 1, com.open.soft.openappsoft.multifuction.util.Global.getCurrentDate(), defaultCellFormat));
+//            sheet.addCell(new Label(2, 1, "", defaultCellFormat));
+//            sheet.mergeCells(2, 1, 18, 1);
 
             WritableFont subMainHeaderFont = new WritableFont(WritableFont.ARIAL, 11, WritableFont.BOLD);
             WritableCellFormat subMainHeaderCellFormat = new WritableCellFormat(subMainHeaderFont);
             subMainHeaderCellFormat.setAlignment(Alignment.CENTRE);
             subMainHeaderCellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
-            sheet.addCell(new Label(0, 2, "经营户信息详情", subMainHeaderCellFormat));
-            sheet.mergeCells(0, 2, 18, 2);
+            sheet.addCell(new Label(0, 0, "食品安全检测数据", subMainHeaderCellFormat));
+            sheet.mergeCells(0, 0, 18, 0);
 
             for (int i = 0; i < EXCEL_HEADER.length; i++) {
-                sheet.addCell(new Label(i, 3, EXCEL_HEADER[i], headerCellFormat));
+                sheet.addCell(new Label(i, 1, EXCEL_HEADER[i], headerCellFormat));
             }
 
             if (list_exportdata != null) {
                 for (int i = 0; i < list_exportdata.size(); i++) {
                     DetectionResultBean drb = list_exportdata.get(i);
-                    int lineIdx = 4 + i;
+                    int lineIdx = 2 + i;
                     sheet.addCell(new Label(0, lineIdx, drb.getSQLType(), defaultCellFormat)); //数据类型
                     sheet.addCell(new Label(1, lineIdx, index_list[i] + "", defaultCellFormat)); //检测流水号
                     sheet.addCell(new Label(2, lineIdx, drb.getNumberSamples(), defaultCellFormat)); //样品编号
-                    sheet.addCell(new Label(3, lineIdx, drb.getDetectionTime() + "", defaultCellFormat)); //检测时间
+                    sheet.addCell(new Label(3, lineIdx, ToolUtil.long2String(drb.getDetectionTime(), ToolUtil.DateTime1), defaultCellFormat)); //检测时间
                     sheet.addCell(new Label(4, lineIdx, drb.getAisle(), defaultCellFormat)); //通道
                     sheet.addCell(new Label(5, lineIdx, drb.getSampleName(), defaultCellFormat)); //样品名称
                     sheet.addCell(new Label(6, lineIdx, drb.getSpecimenType(), defaultCellFormat)); //样品类型
                     sheet.addCell(new Label(7, lineIdx, drb.getLimitStandard(), defaultCellFormat)); //检测限
                     sheet.addCell(new Label(8, lineIdx, drb.getCriticalValue(), defaultCellFormat)); //临界值
-                    sheet.addCell(new Label(9, lineIdx, drb.getSampleConcentration(), defaultCellFormat)); //样品浓度
-                    sheet.addCell(new Label(10, lineIdx, drb.getDetectionValue(), defaultCellFormat)); //抑制率/检测值
-                    sheet.addCell(new Label(11, lineIdx, drb.getTestItem(), defaultCellFormat)); //检测项目
-                    sheet.addCell(new Label(12, lineIdx, drb.getDetectionResult(), defaultCellFormat)); //检测结果
-                    sheet.addCell(new Label(13, lineIdx, drb.getUnitsUnderInspection(), defaultCellFormat)); //受检单位
-                    sheet.addCell(new Label(14, lineIdx, drb.getInspector(), defaultCellFormat)); //检测人员
-                    sheet.addCell(new Label(15, lineIdx, drb.getDetectionCompany(), defaultCellFormat)); //检测单位
-                    sheet.addCell(new Label(16, lineIdx, drb.getInspector(), defaultCellFormat)); //重量
-                    sheet.addCell(new Label(17, lineIdx, drb.getCommodityPlaceOrigin(), defaultCellFormat)); //商品来源
-                    sheet.addCell(new Label(18, lineIdx, drb.getUploadStatus(), defaultCellFormat)); //上传状态
+//                    sheet.addCell(new Label(9, lineIdx, drb.getSampleConcentration(), defaultCellFormat)); //样品浓度
+                    sheet.addCell(new Label(9, lineIdx, drb.getDetectionValue(), defaultCellFormat)); //抑制率/检测值
+                    sheet.addCell(new Label(10, lineIdx, drb.getTestItem(), defaultCellFormat)); //检测项目
+                    sheet.addCell(new Label(11, lineIdx, drb.getDetectionResult(), defaultCellFormat)); //检测结果
+                    sheet.addCell(new Label(12, lineIdx, drb.getUnitsUnderInspection(), defaultCellFormat)); //受检单位
+                    sheet.addCell(new Label(13, lineIdx, drb.getInspector(), defaultCellFormat)); //检测人员
+                    sheet.addCell(new Label(14, lineIdx, drb.getDetectionCompany(), defaultCellFormat)); //检测单位
+//                    sheet.addCell(new Label(15, lineIdx, drb.getInspector(), defaultCellFormat)); //重量
+                    sheet.addCell(new Label(15, lineIdx, drb.getCommodityPlaceOrigin(), defaultCellFormat)); //商品来源
+                    sheet.addCell(new Label(16, lineIdx, drb.getUploadStatus(), defaultCellFormat)); //上传状态
                     //sheet.addCell(new Label(11, i + 1, ToolUtils.long2String(result.testTime, "yyyy-MM-dd HH:mm:ss")));
                 }
             }

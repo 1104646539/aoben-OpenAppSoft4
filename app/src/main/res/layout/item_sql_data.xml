@@ -126,6 +126,7 @@
             android:id="@+id/tv_sampleConcentration"
             style="@style/tvItemTitle"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_weight="1"
             android:singleLine="true" />
 

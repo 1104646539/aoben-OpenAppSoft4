@@ -376,6 +376,7 @@
                     style="@style/tvItemTitle"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:visibility="gone"
                     android:text="样品浓度" />
 
                 <TextView
