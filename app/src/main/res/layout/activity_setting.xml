@@ -173,7 +173,7 @@
                     android:layout_height="100dp"
                     android:layout_weight="1"
                     android:background="@drawable/btn_default1"
-                    android:text="操作视频"
+                    android:text="操作指南"
                     android:textColor="#ffffff"
                     android:textSize="36sp"
                     android:visibility="visible" />

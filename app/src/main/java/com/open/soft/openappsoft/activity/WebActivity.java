@@ -52,7 +52,7 @@ public class WebActivity extends Activity implements TbsReaderView.ReaderCallbac
         progressDialog.setMessage("正在加载");
         if (url != null) {
             progressDialog.show();
-            DownloadUtil.get().download(url, getCacheDir().getAbsolutePath(), "test.pdf", new DownloadUtil.OnDownloadListener() {
+            DownloadUtil.get().download(url, getCacheDir().getAbsolutePath(), "course.pdf", new DownloadUtil.OnDownloadListener() {
                 @Override
                 public void onDownloadSuccess(File file) {
                     Log.d(TAG, "onDownloadSuccess file=" + file.getAbsolutePath());

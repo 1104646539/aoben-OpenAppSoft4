@@ -202,23 +202,20 @@ public class SettingActivity extends Activity implements View.OnClickListener {
             Intent intent = new Intent(this, SampleNameActivity.class);
             startActivity(intent);
         } else if (v.getId() == R.id.btn_video) {
-            Intent intent = new Intent(this, VideoActivity.class);
-            intent.putExtra("title", "操作视频");
-            startActivity(intent);
+            String pdf_name = "course.pdf";
+            openPDFInNative(this,"操作指南", pdf_name);
         } else if (v.getId() == R.id.btn_pdf) {
-            String appSavePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
-            String pdf_name = "test2.pdf";
-            Global.URI_MULT = appSavePath + pdf_name;
-            openPDFInNative(this, Global.URI_MULT);
+            String pdf_name = "manufacturers.pdf";
+            openPDFInNative(this,"厂家信息", pdf_name);
         }
     }
 
-    public static void openPDFInNative(Context context, String FILE_NAME) {
+    public static void openPDFInNative(Context context, String title,String FILE_NAME) {
         Intent intent = new Intent(context, FileActivity.class);
-        intent.putExtra("isFile", true);
+//        intent.putExtra("isFile", true);
         intent.putExtra("url", FILE_NAME);
-        intent.putExtra("fileType", "pdf");
-        intent.putExtra("title", "厂家信息");
+//        intent.putExtra("fileType", "pdf");
+        intent.putExtra("title", title);
         context.startActivity(intent);
     }
 

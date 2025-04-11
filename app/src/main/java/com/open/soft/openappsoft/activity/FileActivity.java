@@ -3,8 +3,6 @@ package com.open.soft.openappsoft.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -37,14 +35,14 @@ public class FileActivity extends Activity implements TbsReaderView.ReaderCallba
         String appSavePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
         Global.URI_MULT = appSavePath + "/" + pdf_name;
         tv_title = findViewById(R.id.tv_title);
-        isFile = getIntent().getBooleanExtra("isFile", false);
+//        isFile = getIntent().getBooleanExtra("isFile", false);
         url = getIntent().getStringExtra("url");
         title = getIntent().getStringExtra("title");
-        fileType = getIntent().getStringExtra("fileType");
+//        fileType = getIntent().getStringExtra("fileType");
         if (title != null) {
             tv_title.setText(title);
         }
-        pdf_view.fromAsset("test.pdf").load();
+        pdf_view.fromAsset(url).load();
 //        tbsReaderView = new TbsReaderView(this, this);
 //        LinearLayout rootRl = findViewById(R.id.ll);
 //        rootRl.addView(tbsReaderView, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
