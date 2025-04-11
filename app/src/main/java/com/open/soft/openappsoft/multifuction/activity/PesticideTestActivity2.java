@@ -1301,7 +1301,10 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
             DetectionResultBean detectionResultBean = checkResultTranDetectionBean(selectedList.get(i));
             hibernate.save(detectionResultBean);
             detectionResultBean.setID(hibernate.getStatus());
-            upload(detectionResultBean);
+            if (!com.example.utils.http.Global.isLocalLogin) {
+                upload(detectionResultBean);
+            }
+
             Timber.i("插入 " + hibernate.isStatus());
         }
     }

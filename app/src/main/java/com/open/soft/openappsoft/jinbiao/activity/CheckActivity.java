@@ -1000,7 +1000,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
     }
 
     private void loadTaskModel() {
-        List<TaskModel> temp = hibernate.where("jcx = ?","").queryAll(TaskModel.class);
+        List<TaskModel> temp = hibernate.where("jcx = ?", "").queryAll(TaskModel.class);
         taskModels.clear();
         if (temp != null) {
             taskModels.addAll(temp);
@@ -1509,7 +1509,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         detectionResultBean.setSpecimenTypeCode(taskModel.getSampleTypeId());//样品类型
         detectionResultBean.setSpecimenTypeChild(taskModel.getSampleSubType());//样品类型
         detectionResultBean.setSpecimenTypeChildCode(taskModel.getSampleSubTypeId());//样品类型
-        detectionResultBean.setLimitStandard(resultModel.xian );//检测限
+        detectionResultBean.setLimitStandard(resultModel.xian);//检测限
 //        detectionResultBean.setLimitStandard(resultModel.xian + resultModel.concentrateUnit);//检测限
 //        detectionResultBean.setLimitStandard(limit_standard);//检测限
         detectionResultBean.setCriticalValue(resultModel.lin);//临界值
@@ -1662,12 +1662,12 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             return;
         }
 
-        if (tv_check_persion.getText() == null || tv_check_persion.getText().toString().isEmpty()) {
-            APPUtils.showToast(CheckActivity.this, "请先选择检验员");
-            tv_scanTime.setText("请先选择检验员");
-            isTest = false;
-            return;
-        }
+//        if (tv_check_persion.getText() == null || tv_check_persion.getText().toString().isEmpty()) {
+//            APPUtils.showToast(CheckActivity.this, "请先选择检验员");
+//            tv_scanTime.setText("请先选择检验员");
+//            isTest = false;
+//            return;
+//        }
 
         if (tv_check_sample.getText() == null || tv_check_sample.getText().toString().isEmpty()) {
             APPUtils.showToast(CheckActivity.this, "请先选样品名称");
@@ -2032,10 +2032,10 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             e.printStackTrace();
         }
         saveCheck_ResultData(etResult.getText().toString());
-
-        // 数据上传
-        uploadResult();
-
+        if (!com.example.utils.http.Global.isLocalLogin) {
+            // 数据上传
+            uploadResult();
+        }
         handler.sendEmptyMessage(100);//关闭定时器
     }
 
@@ -2755,7 +2755,9 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 
                         // 保存新表
                         saveCheck_ResultData(etResult.getText().toString());
-                        uploadResult();
+                        if (!com.example.utils.http.Global.isLocalLogin) {
+                            uploadResult();
+                        }
                         handler.sendEmptyMessage(100);//关闭定时器
                     } catch (ClassCastException e1) {
                         APPUtils.showToast(CheckActivity.this, "接收数据错误");

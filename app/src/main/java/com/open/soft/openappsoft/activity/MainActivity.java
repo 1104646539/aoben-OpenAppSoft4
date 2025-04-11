@@ -258,8 +258,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         // 百度定位
         locationService = new LocationService(getApplicationContext());
         locationService.registerListener(mListener);
-        locationService.start();
-        showLocation("");
+        if (Global.isLocalLogin) {
+            showLocation("未定位");
+        } else {
+            locationService.start();
+            showLocation("");
+        }
 
         // 注册广播(百度)
         locationReceiver = new LocationReceiver();

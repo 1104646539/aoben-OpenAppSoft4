@@ -118,7 +118,8 @@ public class UploadThread2 extends Thread {
             result = 1;
         }
         UploadBean uploadBean = new UploadBean();
-        uploadBean.setCheckUser(ToolUtil.nullToString(checkResult.getInspector(), ""));
+//        uploadBean.setCheckUser(ToolUtil.nullToString(checkResult.getInspector(), ""));
+        uploadBean.setCheckUser(ToolUtil.nullToString(Global.NAME, ""));
         uploadBean.setSampleName(ToolUtil.nullToString(checkResult.getSampleName(), ""));
         uploadBean.setSampleCode(ToolUtil.nullToString(checkResult.getNumberSamples(), ""));
         uploadBean.setCheckItemName(ToolUtil.nullToString(checkResult.getTestItem(), ""));
@@ -138,7 +139,7 @@ public class UploadThread2 extends Thread {
         uploadBean.setCheckTime(ToolUtil.date2String(new Date(checkResult.getDetectionTime()), ToolUtil.DateTime1));
         uploadBean.setLatitude(""+Global.Latitude);
         uploadBean.setLongitude(""+Global.Longitude);
-        uploadBean.setCheckAddress(""+Global.Addr);
+        uploadBean.setCheckAddress(ToolUtil.nullToString(Global.Addr));
         return uploadBean;
     }
 //    public static UploadBean transToUploadModel(CheckResult checkResult) {

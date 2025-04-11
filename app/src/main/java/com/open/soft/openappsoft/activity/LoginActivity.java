@@ -324,12 +324,13 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
         SharedPreferences sp = getSharedPreferences("userPass", MODE_PRIVATE);
         String user = sp.getString("user", "");
         String pass = sp.getString("pass", "");
-        Timber.i("user=" + user +" pass="+pass);
+        Timber.i("user=" + user + " pass=" + pass);
         if (user.length() > 0 && pass.length() > 0) {
             et_user.setText(user);
             et_psw.setText(pass);
         } else if (com.open.soft.openappsoft.multifuction.util.Global.DEBUG) {
             et_user.setText("qdadmin");
+//            et_user.setText("admin");
             et_psw.setText("123456");
         }
     }
@@ -446,7 +447,7 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
 
     @Override
     public void logInSuccess(LoginResultBean resultBean) {
-
+        Global.isLocalLogin = false;
 //        if ("input".equals(resultBean.getSamplingMode())) {
 //            Global.isVoluntarily = false;//不将自动录入信息
 //            Global.ismixedentry = false; // 不是混合录入
@@ -500,10 +501,10 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
         switch (v.getId()) {
             case R.id.btn_login:
                 //判断是否为第一次 Admin 登录
-//                if ("Admin".equals(et_user.getText().toString()) || "admin".equals(et_user.getText().toString()) || "ADMIN".equals(et_user.getText().toString())) {
-//                    startAdmin();
-//                    return;
-//                }
+                if (isAdminLogin()) {
+                    startAdmin();
+                    return;
+                }
 
                 if (verify()) {
                     getEncryptionMethod();
@@ -523,11 +524,21 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
         }
     }
 
+    private boolean isAdminLogin() {
+        String user = et_user.getText().toString();
+        String psw = et_psw.getText().toString();
+        return "admin".equals(user.toLowerCase()) && "123456".equals(psw.toLowerCase());
+    }
+
     private void startAdmin() {
-        Global.isAdimin = true;
-        Global.NAME = "admin";
-        // 修改
-        Global.isVoluntarily = true;
+       Global.isLocalLogin = true;
+//        Global.NAME = "admin";
+//        // 修改
+//        Global.isVoluntarily = true;
+//        Intent start = new Intent(this, MainActivity.class);
+//        startActivity(start);
+//        finish();
+        Toast.makeText(this, "本地登录成功", Toast.LENGTH_SHORT).show();
         Intent start = new Intent(this, MainActivity.class);
         startActivity(start);
         finish();

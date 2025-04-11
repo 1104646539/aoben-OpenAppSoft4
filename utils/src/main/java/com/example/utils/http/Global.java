@@ -68,6 +68,10 @@ public class Global {
      * 是否是管理员模式，管理员可以修改部分设置
      */
     public static boolean isAdimin = true;
+    /**
+     * 本地登录，未联网，也不允许上传
+     */
+    public static boolean isLocalLogin = false;
     public static String admin_user = "admin";
     public static String admin_psw = "123456";
     public static String admin_name = "";

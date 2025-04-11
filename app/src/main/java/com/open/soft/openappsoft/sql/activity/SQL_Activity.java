@@ -24,6 +24,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.utils.http.Global;
 import com.example.utils.http.ToolUtil;
 import com.gsls.gt.GT;
 import com.kongzue.dialogx.dialogs.MessageDialog;
@@ -754,6 +755,10 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 
     // 上传按钮
     public void uploadData() {
+        if (Global.isLocalLogin) {
+            APPUtils.showToast(this, "本地登录不允许上传");
+            return;
+        }
         press_status = true;
         list_upload = new ArrayList<DetectionResultBean>();
         final boolean[] have_chenked = {false};

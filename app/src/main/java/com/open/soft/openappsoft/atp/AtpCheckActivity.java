@@ -327,7 +327,7 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
         resultModel.taskID = taskModel.taskID;
         resultModel.number = testTime;
         resultModel.company_name = tv_check_company.getText().toString();
-        resultModel.persion = com.example.utils.http.Global.NAME;
+//        resultModel.persion = com.example.utils.http.Global.NAME;
 //			resultModel.shiji = shiji_model.getName();
         resultModel.sample_name = tv_check_sample.getText().toString();
         resultModel.sample_number = et_Sample_Num.getText().toString();
@@ -449,7 +449,9 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
                         }
                         //时间到了，检测
                         saveCheck_ResultData(etResult.getText().toString());
-                        uploadResult();
+                        if (!com.example.utils.http.Global.isLocalLogin) {
+                            uploadResult();
+                        }
                     }
                     break;
             }
@@ -505,12 +507,12 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
             return;
         }
 
-        if (tv_check_persion.getText() == null || tv_check_persion.getText().toString().isEmpty()) {
-            APPUtils.showToast(AtpCheckActivity.this, "请先选择检验员");
-            tv_scanTime.setText("请先选择检验员");
-            isTest = false;
-            return;
-        }
+//        if (tv_check_persion.getText() == null || tv_check_persion.getText().toString().isEmpty()) {
+//            APPUtils.showToast(AtpCheckActivity.this, "请先选择检验员");
+//            tv_scanTime.setText("请先选择检验员");
+//            isTest = false;
+//            return;
+//        }
 
         if (tv_check_sample.getText() == null || tv_check_sample.getText().toString().isEmpty()) {
             APPUtils.showToast(AtpCheckActivity.this, "请先选样品名称");
