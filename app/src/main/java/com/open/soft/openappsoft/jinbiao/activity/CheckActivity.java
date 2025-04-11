@@ -326,11 +326,11 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 //        CardOutOrIn();
 //        register();
 
-        if (!GT.Network.isInternet(this)) {
-            GT.toast(this, "请检查网络是否正常");
-            finish();
-            return;
-        }
+//        if (!GT.Network.isInternet(this)) {
+//            GT.toast(this, "请检查网络是否正常");
+//            finish();
+//            return;
+//        }
 
         registerReceiver();
         checkPresenter = new CheckPresenter();

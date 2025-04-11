@@ -110,11 +110,11 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_atp_check_main);
 
-        if (!GT.Network.isInternet(this)) {
-            GT.toast(this, "请检查网络是否正常");
-            finish();
-            return;
-        }
+//        if (!GT.Network.isInternet(this)) {
+//            GT.toast(this, "请检查网络是否正常");
+//            finish();
+//            return;
+//        }
 
         db = DbHelper.GetInstance();
         initView();
