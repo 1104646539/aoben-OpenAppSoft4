@@ -531,8 +531,8 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
     }
 
     private void startAdmin() {
-       Global.isLocalLogin = true;
-//        Global.NAME = "admin";
+        Global.isLocalLogin = true;
+        Global.NAME = "";
 //        // 修改
 //        Global.isVoluntarily = true;
 //        Intent start = new Intent(this, MainActivity.class);

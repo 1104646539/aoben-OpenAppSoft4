@@ -327,7 +327,7 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
         resultModel.taskID = taskModel.taskID;
         resultModel.number = testTime;
         resultModel.company_name = tv_check_company.getText().toString();
-//        resultModel.persion = com.example.utils.http.Global.NAME;
+        resultModel.persion = com.example.utils.http.Global.NAME;
 //			resultModel.shiji = shiji_model.getName();
         resultModel.sample_name = tv_check_sample.getText().toString();
         resultModel.sample_number = et_Sample_Num.getText().toString();
