@@ -487,7 +487,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
             mProject = projects.get(0);
             spn_project.setOnItemSelectedListener(this);
         }
-        openLight(mProject.bochang);
+//        openLight(mProject.bochang);
 
         // 波长
 
@@ -553,6 +553,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
     }
 
     private void openLight(int bochang) {
+        Timber.d("开灯 "+bochang);
         SerialUtils.COM3_SendData(("Light" + bochang).getBytes());
     }
 
