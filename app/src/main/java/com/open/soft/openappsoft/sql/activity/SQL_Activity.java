@@ -576,9 +576,10 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
                         hibernate.delete(DetectionResultBean.class, detectionResultBean.getID());
                         com.open.soft.openappsoft.multifuction.util.APPUtils.showToast(SQL_Activity.this, "删除成功");
                         arg0.dismiss();
-                        // 刷新页面的显示
-                        loadData();
+
                     }
+                    // 刷新页面的显示
+                    loadData();
                 }
             });
 
