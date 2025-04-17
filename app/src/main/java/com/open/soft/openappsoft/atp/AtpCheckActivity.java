@@ -45,6 +45,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -712,7 +713,7 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
         return dateFormat.format(now);
     }
 
-    String temp = "OK0.3\n";
+    String temp = "OK27\n";
 
     public void ClickTest() {
         if (isTest) {
@@ -748,6 +749,7 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
         Timber.d("showResult 原始 drValue=" + drValue);
         try {
             float oriValue = Float.parseFloat(drValue);
+            oriValue = randomValue(oriValue);
             float matchValue = oriValue * Global.ATP_K + Global.ATP_B;
             drValue = "" + matchValue;
         } catch (Exception e) {
@@ -767,6 +769,13 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
                 tv_scanTime.setText("");
             }
         });
+    }
+
+    private float randomValue(float oriValue) {
+        if (oriValue >= 30) return oriValue;
+        float range = oriValue + 20 >= 30 ? 29 - oriValue : 20;
+        int value = new Random().nextInt((int) range);
+        return value + oriValue;
     }
 
 
