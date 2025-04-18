@@ -112,39 +112,39 @@ public class CheckPresenter {
 //        });
     }
 
-    public void SendResult(String str, final int requestCode, final CheckInterface checkInterface) {
+    public void SendResult(String str, final String sampleID, final int requestCode, final CheckInterface checkInterface) {
 //        String str = new Gson().toJson(uploadBean);
         UploadBean2 uploadBean2 = new UploadBean2(str);
         checkService.SendResult(Global.URL_SendResult, uploadBean2).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<BaseResult<String>>() {
-            @Override
-            public void onCompleted() {
+                    @Override
+                    public void onCompleted() {
 
-            }
+                    }
 
-            @Override
-            public void onError(Throwable e) {
+                    @Override
+                    public void onError(Throwable e) {
 //                Timber.i("onError");
-                if (checkInterface != null) {
-                    checkInterface.SendResultFailed(e.getMessage(), requestCode);
-                }
-            }
+                        if (checkInterface != null) {
+                            checkInterface.SendResultFailed(sampleID + ":网络连接错误", requestCode);
+                        }
+                    }
 
-            @Override
-            public void onNext(BaseResult<String> result) {
+                    @Override
+                    public void onNext(BaseResult<String> result) {
 //                Timber.i("onNext");
 
-                if(result.code == 200){
-                    if (checkInterface != null) {
-                        checkInterface.SendResultSuccess(result.data, requestCode);
+                        if (result.code == 200) {
+                            if (checkInterface != null) {
+                                checkInterface.SendResultSuccess(sampleID + ":" + result.data, requestCode);
+                            }
+                        } else {
+                            if (checkInterface != null) {
+                                checkInterface.SendResultFailed(sampleID + ":" + result.message, requestCode);
+                            }
+                        }
                     }
-                }else{
-                    if (checkInterface != null) {
-                        checkInterface.SendResultFailed(result.message, requestCode);
-                    }
-                }
-            }
-        });
+                });
     }
 
     public interface CheckInterface {

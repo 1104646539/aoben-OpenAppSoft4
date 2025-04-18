@@ -2038,8 +2038,11 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         }
         handler.sendEmptyMessage(100);//关闭定时器
     }
+    String failedMsg = "";
 
     private void uploadResult() {
+        failedMsg = "";
+
         if (detectionResultBean != null) {
             if (!detectionResultBean.getDetectionResult().contains("阴性") && !detectionResultBean.getDetectionResult().contains("阳性")
                     && !detectionResultBean.getDetectionResult().contains("合格") && !detectionResultBean.getDetectionResult().contains("不合格")) {
@@ -2056,23 +2059,23 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
                     list_upload.get(position).setUploadStatus("已上传");
                     list_upload.get(position).setSelect(false);
                     hibernate.update(list_upload.get(position));
-                    runOnUiThread(() -> {
-                        com.open.soft.openappsoft.util.APPUtils.showToast(CheckActivity.this, "上传成功");
-                    });
+//                    runOnUiThread(() -> {
+//                        com.open.soft.openappsoft.util.APPUtils.showLongToast(CheckActivity.this, "上传成功");
+//                    });
                 }
 
                 @Override
                 public void onUploadFail(int position, String failInfo) {
-                    runOnUiThread(() -> {
-                        com.open.soft.openappsoft.util.APPUtils.showToast(CheckActivity.this, "上传失败：" + failInfo);
-                    });
+                    failedMsg += failInfo + "\n";
+//                    runOnUiThread(() -> {
+//                        com.open.soft.openappsoft.util.APPUtils.showLongToast(CheckActivity.this, "上传失败：" + failInfo);
+//                    });
                 }
 
                 @Override
                 public void onUploadFinish(int count, int successCount, int failedCount) {
-//                    runOnUiThread(() -> {
-//                        MessageDialog.show("提示", "上传完成,共上传" + count + "条" + "，成功" + successCount + "条" + "，失败" + failedCount + "条", "确定");
-//                    });
+                    ShowUploadResultDialog(count, successCount, failedCount, failedMsg);
+
                 }
             });
             uploadThread2.start();
@@ -2080,7 +2083,25 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             com.open.soft.openappsoft.util.APPUtils.showToast(this, "未检测");
         }
     }
+    private void ShowUploadResultDialog(int count, int successCount, int failedCount, String failedMsg) {
+        String msg = "";
 
+        //全都成功
+        msg = "本次上传共" + count + "条数据,上传成功" + successCount + "条，失败" + failedCount + "条。";
+        if (!failedMsg.isEmpty()) {
+            msg +="\n失败原因\n"+ failedMsg;
+        }
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setTitle("上传结果")
+                .setMessage(msg)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).create();
+        alertDialog.show();
+    }
     public boolean isNumeric(String str) {
 
         {

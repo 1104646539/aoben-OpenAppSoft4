@@ -123,6 +123,16 @@ public class APPUtils {
             }
         });
     }
+    public static void showLongToast(final Activity activity, final String content) {
+        activity.runOnUiThread(new Runnable() {
+
+            @SuppressLint("WrongConstant")
+            @Override
+            public void run() {
+                Toast.makeText(activity, content, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
     /**
      * 判断指定名称的服务是否运行

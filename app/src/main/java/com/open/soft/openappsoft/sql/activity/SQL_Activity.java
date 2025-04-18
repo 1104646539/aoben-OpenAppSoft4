@@ -753,6 +753,7 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
     private boolean press_status = false;
 
     private List<DetectionResultBean> list_upload;
+    String failedMsg = "";
 
     // 上传按钮
     public void uploadData() {
@@ -760,6 +761,8 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
             APPUtils.showToast(this, "本地登录不允许上传");
             return;
         }
+        failedMsg = "";
+
         press_status = true;
         list_upload = new ArrayList<DetectionResultBean>();
         final boolean[] have_chenked = {false};
@@ -842,6 +845,7 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 
                 @Override
                 public void onUploadFail(int position, String failInfo) {
+                    failedMsg += failInfo + "\n";
 
                 }
 
@@ -849,8 +853,10 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
                 public void onUploadFinish(int count, int successCount, int failedCount) {
                     runOnUiThread(() -> {
                         progressDialog.dismiss();
-                        MessageDialog.show("提示", "上传完成,共上传" + count + "条" + "，成功" + successCount + "条" + "，失败" + failedCount + "条", "确定");
+//                        MessageDialog.show("提示", "上传完成,共上传" + count + "条" + "，成功" + successCount + "条" + "，失败" + failedCount + "条", "确定");
                     });
+                    ShowUploadResultDialog(count, successCount, failedCount, failedMsg);
+
                     press_status = false;
                 }
             });
@@ -910,7 +916,25 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
         }
     }
 
+    private void ShowUploadResultDialog(int count, int successCount, int failedCount, String failedMsg) {
+        String msg = "";
 
+        //全都成功
+        msg = "本次上传共" + count + "条数据,上传成功" + successCount + "条，失败" + failedCount + "条。";
+        if (!failedMsg.isEmpty()) {
+            msg +="\n失败原因\n"+ failedMsg;
+        }
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setTitle("上传结果")
+                .setMessage(msg)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).create();
+        alertDialog.show();
+    }
     // 胶体金数据打印[朝外打印]
     public static String GetPrintInfo1(DetectionResultBean detectionResultBean, Context context) {
         String title = LoginActivity.sp_ServiceUrl.query("TitleSet").toString();

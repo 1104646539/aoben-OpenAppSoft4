@@ -306,7 +306,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
     }
 
     private void loadTaskModel() {
-        List<TaskModel> temp = hibernate.where("jcx = ?","").queryAll(TaskModel.class);
+        List<TaskModel> temp = hibernate.where("jcx = ?", "").queryAll(TaskModel.class);
         taskModels.clear();
         if (temp != null) {
             taskModels.addAll(temp);
@@ -553,7 +553,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
     }
 
     private void openLight(int bochang) {
-        Timber.d("开灯 "+bochang);
+        Timber.d("开灯 " + bochang);
         SerialUtils.COM3_SendData(("Light" + bochang).getBytes());
     }
 
@@ -664,7 +664,10 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
         statusDialog.show();
     }
 
+    String failedMsg = "";
+
     private void upload(DetectionResultBean bean) {
+        failedMsg = "";
         List<DetectionResultBean> list = new ArrayList<>();
         list.add(bean);
         UploadThread2 uploadThread2 = new UploadThread2(this, list, new UploadThread2.onUploadListener() {
@@ -679,14 +682,37 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
             @Override
             public void onUploadFail(int position, String failInfo) {
                 Timber.i("onFail position=" + position);
+                failedMsg += failInfo + "\n";
             }
 
             @Override
             public void onUploadFinish(int count, int successCount, int failedCount) {
+
+                ShowUploadResultDialog(count, successCount, failedCount, failedMsg);
             }
 
         });
         uploadThread2.start();
+    }
+
+    private void ShowUploadResultDialog(int count, int successCount, int failedCount, String failedMsg) {
+        String msg = "";
+
+        //全都成功
+        msg = "本次上传共" + count + "条数据,上传成功" + successCount + "条，失败" + failedCount + "条。";
+        if (!failedMsg.isEmpty()) {
+            msg +="\n失败原因\n"+ failedMsg;
+        }
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setTitle("上传结果")
+                .setMessage(msg)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).create();
+        alertDialog.show();
     }
 
     private void upload(boolean autoUpload) {
@@ -1317,7 +1343,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
         detectionResultBean.setDetectionTime(checkResult.testTime);//检测时间
         detectionResultBean.setAisle(checkResult.channel);//通道
         detectionResultBean.setSampleName(checkResult.sampleName);//样品名称
-        detectionResultBean.setDetectionValue(checkResult.testValue );//抑制率/检测值
+        detectionResultBean.setDetectionValue(checkResult.testValue);//抑制率/检测值
         detectionResultBean.setDetectionResult(checkResult.resultJudge);//检测结果
         detectionResultBean.setUnitsUnderInspection(checkResult.bcheckedOrganization);//受检单位
         detectionResultBean.setUnitsUnderInspectionCode(checkResult.bcheckedOrganizationCode);//受检单位Code
@@ -1327,7 +1353,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
         detectionResultBean.setCommodityPlaceOrigin(checkResult.sampleSource);//商品来源
         detectionResultBean.setUploadStatus("未上传");
         detectionResultBean.setSpecimenType(checkResult.sampleType); // 样品类型
-        detectionResultBean.setLimitStandard(checkResult.xlz ); // 检测限
+        detectionResultBean.setLimitStandard(checkResult.xlz); // 检测限
 //        detectionResultBean.setCriticalValue(checkResult.xlz); // 临界值
         detectionResultBean.setTestItem(checkResult.projectName); // 检测项目
         detectionResultBean.setQRCode(card_number); // 试剂盒二维码字符串

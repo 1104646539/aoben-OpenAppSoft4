@@ -65,7 +65,7 @@ public class UploadThread2 extends Thread {
             Timber.i("encodeStr=" + encodeStr);
             Timber.i("Global.ENCODE_KEY=" + Global.ENCODE_KEY + " Global.SALT=" + Global.SALT);
             Timber.i("decodeStr=" + decodeStr);
-            checkPresenter.SendResult(encodeStr, i, new CheckPresenter.CheckInterface() {
+            checkPresenter.SendResult(encodeStr,uploadBean.getSampleCode(), i, new CheckPresenter.CheckInterface() {
                 @Override
                 public void GetSamplingInfoSuccess(Result<GetSamplingInfoResultBean> result, int requestCode) {
 
@@ -125,6 +125,7 @@ public class UploadThread2 extends Thread {
         uploadBean.setCheckItemName(ToolUtil.nullToString(checkResult.getTestItem(), ""));
         uploadBean.setCheckMothedName(ToolUtil.nullToString("123", ""));
         uploadBean.setDeviceSn(ToolUtil.nullToString(InterfaceURL.deviceNum, ""));
+//        uploadBean.setDeviceSn(ToolUtil.nullToString("5223", ""));
         uploadBean.setSampleType(ToolUtil.nullToString(checkResult.getSpecimenType(), ""));
         uploadBean.setSampleTypeId(ToolUtil.nullToString(checkResult.getSpecimenTypeCode(), ""));
         uploadBean.setSampleSubType(ToolUtil.nullToString(checkResult.getSpecimenTypeChild(), ""));
