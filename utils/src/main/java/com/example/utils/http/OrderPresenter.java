@@ -101,7 +101,7 @@ public class OrderPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(context, "登录失败 "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "登录失败,网络连接错误", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
 //                if (checkInterface != null) {
 //                    checkInterface.logInFailed(e.getMessage());

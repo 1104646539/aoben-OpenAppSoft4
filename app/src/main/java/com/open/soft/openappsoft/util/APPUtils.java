@@ -328,7 +328,7 @@ public class APPUtils {
                     public void onError(Throwable e) {
                         ((Activity) context).runOnUiThread(() -> {
                             progressDialog.dismiss();
-                            APPUtils.showToast(((Activity) context), "获取错误：" + e.getMessage());
+                            APPUtils.showToast(((Activity) context), "获取最新版本失败,网络连接错误" );
 
                         });
                     }
