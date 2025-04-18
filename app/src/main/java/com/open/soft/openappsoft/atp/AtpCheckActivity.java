@@ -443,6 +443,8 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
                     tv_scanTime.setText("请等待" + recLen + "S");
                     if (recLen <= 0) {
                         taskTime.cancel();
+                        timer.cancel();
+                        isTest = false;
                         if (Global.DEBUG) {
                             showResult(temp);
                         } else {
@@ -489,7 +491,6 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
             APPUtils.showToast(AtpCheckActivity.this, "检测中，请稍后...");
             return;
         }
-        //如果样品名称为null 那就弹出对话框
 
         if (tv_check_sample == null || tv_check_sample.getText().toString().length() == 0) {
             showTaskDialog();
@@ -504,34 +505,29 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
         if (tv_check_company.getText() == null || tv_check_company.getText().toString().isEmpty()) {
             APPUtils.showToast(AtpCheckActivity.this, "请先选择检测单位");
             tv_scanTime.setText("请先选择检测单位");
-            isTest = false;
             return;
         }
 
 //        if (tv_check_persion.getText() == null || tv_check_persion.getText().toString().isEmpty()) {
 //            APPUtils.showToast(AtpCheckActivity.this, "请先选择检验员");
 //            tv_scanTime.setText("请先选择检验员");
-//            isTest = false;
 //            return;
 //        }
 
         if (tv_check_sample.getText() == null || tv_check_sample.getText().toString().isEmpty()) {
             APPUtils.showToast(AtpCheckActivity.this, "请先选样品名称");
             tv_scanTime.setText("请先选样品名称");
-            isTest = false;
             return;
         }
         if (tv_check_type.getText() == null || tv_check_type.getText().toString().isEmpty()) {
             APPUtils.showToast(AtpCheckActivity.this, "请先选样品类型");
             tv_scanTime.setText("请先选样品类型");
-            isTest = false;
             return;
         }
 
         GT.Thread.runAndroid(AtpCheckActivity.this, new Runnable() {
             @Override
             public void run() {
-                isTest = false;
                 //清空测试数据显示
                 clearTestDataShow();
 
@@ -723,7 +719,7 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
      * 定时检测
      */
     private void timeCheck() {
-        recLen = Global.DEBUG ? 3 : reactionTime;
+        recLen = Global.DEBUG ? 15 : reactionTime;
         taskTime = new MytaskTime();
         timer = new Timer();
         timer.schedule(taskTime, 0, 1000);
@@ -745,12 +741,19 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
             APPUtils.showToast(this, "正在检测，请稍后...");
             return;
         }
+        isTest = true;
+//        if(timer!=null){
+//            timer.cancel();
+//        }
+//        if(taskTime!=null){
+//            taskTime.cancel();
+//        }
 
         final String message = "GetATPData";
 
         if (com.open.soft.openappsoft.multifuction.util.Global.DEBUG) {
             //测试
-            recLen = 3;
+            recLen = 15;
             timeCheck();
             return;
         }
