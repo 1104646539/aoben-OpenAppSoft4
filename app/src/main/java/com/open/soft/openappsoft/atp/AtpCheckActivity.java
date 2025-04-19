@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -24,7 +23,6 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.gsls.gt.GT;
 import com.lidroid.xutils.DbUtils;
-import com.lidroid.xutils.exception.DbException;
 import com.open.soft.openappsoft.R;
 import com.open.soft.openappsoft.activity.MainActivity;
 import com.open.soft.openappsoft.activity.task.TaskListAdapter2;
@@ -719,7 +717,7 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
      * 定时检测
      */
     private void timeCheck() {
-        recLen = Global.DEBUG ? 15 : reactionTime;
+        recLen = Global.DEBUG ? 3 : reactionTime;
         taskTime = new MytaskTime();
         timer = new Timer();
         timer.schedule(taskTime, 0, 1000);
@@ -734,7 +732,7 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
         return dateFormat.format(now);
     }
 
-    String temp = "OK27\n";
+    String temp = "OK3\n";
 
     public void ClickTest() {
         if (isTest) {
@@ -753,7 +751,7 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
 
         if (com.open.soft.openappsoft.multifuction.util.Global.DEBUG) {
             //测试
-            recLen = 15;
+            recLen = 3;
             timeCheck();
             return;
         }
@@ -775,17 +773,20 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
         Timber.d("showResult str=" + str);
         String drValue = str.replace("OK", "").replace("\n", "");
         Timber.d("showResult 原始 drValue=" + drValue);
+        String jcx = etJcx.getText().toString();
         try {
-            float oriValue = Float.parseFloat(drValue);
-            oriValue = randomValue(oriValue);
-            float matchValue = oriValue * Global.ATP_K + Global.ATP_B;
-            drValue = "" + matchValue;
+            double oriValue = Double.parseDouble(drValue);
+            double matchValue = oriValue * Global.ATP_K + Global.ATP_B;
+            matchValue = randomValue(matchValue,Double.parseDouble(jcx));
+//            drValue = "" + String.format("%.2f",matchValue);
+            drValue = "" + (int)(matchValue);
         } catch (Exception e) {
             Timber.d("");
+            drValue = "0";
         }
         String finalDrValue = drValue;
         Timber.d("showResult 拟合后 finalDrValue=" + finalDrValue);
-        String jcx = etJcx.getText().toString();
+
         runOnUiThread(() -> {
             if (Float.parseFloat(finalDrValue) > Float.parseFloat(jcx)) {
                 etConcentrate.setText(finalDrValue);
@@ -799,11 +800,21 @@ public class AtpCheckActivity extends BaseActivity implements OnClickListener {
         });
     }
 
-    private float randomValue(float oriValue) {
-        if (oriValue >= 30) return oriValue;
-        float range = oriValue + 20 >= 30 ? 29 - oriValue : 20;
-        int value = new Random().nextInt((int) range);
-        return value + oriValue;
+    private double randomValue(double oriValue, double jcx) {
+        double value = oriValue;
+        if(value < jcx){//小于检测限
+            int v1 = (int) (jcx * 0.4);
+            value = (jcx * 0.3) + new Random().nextInt(v1);
+        }else if (value >= 9999){//大于9999
+            value = 9999;
+        }else{//大于检测限小于9999,不变
+
+        }
+//        if (oriValue >= 30) return oriValue;
+//        float range = oriValue + 20 >= 30 ? 29 - oriValue : 20;
+//        int value = new Random().nextInt((int) range);
+//        return value + oriValue;
+        return value;
     }
 
 
