@@ -1,5 +1,6 @@
 package com.example.utils.http;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -85,6 +86,17 @@ public class OrderPresenter {
     String TAG = "GT_i";
 
     public void login(final LoginBean loginBean, final OrderInterface checkInterface, final Context context, final String pass, final ProgressDialog progressDialog) {
+        if(checkService==null){
+            ((Activity) context).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (checkInterface != null) {
+                        checkInterface.logInFailed("url初始化失败,请检查上传地址");
+                    }
+                }
+            });
+            return;
+        }
         checkService.LogIn(Global.URL_LOGIN, loginBean).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<BaseResult<LoginResultBean>>() {
                     @Override

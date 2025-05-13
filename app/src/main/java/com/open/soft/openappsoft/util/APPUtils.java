@@ -324,7 +324,13 @@ public class APPUtils {
     //更新APP中
     public static void updateApp(Context context, ProgressDialog progressDialog) {
         CheckService checkService = RetrofitServiceManager.getInstance().getCheckService();
-
+        if(checkService==null){
+            ((Activity) context).runOnUiThread(() -> {
+                progressDialog.dismiss();
+                APPUtils.showToast(((Activity) context), "url初始化失败,请检查上传地址");
+            });
+            return;
+        }
 //        Map<String, String> map = new HashMap<>();
 //        map.put("app","qingdao001");
         checkService.GetUpdate(Global.URL_UPDATE, Global.APP_NAME).subscribeOn(Schedulers.io())

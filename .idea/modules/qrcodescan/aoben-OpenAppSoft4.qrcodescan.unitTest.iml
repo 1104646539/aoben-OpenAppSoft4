@@ -22,7 +22,7 @@
     <content url="file://$MODULE_DIR$/../../../qrcodescan/src/testDebug" />
     <orderEntry type="jdk" jdkName="Android API 30 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="TEST" name="Gradle: E./androidproject/aoben/aoben-OpenAppSoft4/qrcodescan/libs/tbs_sdk_thirdapp_v4.3.0.386_44286_sharewithdownloadwithfile_withoutGame_obfs_20230210_114429.jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: J./TongKang10/aoben/aoben-OpenAppSoft4/qrcodescan/libs/tbs_sdk_thirdapp_v4.3.0.386_44286_sharewithdownloadwithfile_withoutGame_obfs_20230210_114429.jar" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="aoben-OpenAppSoft4.qrcodescan.main" />
 </module>

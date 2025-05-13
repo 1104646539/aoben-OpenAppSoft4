@@ -252,7 +252,7 @@ public class SettingActivity extends Activity implements View.OnClickListener {
         editURLDialog.showDilaog(new EditURLDialog.OnUrlSave() {
             @Override
             public void onUrlSave(String url, String et_1, String et_2, String et_3, String et_4, String et_5) {
-                if (et_1.isEmpty() || et_2.isEmpty() || et_3.isEmpty() || et_4.isEmpty() || et_5.isEmpty()) {
+                if ( et_1.isEmpty() ||  et_5.isEmpty()) {
                     APPUtils.showToast(SettingActivity.this, "请输入");
                     return;
                 }
