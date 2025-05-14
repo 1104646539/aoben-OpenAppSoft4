@@ -49,7 +49,8 @@ public class ProjectActivity extends Activity implements View.OnClickListener, P
 //    private EditText etSingleXlz;
     private EditText etCardXlz;
     private Spinner spn_bochange;
-    private Spinner spn_project;
+//    private Spinner spn_project;
+    private EditText et_project;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,7 +82,8 @@ public class ProjectActivity extends Activity implements View.OnClickListener, P
         btnDelete = (Button) findViewById(R.id.btn_delete_data);
         btnSave = (Button) findViewById(R.id.btn_save_project);
         spn_bochange = (Spinner) findViewById(R.id.spn_bochange);
-        spn_project = (Spinner) findViewById(R.id.spn_project);
+        et_project =  findViewById(R.id.et_project);
+//        spn_project = (Spinner) findViewById(R.id.spn_project);
         btnAdd = (Button) findViewById(R.id.btn_add_data);
         btnReturn = (Button) findViewById(R.id.btn_return);
 
@@ -102,23 +104,29 @@ public class ProjectActivity extends Activity implements View.OnClickListener, P
         spn_bochange.setAdapter(adapter);
         spn_bochange.setSelection(0);
 
+//        List<Project> sns =  new Project().findAll();
+//        if (sns!=null&&sns.size()>0){
+//            snp = sns;
+//            if (snp!=null){
+//                Log.d(TAG,"snp="+snp.size());
+//                for (int i = 0; i < snp.size(); i++) {
+//                    Log.d(TAG,"i="+i+"spn="+snp.get(i).toString());
+//                }
+//                ArrayAdapter<Project> adapterP = new ArrayAdapter<Project>(this, android.R.layout.simple_list_item_1, snp);
+//                adapterP.setDropDownViewResource
+//                        (android.R.layout.simple_spinner_dropdown_item);
+//                spn_project.setAdapter(adapterP);
+//                spn_project.setSelection(0);
+//            }
+//        }
+        LoadProjects();
+    }
+    private void LoadProjects(){
         List<Project> sns =  new Project().findAll();
-        if (sns!=null&&sns.size()>0){
+        if (sns!=null&&sns.size()>0) {
             snp = sns;
-            if (snp!=null){
-                Log.d(TAG,"snp="+snp.size());
-                for (int i = 0; i < snp.size(); i++) {
-                    Log.d(TAG,"i="+i+"spn="+snp.get(i).toString());
-                }
-                ArrayAdapter<Project> adapterP = new ArrayAdapter<Project>(this, android.R.layout.simple_list_item_1, snp);
-                adapterP.setDropDownViewResource
-                        (android.R.layout.simple_spinner_dropdown_item);
-                spn_project.setAdapter(adapterP);
-                spn_project.setSelection(0);
-            }
         }
     }
-
     @Override
     public void onClick(View v) {
 
@@ -152,7 +160,8 @@ public class ProjectActivity extends Activity implements View.OnClickListener, P
 //            return;
 //        }
         Project project = projectList.get(selectedIndex);
-        project.projectName = snp.get(spn_project.getSelectedItemPosition()).projectName;
+//        project.projectName = snp.get(spn_project.getSelectedItemPosition()).projectName;
+        project.projectName = et_project.getText().toString();
         project.k = Float.valueOf(etK.getText().toString().trim());
         project.b = Float.valueOf(etB.getText().toString().trim());
         project.bochang = Integer.valueOf(bochanges[spn_bochange.getSelectedItemPosition()]);
@@ -180,7 +189,8 @@ public class ProjectActivity extends Activity implements View.OnClickListener, P
 //        }
 
         Project project = new Project();
-        project.projectName = snp.get(spn_project.getSelectedItemPosition()).projectName;
+//        project.projectName = snp.get(spn_project.getSelectedItemPosition()).projectName;
+        project.projectName = et_project.getText().toString();
         project.k = Float.valueOf(etK.getText().toString().trim());
         project.b = Float.valueOf(etB.getText().toString().trim());
         project.bochang = Integer.valueOf(bochanges[spn_bochange.getSelectedItemPosition()]);
@@ -205,6 +215,7 @@ public class ProjectActivity extends Activity implements View.OnClickListener, P
                 setAdapter();
             }
             clearText();
+            LoadProjects();
         } else {
             APPUtils.showToast(act, "添加失败");
         }
@@ -318,7 +329,8 @@ public class ProjectActivity extends Activity implements View.OnClickListener, P
             }
             for (int i = 0; i < snp.size(); i++) {
                 if (snp.get(i).getName().equals(String.valueOf(p.projectName))){
-                    spn_project.setSelection(i);
+//                    spn_project.setSelection(i);
+                    et_project.setText(snp.get(i).getName());
                 }
             }
         }

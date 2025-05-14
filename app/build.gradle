@@ -8,8 +8,8 @@ android {
         applicationId "com.open.soft.openappsoft"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 43
-        versionName "1.0.43"
+        versionCode 45
+        versionName "1.0.45"
 
         ndk {//thgppf  123456
             // 设置支持的SO库架构

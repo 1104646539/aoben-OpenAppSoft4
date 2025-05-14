@@ -44,9 +44,17 @@
                 android:layout_marginLeft="10dp"
                 android:textSize="26sp"
                 android:textColor="@android:color/black"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:layout_width="150dp"
                 android:layout_height="match_parent" />
+            <EditText
+                android:id="@+id/et_project"
+                android:layout_marginLeft="10dp"
+                android:textSize="26sp"
+                android:textColor="@android:color/black"
+                android:visibility="visible"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:text="检 测 限"
