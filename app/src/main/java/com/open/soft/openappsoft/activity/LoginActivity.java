@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -372,12 +373,33 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
         Global.admin_psw = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString(Global.SP_ADMIN_PSW, Global.admin_psw);
         Global.admin_pt = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString(Global.SP_ADMIN_PT, Global.admin_pt);
         Global.URL_LOGIN = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString(Global.SP_URL_LOGIN, Global.URL_LOGIN);
+        Global.URL_SendResult = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString(Global.SP_URL_SendResult, Global.URL_SendResult);
 //        Global.URL_GetAreaList = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString(Global.SP_URL_GetAreaList, Global.URL_GetAreaList);
 //        Global.URL_GetCardQRInfo = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString(Global.SP_URL_GetCardQRInfo, Global.URL_GetCardQRInfo);
 //        Global.URL_GetSamplingInfo = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString(Global.SP_URL_GetSamplingInfo, Global.URL_GetSamplingInfo);
-        Global.URL_SendResult = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString(Global.SP_URL_SendResult, Global.URL_SendResult);
 //        Log.d("onSettingPsw", "initSp onUrlSave admin_psw=" + Global.admin_psw);
+
+//        initVersion();
     }
+
+//    private void initVersion() {
+//        try {
+//            Global.Max_Init_Version = SharedPreferencesUtil.getDefaultSharedPreferences(this).getInt(Global.SP_Max_Init_Version, Global.Max_Init_Version);
+//            PackageInfo pi = getPackageManager().getPackageInfo(getPackageName(), 0);
+//            int currentVersion = pi.versionCode;
+//            if (currentVersion > Global.Max_Init_Version) {//有新版本没有初始化过
+//                SharedPreferencesUtil.getDefaultSharedPreferences(this).edit().putInt(Global.SP_Max_Init_Version, currentVersion).commit();
+//
+//                if (Global.Max_Init_Version <= 45) {//45 1.0.45 需要更新url
+////                https://amr.qingdao.gov.cn/abxda/
+//                    String newUrl = "https://amr.qingdao.gov.cn/abxda/";
+//                    sp_ServiceUrl.save("url_api", newUrl);
+//                }
+//            }
+//        } catch (Exception e) {
+//            Log.i("LoginActivity", "initVersion " + e.getMessage());
+//        }
+//    }
 
     void getAreaList() {
 //        handler.postDelayed(new Runnable() {

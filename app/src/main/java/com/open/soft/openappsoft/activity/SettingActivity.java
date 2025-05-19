@@ -252,13 +252,14 @@ public class SettingActivity extends Activity implements View.OnClickListener {
         editURLDialog.showDilaog(new EditURLDialog.OnUrlSave() {
             @Override
             public void onUrlSave(String url, String et_1, String et_2, String et_3, String et_4, String et_5) {
-                if ( et_1.isEmpty() ||  et_5.isEmpty()) {
+                if ( et_1.isEmpty() ||  et_2.isEmpty()||  et_5.isEmpty()) {
                     APPUtils.showToast(SettingActivity.this, "请输入");
                     return;
                 }
 
                 Global.BASE_URL = url;
                 Global.URL_LOGIN = et_1;
+                Global.APP_NAME = et_2;
 //                Global.URL_GetAreaList = et_2;
 //                Global.URL_GetCardQRInfo = et_3;
 //                Global.URL_GetSamplingInfo = et_4;
@@ -272,6 +273,7 @@ public class SettingActivity extends Activity implements View.OnClickListener {
                 RetrofitServiceManager.getInstance().refreshRetrofitServiceManager();
 
                 SharedPreferencesUtil.getDefaultSharedPreferences(SettingActivity.this).edit().putString(Global.SP_URL_LOGIN, Global.URL_LOGIN).commit();
+                SharedPreferencesUtil.getDefaultSharedPreferences(SettingActivity.this).edit().putString(Global.SP_APP_NAME, Global.APP_NAME).commit();
 //                SharedPreferencesUtil.getDefaultSharedPreferences(SettingActivity.this).edit().putString(Global.SP_URL_GetAreaList, Global.URL_GetAreaList).commit();
 //                SharedPreferencesUtil.getDefaultSharedPreferences(SettingActivity.this).edit().putString(Global.SP_URL_GetCardQRInfo, Global.URL_GetCardQRInfo).commit();
 //                SharedPreferencesUtil.getDefaultSharedPreferences(SettingActivity.this).edit().putString(Global.SP_URL_GetSamplingInfo, Global.URL_GetSamplingInfo).commit();

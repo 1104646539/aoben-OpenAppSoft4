@@ -33,6 +33,7 @@ import com.open.soft.openappsoft.App;
 import com.open.soft.openappsoft.bean.AppInfoBean;
 import com.open.soft.openappsoft.bean.AppUpdateBean;
 import com.open.soft.openappsoft.bean.JsonRootBean;
+import com.open.soft.openappsoft.jinbiao.model.SharedPreferencesUtil;
 import com.open.soft.openappsoft.multifuction.util.DownloadUtil;
 
 import java.io.File;
@@ -123,6 +124,7 @@ public class APPUtils {
             }
         });
     }
+
     public static void showLongToast(final Activity activity, final String content) {
         activity.runOnUiThread(new Runnable() {
 
@@ -324,7 +326,7 @@ public class APPUtils {
     //更新APP中
     public static void updateApp(Context context, ProgressDialog progressDialog) {
         CheckService checkService = RetrofitServiceManager.getInstance().getCheckService();
-        if(checkService==null){
+        if (checkService == null) {
             ((Activity) context).runOnUiThread(() -> {
                 progressDialog.dismiss();
                 APPUtils.showToast(((Activity) context), "url初始化失败,请检查上传地址");
@@ -344,7 +346,7 @@ public class APPUtils {
                     public void onError(Throwable e) {
                         ((Activity) context).runOnUiThread(() -> {
                             progressDialog.dismiss();
-                            APPUtils.showToast(((Activity) context), "获取最新版本失败,网络连接错误" );
+                            APPUtils.showToast(((Activity) context), "获取最新版本失败,网络连接错误");
 
                         });
                     }
@@ -356,6 +358,7 @@ public class APPUtils {
                             if (appUpdateBean == null) {
                                 return;
                             }
+                            initVersion(context,updateBeanResult.data);
                             int versionCode = Integer.valueOf(appUpdateBean.getVersion());
                             if (versionCode <= GT.ApplicationUtils.getVersionCode(context)) {
                                 Timber.i("onResponse: 当前App为最新版，无需更新。");
@@ -424,6 +427,26 @@ public class APPUtils {
                 });
 
 
+    }
+
+    private static void initVersion(Context context, UpdateBean updateBean) {
+        try {
+            Global.Max_Init_Version = SharedPreferencesUtil.getDefaultSharedPreferences(context).getInt(Global.SP_Max_Init_Version, Global.Max_Init_Version);
+            PackageInfo pi = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            int currentVersion = pi.versionCode;
+            if (currentVersion > Global.Max_Init_Version) {//有新版本没有初始化过
+                SharedPreferencesUtil.getDefaultSharedPreferences(context).edit().putInt(Global.SP_Max_Init_Version, currentVersion).commit();
+                SharedPreferences2 sp_ServiceUrl = new SharedPreferences2(context, "companyName");
+
+                sp_ServiceUrl.save("url_api", updateBean.getBaseUrl());
+//                if (Global.Max_Init_Version <= 45) {//45 1.0.45 需要更新url
+//                    String newUrl = "https://amr.qingdao.gov.cn/abxda/";
+//                    sp_ServiceUrl.save("url_api", newUrl);
+//                }
+            }
+        } catch (Exception e) {
+            Log.i("LoginActivity", "initVersion " + e.getMessage());
+        }
     }
 
     private static boolean isValidContext(Context c) {

@@ -77,11 +77,13 @@ public class Global {
     public static String admin_name = "";
     public static String admin_pt = "";
     public static String URL_LOGIN = "api/system/auth/device-login";
-    public static String URL_UPDATE = "api/system/app/version/check";
+//    public static String URL_UPDATE = "api/system/app/version/check";
+    public static String URL_UPDATE = "http://test.shionda.com/result.json";
     //    public static String URL_GetAreaList = "System/GetAreaList";
 //    public static String URL_GetSamplingInfo = "QR/GetSamplingInfo";
 //    public static String URL_GetCardQRInfo = "QR/GetQRInfo";
     public static String URL_SendResult = "api/device/sample/check/upload";
+    public static int Max_Init_Version = 1;
 //    public static String URL_GetKnowledge = "Other/GetKnowledge";
 
     /**
@@ -106,10 +108,12 @@ public class Global {
     public final static String SP_ADMIN_PSW = "ADMIN_PSW";
     public final static String SP_ADMIN_PT = "PT";
     public final static String SP_URL_LOGIN = "URL_LOGIN";
+    public final static String SP_APP_NAME = "URL_LOGIN";
     public final static String SP_URL_GetAreaList = "URL_GetAreaList";
     public final static String SP_URL_GetSamplingInfo = "URL_GetSamplingInfo";
     public final static String SP_URL_GetCardQRInfo = "URL_GetCardQRInfo";
     public final static String SP_URL_SendResult = "URL_SendResult";
+    public final static String SP_Max_Init_Version = "Max_Init_Version";
     public final static String SP_URL_GetKnowledge = "URL_GetKnowledge";
 
     /**

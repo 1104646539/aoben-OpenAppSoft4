@@ -71,9 +71,9 @@ public class EditURLDialog extends Dialog {
 //        } else {
             et_url.setText(Global.BASE_URL);//否则使用默认的网址
 //        }
+//        et_input1.setText(Global.URL_LOGIN);
         et_input1.setText(Global.URL_LOGIN);
-//        et_input2.setText(Global.URL_GetAreaList);
-//        et_input3.setText(Global.URL_GetCardQRInfo);
+        et_input2.setText(Global.APP_NAME);
 //        et_input4.setText(Global.URL_GetSamplingInfo);
         et_input5.setText(Global.URL_SendResult);
         showDilaog(onUrlSave, "上传设置", "网址");

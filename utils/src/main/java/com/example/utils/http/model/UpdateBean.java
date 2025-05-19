@@ -15,6 +15,7 @@ public class UpdateBean {
     private String version;
     private String info;
     private String url;
+    private String baseUrl;
 
     public UpdateBean() {
     }
@@ -57,5 +58,12 @@ public class UpdateBean {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+    public String getBaseUrl() {
+        return baseUrl;
+    }
+
+    public void setBaseUrl(String baseUrl) {
+        this.baseUrl = baseUrl;
     }
 }
