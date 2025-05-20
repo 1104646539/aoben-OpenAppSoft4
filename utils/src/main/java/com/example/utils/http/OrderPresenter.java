@@ -44,7 +44,7 @@ public class OrderPresenter {
      * 密码错误	40003
      */
     public OrderPresenter() {
-        checkService = RetrofitServiceManager.getInstance().getCheckService();
+//        checkService = RetrofitServiceManager.getInstance().getCheckService();
     }
 
     public void GetAreaList(final OrderInterface checkInterface) {
@@ -86,7 +86,7 @@ public class OrderPresenter {
     String TAG = "GT_i";
 
     public void login(final LoginBean loginBean, final OrderInterface checkInterface, final Context context, final String pass, final ProgressDialog progressDialog) {
-        if(checkService==null){
+        if(RetrofitServiceManager.getInstance().getCheckService()==null){
             ((Activity) context).runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -97,7 +97,7 @@ public class OrderPresenter {
             });
             return;
         }
-        checkService.LogIn(Global.URL_LOGIN, loginBean).subscribeOn(Schedulers.io())
+        RetrofitServiceManager.getInstance().getCheckService().LogIn(Global.URL_LOGIN, loginBean).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<BaseResult<LoginResultBean>>() {
                     @Override
                     public void onCompleted() {

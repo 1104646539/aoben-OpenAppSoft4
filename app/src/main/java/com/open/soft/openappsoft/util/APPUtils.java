@@ -30,6 +30,7 @@ import com.example.utils.http.model.UpdateBean;
 import com.google.gson.Gson;
 import com.gsls.gt.GT;
 import com.open.soft.openappsoft.App;
+import com.open.soft.openappsoft.activity.LoginActivity;
 import com.open.soft.openappsoft.bean.AppInfoBean;
 import com.open.soft.openappsoft.bean.AppUpdateBean;
 import com.open.soft.openappsoft.bean.JsonRootBean;
@@ -325,7 +326,7 @@ public class APPUtils {
 
     //更新APP中
     public static void updateApp(Context context, ProgressDialog progressDialog) {
-        CheckService checkService = RetrofitServiceManager.getInstance().getCheckService();
+        CheckService checkService = RetrofitServiceManager.getInstance().getCheckServiceUpdate();
         if (checkService == null) {
             ((Activity) context).runOnUiThread(() -> {
                 progressDialog.dismiss();
@@ -358,7 +359,7 @@ public class APPUtils {
                             if (appUpdateBean == null) {
                                 return;
                             }
-                            initVersion(context,updateBeanResult.data);
+                            initVersion(context, updateBeanResult.data);
                             int versionCode = Integer.valueOf(appUpdateBean.getVersion());
                             if (versionCode <= GT.ApplicationUtils.getVersionCode(context)) {
                                 Timber.i("onResponse: 当前App为最新版，无需更新。");
@@ -380,8 +381,11 @@ public class APPUtils {
                              * @param listener     下载监听
                              */
                             String appSavePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "APP/";
-//                            String appSavePath = context.getFilesDir().getAbsolutePath() + "/" + "APP/";
+                            if (InterfaceURL.isSimulatorTest) {
+                                appSavePath = "/sdcard" + "/";
+                            }
                             String saveFileName = appUpdateBean.getApp() + "" + appUpdateBean.getVersion() + ".apk";
+                            String finalAppSavePath = appSavePath;
                             new DownloadUtil().download(appUpdateBean.getUrl(), appSavePath, saveFileName, new DownloadUtil.OnDownloadListener() {
                                 @Override
                                 public void onDownloadSuccess(File file) {
@@ -389,7 +393,7 @@ public class APPUtils {
 
                                     ((Activity) context).runOnUiThread(() -> progressDialog.dismiss());
                                     //自动安装下载好的 APP
-                                    installNewApk((Activity) context, appSavePath + saveFileName);
+                                    installNewApk((Activity) context, finalAppSavePath + saveFileName);
                                 }
 
                                 @Override
@@ -434,11 +438,17 @@ public class APPUtils {
             Global.Max_Init_Version = SharedPreferencesUtil.getDefaultSharedPreferences(context).getInt(Global.SP_Max_Init_Version, Global.Max_Init_Version);
             PackageInfo pi = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             int currentVersion = pi.versionCode;
+            Log.i("LoginActivity", "currentVersion=" + currentVersion + " Global.Max_Init_Version=" + Global.Max_Init_Version);
+
             if (currentVersion > Global.Max_Init_Version) {//有新版本没有初始化过
                 SharedPreferencesUtil.getDefaultSharedPreferences(context).edit().putInt(Global.SP_Max_Init_Version, currentVersion).commit();
-                SharedPreferences2 sp_ServiceUrl = new SharedPreferences2(context, "companyName");
+//                SharedPreferences2 sp_ServiceUrl = new SharedPreferences2(context, "companyName");
 
-                sp_ServiceUrl.save("url_api", updateBean.getBaseUrl());
+                LoginActivity.sp_ServiceUrl.save("url_api", updateBean.getApiUrl());
+                Global.BASE_URL = updateBean.getApiUrl();
+                RetrofitServiceManager.getInstance().init();
+                Log.i("LoginActivity", "更新url=" + updateBean.getApiUrl());
+
 //                if (Global.Max_Init_Version <= 45) {//45 1.0.45 需要更新url
 //                    String newUrl = "https://amr.qingdao.gov.cn/abxda/";
 //                    sp_ServiceUrl.save("url_api", newUrl);

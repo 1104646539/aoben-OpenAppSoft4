@@ -101,12 +101,12 @@ public class EditURLDialog extends Dialog {
 
                 // 修改，添加配置信息到本地
 
-                LoginActivity.sp_ServiceUrl.save("url_api", et_url.getText().toString().trim());
-                LoginActivity.sp_ServiceUrl.save("url_Login", et_input1.getText().toString().trim());
+//                LoginActivity.sp_ServiceUrl.save("url_api", et_url.getText().toString().trim());
+//                LoginActivity.sp_ServiceUrl.save("url_Login", et_input1.getText().toString().trim());
 //                LoginActivity.sp_ServiceUrl.save("url_GetAreaList", et_input2.getText().toString().trim());
 //                LoginActivity.sp_ServiceUrl.save("url_GetQrInfo", et_input3.getText().toString().trim());
 //                LoginActivity.sp_ServiceUrl.save("url_GetSamplingInfo", et_input4.getText().toString().trim());
-                LoginActivity.sp_ServiceUrl.save("url_SendResult", et_input5.getText().toString().trim());
+//                LoginActivity.sp_ServiceUrl.save("url_SendResult", et_input5.getText().toString().trim());
 
                 if (!isNull2()) {
                     if (onUrlSave != null) {
@@ -189,16 +189,16 @@ public class EditURLDialog extends Dialog {
 
                 // 修改，添加配置信息到本地
 
-                LoginActivity.sp_ServiceUrl.save("url_api", et_url.getText().toString().trim());
-                LoginActivity.sp_ServiceUrl.save("url_Login", et_input1.getText().toString().trim());
-                LoginActivity.sp_ServiceUrl.save("url_GetAreaList", et_input2.getText().toString().trim());
-                LoginActivity.sp_ServiceUrl.save("url_GetQrInfo", et_input3.getText().toString().trim());
-                LoginActivity.sp_ServiceUrl.save("url_GetSamplingInfo", et_input4.getText().toString().trim());
-                LoginActivity.sp_ServiceUrl.save("url_SendResult", et_input5.getText().toString().trim());
+//                LoginActivity.sp_ServiceUrl.save("url_api", et_url.getText().toString().trim());
+//                LoginActivity.sp_ServiceUrl.save("url_Login", et_input1.getText().toString().trim());
+//                LoginActivity.sp_ServiceUrl.save("url_GetAreaList", et_input2.getText().toString().trim());
+//                LoginActivity.sp_ServiceUrl.save("url_GetQrInfo", et_input3.getText().toString().trim());
+//                LoginActivity.sp_ServiceUrl.save("url_GetSamplingInfo", et_input4.getText().toString().trim());
+//                LoginActivity.sp_ServiceUrl.save("url_SendResult", et_input5.getText().toString().trim());
 
                 // 从本地上取出对应的值
-                Object url_api = LoginActivity.sp_ServiceUrl.query("url_api");
-                String s = url_api.toString();
+//                Object url_api = LoginActivity.sp_ServiceUrl.query("url_api");
+//                String s = url_api.toString();
 
 
                 if (!isNull()) {

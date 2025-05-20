@@ -241,6 +241,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_main);
+        Log.i("LoginActivity", "查询url2=" + Global.BASE_URL);
+
         //初始化金标的
         DbHelper.InitDb(getApplicationContext());
         // 初始化

@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "com.open.soft.openappsoft"
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 21
         versionCode 46
         versionName "1.0.46"
 

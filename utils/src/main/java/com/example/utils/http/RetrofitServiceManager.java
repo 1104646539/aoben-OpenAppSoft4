@@ -23,7 +23,9 @@ public class RetrofitServiceManager {
     private static final int DEFAULT_READ_TIME_OUT = 10;
     private Retrofit mRetrofit;
     private static CheckService checkService;
+    private static CheckService checkServiceUpdate;
     static RetrofitServiceManager retrofitServiceManager;
+    private Retrofit mRetrofitUpdate;
 
     public RetrofitServiceManager() {
         init();
@@ -86,6 +88,19 @@ public class RetrofitServiceManager {
 //            builder.addInterceptor(commonInterceptor);
         // 创建Retrofit
         try {
+            mRetrofitUpdate = new Retrofit.Builder()
+                    .client(builder.build())
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .baseUrl("http://www.baidu.com")
+                    .build();
+//        GT.logs("Global.BASE_URL:" + Global.BASE_URL);
+            checkServiceUpdate = mRetrofitUpdate.create(CheckService.class);
+        } catch (Exception e) {
+            Log.d("RetrofitServiceManager", Global.BASE_URL + " " + e.getMessage());
+        }
+
+        try {
             mRetrofit = new Retrofit.Builder()
                     .client(builder.build())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -94,9 +109,10 @@ public class RetrofitServiceManager {
                     .build();
 //        GT.logs("Global.BASE_URL:" + Global.BASE_URL);
             checkService = mRetrofit.create(CheckService.class);
-        }catch (Exception e){
-            Log.d("RetrofitServiceManager",Global.BASE_URL+" "+e.getMessage());
+        } catch (Exception e) {
+            Log.d("RetrofitServiceManager2", Global.BASE_URL + " " + e.getMessage());
         }
+        Log.d("RetrofitServiceManager", Global.BASE_URL + " 初始化成功");
 
     }
 
@@ -106,6 +122,9 @@ public class RetrofitServiceManager {
 
     public CheckService getCheckService() {
         return checkService;
+    }
+    public CheckService getCheckServiceUpdate() {
+        return checkServiceUpdate;
     }
 
 //    private static class SingletonHolder {

@@ -1,5 +1,6 @@
 package com.open.soft.openappsoft.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,6 +30,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.utils.http.AreaResultBean;
 import com.example.utils.http.Global;
@@ -51,6 +55,7 @@ import com.open.soft.openappsoft.util.SharedPreferences2;
 import java.security.MessageDigest;
 import java.util.List;
 
+import retrofit2.http.Url;
 import timber.log.Timber;
 
 public class LoginActivity extends Activity implements OrderPresenter.OrderInterface, View.OnClickListener {
@@ -168,6 +173,7 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
 //            tv_title.setText(title);
 //        }
         updateDevice();
+
         //检测App更新
         if (InterfaceURL.isDetectionAppUpdate) {
             ProgressDialog progressDialog;
@@ -332,7 +338,7 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
         } else if (com.open.soft.openappsoft.multifuction.util.Global.DEBUG) {
             et_user.setText("qdadmin");
 //            et_user.setText("admin");
-            et_psw.setText("123456");
+            et_psw.setText("Qa@123#098");
         }
     }
 
@@ -369,6 +375,8 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
 //            sp_ServiceUrl.save("url_api", InterfaceURL.BASE_URL);//默认是测试服务器
 //        }
         Global.BASE_URL = url_api;
+        Log.i("LoginActivity", "查询url=" + url_api);
+
 //        Global.BASE_URL = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString(SPResource.KEY_UPLOAD_URL, com.example.utils.http.Global.BASE_URL);
         Global.admin_psw = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString(Global.SP_ADMIN_PSW, Global.admin_psw);
         Global.admin_pt = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString(Global.SP_ADMIN_PT, Global.admin_pt);

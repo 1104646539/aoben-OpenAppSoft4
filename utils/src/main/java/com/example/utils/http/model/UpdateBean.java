@@ -15,7 +15,7 @@ public class UpdateBean {
     private String version;
     private String info;
     private String url;
-    private String baseUrl;
+    private String apiUrl;
 
     public UpdateBean() {
     }
@@ -59,11 +59,11 @@ public class UpdateBean {
     public void setUrl(String url) {
         this.url = url;
     }
-    public String getBaseUrl() {
-        return baseUrl;
+    public String getApiUrl() {
+        return apiUrl;
     }
 
-    public void setBaseUrl(String baseUrl) {
-        this.baseUrl = baseUrl;
+    public void setApiUrl(String apiUrl) {
+        this.apiUrl = apiUrl;
     }
 }

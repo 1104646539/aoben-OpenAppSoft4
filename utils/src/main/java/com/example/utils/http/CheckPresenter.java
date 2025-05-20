@@ -33,7 +33,7 @@ public class CheckPresenter {
      * 密码错误	40003
      */
     public CheckPresenter() {
-        checkService = RetrofitServiceManager.getInstance().getCheckService();
+//        checkService = RetrofitServiceManager.getInstance().getCheckService();
     }
 
     public void GetSamplingInfo(GetSamplingInfoBean getSamplingInfoBean, final int requestCode, final CheckInterface checkInterface) {
@@ -115,7 +115,7 @@ public class CheckPresenter {
     public void SendResult(String str, final String sampleID, final int requestCode, final CheckInterface checkInterface) {
 //        String str = new Gson().toJson(uploadBean);
         UploadBean2 uploadBean2 = new UploadBean2(str);
-        checkService.SendResult(Global.URL_SendResult, uploadBean2).subscribeOn(Schedulers.io())
+        RetrofitServiceManager.getInstance().getCheckService().SendResult(Global.URL_SendResult, uploadBean2).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<BaseResult<String>>() {
                     @Override
                     public void onCompleted() {
