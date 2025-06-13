@@ -3,3 +3,6 @@
 app/build/
 /build/
 /local.properties
+*.apk
+/.idea/
+*.iml
