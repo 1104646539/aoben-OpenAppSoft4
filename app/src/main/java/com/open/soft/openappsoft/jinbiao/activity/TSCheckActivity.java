@@ -1506,7 +1506,7 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
         String AreaId = com.example.utils.http.Global.admin_pt;
         String OperatorId = com.example.utils.http.Global.ID;
 
-        if ("信达安检测".equals(OperatorId)) {
+        if ("益格检测".equals(OperatorId)) {
             OperatorId = "TangshanNM";
         }
 
@@ -3326,8 +3326,8 @@ public class TSCheckActivity extends BaseActivity implements View.OnClickListene
         }
 
 
-//        CardCompanyModel cardModel = new CardCompanyModel("奥本", "320", "920", "140", "320");
-        CardCompanyModel cardModel = new CardCompanyModel("奥本", selectedProject.getScanStart(), selectedProject.getScanEnd(), selectedProject.getCTWidth(), selectedProject.getCTDistance());
+//        CardCompanyModel cardModel = new CardCompanyModel("益格", "320", "920", "140", "320");
+        CardCompanyModel cardModel = new CardCompanyModel("益格", selectedProject.getScanStart(), selectedProject.getScanEnd(), selectedProject.getCTWidth(), selectedProject.getCTDistance());
 
 
         // 向数据库保存检测项目的数据

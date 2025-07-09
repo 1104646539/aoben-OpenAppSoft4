@@ -175,13 +175,13 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
         updateDevice();
 
         //检测App更新
-        if (InterfaceURL.isDetectionAppUpdate) {
-            ProgressDialog progressDialog;
-            progressDialog = new ProgressDialog(this);
-            progressDialog.setMessage("正在检测新版本");
-            progressDialog.setCancelable(false);
-            APPUtils.updateApp(this, progressDialog);//检测App更新
-        }
+//        if (InterfaceURL.isDetectionAppUpdate) {
+//            ProgressDialog progressDialog;
+//            progressDialog = new ProgressDialog(this);
+//            progressDialog.setMessage("正在检测新版本");
+//            progressDialog.setCancelable(false);
+//            APPUtils.updateApp(this, progressDialog);//检测App更新
+//        }
 
         //是否打开测试
         if (!InterfaceURL.isOpenTest) {
@@ -204,7 +204,7 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
 //            if (!"0".equals(name)) {
 //                InterfaceURL.companyName = name;//赋值
 //                // 修改
-//                if ("北京奥本生物技术有限公司".equals(name)) {
+//                if ("北京益格生物技术有限公司".equals(name)) {
 //                    Global.company_name = "Aoben";
 //                } else {
 //                    Global.company_name = "Xindaan";
@@ -258,10 +258,10 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
 //            sb.append("果蔬" + "\n");
 //
 //            sb.append("检 验 员：");
-//            sb.append("信达安测试用户" + "\n");
+//            sb.append("益格测试用户" + "\n");
 //
 //            sb.append("检测单位：");
-//            sb.append("信达安" + "\n");
+//            sb.append("益格" + "\n");
 //
 //            sb.append("多参数食品安全分析仪" + "\n\n");
 //
@@ -535,11 +535,11 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
                     startAdmin();
                     return;
                 }
-
-                if (verify()) {
-                    getEncryptionMethod();
-                    login();
-                }
+                APPUtils.showToast(this, "帐号密码错误");
+//                if (verify()) {
+//                    getEncryptionMethod();
+//                    login();
+//                }
                 break;
             case R.id.tv_get_list:
                 isSuccess = false;
@@ -568,7 +568,15 @@ public class LoginActivity extends Activity implements OrderPresenter.OrderInter
 //        Intent start = new Intent(this, MainActivity.class);
 //        startActivity(start);
 //        finish();
-        Toast.makeText(this, "本地登录成功", Toast.LENGTH_SHORT).show();
+        String user = et_user.getText().toString();
+        String psw = et_psw.getText().toString();
+        SharedPreferences sp = this.getSharedPreferences("userPass", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();   //获取编辑器
+        editor.putString("user", user);
+        editor.putString("pass", psw);
+        editor.apply();
+
+        Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
         Intent start = new Intent(this, MainActivity.class);
         startActivity(start);
         finish();

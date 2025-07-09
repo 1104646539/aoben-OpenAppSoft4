@@ -44,10 +44,11 @@ public class App extends Application {
     public LocationService locationService;
     public Vibrator mVibrator;
     public static SharedPreferences defaultSP;
-
+    public static App app;
     @Override
     public void onCreate() {
         super.onCreate();
+        app = this;
         //这个是打开日志
         BaseOkHttp.TIME_OUT_DURATION = 10;
         BaseOkHttp.DEBUGMODE = true;

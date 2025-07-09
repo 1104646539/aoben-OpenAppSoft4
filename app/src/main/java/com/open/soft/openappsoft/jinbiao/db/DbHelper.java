@@ -108,7 +108,7 @@ public class DbHelper {
     private static void InitDbData(DbUtils db) {
 
         String concentrateUnit = "μg/kg";
-        CardCompanyModel cardModel = new CardCompanyModel("奥本", "300", "900", "120", "330");
+        CardCompanyModel cardModel = new CardCompanyModel("益格", "300", "900", "120", "330");
         //初始化检测项目
         ArrayList<LineModel> list = new ArrayList<>();
 //        String[] projectNames1 = new String[]{"氯霉素", "呋喃唑酮", "呋喃他酮",
@@ -182,7 +182,7 @@ public class DbHelper {
             {
                 ShiJiModel reagentCompany = new ShiJiModel();
                 reagentCompany.code = "";
-                reagentCompany.name = "奥本";
+                reagentCompany.name = "益格";
                 db.save(reagentCompany);
             }
 //        4、	样品类型：食用油、乳及乳制品、谷物

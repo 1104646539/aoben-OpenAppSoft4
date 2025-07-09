@@ -507,6 +507,7 @@
             android:layout_weight="1"
             android:background="@drawable/btn_filleted_corner"
             android:padding="5dp"
+            android:visibility="gone"
             android:text="上传"
             android:textColor="#FFFFFF"
             android:textSize="24sp" />

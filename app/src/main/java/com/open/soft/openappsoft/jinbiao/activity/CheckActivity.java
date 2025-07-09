@@ -2306,7 +2306,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             project_name_list[0] = result_list.get(0).project_name;
         }
 
-        CardCompanyModel cardModel = new CardCompanyModel("奥本", selectedProject.getScanStart(), selectedProject.getScanEnd(), selectedProject.getCTWidth(), selectedProject.getCTDistance());
+        CardCompanyModel cardModel = new CardCompanyModel("益格", selectedProject.getScanStart(), selectedProject.getScanEnd(), selectedProject.getCTWidth(), selectedProject.getCTDistance());
         // 向数据库保存检测项目的数据
         for (int i = 0; i < result_list.size(); i++) {
             project_name_list = insert(project_name_list, result_list.get(i).project_name);
@@ -2559,7 +2559,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 
                 int int1 = (imageData[2 * i] & 0xff) << 8;
                 value = int1 + (imageData[2 * i + 1] & 0xff);
-                Timber.i("ff=" + ff + " value=" + value);
+//                Timber.i("ff=" + ff + " value=" + value);
             }
             temp += (img + "\n");
             showResult(temp);

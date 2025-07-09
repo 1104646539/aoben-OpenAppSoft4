@@ -496,7 +496,7 @@ public class TSDialogFragmentDemo2 extends GT.GT_Dialog.BaseDialogFragment imple
         AreaId = com.example.utils.http.Global.admin_pt;
         String OperatorId = com.example.utils.http.Global.ID;
 
-        if ("信达安检测".equals(OperatorId)) {
+        if ("益格检测".equals(OperatorId)) {
             OperatorId = "TangshanNM";
         }
 

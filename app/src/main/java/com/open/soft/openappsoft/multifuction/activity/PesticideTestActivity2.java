@@ -3154,7 +3154,7 @@ public class PesticideTestActivity2 extends TestActivity implements View.OnClick
         }
 
 
-        CardCompanyModel cardModel = new CardCompanyModel("奥本", "320", "920", "140", "320");
+        CardCompanyModel cardModel = new CardCompanyModel("益格", "320", "920", "140", "320");
 
         // 向数据库保存检测项目的数据
         for (int i = 0; i < savaDatas.size(); i++) {

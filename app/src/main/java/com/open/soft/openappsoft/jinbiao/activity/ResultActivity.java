@@ -137,7 +137,7 @@ public class ResultActivity extends BaseActivity {
     private void change_projectname_list(){
         String concentrateUnit = "μg/kg";
         ArrayList<LineModel> list = new ArrayList<>();
-        CardCompanyModel cardModel = new CardCompanyModel("奥本", "200", "800", "120", "290");
+        CardCompanyModel cardModel = new CardCompanyModel("益格", "200", "800", "120", "290");
 
         // 向数据库保存检测项目的数据
         for(int i=0;i<result_list.size();i++){

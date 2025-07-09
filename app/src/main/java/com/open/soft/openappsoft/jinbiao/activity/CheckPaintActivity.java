@@ -2800,7 +2800,7 @@ public class CheckPaintActivity extends AppCompatActivity implements View.OnClic
             project_name_list[0] = result_list.get(0).project_name;
         }
 
-        CardCompanyModel cardModel = new CardCompanyModel("奥本", selectedProject.getScanStart(), selectedProject.getScanEnd(), selectedProject.getCTWidth(), selectedProject.getCTDistance());
+        CardCompanyModel cardModel = new CardCompanyModel("益格", selectedProject.getScanStart(), selectedProject.getScanEnd(), selectedProject.getCTWidth(), selectedProject.getCTDistance());
 
         // 向数据库保存检测项目的数据
         for (int i = 0; i < result_list.size(); i++) {

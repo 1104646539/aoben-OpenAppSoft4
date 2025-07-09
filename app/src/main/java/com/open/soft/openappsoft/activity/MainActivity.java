@@ -258,14 +258,14 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
 
         // 百度定位
-        locationService = new LocationService(getApplicationContext());
-        locationService.registerListener(mListener);
-        if (Global.isLocalLogin) {
-            showLocation("未定位");
-        } else {
-            locationService.start();
-            showLocation("");
-        }
+//        locationService = new LocationService(getApplicationContext());
+//        locationService.registerListener(mListener);
+//        if (Global.isLocalLogin) {
+//            showLocation("未定位");
+//        } else {
+//            locationService.start();
+//            showLocation("");
+//        }
 
         // 注册广播(百度)
         locationReceiver = new LocationReceiver();
@@ -902,7 +902,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         }.start();
     }
 
-    CardCompanyModel cardModel = new CardCompanyModel("信达安检测", "300", "900", "120", "330");
+    CardCompanyModel cardModel = new CardCompanyModel("益格检测", "300", "900", "120", "330");
 
     /**
      * 初始化项目
@@ -1378,7 +1378,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             prints_check.add(new Print("商品来源", true, false, false));
             prints_check.add(new Print("检测限", true, false, false));
             prints_check.add(new Print("检测单位", true, false, false));
-            prints_check.add(new Print("检测人员", true, false, false));
+//            prints_check.add(new Print("检测人员", true, false, false));
 //            prints_check.add(new Print("检测限", true, true, false));
 
             prints_data_manager.add(new Print("检测时间", true, true, true));
@@ -1388,7 +1388,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             prints_data_manager.add(new Print("通道号", true, true, true));
             prints_data_manager.add(new Print("受检单位", true, true, true));
             prints_data_manager.add(new Print("检测单位", true, true, false));
-            prints_data_manager.add(new Print("检测人员", true, true, false));
+//            prints_data_manager.add(new Print("检测人员", true, true, false));
 //            prints_data_manager.add(new Print("商品来源", true, false, false));
             prints_data_manager.add(new Print("样品编号", true, true, true));
             prints_data_manager.add(new Print("重量", true, false, false));

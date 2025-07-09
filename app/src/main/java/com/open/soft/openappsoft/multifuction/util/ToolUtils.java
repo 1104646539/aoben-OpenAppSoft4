@@ -289,8 +289,8 @@ public class ToolUtils {
                 sb.append(result.sampleType + "\n");
 
                 //if (isPrint_checkp) {
-                sb.append("检测人员:");
-                sb.append(com.example.utils.http.Global.NAME + "\n");
+//                sb.append("检测人员:");
+//                sb.append(com.example.utils.http.Global.NAME + "\n");
                 //}
 
                 //if (isPrint_checkedOrganization) {
@@ -430,10 +430,10 @@ public class ToolUtils {
                     sb.append("检测单位:");
                     sb.append(result.checkedOrganization + "\n");
                 }
-                if (isPrint_checkp) {
-                    sb.append("检测人员:");
-                    sb.append(result.checker + "\n");
-                }
+//                if (isPrint_checkp) {
+//                    sb.append("检测人员:");
+//                    sb.append(result.checker + "\n");
+//                }
                 sb.append("样品类型:");
                 sb.append(result.sampleType + "\n");
                 sb.append("样品名称:");
@@ -519,10 +519,10 @@ public class ToolUtils {
 
                 sb.append("\n\n");
             }
-            if (isPrint_checkp) {
-                sb.append("检测人员:");
-                sb.append(resultList.get(0).checker + "\n");
-            }
+//            if (isPrint_checkp) {
+//                sb.append("检测人员:");
+//                sb.append(resultList.get(0).checker + "\n");
+//            }
             if (isPrint_checkedOrganization) {
                 sb.append("检测单位:");
                 sb.append(resultList.get(0).checkedOrganization + "\n");
@@ -574,8 +574,8 @@ public class ToolUtils {
             sb.append(result.projectName + "\n");
             sb.append("检测通道:");
             sb.append(result.channel + "\n");
-            sb.append("检测人员:");
-            sb.append(result.checker + "\n");
+//            sb.append("检测人员:");
+//            sb.append(result.checker + "\n");
             sb.append("临界值:");
             sb.append(result.xlz + "\n");
             sb.append("检测值:");
