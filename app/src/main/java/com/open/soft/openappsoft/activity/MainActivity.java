@@ -376,13 +376,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         public void onReceive(Context context, Intent intent) {
             if (intent != null) {
                 String locationMessage = intent.getStringExtra("locationMessage");
-                if ("开始定位".equals(locationMessage)) {
-                    //启动定位
-                    locationService.start();
-                } else if ("停止定位".equals(locationMessage)) {
-                    //停止定位
-                    locationService.stop();
-                }
+//                if ("开始定位".equals(locationMessage)) {
+//                    //启动定位
+//                    locationService.start();
+//                } else if ("停止定位".equals(locationMessage)) {
+//                    //停止定位
+//                    locationService.stop();
+//                }
             }
 
         }
