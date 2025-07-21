@@ -1459,7 +1459,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         resultModel.project_name = selectedProject.getName();
 //        resultModel.sample_unit = sampleUnit_model.getName();
         resultModel.xian = etJcx.getText().toString() + selectedProject.ConcentrateUnit;
-        resultModel.lin = etLjz.getText().toString() ;
+        resultModel.lin = etLjz.getText().toString();
         resultModel.check_value = etDr.getText().toString() + selectedProject.ConcentrateUnit;
         resultModel.style_long = etConcentrate.getText().toString() + selectedProject.ConcentrateUnit;
         resultModel.check_result = result;
@@ -1569,6 +1569,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
                 case 1:
                     move_time.setText("" + recLen + "S后开始检测");
                     if (recLen < 0) {
+                        clickTimeClick = false;
                         taskTime.cancel();
 //                        timerRe.cancel();
 //                        timerRe = null;
@@ -1619,7 +1620,10 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
      * @param v
      */
     public void ClickStart(View v) {
-
+        if (clickTimeClick && v != null) {
+            APPUtils.showToast(CheckActivity.this, "检测中，请稍后...");
+            return;
+        }
         //如果还在扫描二维码时，不许再点击即时检测
         if (isTest) {
             APPUtils.showToast(CheckActivity.this, "检测中，请稍后...");
@@ -2038,6 +2042,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         }
         handler.sendEmptyMessage(100);//关闭定时器
     }
+
     String failedMsg = "";
 
     private void uploadResult() {
@@ -2083,13 +2088,14 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
             com.open.soft.openappsoft.util.APPUtils.showToast(this, "未检测");
         }
     }
+
     private void ShowUploadResultDialog(int count, int successCount, int failedCount, String failedMsg) {
         String msg = "";
 
         //全都成功
         msg = "本次上传共" + count + "条数据,上传成功" + successCount + "条，失败" + failedCount + "条。";
         if (!failedMsg.isEmpty()) {
-            msg +="\n失败原因\n"+ failedMsg;
+            msg += "\n失败原因\n" + failedMsg;
         }
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setTitle("上传结果")
@@ -2102,6 +2108,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
                 }).create();
         alertDialog.show();
     }
+
     public boolean isNumeric(String str) {
 
         {
@@ -2224,12 +2231,19 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
         startActivity(intent);
     }
 
+    boolean clickTimeClick = false;
+
+
     /**
      * 定时检测
      */
     private void timeCheck() {
+        if (clickTimeClick) {
+            return;
+        }
+        clickTimeClick = true;
         recLen = SharedPreferencesUtil.getTime(getApplicationContext(), "time") * 60;
-        if(com.open.soft.openappsoft.multifuction.util.Global.DEBUG){
+        if (com.open.soft.openappsoft.multifuction.util.Global.DEBUG) {
             recLen = 5;
         }
         taskTime = new MytaskTime();
