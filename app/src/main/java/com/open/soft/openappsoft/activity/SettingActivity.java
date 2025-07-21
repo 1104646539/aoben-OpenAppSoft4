@@ -37,6 +37,7 @@ import com.open.soft.openappsoft.jinbiao.model.CompanyNameRootBean;
 import com.open.soft.openappsoft.jinbiao.model.SharedPreferencesUtil;
 import com.open.soft.openappsoft.multifuction.activity.SystemSettingActivity2;
 import com.open.soft.openappsoft.multifuction.dialog.EditURLDialog;
+import com.open.soft.openappsoft.multifuction.dialog.SetStandardDialog;
 import com.open.soft.openappsoft.multifuction.dialog.SetTitleDialog;
 import com.open.soft.openappsoft.multifuction.dialog.UploadingDialog;
 import com.open.soft.openappsoft.multifuction.resource.SPResource;
@@ -54,6 +55,7 @@ public class SettingActivity extends Activity implements View.OnClickListener {
     private Button btn_open_3;
     private Button btn_open_4;
     private Button btn_open_5;
+    private Button btn_open_6;
     private Button btn_pdf;
     private Button btn_video;
     private Button btn_sample_type_main, btn_sample_type_child, btn_bcheck_ori, btn_check_ori, btn_sample;
@@ -70,6 +72,7 @@ public class SettingActivity extends Activity implements View.OnClickListener {
     EditURLDialog editURLDialog;
     EditURLDialog editPswDialog;
     SetTitleDialog setTitleDialog;
+    SetStandardDialog setStandardDialog;
 
 
     @Override
@@ -83,6 +86,7 @@ public class SettingActivity extends Activity implements View.OnClickListener {
         btn_open_3 = (Button) findViewById(R.id.btn_open_3);
         btn_open_4 = (Button) findViewById(R.id.btn_open_4);
         btn_open_5 = (Button) findViewById(R.id.btn_open_5);
+        btn_open_6 = (Button) findViewById(R.id.btn_open_6);
         btn_pdf = (Button) findViewById(R.id.btn_pdf);
         btn_video = (Button) findViewById(R.id.btn_video);
         btn_sample_type_main = (Button) findViewById(R.id.btn_sample_type_main);
@@ -101,6 +105,7 @@ public class SettingActivity extends Activity implements View.OnClickListener {
         btn_open_3.setOnClickListener(this);
         btn_open_4.setOnClickListener(this);
         btn_open_5.setOnClickListener(this);
+        btn_open_6.setOnClickListener(this);
         btn_bcheck_ori.setOnClickListener(this);
         btn_check_ori.setOnClickListener(this);
         btn_sample_type_main.setOnClickListener(this);
@@ -179,6 +184,19 @@ public class SettingActivity extends Activity implements View.OnClickListener {
                 public void onConfirmPw(String pw) {
                     InterfaceURL.oneModule = pw;
                     SharedPreferencesUtil.getDefaultSharedPreferences(SettingActivity.this).edit().putString("oneModule", pw).commit();
+                    Toast.makeText(SettingActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else if (v.getId() == R.id.btn_open_6) {
+            if (setStandardDialog == null) {
+                setStandardDialog = new SetStandardDialog(this);
+            }
+            setStandardDialog.showDialog("", InterfaceURL.standard, 1);
+            setStandardDialog.setOnConfirmListener(new SetStandardDialog.OnConfirmListener() {
+                @Override
+                public void onConfirmPw(String pw) {
+                    InterfaceURL.standard = pw;
+                    SharedPreferencesUtil.getDefaultSharedPreferences(SettingActivity.this).edit().putString("standard", pw).commit();
                     Toast.makeText(SettingActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
                 }
             });

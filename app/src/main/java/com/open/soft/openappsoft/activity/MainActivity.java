@@ -329,6 +329,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 //            initBook();
             initXlzMap();
         }
+        //检测依据
+        InterfaceURL.standard  = SharedPreferencesUtil.getDefaultSharedPreferences(this).getString("standard",InterfaceURL.standard);
 
         //是否模拟器测试
         if (!InterfaceURL.isSimulatorTest) {

@@ -390,7 +390,7 @@
                         android:id="@+id/move_time"
                         style="@style/checkactivity_button_style"
                         android:background="@drawable/main_change_btu_shape"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:text="定时检测" />
 
                     <Button

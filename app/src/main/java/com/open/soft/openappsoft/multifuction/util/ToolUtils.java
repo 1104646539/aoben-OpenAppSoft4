@@ -46,8 +46,6 @@ public class ToolUtils {
     private static final String TAG = "ToolUtils";
 
 
-
-
     // long转换为Date类型
     // currentTime要转换的long类型的时间
     // formatType要转换的时间格式yyyy-MM-dd HH:mm:ss//yyyy年MM月dd日 HH时mm分ss秒
@@ -202,8 +200,8 @@ public class ToolUtils {
                 isPrint_testStandard = false;
 
         String title = LoginActivity.sp_ServiceUrl.query("TitleSet").toString();
-        if(title.isEmpty() || title.equals("0")){
-            title=InterfaceURL.oneModule;
+        if (title.isEmpty() || title.equals("0")) {
+            title = InterfaceURL.oneModule;
         }
 
         if (isZT) {
@@ -232,7 +230,6 @@ public class ToolUtils {
             }
 
 
-
             for (int i = 0; i < resultList.size(); i++) {
                 CheckResult result = resultList.get(i);
                 Log.d(TAG, "result=" + result.toString());
@@ -254,6 +251,9 @@ public class ToolUtils {
                 }
                 sb.append(result.testValue + "\n");
 
+                if ("有机磷和氨基甲酸酯类".equals(result.projectName)) {
+                    sb.append("检测依据:" + InterfaceURL.standard + "\n");
+                }
                 //if (isPrint_standardValue) {
                 sb.append("检测限:");
                 sb.append(result.xlz + "\n");
@@ -301,7 +301,7 @@ public class ToolUtils {
                 sb.append("通道号:");
                 sb.append(result.channel + "\n");
 
-                sb.append(title+"\n");
+                sb.append(title + "\n");
                 sb.append("\n\n");
 //                if (isPrint_testStandard) {
 //                    sb.append("检测限:");
@@ -353,6 +353,7 @@ public class ToolUtils {
 
                 sb.append("\n\n");
             }
+
             if (isPrint_standardValue) {
                 sb.append("检测限:" + "");
                 sb.append(resultList.get(0).xlz + "\n");
@@ -373,7 +374,7 @@ public class ToolUtils {
         SPUtils spUtils = new SPUtils(sp);
         List<Print> prints = spUtils.getDataList(SPResource.KEY_PRINT_DATA_MANAGER_DATA);
 
-        if(prints == null) return null;
+        if (prints == null) return null;
 
         boolean isZt = sp.getBoolean(SPResource.KEY_PRINT_DATA_MANAGER, true);
 
@@ -393,8 +394,8 @@ public class ToolUtils {
                 isPrint_testStandard = false;
 
         String title = LoginActivity.sp_ServiceUrl.query("TitleSet").toString();
-        if(title.isEmpty() || title.equals("0")){
-            title=InterfaceURL.oneModule;
+        if (title.isEmpty() || title.equals("0")) {
+            title = InterfaceURL.oneModule;
         }
 
         if (isZT) {//逐条打印
@@ -423,7 +424,7 @@ public class ToolUtils {
             for (int i = 0; i < resultList.size(); i++) {
                 CheckResult result = resultList.get(i);
                 sb.append("\n\n\n");
-                sb.append(title+"\n");
+                sb.append(title + "\n");
                 sb.append("通道号:");
                 sb.append(result.channel + "\n");
                 if (isPrint_checkedOrganization) {

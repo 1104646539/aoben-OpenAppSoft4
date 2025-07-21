@@ -2229,6 +2229,9 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
      */
     private void timeCheck() {
         recLen = SharedPreferencesUtil.getTime(getApplicationContext(), "time") * 60;
+        if(com.open.soft.openappsoft.multifuction.util.Global.DEBUG){
+            recLen = 5;
+        }
         taskTime = new MytaskTime();
         timer = new Timer();
         timer.schedule(taskTime, 0, 1000);
