@@ -455,8 +455,8 @@ public class ToolUtils {
 //		sb.append("检 测 值：");
 //		sb.append(model.check_value + "\n");
 
-        sb.append("检 验 员：");
-        sb.append(model.persion + "\n");
+//        sb.append("检 验 员：");
+//        sb.append(model.persion + "\n");
         //if(model.id != 0) {
         //	sb.append("检测流水号：");
         //	sb.append(model.id + "\n");

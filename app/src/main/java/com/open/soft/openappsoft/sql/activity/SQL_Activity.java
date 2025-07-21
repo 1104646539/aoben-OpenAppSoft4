@@ -992,14 +992,14 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
         sb.append(detectionResultBean.getSpecimenType() + "\n");
 //        sb.append("检 验 员：");
 //        sb.append(detectionResultBean.getInspector() + "\n");
-        if (detectionResultBean.getInspector().length() > 11) {
-            sb.append(detectionResultBean.getInspector().substring(11) + "\n");
-            sb.append("检 验 员：");
-            sb.append(detectionResultBean.getInspector().substring(0, 11) + "\n");
-        } else {
-            sb.append("检 验 员：");
-            sb.append(detectionResultBean.getInspector() + "\n");
-        }
+//        if (detectionResultBean.getInspector().length() > 11) {
+//            sb.append(detectionResultBean.getInspector().substring(11) + "\n");
+//            sb.append("检 验 员：");
+//            sb.append(detectionResultBean.getInspector().substring(0, 11) + "\n");
+//        } else {
+//            sb.append("检 验 员：");
+//            sb.append(detectionResultBean.getInspector() + "\n");
+//        }
 
 
         if (detectionResultBean.getDetectionCompany().length() > 11) {
@@ -1106,9 +1106,6 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 
         sb.append("抑 制 率：");
         sb.append(detectionResultBean.getDetectionValue() + "\n");
-
-        sb.append("检 测 限：");
-        sb.append(detectionResultBean.getLimitStandard() + "\n");
 
         if ("有机磷和氨基甲酸酯类".equals(detectionResultBean.getTestItem())) {
             sb.append("检测依据:" + InterfaceURL.standard + "\n");
@@ -1232,14 +1229,14 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 
 //        sb.append("检 验 员：");
 //        sb.append(detectionResultBean.getInspector() + "\n");
-        if (detectionResultBean.getInspector().length() > 11) {
-            sb.append(detectionResultBean.getInspector().substring(11) + "\n");
-            sb.append("检 验 员：");
-            sb.append(detectionResultBean.getInspector().substring(0, 11) + "\n");
-        } else {
-            sb.append("检 验 员：");
-            sb.append(detectionResultBean.getInspector() + "\n");
-        }
+//        if (detectionResultBean.getInspector().length() > 11) {
+//            sb.append(detectionResultBean.getInspector().substring(11) + "\n");
+//            sb.append("检 验 员：");
+//            sb.append(detectionResultBean.getInspector().substring(0, 11) + "\n");
+//        } else {
+//            sb.append("检 验 员：");
+//            sb.append(detectionResultBean.getInspector() + "\n");
+//        }
 
         if (detectionResultBean.getDetectionCompany().length() > 11) {
             sb.append(detectionResultBean.getDetectionCompany().substring(11) + "\n");
