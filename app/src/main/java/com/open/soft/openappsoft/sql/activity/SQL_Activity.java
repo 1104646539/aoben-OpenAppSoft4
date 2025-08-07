@@ -1189,13 +1189,14 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
         sb.append("检测结果：");
         sb.append(detectionResultBean.getDetectionResult() + "\n");
 
+        sb.append("检 测 值：");
+        sb.append(detectionResultBean.getDetectionValue() + "\n");
+
         sb.append("检 测 限：");
         sb.append(detectionResultBean.getLimitStandard() + "\n");
 
         sb.append("样品编号：");
         sb.append(detectionResultBean.getNumberSamples() + "\n");
-        sb.append("受检单位：");
-        sb.append(detectionResultBean.getUnitsUnderInspection() + "\n");
 
 
         List list1 = getStrList1(detectionResultBean.getCommodityPlaceOrigin());
@@ -1241,13 +1242,16 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 //            sb.append("检测单位：");
 //            sb.append(detectionResultBean.getDetectionCompany().substring(0, 11) + "\n");
 //        } else {
+        sb.append("受检单位：");
+        sb.append(detectionResultBean.getUnitsUnderInspection() + "\n");
+
         sb.append("检测单位：");
         sb.append(detectionResultBean.getDetectionCompany() + "\n");
 //        }
 
 //        sb.append("通 道 号：");
 //        sb.append(detectionResultBean.getAisle() + "\n");
-        sb.append("\n" + title + "\n\n\n\n");
+        sb.append(title + "\n\n\n\n");
         sb.append("\n\n");
 
         return sb.toString();

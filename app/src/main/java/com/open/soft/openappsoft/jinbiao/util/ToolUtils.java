@@ -514,10 +514,10 @@ public class ToolUtils {
         sb.append(model.check_result + "\n");
 
         sb.append("检 测 值：");
-        sb.append(model.check_value + model.concentrateUnit + "\n");
+        sb.append(model.check_value  + "\n");
 
         sb.append("检 测 限：");
-        sb.append(model.xian + model.concentrateUnit + "\n");
+        sb.append(model.xian  + "\n");
 
 //        sb.append("样品编号：");
 //        sb.append(model.sample_number + "\n");
