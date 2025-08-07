@@ -922,7 +922,7 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
         //全都成功
         msg = "本次上传共" + count + "条数据,上传成功" + successCount + "条，失败" + failedCount + "条。";
         if (!failedMsg.isEmpty()) {
-            msg +="\n失败原因\n"+ failedMsg;
+            msg += "\n失败原因\n" + failedMsg;
         }
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setTitle("上传结果")
@@ -935,6 +935,7 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
                 }).create();
         alertDialog.show();
     }
+
     // 胶体金数据打印[朝外打印]
     public static String GetPrintInfo1(DetectionResultBean detectionResultBean, Context context) {
         String title = LoginActivity.sp_ServiceUrl.query("TitleSet").toString();
@@ -992,24 +993,24 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
         sb.append(detectionResultBean.getSpecimenType() + "\n");
 //        sb.append("检 验 员：");
 //        sb.append(detectionResultBean.getInspector() + "\n");
-        if (detectionResultBean.getInspector().length() > 11) {
-            sb.append(detectionResultBean.getInspector().substring(11) + "\n");
-            sb.append("检 验 员：");
-            sb.append(detectionResultBean.getInspector().substring(0, 11) + "\n");
-        } else {
+//        if (detectionResultBean.getInspector().length() > 11) {
+//            sb.append(detectionResultBean.getInspector().substring(11) + "\n");
+//            sb.append("检 验 员：");
+//            sb.append(detectionResultBean.getInspector().substring(0, 11) + "\n");
+//        } else {
             sb.append("检 验 员：");
             sb.append(detectionResultBean.getInspector() + "\n");
-        }
+//        }
 
 
-        if (detectionResultBean.getDetectionCompany().length() > 11) {
-            sb.append(detectionResultBean.getDetectionCompany().substring(11) + "\n");
-            sb.append("检测单位：");
-            sb.append(detectionResultBean.getDetectionCompany().substring(0, 11) + "\n");
-        } else {
+//        if (detectionResultBean.getDetectionCompany().length() > 11) {
+//            sb.append(detectionResultBean.getDetectionCompany().substring(11) + "\n");
+//            sb.append("检测单位：");
+//            sb.append(detectionResultBean.getDetectionCompany().substring(0, 11) + "\n");
+//        } else {
             sb.append("检测单位：");
             sb.append(detectionResultBean.getDetectionCompany() + "\n");
-        }
+//        }
 
         sb.append("\n" + title + "\n");
         sb.append("\n\n\n\n");
@@ -1145,23 +1146,23 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 
 //        sb.append("检 验 员：");
 //        sb.append(detectionResultBean.getInspector() + "\n");
-        if (detectionResultBean.getInspector().length() > 11) {
-            sb.append(detectionResultBean.getInspector().substring(11) + "\n");
-            sb.append("检 验 员：");
-            sb.append(detectionResultBean.getInspector().substring(0, 11) + "\n");
-        } else {
+//        if (detectionResultBean.getInspector().length() > 11) {
+//            sb.append(detectionResultBean.getInspector().substring(11) + "\n");
+//            sb.append("检 验 员：");
+//            sb.append(detectionResultBean.getInspector().substring(0, 11) + "\n");
+//        } else {
             sb.append("检 验 员：");
             sb.append(detectionResultBean.getInspector() + "\n");
-        }
+//        }
 
-        if (detectionResultBean.getDetectionCompany().length() > 11) {
-            sb.append(detectionResultBean.getDetectionCompany().substring(11) + "\n");
-            sb.append("检测单位：");
-            sb.append(detectionResultBean.getDetectionCompany().substring(0, 11) + "\n");
-        } else {
+//        if (detectionResultBean.getDetectionCompany().length() > 11) {
+//            sb.append(detectionResultBean.getDetectionCompany().substring(11) + "\n");
+//            sb.append("检测单位：");
+//            sb.append(detectionResultBean.getDetectionCompany().substring(0, 11) + "\n");
+//        } else {
             sb.append("检测单位：");
             sb.append(detectionResultBean.getDetectionCompany() + "\n");
-        }
+//        }
 
         sb.append("通 道 号：");
         sb.append(detectionResultBean.getAisle() + "\n");
@@ -1226,26 +1227,26 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 
 //        sb.append("检 验 员：");
 //        sb.append(detectionResultBean.getInspector() + "\n");
-        if (detectionResultBean.getInspector().length() > 11) {
-            sb.append(detectionResultBean.getInspector().substring(11) + "\n");
-            sb.append("检 验 员：");
-            sb.append(detectionResultBean.getInspector().substring(0, 11) + "\n");
-        } else {
-            sb.append("检 验 员：");
-            sb.append(detectionResultBean.getInspector() + "\n");
-        }
+//        if (detectionResultBean.getInspector().length() > 11) {
+//            sb.append(detectionResultBean.getInspector().substring(11) + "\n");
+//            sb.append("检 验 员：");
+//            sb.append(detectionResultBean.getInspector().substring(0, 11) + "\n");
+//        } else {
+        sb.append("检 验 员：");
+        sb.append(detectionResultBean.getInspector() + "\n");
+//        }
 
-        if (detectionResultBean.getDetectionCompany().length() > 11) {
-            sb.append(detectionResultBean.getDetectionCompany().substring(11) + "\n");
-            sb.append("检测单位：");
-            sb.append(detectionResultBean.getDetectionCompany().substring(0, 11) + "\n");
-        } else {
-            sb.append("检测单位：");
-            sb.append(detectionResultBean.getDetectionCompany() + "\n");
-        }
+//        if (detectionResultBean.getDetectionCompany().length() > 11) {
+//            sb.append(detectionResultBean.getDetectionCompany().substring(11) + "\n");
+//            sb.append("检测单位：");
+//            sb.append(detectionResultBean.getDetectionCompany().substring(0, 11) + "\n");
+//        } else {
+        sb.append("检测单位：");
+        sb.append(detectionResultBean.getDetectionCompany() + "\n");
+//        }
 
-        sb.append("通 道 号：");
-        sb.append(detectionResultBean.getAisle() + "\n");
+//        sb.append("通 道 号：");
+//        sb.append(detectionResultBean.getAisle() + "\n");
         sb.append("\n" + title + "\n\n\n\n");
         sb.append("\n\n");
 

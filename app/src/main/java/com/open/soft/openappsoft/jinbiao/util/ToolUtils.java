@@ -364,24 +364,26 @@ public class ToolUtils {
             sb.append(model.persion + "\n");
         }
         //20250107 添加受检单位(商品来源字段)
-        if (model.sample_unit.length() > 11) {
-            sb.append(model.sample_unit.substring(11) + "\n");
-            sb.append("受检单位：");
-            sb.append(model.sample_unit.substring(0, 11) + "\n");
-        } else {
-            sb.append("受检单位：");
-            sb.append(model.sample_unit + "\n");
-        }
+//        if (model.sample_unit.length() > 11) {
+//            sb.append(model.sample_unit.substring(11) + "\n");
+        sb.append("受检单位：");
+        sb.append(model.sample_unit + "\n");
+//            sb.append(model.sample_unit.substring(0, 11) + "\n");
+//        } else {
+//            sb.append("受检单位：");
+//            sb.append(model.sample_unit + "\n");
+//        }
 
 //判断打印检测单位名称是否换行
-        if (model.company_name.length() > 11) {
-            sb.append(model.company_name.substring(11) + "\n");
-            sb.append("检测单位：");
-            sb.append(model.company_name.substring(0, 11) + "\n");
-        } else {
-            sb.append("检测单位：");
-            sb.append(model.company_name + "\n");
-        }
+//        if (model.company_name.length() > 11) {
+//            sb.append(model.company_name.substring(11) + "\n");
+        sb.append("检测单位：");
+//            sb.append(model.company_name.substring(0, 11) + "\n");
+        sb.append(model.company_name + "\n");
+//        } else {
+//            sb.append("检测单位：");
+//            sb.append(model.company_name + "\n");
+//        }
 
 
         sb.append(title + "\n\n\n");
@@ -423,15 +425,15 @@ public class ToolUtils {
         sb.append(model.check_result + "\n");
 
         sb.append("检 测 值：");
-        sb.append(model.check_value  + "\n");
+        sb.append(model.check_value + "\n");
 
         if (!"2".equals(testType)) {
             sb.append("样品浓度：");
-            sb.append(model.style_long  + "\n");
+            sb.append(model.style_long + "\n");
         }
 
         sb.append("检 测 限：");
-        sb.append(model.xian  + "\n");
+        sb.append(model.xian + "\n");
 
 //        sb.append("样品编号：");
 //        sb.append(model.sample_number + "\n");
@@ -463,25 +465,27 @@ public class ToolUtils {
         //}
 
         //20250107 添加受检单位(商品来源字段)
-        if (model.sample_unit.length() > 11) {
-            sb.append(model.sample_unit.substring(11) + "\n");
-            sb.append("受检单位：");
-            sb.append(model.sample_unit.substring(0, 11) + "\n");
-        } else {
+//        if (model.sample_unit.length() > 11) {
+//            sb.append(model.sample_unit.substring(11) + "\n");
         sb.append("受检单位：");
         sb.append(model.sample_unit + "\n");
-        }
+//            sb.append(model.sample_unit.substring(0, 11) + "\n");
+//        } else {
+//            sb.append("受检单位：");
+//            sb.append(model.sample_unit + "\n");
+//        }
 
-//		sb.append("检测单位：");
+		sb.append("检测单位：");
 //		sb.append(model.company_name +"\n");
-        if (model.company_name.length() > 11) {
-            sb.append(model.company_name.substring(11) + "\n");
-            sb.append("检测单位：");
-            sb.append(model.company_name.substring(0, 11) + "\n");
-        } else {
-            sb.append("检测单位：");
-            sb.append(model.company_name + "\n");
-        }
+        sb.append(model.company_name + "\n");
+//        if (model.company_name.length() > 11) {
+//            sb.append(model.company_name.substring(11) + "\n");
+//            sb.append("检测单位：");
+//            sb.append(model.company_name.substring(0, 11) + "\n");
+//        } else {
+//            sb.append("检测单位：");
+//            sb.append(model.company_name + "\n");
+//        }
 
 
         sb.append(title + "\n\n\n");
