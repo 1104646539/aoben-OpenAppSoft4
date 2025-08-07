@@ -47,6 +47,9 @@ public class SerialUtils {
                     Global.DEV_COM4 = dev;
                 }
             }
+            if (Global.DEV_COM4 > -1) {
+                COM4_SendData(new byte[]{0x1B, 0x63, 0x00});
+            }
         } catch (UnsatisfiedLinkError e) {
             Timber.d("打开串口失败");
         }
@@ -102,14 +105,15 @@ public class SerialUtils {
 
     /**
      * 读取COM3接收到的数据
+     *
      * @return
      */
-    public static synchronized byte[] COM3_RevData(){
+    public static synchronized byte[] COM3_RevData() {
 
         byte[] rec = new byte[1024];
         int len = HardwareControler.read(Global.DEV_COM3, rec, rec.length);
 
-        if(len == 0){
+        if (len == 0) {
             return null;
         }
         byte[] data = new byte[len];
