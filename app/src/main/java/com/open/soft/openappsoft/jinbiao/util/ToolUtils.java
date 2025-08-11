@@ -413,27 +413,35 @@ public class ToolUtils {
         }
 
         StringBuffer sb = new StringBuffer();
-
-        sb.append("\n\n\n");
-
-        sb.append("检测时间：");
-        sb.append(ToolUtils.dateToString(ToolUtils.longToDate(
-                        model.time, "yyyy-MM-dd HH:mm:ss"),
-                "yyyy-MM-dd HH:mm:ss") + "\n");
-
-        sb.append("检测结果：");
-        sb.append(model.check_result + "\n");
-
-        sb.append("检 测 值：");
+        sb.append("\n       检测报告单       \n");
+        sb.append("检测单位：");
+        sb.append(model.company_name + "\n");
+        sb.append("检测员：");
+        sb.append(model.persion + "\n");
+        sb.append("受检单位：");
+        sb.append(model.sample_unit + "\n");
+        sb.append("样品类型：");
+        sb.append(model.sample_type + "\n");
+        sb.append("样品名称：");
+        sb.append(model.sample_name + "\n");
+        sb.append("样品编号：");
+        sb.append(model.taskID + "\n");
+        sb.append("检测项目：");
+        sb.append(model.project_name + "\n");
+        sb.append("检测限：");
+        sb.append(model.xian + "\n");
+        sb.append("检测值：");
         sb.append(model.check_value + "\n");
-
         if (!"2".equals(testType)) {
             sb.append("样品浓度：");
             sb.append(model.style_long + "\n");
         }
-
-        sb.append("检 测 限：");
-        sb.append(model.xian + "\n");
+        sb.append("检测结果：");
+        sb.append(model.check_result + "\n");
+        sb.append("检测时间：");
+        sb.append(ToolUtils.dateToString(ToolUtils.longToDate(
+                        model.time, "yyyy-MM-dd HH:mm:ss"),
+                "yyyy-MM-dd HH:mm:ss") + "\n");
 
 //        sb.append("样品编号：");
 //        sb.append(model.sample_number + "\n");
@@ -441,24 +449,12 @@ public class ToolUtils {
 //
 //        sb.append("样品来源：");
 //        sb.append(model.sample_unit + "\n");
-        sb.append("样品编号：");
-        sb.append(model.taskID + "\n");
 
-        sb.append("检测项目：");
-        sb.append(model.project_name + "\n");
-
-        sb.append("样品名称：");
-        sb.append(model.sample_name + "\n");
-
-
-        sb.append("样品类型：");
-        sb.append(model.sample_type + "\n");
 
 //		sb.append("检 测 值：");
 //		sb.append(model.check_value + "\n");
 
-        sb.append("检 验 员：");
-        sb.append(model.persion + "\n");
+
         //if(model.id != 0) {
         //	sb.append("检测流水号：");
         //	sb.append(model.id + "\n");
@@ -467,17 +463,14 @@ public class ToolUtils {
         //20250107 添加受检单位(商品来源字段)
 //        if (model.sample_unit.length() > 11) {
 //            sb.append(model.sample_unit.substring(11) + "\n");
-        sb.append("受检单位：");
-        sb.append(model.sample_unit + "\n");
+
 //            sb.append(model.sample_unit.substring(0, 11) + "\n");
 //        } else {
 //            sb.append("受检单位：");
 //            sb.append(model.sample_unit + "\n");
 //        }
 
-		sb.append("检测单位：");
-//		sb.append(model.company_name +"\n");
-        sb.append(model.company_name + "\n");
+
 //        if (model.company_name.length() > 11) {
 //            sb.append(model.company_name.substring(11) + "\n");
 //            sb.append("检测单位：");
@@ -488,7 +481,7 @@ public class ToolUtils {
 //        }
 
 
-        sb.append(title + "\n\n\n");
+//        sb.append(title + "\n\n\n");
 
         sb.append("\n\n\n");
 
@@ -496,28 +489,37 @@ public class ToolUtils {
     }
 
     public static String GetPrintInfo3(ResultModel model) {
-        String title = LoginActivity.sp_ServiceUrl.query("TitleSet").toString();
-        if (title.isEmpty() || title.equals("0")) {
-            title = InterfaceURL.oneModule;
-        }
+//        String title = LoginActivity.sp_ServiceUrl.query("TitleSet").toString();
+//        if (title.isEmpty() || title.equals("0")) {
+//            title = InterfaceURL.oneModule;
+//        }
 
         StringBuffer sb = new StringBuffer();
-
-        sb.append("\n\n\n");
-
+        sb.append("\n       检测报告单       \n");
+        sb.append("检测单位：");
+        sb.append(model.company_name + "\n");
+        sb.append("检测员：");
+        sb.append(model.persion + "\n");
+        sb.append("受检单位：");
+        sb.append(model.sample_unit + "\n");
+        sb.append("样品类型：");
+        sb.append(model.sample_type + "\n");
+        sb.append("样品名称：");
+        sb.append(model.sample_name + "\n");
+        sb.append("样品编号：");
+        sb.append(model.taskID + "\n");
+        sb.append("检测项目：");
+        sb.append(model.project_name + "\n");
+        sb.append("检测限：");
+        sb.append(model.xian + "\n");
+        sb.append("检测值：");
+        sb.append(model.check_value + "\n");
+        sb.append("判定结果：");
+        sb.append(model.check_result + "\n");
         sb.append("检测时间：");
         sb.append(ToolUtils.dateToString(ToolUtils.longToDate(
                         model.time, "yyyy-MM-dd HH:mm:ss"),
                 "yyyy-MM-dd HH:mm:ss") + "\n");
-
-        sb.append("检测结果：");
-        sb.append(model.check_result + "\n");
-
-        sb.append("检 测 值：");
-        sb.append(model.check_value  + "\n");
-
-        sb.append("检 测 限：");
-        sb.append(model.xian  + "\n");
 
 //        sb.append("样品编号：");
 //        sb.append(model.sample_number + "\n");
@@ -526,23 +528,10 @@ public class ToolUtils {
 //        sb.append("样品来源：");
 //        sb.append(model.sample_unit + "\n");
 
-        sb.append("样品编号：");
-        sb.append(model.taskID + "\n");
-        sb.append("检测项目：");
-        sb.append(model.project_name + "\n");
-
-        sb.append("样品名称：");
-        sb.append(model.sample_name + "\n");
-
-
-        sb.append("样品类型：");
-        sb.append(model.sample_type + "\n");
 
 //		sb.append("检 测 值：");
 //		sb.append(model.check_value + "\n");
 
-        sb.append("检 验 员：");
-        sb.append(model.persion + "\n");
         //if(model.id != 0) {
         //	sb.append("检测流水号：");
         //	sb.append(model.id + "\n");
@@ -554,17 +543,11 @@ public class ToolUtils {
 //            sb.append("受检单位：");
 //            sb.append(model.sample_unit.substring(0, 11) + "\n");
 //        } else {
-        sb.append("受检单位：");
-        sb.append(model.sample_unit + "\n");
 //        }
 
 //		sb.append("检测单位：");
 //		sb.append(model.company_name +"\n");
-        sb.append("检测单位：");
-        sb.append(model.company_name + "\n");
 
-
-        sb.append(title + "\n\n\n");
 
         sb.append("\n\n\n");
 

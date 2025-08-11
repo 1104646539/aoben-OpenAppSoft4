@@ -943,31 +943,35 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
             title = InterfaceURL.oneModule;
         }
         StringBuffer sb = new StringBuffer("\n");
-
+        sb.append("\n       检测报告单       \n");
+        sb.append("检测单位：");
+        sb.append(detectionResultBean.getDetectionCompany() + "\n");
+        sb.append("检测员：");
+        sb.append(detectionResultBean.getInspector() + "\n");
+        sb.append("受检单位：");
+        sb.append(detectionResultBean.getUnitsUnderInspection() + "\n");
+        sb.append("样品类型：");
+        sb.append(detectionResultBean.getSpecimenType() + "\n");
+        sb.append("样品名称：");
+        sb.append(detectionResultBean.getSampleName() + "\n");
+        sb.append("样品编号：");
+        sb.append(detectionResultBean.getNumberSamples() + "\n");
+        sb.append("检测项目：");
+        sb.append(detectionResultBean.getTestItem() + "\n");
+        sb.append("检测限：");
+        sb.append(detectionResultBean.getLimitStandard() + "\n");
+        sb.append("检测值：");
+        sb.append(detectionResultBean.getDetectionValue() + "\n");
+        sb.append("检测结果：");
+        sb.append(detectionResultBean.getDetectionResult() + "\n");
         sb.append("检测时间：");
         sb.append(ToolUtils.dateToString(ToolUtils.longToDate(
                         detectionResultBean.getDetectionTime(), "yyyy-MM-dd HH:mm:ss"),
                 "yyyy-MM-dd HH:mm:ss") + "\n");
 
-        sb.append("检测结果：");
-        sb.append(detectionResultBean.getDetectionResult() + "\n");
-
-        sb.append("检 测 值：");
-        sb.append(detectionResultBean.getDetectionValue() + "\n");
-
-
-        sb.append("检 测 限：");
-        sb.append(detectionResultBean.getLimitStandard() + "\n");
-
-        sb.append("样品编号：");
-        sb.append(detectionResultBean.getNumberSamples() + "\n");
-        sb.append("受检单位：");
-        sb.append(detectionResultBean.getUnitsUnderInspection() + "\n");
-
-
-        List list1 = getStrList1(detectionResultBean.getCommodityPlaceOrigin());
-        Log.d("list1", list1.toString());
-        Log.d("list1.size() ", "" + list1.size() + "");
+//        List list1 = getStrList1(detectionResultBean.getCommodityPlaceOrigin());
+//        Log.d("list1", list1.toString());
+//        Log.d("list1.size() ", "" + list1.size() + "");
 
 //        if (0 < detectionResultBean.getCommodityPlaceOrigin().length() && detectionResultBean.getCommodityPlaceOrigin().length() <= 11) {
 //            sb.append("样品来源：");
@@ -983,14 +987,8 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 //            sb.append(list1.get(2) + "\n");
 //        }
 
-        sb.append("检测项目：");
-        sb.append(detectionResultBean.getTestItem() + "\n");
 
-        sb.append("样品名称：");
-        sb.append(detectionResultBean.getSampleName() + "\n");
 
-        sb.append("样品类型：");
-        sb.append(detectionResultBean.getSpecimenType() + "\n");
 //        sb.append("检 验 员：");
 //        sb.append(detectionResultBean.getInspector() + "\n");
 //        if (detectionResultBean.getInspector().length() > 11) {
@@ -998,8 +996,7 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 //            sb.append("检 验 员：");
 //            sb.append(detectionResultBean.getInspector().substring(0, 11) + "\n");
 //        } else {
-            sb.append("检 验 员：");
-            sb.append(detectionResultBean.getInspector() + "\n");
+
 //        }
 
 
@@ -1008,11 +1005,10 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 //            sb.append("检测单位：");
 //            sb.append(detectionResultBean.getDetectionCompany().substring(0, 11) + "\n");
 //        } else {
-            sb.append("检测单位：");
-            sb.append(detectionResultBean.getDetectionCompany() + "\n");
+
 //        }
 
-        sb.append("\n" + title + "\n");
+//        sb.append("\n" + title + "\n");
         sb.append("\n\n\n\n");
 //        sb.append("检 测 值：");
 //        sb.append(detectionResultBean.getDetectionValue() + "\n");
@@ -1090,31 +1086,41 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 
     // 分光光度数据打印[朝外打印]
     public static String GetPrintInfo2(DetectionResultBean detectionResultBean, Context context) {
-        StringBuffer sb = new StringBuffer("\n\n");
-
-        String title = LoginActivity.sp_ServiceUrl.query("TitleSet").toString();
-        if (title.isEmpty() || title.equals("0")) {
-            title = InterfaceURL.oneModule;
-        }
-        sb.append("\n\n");
+        StringBuffer sb = new StringBuffer();
+        sb.append("\n       检测报告单       \n");
+//        String title = LoginActivity.sp_ServiceUrl.query("TitleSet").toString();
+//        if (title.isEmpty() || title.equals("0")) {
+//            title = InterfaceURL.oneModule;
+//        }
+        sb.append("通 道 号：");
+        sb.append(detectionResultBean.getAisle() + "\n");
+        sb.append("检测单位：");
+        sb.append(detectionResultBean.getDetectionCompany() + "\n");
+        sb.append("检测员：");
+        sb.append(detectionResultBean.getInspector() + "\n");
+        sb.append("受检单位：");
+        sb.append(detectionResultBean.getUnitsUnderInspection() + "\n");
+        sb.append("样品类型：");
+        sb.append(detectionResultBean.getSpecimenType() + "\n");
+        sb.append("样品名称：");
+        sb.append(detectionResultBean.getNumberSamples() + "\n");
+        sb.append("样品编号：");
+        sb.append(detectionResultBean.getNumberSamples() + "\n");
+        sb.append("检测项目：");
+        sb.append(detectionResultBean.getTestItem() + "\n");
+        sb.append("检测限：");
+        sb.append(detectionResultBean.getLimitStandard() + "\n");
+        sb.append("检测值：");
+        sb.append(detectionResultBean.getDetectionValue() + "\n");
+        sb.append("结果判定：");
+        sb.append(detectionResultBean.getDetectionResult() + "\n");
         sb.append("检测时间：");
         sb.append(ToolUtils.dateToString(ToolUtils.longToDate(
                         detectionResultBean.getDetectionTime(), "yyyy-MM-dd HH:mm:ss"),
                 "yyyy-MM-dd HH:mm:ss") + "\n");
 
-        sb.append("检测结果：");
-        sb.append(detectionResultBean.getDetectionResult() + "\n");
 
-        sb.append("抑 制 率：");
-        sb.append(detectionResultBean.getDetectionValue() + "\n");
 
-        sb.append("检 测 限：");
-        sb.append(detectionResultBean.getLimitStandard() + "\n");
-
-//        sb.append("样品编号：");
-//        sb.append(detectionResultBean.getNumberSamples() + "\n");
-        sb.append("受检单位：");
-        sb.append(detectionResultBean.getUnitsUnderInspection() + "\n");
 
 
         List list1 = getStrList1(detectionResultBean.getCommodityPlaceOrigin());
@@ -1135,14 +1141,6 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 //            sb.append(list1.get(2) + "\n");
 //        }
 
-        sb.append("检测项目：");
-        sb.append(detectionResultBean.getTestItem() + "\n");
-
-        sb.append("样品名称：");
-        sb.append(detectionResultBean.getSampleName() + "\n");
-
-        sb.append("样品类型：");
-        sb.append(detectionResultBean.getSpecimenType() + "\n");
 
 //        sb.append("检 验 员：");
 //        sb.append(detectionResultBean.getInspector() + "\n");
@@ -1151,8 +1149,7 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 //            sb.append("检 验 员：");
 //            sb.append(detectionResultBean.getInspector().substring(0, 11) + "\n");
 //        } else {
-            sb.append("检 验 员：");
-            sb.append(detectionResultBean.getInspector() + "\n");
+
 //        }
 
 //        if (detectionResultBean.getDetectionCompany().length() > 11) {
@@ -1160,13 +1157,10 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 //            sb.append("检测单位：");
 //            sb.append(detectionResultBean.getDetectionCompany().substring(0, 11) + "\n");
 //        } else {
-            sb.append("检测单位：");
-            sb.append(detectionResultBean.getDetectionCompany() + "\n");
+
 //        }
 
-        sb.append("通 道 号：");
-        sb.append(detectionResultBean.getAisle() + "\n");
-        sb.append("\n" + title + "\n\n\n\n");
+
         sb.append("\n\n");
 
         return sb.toString();
@@ -1175,29 +1169,31 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
     // ATP数据打印[朝外打印]
     public static String GetPrintInfo5(DetectionResultBean detectionResultBean, Context context) {
         StringBuffer sb = new StringBuffer("\n\n");
-
-        String title = LoginActivity.sp_ServiceUrl.query("TitleSet").toString();
-        if (title.isEmpty() || title.equals("0")) {
-            title = InterfaceURL.oneModule;
-        }
-        sb.append("\n\n");
+        sb.append("\n       检测报告单       \n");
+        sb.append("检测单位：");
+        sb.append(detectionResultBean.getDetectionCompany() + "\n");
+        sb.append("检测员：");
+        sb.append(detectionResultBean.getInspector() + "\n");
+        sb.append("受检单位：");
+        sb.append(detectionResultBean.getUnitsUnderInspection() + "\n");
+        sb.append("样品类型：");
+        sb.append(detectionResultBean.getSpecimenType() + "\n");
+        sb.append("样品名称：");
+        sb.append(detectionResultBean.getSampleName() + "\n");
+        sb.append("样品编号：");
+        sb.append(detectionResultBean.getNumberSamples() + "\n");
+        sb.append("检测项目：");
+        sb.append(detectionResultBean.getTestItem() + "\n");
+        sb.append("检测限：");
+        sb.append(detectionResultBean.getLimitStandard() + "\n");
+        sb.append("检测值：");
+        sb.append(detectionResultBean.getDetectionValue() + "\n");
+        sb.append("判定结果：");
+        sb.append(detectionResultBean.getDetectionResult() + "\n");
         sb.append("检测时间：");
         sb.append(ToolUtils.dateToString(ToolUtils.longToDate(
                         detectionResultBean.getDetectionTime(), "yyyy-MM-dd HH:mm:ss"),
                 "yyyy-MM-dd HH:mm:ss") + "\n");
-
-        sb.append("检测结果：");
-        sb.append(detectionResultBean.getDetectionResult() + "\n");
-
-        sb.append("检 测 值：");
-        sb.append(detectionResultBean.getDetectionValue() + "\n");
-
-        sb.append("检 测 限：");
-        sb.append(detectionResultBean.getLimitStandard() + "\n");
-
-        sb.append("样品编号：");
-        sb.append(detectionResultBean.getNumberSamples() + "\n");
-
 
         List list1 = getStrList1(detectionResultBean.getCommodityPlaceOrigin());
         Log.d("list1", list1.toString());
@@ -1217,14 +1213,7 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 //            sb.append(list1.get(2) + "\n");
 //        }
 
-        sb.append("检测项目：");
-        sb.append(detectionResultBean.getTestItem() + "\n");
 
-        sb.append("样品名称：");
-        sb.append(detectionResultBean.getSampleName() + "\n");
-
-        sb.append("样品类型：");
-        sb.append(detectionResultBean.getSpecimenType() + "\n");
 
 //        sb.append("检 验 员：");
 //        sb.append(detectionResultBean.getInspector() + "\n");
@@ -1233,8 +1222,7 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 //            sb.append("检 验 员：");
 //            sb.append(detectionResultBean.getInspector().substring(0, 11) + "\n");
 //        } else {
-        sb.append("检 验 员：");
-        sb.append(detectionResultBean.getInspector() + "\n");
+
 //        }
 
 //        if (detectionResultBean.getDetectionCompany().length() > 11) {
@@ -1242,16 +1230,12 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 //            sb.append("检测单位：");
 //            sb.append(detectionResultBean.getDetectionCompany().substring(0, 11) + "\n");
 //        } else {
-        sb.append("受检单位：");
-        sb.append(detectionResultBean.getUnitsUnderInspection() + "\n");
 
-        sb.append("检测单位：");
-        sb.append(detectionResultBean.getDetectionCompany() + "\n");
+
 //        }
 
 //        sb.append("通 道 号：");
 //        sb.append(detectionResultBean.getAisle() + "\n");
-        sb.append(title + "\n\n\n\n");
         sb.append("\n\n");
 
         return sb.toString();

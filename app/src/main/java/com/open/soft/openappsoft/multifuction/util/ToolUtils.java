@@ -46,8 +46,6 @@ public class ToolUtils {
     private static final String TAG = "ToolUtils";
 
 
-
-
     // long转换为Date类型
     // currentTime要转换的long类型的时间
     // formatType要转换的时间格式yyyy-MM-dd HH:mm:ss//yyyy年MM月dd日 HH时mm分ss秒
@@ -202,8 +200,8 @@ public class ToolUtils {
                 isPrint_testStandard = false;
 
         String title = LoginActivity.sp_ServiceUrl.query("TitleSet").toString();
-        if(title.isEmpty() || title.equals("0")){
-            title=InterfaceURL.oneModule;
+        if (title.isEmpty() || title.equals("0")) {
+            title = InterfaceURL.oneModule;
         }
 
         if (isZT) {
@@ -232,42 +230,52 @@ public class ToolUtils {
             }
 
 
-
             for (int i = 0; i < resultList.size(); i++) {
                 CheckResult result = resultList.get(i);
                 Log.d(TAG, "result=" + result.toString());
 
-                sb.append("\n");
+                sb.append("\n       检测报告单       \n");
 
-                sb.append("检测时间:");
-                sb.append(ToolUtils.long2String(result.testTime,
-                        "yyyy-MM-dd HH:mm:ss") + "\n");
-
-                sb.append("判定结果:");
-                sb.append(result.resultJudge + "\n");
-
-
-                if ("有机磷和氨基甲酸酯类".equals(result.projectName)) {
-                    sb.append("抑 制 率:");
-                } else {
-                    sb.append("检 测 值:");
-                }
-                sb.append(result.testValue + "\n");
-
-                //if (isPrint_standardValue) {
-                sb.append("检测限:");
-                sb.append(result.xlz + "\n");
-                //}
-
-                //if (isPrint_sampleNum) {
-                sb.append("样品编号:");
-                sb.append(result.sampleNum + "\n");
-                //}
-
+                sb.append("通道号:");
+                sb.append(result.channel + "\n");
+                sb.append("检测单位:");
+                sb.append(result.checkedOrganization + "\n");
+                sb.append("检测员:");
+                sb.append(com.example.utils.http.Global.NAME + "\n");
                 if (isPrint_bcheckedOrganization) {
                     sb.append("受检单位:");
                     sb.append(result.bcheckedOrganization + "\n");
                 }
+                sb.append("样品类型:");
+                sb.append(result.sampleType + "\n");
+                sb.append("样品名称:");
+                sb.append(result.sampleName + "\n");
+                sb.append("样品编号:");
+                sb.append(result.sampleNum + "\n");
+                sb.append("检测项目:");
+                sb.append(result.projectName + "\n");
+                sb.append("检测限:");
+                sb.append(result.xlz + "\n");
+//                if ("有机磷和氨基甲酸酯类".equals(result.projectName)) {
+//                    sb.append("抑 制 率:");
+//                } else {
+                    sb.append("检测值:");
+//                }
+                sb.append(result.testValue + "\n");
+                sb.append("判定结果:");
+                sb.append(result.resultJudge + "\n");
+                sb.append("检测时间:");
+                sb.append(ToolUtils.long2String(result.testTime,
+                        "yyyy-MM-dd HH:mm:ss") + "\n");
+
+                //if (isPrint_standardValue) {
+
+                //}
+
+                //if (isPrint_sampleNum) {
+
+                //}
+
 
                 if (isPrint_weight) {
                     sb.append("重量/Kg:");
@@ -279,29 +287,17 @@ public class ToolUtils {
 //                sb.append(result.sampleSource + "\n");
                 // }
 
-                sb.append("检测项目:");
-                sb.append(result.projectName + "\n");
-
-                sb.append("样品名称:");
-                sb.append(result.sampleName + "\n");
-
-                sb.append("样品类型:");
-                sb.append(result.sampleType + "\n");
 
                 //if (isPrint_checkp) {
-                sb.append("检测人员:");
-                sb.append(com.example.utils.http.Global.NAME + "\n");
+
                 //}
 
                 //if (isPrint_checkedOrganization) {
-                sb.append("检测单位:");
-                sb.append(result.checkedOrganization + "\n");
+
                 //}
 
-                sb.append("通道号:");
-                sb.append(result.channel + "\n");
 
-                sb.append(title+"\n");
+//                sb.append(title + "\n");
                 sb.append("\n\n");
 //                if (isPrint_testStandard) {
 //                    sb.append("检测限:");
@@ -373,7 +369,7 @@ public class ToolUtils {
         SPUtils spUtils = new SPUtils(sp);
         List<Print> prints = spUtils.getDataList(SPResource.KEY_PRINT_DATA_MANAGER_DATA);
 
-        if(prints == null) return null;
+        if (prints == null) return null;
 
         boolean isZt = sp.getBoolean(SPResource.KEY_PRINT_DATA_MANAGER, true);
 
@@ -393,8 +389,8 @@ public class ToolUtils {
                 isPrint_testStandard = false;
 
         String title = LoginActivity.sp_ServiceUrl.query("TitleSet").toString();
-        if(title.isEmpty() || title.equals("0")){
-            title=InterfaceURL.oneModule;
+        if (title.isEmpty() || title.equals("0")) {
+            title = InterfaceURL.oneModule;
         }
 
         if (isZT) {//逐条打印
@@ -423,7 +419,7 @@ public class ToolUtils {
             for (int i = 0; i < resultList.size(); i++) {
                 CheckResult result = resultList.get(i);
                 sb.append("\n\n\n");
-                sb.append(title+"\n");
+                sb.append(title + "\n");
                 sb.append("通道号:");
                 sb.append(result.channel + "\n");
                 if (isPrint_checkedOrganization) {
