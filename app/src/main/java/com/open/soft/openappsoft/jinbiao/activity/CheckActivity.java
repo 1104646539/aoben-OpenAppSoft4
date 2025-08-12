@@ -1460,8 +1460,8 @@ public class CheckActivity extends BaseActivity implements OnClickListener, Chec
 //        resultModel.sample_unit = sampleUnit_model.getName();
         resultModel.xian = etJcx.getText().toString() + selectedProject.ConcentrateUnit;
         resultModel.lin = etLjz.getText().toString() ;
-        resultModel.check_value = etDr.getText().toString() + selectedProject.ConcentrateUnit;
-        resultModel.style_long = etConcentrate.getText().toString() + selectedProject.ConcentrateUnit;
+        resultModel.check_value = etDr.getText().toString();
+        resultModel.style_long = etConcentrate.getText().toString();
         resultModel.check_result = result;
         resultModel.time = time;
         resultModel.concentrateUnit = selectedProject.ConcentrateUnit;

@@ -1161,7 +1161,7 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 //        }
 
 
-        sb.append("\n\n");
+        sb.append("\n\n\n\n");
 
         return sb.toString();
     }
@@ -1236,7 +1236,7 @@ public class SQL_Activity extends GT.GT_Activity.AnnotationActivity implements A
 
 //        sb.append("通 道 号：");
 //        sb.append(detectionResultBean.getAisle() + "\n");
-        sb.append("\n\n");
+        sb.append("\n\n\n\n");
 
         return sb.toString();
     }
